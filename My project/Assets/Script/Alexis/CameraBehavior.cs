@@ -1,8 +1,12 @@
 using UnityEngine;
 
+/// But: Suivre un GameObject (le Player) tout en limitant le mouvement de la caméra
+/// Requiert: Camera
+/// État: Adéquat(temp)
 public class CameraBehavior : MonoBehaviour
 {
     //Gameobject autres
+    [Header("Other GameObjects")]
     [SerializeField] public Transform limiteHG;              //Pour limiter la caméra à un point haut-gauche
     [SerializeField] public Transform limiteBD;              //Pour limiter la caméra à un point bas-droit
     [SerializeField] public Transform focus;                 //Pour centrer sur le joueur
@@ -16,8 +20,9 @@ public class CameraBehavior : MonoBehaviour
     float halfSizeY;
 
     //Variables
-    Vector3 posSelf;                                        //Pour modifier la position de la caméra
+    [Header("Variables")]
     [SerializeField] public float camSpeed;                 //Vitesse de la caméra vers le Focus
+    Vector3 posSelf;                                        //Pour modifier la position de la caméra
 
     //Shortcut
     Camera cam;
@@ -32,6 +37,7 @@ public class CameraBehavior : MonoBehaviour
         posSelf = transform.position;
     }
 
+    //Pour le mouvement de la caméra
     void FixedUpdate()
     {
         //Gestion des limites et du mouvement de la caméra sur x

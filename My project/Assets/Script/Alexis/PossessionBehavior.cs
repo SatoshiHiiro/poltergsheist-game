@@ -1,15 +1,22 @@
 using UnityEngine;
 using System.Collections;
 
+/// But: Posséder des objets
+/// Requiert: PossessionController
+/// Requiert Externe: PlayerController(1)
+/// Input: Click Gauche = possession/dépossession
+/// État: Adéquat(temp)
 public class PossessionBehavior : MonoBehaviour
 {
-    [SerializeField] public float lerpSpeed;
+    //Variables
+    [Header("Variables")]
+    [SerializeField] public float lerpSpeed;        //Vitesse du lerp
 
-    bool isPossessed;
-    bool isAnimationFinished;
+    //Conditions
+    bool isPossessed;                               //Pour savoir si l'objet possessible est possédé
+    bool isAnimationFinished;                       //Pour savoir si l'animaation de possession est fini
 
-    
-
+    //Shortcuts
     PlayerController player;
     PossessionController possession;
 
@@ -22,11 +29,13 @@ public class PossessionBehavior : MonoBehaviour
         isAnimationFinished = true;
     }
 
+    //Pour l'animation de possession
     IEnumerator AnimationTime()
     {
         player.lastPossession = gameObject.name;
         player.GetComponent<SpriteRenderer>().enabled = true;
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+        player.GetComponent<Rigidbody2D>().simulated = false;
+        gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         player.GetComponent<Collider2D>().enabled = false;
         player.canMove = false;
         isAnimationFinished = false;
@@ -34,27 +43,36 @@ public class PossessionBehavior : MonoBehaviour
         player.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSecondsRealtime(.5f);
         isAnimationFinished = true;
-        gameObject.GetComponent<Collider2D>().isTrigger = false;
         possession.enabled = true;
     }
 
     void FixedUpdate()
     {
+        //Pour le mouvement de l'animation
         if (isPossessed)
         {
             Vector3 pos = Vector3.zero;
 
-            pos.y = player.transform.position.y;
-            pos.x = Mathf.Lerp(player.transform.position.x, transform.position.x, lerpSpeed * Time.deltaTime);
+            if (!isAnimationFinished)
+            {
+                pos.y = Mathf.Lerp(player.transform.position.y, transform.position.y, lerpSpeed * Time.deltaTime);
+                pos.x = Mathf.Lerp(player.transform.position.x, transform.position.x, lerpSpeed * Time.deltaTime);
+            }
+            else
+            {
+                pos.y = transform.position.y;
+                pos.x = transform.position.x;
+            }
+            
             player.transform.position = pos;
         }
 
-        if (player.lastPossession != gameObject.name)
-        {
+        //Pour enlever la possession sur l'objet si le Player possède un autre objet avant de déposséder
+        if (player.lastPossession != gameObject.name && isPossessed)
             StopPossession();
-        }
     }
 
+    //Input de possession
     private void OnMouseDown()
     {
         if (isAnimationFinished)
@@ -79,19 +97,20 @@ public class PossessionBehavior : MonoBehaviour
             {
                 StopPossession();
                 player.isPossessing = false;
-                player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
                 player.GetComponent<Collider2D>().enabled = true;
+                player.GetComponent<Rigidbody2D>().simulated = true;
                 player.GetComponent<SpriteRenderer>().enabled = true;
                 player.canMove = true;
             }
         }
     }
 
+    //Pour arrêter la possession
     void StopPossession()
     {
         isPossessed = false;
         possession.enabled = false;
+        gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
         gameObject.GetComponent<Rigidbody2D>().linearVelocityX = 0;
-        gameObject.GetComponent<Collider2D>().isTrigger = true;
     }
 }

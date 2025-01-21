@@ -1,12 +1,21 @@
 using UnityEngine;
 
+/// But: Pousser un objet
+/// Requiert Externe: tag "Player"
+/// Input: E = pousser
+/// État: À travailler
 public class PushableBehavior : MonoBehaviour
 {
-    [SerializeField] public float distanceFromPlayer;
-    Vector3 positionPlayer;
-    bool isPushed;
-    float stockMaxSpeed;
+    //Variables
+    [Header("Variables")]
+    [SerializeField] public float distanceFromPlayer;       //La distance fixe entre Player et l'objet poussable
+    float stockMaxSpeed;                                    //Garde en mémoire la vitesse initiale du PlayerController
+    Vector3 positionPlayer;                                 //Regarde la position du Player
 
+    //Conditions
+    bool isPushed;                                          //Condition pour enclencher le déplacement de l'objet poussable
+
+    //Bouge la position de l'objet poussable
     void Update()
     {
         if (isPushed)
@@ -17,6 +26,7 @@ public class PushableBehavior : MonoBehaviour
         }
     }
 
+    //Pour déterminer la position de l'objet poussable par rapport au Player
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -30,6 +40,7 @@ public class PushableBehavior : MonoBehaviour
         }
     }
 
+    //Pour donner la permission de pousser
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
