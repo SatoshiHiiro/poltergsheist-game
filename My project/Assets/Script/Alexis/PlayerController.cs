@@ -129,4 +129,18 @@ public class PlayerController : MonoBehaviour
         //    StartCoroutine(InputReset());
         //}
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Stair")
+        {
+            StairController stair = collision.gameObject.GetComponent<StairController>();
+            if(moveInput.y != 0)
+            {
+                StairDirection direction = moveInput.y > 0 ? StairDirection.Upward : StairDirection.Downward;
+                stair.ClimbStair(this.gameObject, direction);
+            }
+            
+        }
+    }
 }

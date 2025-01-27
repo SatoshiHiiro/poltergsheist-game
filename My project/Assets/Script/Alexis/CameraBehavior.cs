@@ -5,11 +5,23 @@ using UnityEngine;
 /// État: Adéquat(temp)
 public class CameraBehavior : MonoBehaviour
 {
+    // Singleton
+    private static CameraBehavior instance;
+
+    public static CameraBehavior Instance()
+    {
+        if(instance == null)
+        {
+            instance = new CameraBehavior();
+        }
+        return instance;
+    }
+
     //Gameobject autres
     [Header("Other GameObjects")]
-    [SerializeField] public Transform limiteHG;              //Pour limiter la caméra à un point haut-gauche
-    [SerializeField] public Transform limiteBD;              //Pour limiter la caméra à un point bas-droit
-    [SerializeField] public Transform focus;                 //Pour centrer sur le joueur
+    [SerializeField] private Transform limiteHG;              //Pour limiter la caméra à un point haut-gauche
+    [SerializeField] private Transform limiteBD;              //Pour limiter la caméra à un point bas-droit
+    [SerializeField] private Transform focus;                 //Pour centrer sur le joueur
 
     //Camera Limits
     float minX;
@@ -51,5 +63,20 @@ public class CameraBehavior : MonoBehaviour
         posSelf.y = Mathf.Clamp(posSelf.y, minY + halfSizeY, maxY - halfSizeY);
 
         transform.position = posSelf;
+    }
+
+    // Update Camera bounds to fit next room
+    public void UpdateCameraLimits(Transform limitTopLeft, Transform limitBottomRight)
+    {
+        if(limitBottomRight != null && limitTopLeft != null)
+        {
+            limiteHG = limitTopLeft;
+            limiteBD = limitBottomRight;
+
+            minX = limiteHG.position.x;
+            maxX = limiteBD.position.x;
+            minY = limiteBD.position.y;
+            maxY = limiteHG.position.y;
+        }
     }
 }
