@@ -11,7 +11,9 @@ public class SuspicionManager : MonoBehaviour
     private float maxSuspicion;
 
     [SerializeField] protected float suspicionRate;
-    protected float npcFactor;
+    [SerializeField] protected float sizeFactor;
+    [SerializeField] protected float npcFactor;
+    
 
     public event Action<float> OnSuspicionChanged;
 
@@ -36,7 +38,7 @@ public class SuspicionManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateSuspicion();
+        //UpdateSuspicion();
     }
 
     public void AddParanormalObserver()
@@ -51,12 +53,26 @@ public class SuspicionManager : MonoBehaviour
         paranormalObserverCount = Mathf.Max(0, paranormalObserverCount);
     }
 
+    public void UpdateMovementSuspicion(float objectSize)
+    {
+        // Caculate suspicion when an object is moving
+        if (paranormalObserverCount > 0)
+        {
+            // Double the increase of suspicion when multiple NPC see the object moves
+            npcFactor = paranormalObserverCount > 1 ? npcFactor : 1f;
+            currentSuspicion += suspicionRate * npcFactor * (sizeFactor * objectSize) * Time.deltaTime;
+            currentSuspicion = Mathf.Clamp(currentSuspicion, 0f, maxSuspicion);
+            OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
+        }
+    }
+
     private void UpdateSuspicion()
     {
+        // Caculate suspicion when an object is moving
         if(paranormalObserverCount > 0)
         {
             // Double the increase of suspicion when multiple NPC see the object moves
-            npcFactor = paranormalObserverCount > 1 ? 2f : 1f;
+            npcFactor = paranormalObserverCount > 1 ? npcFactor : 1f;
             currentSuspicion += suspicionRate * npcFactor * Time.deltaTime;
             currentSuspicion = Mathf.Clamp(currentSuspicion, 0f, maxSuspicion);
             OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);

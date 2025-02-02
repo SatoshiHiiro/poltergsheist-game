@@ -201,6 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 159702591}
   - component: {fileID: 159702592}
+  - component: {fileID: 159702593}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -281,6 +282,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &159702593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159702590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9db5293d9796143be7c80665a4c38a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  suspicionSlider: {fileID: 159702592}
 --- !u!1 &193031244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,7 +3199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suspicionRate: 1
-  npcFactor: 0
+  sizeFactor: 2
+  npcFactor: 2
 --- !u!114 &1412952355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3923,6 +3938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c5ff64ab3bedb40b4e4dc12486e35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 0
   facingRight: 0
   detectLayer:
     serializedVersion: 2
@@ -4486,6 +4502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c5ff64ab3bedb40b4e4dc12486e35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 0
   facingRight: 1
   detectLayer:
     serializedVersion: 2
@@ -4752,8 +4769,8 @@ Transform:
   m_GameObject: {fileID: 2074973146}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.16, y: -3.485006, z: 0}
-  m_LocalScale: {x: 1.8, y: 1, z: 1}
+  m_LocalPosition: {x: 6.16, y: -2.14, z: 0}
+  m_LocalScale: {x: 3.34008, y: 1.8556, z: 1.8556}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1607085032}
@@ -4884,7 +4901,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 1.8
+  m_Mass: 6.1978526
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1

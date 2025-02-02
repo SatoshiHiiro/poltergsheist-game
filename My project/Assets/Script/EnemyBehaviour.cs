@@ -4,9 +4,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     // Enemy vision variables
     protected float fieldOfViewAngle;
-    protected float sightDistance;
-    protected float detectionRadius;
-    protected Vector3 playerPosition;
+    [SerializeField]  protected float detectionRadius;
     [SerializeField] protected bool facingRight;
     [SerializeField] protected LayerMask detectLayer;   // Layer of objects to be detected by the NPC
     [SerializeField] protected LayerMask ignoreLayer;    // Layer to ignore when raycasting
@@ -16,25 +14,22 @@ public class EnemyBehaviour : MonoBehaviour
 
     // Enemy patrol variables
     [SerializeField] protected Transform[] patrolPoints;
-
-    private Vector2 direction;
     private void Start()
     {
         fieldOfViewAngle = 180f;
-        sightDistance = 20f;
         detectionRadius = 10f;
 
         isCurrentlyObserving = false;
     }
     private void Update()
     {
-        //PlayerInFieldOfView();
         DetectMovingObjects();
     }
 
     protected virtual void DetectMovingObjects()
     {
         bool isObjectMoving = false;
+        float objectSize = 0f;
         // Find all the possible possessed object in the room
         Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius,detectLayer);
         foreach (Collider2D obj in objects)
@@ -58,7 +53,11 @@ public class EnemyBehaviour : MonoBehaviour
                     if(possessedObject != null && possessedObject.IsMoving)
                     {
                         isObjectMoving = true;
+                        Renderer objRenderer = obj.GetComponent<Renderer>();
+                        objectSize = Mathf.Max(objRenderer.bounds.size.x, objRenderer.bounds.size.y);
+                        print(objectSize);
                     }
+                    break;  // Only one object can be possesed at the time
                 }
             }
         }
@@ -73,6 +72,11 @@ public class EnemyBehaviour : MonoBehaviour
             isCurrentlyObserving = false;
             SuspicionManager.Instance.RemoveParanormalObserver();
         }
+        else if(isObjectMoving && isCurrentlyObserving)
+        {
+
+            SuspicionManager.Instance.UpdateMovementSuspicion(objectSize);
+        }
         
     }
 
@@ -81,7 +85,6 @@ public class EnemyBehaviour : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
-
     }
 
 
