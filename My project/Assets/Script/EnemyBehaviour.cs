@@ -4,21 +4,23 @@ public class EnemyBehaviour : MonoBehaviour
 {
     // Enemy vision variables
     protected float fieldOfViewAngle;
-    [SerializeField]  protected float detectionRadius;
-    [SerializeField] protected bool facingRight;
+    [SerializeField]  protected float detectionRadius;  // NPC detection radius
+    [SerializeField] protected bool facingRight;        // Is the NPC Sprite facing right    
     [SerializeField] protected LayerMask detectLayer;   // Layer of objects to be detected by the NPC
-    [SerializeField] protected LayerMask ignoreLayer;    // Layer to ignore when raycasting
+    [SerializeField] protected LayerMask ignoreLayer;   // Layer to ignore when raycasting
     [SerializeField] protected GameObject player;
 
-    private bool isCurrentlyObserving;
+    // Variable manage suspicion of the NPC
+    [SerializeField] protected float minSuspiciousRotation; // Minimum rotation change in degrees to trigger suspicion
+    [SerializeField] protected float minSuspiciousPosition; // Minimum position change to trigger suspicion
+    private bool isCurrentlyObserving;                      // Is the NPC already watching an object moving
 
     // Enemy patrol variables
-    [SerializeField] protected Transform[] patrolPoints;
+    [SerializeField] protected Transform[] patrolPoints;    // Points were the NPC patrol
     private void Start()
     {
         fieldOfViewAngle = 180f;
         detectionRadius = 10f;
-
         isCurrentlyObserving = false;
     }
     private void Update()
@@ -30,6 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         bool isObjectMoving = false;
         float objectSize = 0f;
+
         // Find all the possible possessed object in the room
         Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius,detectLayer);
         foreach (Collider2D obj in objects)
@@ -46,18 +49,32 @@ public class EnemyBehaviour : MonoBehaviour
                 // Is the path from the npc to the object clear?
                 if (hit.collider != null && hit.collider == obj)
                 {
-                    
+                    // Get object size
+                    Renderer objRenderer = obj.GetComponent<Renderer>();
+                    objectSize = Mathf.Max(objRenderer.bounds.size.x, objRenderer.bounds.size.y);
+
                     // Check if the object is moving
                     PossessionController possessedObject = obj.GetComponent<PossessionController>();
 
                     if(possessedObject != null && possessedObject.IsMoving)
                     {
-                        isObjectMoving = true;
-                        Renderer objRenderer = obj.GetComponent<Renderer>();
-                        objectSize = Mathf.Max(objRenderer.bounds.size.x, objRenderer.bounds.size.y);
-                        print(objectSize);
+                        isObjectMoving = true;                        
                     }
-                    break;  // Only one object can be possesed at the time
+                    else
+                    {
+                        // Check if the object change significantly of position and rotation
+                        float positionChange = Vector2.Distance(possessedObject.LastKnownPosition, obj.transform.position);
+                        float rotationChange = Quaternion.Angle(possessedObject.LastKnownRotation, obj.transform.rotation);
+
+                        if(positionChange >= minSuspiciousPosition || rotationChange >= minSuspiciousRotation)
+                        {
+
+                            print("HERE!");
+                            //possessedObject.UpdateLastKnownPositionRotation();
+                            SuspicionManager.Instance.UpdateDisplacementSuspicion(objectSize, rotationChange, positionChange);
+                        }
+                    }
+                    possessedObject.UpdateLastKnownPositionRotation();
                 }
             }
         }
@@ -72,9 +89,8 @@ public class EnemyBehaviour : MonoBehaviour
             isCurrentlyObserving = false;
             SuspicionManager.Instance.RemoveParanormalObserver();
         }
-        else if(isObjectMoving && isCurrentlyObserving)
+        if(isObjectMoving && isCurrentlyObserving)
         {
-
             SuspicionManager.Instance.UpdateMovementSuspicion(objectSize);
         }
         
