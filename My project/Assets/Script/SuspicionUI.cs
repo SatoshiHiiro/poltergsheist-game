@@ -1,0 +1,23 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SuspicionUI : MonoBehaviour
+{
+    [SerializeField] private Slider suspicionSlider;
+
+    private void Start()
+    {
+        suspicionSlider.value = 0;
+        SuspicionManager.Instance.OnSuspicionChanged += UpdateUI;
+    }
+
+    private void UpdateUI(float suspiciousAmount)
+    {
+        suspicionSlider.value = suspiciousAmount;
+    }
+
+    private void OnDisable()
+    {
+        SuspicionManager.Instance.OnSuspicionChanged -= UpdateUI;
+    }
+}

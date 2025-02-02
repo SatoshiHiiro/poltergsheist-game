@@ -2,84 +2,85 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    // Enemy vision variables
     protected float fieldOfViewAngle;
     protected float sightDistance;
-    protected bool playerVisible;
+    protected float detectionRadius;
     protected Vector3 playerPosition;
     [SerializeField] protected bool facingRight;
-    [SerializeField] protected LayerMask playerLayer;
-    [SerializeField] protected LayerMask enemyLayer;
-
+    [SerializeField] protected LayerMask detectLayer;   // Layer of objects to be detected by the NPC
+    [SerializeField] protected LayerMask ignoreLayer;    // Layer to ignore when raycasting
     [SerializeField] protected GameObject player;
+
+    private bool isCurrentlyObserving;
+
+    // Enemy patrol variables
+    [SerializeField] protected Transform[] patrolPoints;
+
+    private Vector2 direction;
     private void Start()
     {
         fieldOfViewAngle = 180f;
         sightDistance = 20f;
-        playerVisible = false;
+        detectionRadius = 10f;
+
+        isCurrentlyObserving = false;
     }
     private void Update()
     {
-        PlayerInFieldOfView();
+        //PlayerInFieldOfView();
+        DetectMovingObjects();
     }
 
-    // Check if the enemy is able to see the player
-    protected virtual void PlayerInFieldOfView()
+    protected virtual void DetectMovingObjects()
     {
-        // Raycast direction from enemy to player
-        Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, sightDistance, ~enemyLayer);
-
-        if (hit.collider != null && hit.collider.CompareTag("Player"))
+        bool isObjectMoving = false;
+        // Find all the possible possessed object in the room
+        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius,detectLayer);
+        foreach (Collider2D obj in objects)
         {
-            // Check if the detected object is in the field of view
-            float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToPlayer);
-            if (angle <= fieldOfViewAngle / 2)
+            // Check if the object is in the line of sight of the NPC
+            Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
+            float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
+
+            if(angle <= fieldOfViewAngle / 2)
             {
-                Debug.Log($"Target in view: {hit.collider.gameObject.name}");
-                playerVisible = true;
-                playerPosition = hit.transform.position;
-                // Ajoute ici la logique pour poursuivre ou attaquer la cible
+                // Check if there is no object blocking the sight of the NPC
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position), detectionRadius, ~ignoreLayer);
+                
+                // Is the path from the npc to the object clear?
+                if (hit.collider != null && hit.collider == obj)
+                {
+                    
+                    // Check if the object is moving
+                    PossessionController possessedObject = obj.GetComponent<PossessionController>();
+
+                    if(possessedObject != null && possessedObject.IsMoving)
+                    {
+                        isObjectMoving = true;
+                    }
+                }
             }
         }
-        else
+
+        if(isObjectMoving && !isCurrentlyObserving)
         {
-            playerVisible = false;
-            playerPosition = Vector3.zero;
+            isCurrentlyObserving = true;
+            SuspicionManager.Instance.AddParanormalObserver();
         }
-
-
-
-        //Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, sightRadius, playerLayer);
-
-        //foreach (Collider2D hit in hits)
-        //{
-        //    // Calculate the direction between the NPC and the object detected
-        //    Vector2 directionTarget = (hit.transform.position - transform.position).normalized;
-
-        //    // Check if the detected object is in the field of view
-        //    float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionTarget);
-        //    if (angle <= fieldOfViewAngle / 2)
-        //    {
-        //        Debug.Log($"Target in view: {hit.name}");
-        //        playerVisible = true;
-        //        playerPosition = hit.transform.position;
-        //        // Ajoute ici la logique pour poursuivre ou attaquer la cible
-        //    }
-        //}
+        else if(!isObjectMoving && isCurrentlyObserving)
+        {
+            isCurrentlyObserving = false;
+            SuspicionManager.Instance.RemoveParanormalObserver();
+        }
+        
     }
 
     // Debug method only
     private void OnDrawGizmos()
     {
-        if (transform.position != null)
-        {
-            if (player != null)
-            {
-                Gizmos.color = playerVisible ? Color.red : Color.yellow;
-                Gizmos.DrawLine(transform.position, player.transform.position);               
-            }
-        }
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
     }
 

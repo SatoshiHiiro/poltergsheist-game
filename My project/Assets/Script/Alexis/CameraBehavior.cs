@@ -6,16 +6,9 @@ using UnityEngine;
 public class CameraBehavior : MonoBehaviour
 {
     // Singleton
-    private static CameraBehavior instance;
+    public static CameraBehavior Instance { get; private set; }
 
-    public static CameraBehavior Instance()
-    {
-        if(instance == null)
-        {
-            instance = new CameraBehavior();
-        }
-        return instance;
-    }
+
 
     //Gameobject autres
     [Header("Other GameObjects")]
@@ -38,6 +31,19 @@ public class CameraBehavior : MonoBehaviour
 
     //Shortcut
     Camera cam;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+    }
 
     void Start()
     {

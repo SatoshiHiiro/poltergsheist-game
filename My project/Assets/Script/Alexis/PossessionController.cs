@@ -24,6 +24,12 @@ public class PossessionController : MonoBehaviour
     public bool canJump;                                            //Pour permettre l'arrêt du mouvement physique en Y
     public bool isInContact;                                        //Utiliser pour savoir si l'objet est en contact avec quelque chose lui permettant de sauter
     bool isJumping;                                                 //Utiliser pour savoir si l'objet est en saut
+    
+    // Movement variables
+    private bool hasMoved;
+    private Transform initialPosition;
+    private Transform lasPosition;
+    public bool IsMoving {  get; private set; }
 
     //Contacts
     [Header("GameObjets in contact")]
@@ -49,6 +55,7 @@ public class PossessionController : MonoBehaviour
         canWalk = true;
         canJump = true;
         isJumping = false;
+        hasMoved = false;
 
         //Met en place les variables de mouvement dépendamment du type de possession
         switch (((int)_possessionType))
@@ -129,6 +136,7 @@ public class PossessionController : MonoBehaviour
             isJumping = true;
             StartCoroutine(InputReset());
         }
+        IsMoving = (horizontalDirection != 0 || isJumping) ? true : false;
     }
 
     //Stock les GameObjets en contact avec l'objet

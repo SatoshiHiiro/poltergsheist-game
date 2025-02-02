@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [HideInInspector] public int horizontalDirection;  //Direction du mouvement
     private bool playerInputEnable;
     private Vector2 moveInput;
+    private bool isMoving;
+    public bool IsMoving { get; private set; }
 
     //Conditions
     [Header("Mouvement conditions")]
