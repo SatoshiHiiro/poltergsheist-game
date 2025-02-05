@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // Detection of the stairs
         if (collision.gameObject.tag == "Stair")
         {
             StairController stair = collision.gameObject.GetComponent<StairController>();

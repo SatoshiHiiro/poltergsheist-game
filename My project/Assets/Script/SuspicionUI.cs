@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class SuspicionUI : MonoBehaviour
 {
+    // This class manage the suspicion UI.
+
     [SerializeField] private Slider suspicionSlider;
 
     private void Start()

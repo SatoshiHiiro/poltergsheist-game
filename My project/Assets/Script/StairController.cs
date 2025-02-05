@@ -8,6 +8,8 @@ public enum StairDirection
 }
 public class StairController : MonoBehaviour
 {
+    // This class manage stairs depending on the direction desired by the character
+
     [Header("Stairs")]
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform nextFloor;
@@ -28,6 +30,7 @@ public class StairController : MonoBehaviour
 
     private IEnumerator HandleClimbingStair(GameObject character, StairDirection direction)
     {
+        // Which floor does the character want to go to
         Transform destination = direction == StairDirection.Upward ? nextFloor : bottomFloor;
 
         if(destination == null)
@@ -56,7 +59,7 @@ public class StairController : MonoBehaviour
         // Climbing stair animation
 
         
-        character.transform.position = destination.position;
+        character.transform.position = destination.position;    // Teleport the player
                
 
         // Finish climbing stair animation
