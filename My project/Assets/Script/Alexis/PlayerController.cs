@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 /// But: Controller un avatar
 /// Requiert: Rigidbody2D
@@ -14,6 +15,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float stopSpeed;                            //Vitesse de ralentissage
     [SerializeField] public float jumpSpeed;                            //Vitesse de saut
     [SerializeField] [HideInInspector] public int horizontalDirection;  //Direction du mouvement
+    private bool playerInputEnable;
+    private Vector2 moveInput;
+    private bool isMoving;
+    public bool IsMoving { get; private set; }
 
     //Conditions
     [Header("Mouvement conditions")]
@@ -29,6 +34,20 @@ public class PlayerController : MonoBehaviour
 
     //Shortcuts
     Rigidbody2D rigid2D;
+
+    //Input action section, has to be public or can be private with a SerializeField statement
+    [Header("Input Section")]
+    public InputAction move;
+    public InputAction jump;
+
+    private void Awake()
+    {
+        playerInputEnable = true;
+        moveInput = Vector2.zero;
+
+        move.Enable();
+        jump.Enable();
+    }
 
     void Start()
     {
@@ -50,19 +69,20 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             //Effectue le mouvement horizontal
-            rigid2D.AddForceX(horizontalDirection * speed, ForceMode2D.Impulse);
+            rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
 
-            //Limite la vitesse horizontale en fonction du maxSpeed
-            if (Mathf.Abs(rigid2D.linearVelocityX) > maxSpeed)
-            {
-                if (rigid2D.linearVelocityX < 0)
-                    rigid2D.linearVelocityX = -maxSpeed;
-                else
-                    rigid2D.linearVelocityX = maxSpeed;
-            }
+            ////Limite la vitesse horizontale en fonction du maxSpeed
+            rigid2D.linearVelocityX = Mathf.Clamp(rigid2D.linearVelocityX, -maxSpeed, maxSpeed);
+            //if (Mathf.Abs(rigid2D.linearVelocityX) > maxSpeed)
+            //{
+            //    if (rigid2D.linearVelocityX < 0)
+            //        rigid2D.linearVelocityX = -maxSpeed;
+            //    else
+            //        rigid2D.linearVelocityX = maxSpeed;
+            //}
 
             //Effectue le ralentissement quand aucun input
-            if (horizontalDirection == 0)
+            if (moveInput.x == 0)
                 rigid2D.linearVelocityX = rigid2D.linearVelocityX / stopSpeed;
 
             if (isJumping && (rigid2D.linearVelocityY == 0))
@@ -76,22 +96,54 @@ public class PlayerController : MonoBehaviour
     //Pour les inputs
     void Update()
     {
-        //Détermine la direction du mouvement dépendamment du input
-        if (canWalk)
+        if (playerInputEnable)
         {
-            int _horizontalDirection = 0;
-            if (Input.GetKey(KeyCode.A))
-                _horizontalDirection--;
-            if (Input.GetKey(KeyCode.D))
-                _horizontalDirection++;
-            horizontalDirection = _horizontalDirection;
+            if(canMove && move.WasPressedThisFrame())
+            {
+                moveInput = move.ReadValue<Vector2>();
+            }
+            if (move.WasReleasedThisFrame())
+            {
+                moveInput = Vector2.zero;
+            }
+            if (canJump && !isJumping && jump.WasPressedThisFrame())
+            {
+                isJumping = true;
+                StartCoroutine(InputReset());
+            }
         }
 
-        //Détermine si les joueurs.es peuvent sauter avec le input
-        if (canJump && !isJumping && Input.GetKeyDown(KeyCode.Space))
+        ////Détermine la direction du mouvement dépendamment du input
+        //if (canWalk)
+        //{
+        //    int _horizontalDirection = 0;
+        //    if (Input.GetKey(KeyCode.A))
+        //        _horizontalDirection--;
+        //    if (Input.GetKey(KeyCode.D))
+        //        _horizontalDirection++;
+        //    horizontalDirection = _horizontalDirection;
+        //}
+
+        ////Détermine si les joueurs.es peuvent sauter avec le input
+        //if (canJump && !isJumping && Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    isJumping = true;
+        //    StartCoroutine(InputReset());
+        //}
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        // Detection of the stairs
+        if (collision.gameObject.tag == "Stair")
         {
-            isJumping = true;
-            StartCoroutine(InputReset());
+            StairController stair = collision.gameObject.GetComponent<StairController>();
+            if(moveInput.y != 0)
+            {
+                StairDirection direction = moveInput.y > 0 ? StairDirection.Upward : StairDirection.Downward;
+                stair.ClimbStair(this.gameObject, direction);
+            }
+            
         }
     }
 }

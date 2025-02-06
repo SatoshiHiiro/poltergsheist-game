@@ -25,6 +25,11 @@ public class PossessionController : MonoBehaviour
     public bool isInContact;                                        //Utiliser pour savoir si l'objet est en contact avec quelque chose lui permettant de sauter
     bool isJumping;                                                 //Utiliser pour savoir si l'objet est en saut
 
+    // Movement variables
+    public Vector2 LastKnownPosition { get; private set; }          // Last known position of the object by an NPC
+    public Quaternion LastKnownRotation { get; private set; }       // Last known rotation of the object by an NPC
+    public bool IsMoving {  get; private set; }
+
     //Contacts
     [Header("GameObjets in contact")]
     public List<GameObject> curObject = new List<GameObject>();     //Pour stocker tous les GameObjets en contact avec l'objet
@@ -42,6 +47,12 @@ public class PossessionController : MonoBehaviour
     //Shortcuts
     Rigidbody2D rigid2D;
 
+    private void Awake()
+    {
+        LastKnownPosition = transform.position;
+        LastKnownRotation = transform.rotation;
+    }
+
     void Start()
     {
         rigid2D = gameObject.GetComponent<Rigidbody2D>();
@@ -49,6 +60,8 @@ public class PossessionController : MonoBehaviour
         canWalk = true;
         canJump = true;
         isJumping = false;
+
+        
 
         //Met en place les variables de mouvement dépendamment du type de possession
         switch (((int)_possessionType))
@@ -129,6 +142,7 @@ public class PossessionController : MonoBehaviour
             isJumping = true;
             StartCoroutine(InputReset());
         }
+        IsMoving = (horizontalDirection != 0 || isJumping) ? true : false;
     }
 
     //Stock les GameObjets en contact avec l'objet
@@ -156,5 +170,12 @@ public class PossessionController : MonoBehaviour
             }
         }
         isInContact = temp;
+    }
+
+    // The NPC saw the object has moved from it's origin position/rotation so we update it's new position/rotation
+    public void UpdateLastKnownPositionRotation()
+    {
+        LastKnownPosition = this.transform.position;
+        LastKnownRotation = this.transform.rotation;
     }
 }
