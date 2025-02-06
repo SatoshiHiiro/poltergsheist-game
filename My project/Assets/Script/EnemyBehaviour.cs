@@ -17,14 +17,20 @@ public class EnemyBehaviour : MonoBehaviour
 
     // Enemy patrol variables
     [SerializeField] protected Transform[] patrolPoints;    // Points were the NPC patrol
+    protected int indexPatrolPoints;    // Next index patrol point
+
+    [SerializeField] protected float speed;
     private void Start()
     {
         fieldOfViewAngle = 180f;
         detectionRadius = 10f;
         isCurrentlyObserving = false;
+
+        indexPatrolPoints = 0;
     }
     private void Update()
     {
+        Patrol();
         DetectMovingObjects();
     }
 
@@ -100,6 +106,33 @@ public class EnemyBehaviour : MonoBehaviour
         }
         
     }
+
+    protected void Patrol()
+    {
+        // Get movement direction
+        Vector2 destination = new Vector2(patrolPoints[indexPatrolPoints].position.x, transform.position.y);
+        Vector2 direction = (destination - (Vector2)transform.position).normalized;
+
+        // Flip sprite based on direction
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.flipX = direction.x < 0;
+        facingRight = !spriteRenderer.flipX;
+
+        // Move towards destination
+        transform.position = Vector2.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+
+        // If the enemy reaches his destination, he is given a new destination to patrol
+        if (Mathf.Abs(patrolPoints[indexPatrolPoints].position.x - transform.position.x) <= 0.2f)
+        {
+            indexPatrolPoints++;
+            if(indexPatrolPoints >= patrolPoints.Length)
+            {
+                indexPatrolPoints = 0;
+            }
+        }
+    }
+
+
 
     // Debug method only
     private void OnDrawGizmos()
