@@ -62,7 +62,7 @@ public class EnemyBehaviour : MonoBehaviour
 
                     // Check if the object is moving
                     PossessionController possessedObject = obj.GetComponent<PossessionController>();
-
+                    
                     if(possessedObject != null && possessedObject.IsMoving)
                     {
                         isObjectMoving = true;                        
