@@ -541,12 +541,12 @@ MonoBehaviour:
   stopSpeed: 1.1
   jumpSpeed: 5
   horizontalDirection: 0
+  curObject: []
   canMove: 1
   canWalk: 1
   canJump: 1
-  isPossessing: 0
+  isInContact: 0
   isJumping: 0
-  lastPossession: 
   move:
     m_Name: Move
     m_Type: 0
@@ -613,6 +613,8 @@ MonoBehaviour:
       m_Action: Jump
       m_Flags: 0
     m_Flags: 0
+  lastPossession: 
+  isPossessing: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,12 +1405,31 @@ MonoBehaviour:
   maxSpeed: 0
   stopSpeed: 0
   jumpSpeed: 0
+  horizontalDirection: 0
+  curObject: []
   canMove: 0
   canWalk: 0
   canJump: 0
   isInContact: 0
-  curObject: []
-  _possessionType: 1
+  isJumping: 0
+  move:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e1cfebdf-cb17-4f31-86bd-8c00a101f507
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 029458fc-77a2-4793-b160-ce9114fa3923
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &1607085031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,12 +1516,31 @@ MonoBehaviour:
   maxSpeed: 0
   stopSpeed: 0
   jumpSpeed: 0
+  horizontalDirection: 0
+  curObject: []
   canMove: 0
   canWalk: 0
   canJump: 0
   isInContact: 0
-  curObject: []
-  _possessionType: 2
+  isJumping: 0
+  move:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5e768f6e-aaba-400a-ae36-17eb380eda23
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9dc7908c-9600-41d4-92df-db14ce775963
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &1624362693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2136,12 +2176,31 @@ MonoBehaviour:
   maxSpeed: 0
   stopSpeed: 0
   jumpSpeed: 0
+  horizontalDirection: 0
+  curObject: []
   canMove: 0
   canWalk: 0
   canJump: 0
   isInContact: 0
-  curObject: []
-  _possessionType: 1
+  isJumping: 0
+  move:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a3c3bb65-4bd4-4bef-8fb9-27d58cfd4856
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6cab0387-e833-4cdd-9d01-ae5a02d2f6c5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
