@@ -51,8 +51,8 @@ public abstract class MovementController : MonoBehaviour
     protected virtual void Start()
     {
         rigid2D = gameObject.transform.GetComponent<Rigidbody2D>();
-        canMove = true;
-        isJumping = false;
+        //canMove = true;
+        //isJumping = false;
     }
 
     //Pour la physique

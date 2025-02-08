@@ -19,6 +19,7 @@ public class PlayerController : MovementController
     protected override void Start()
     {
         base.Start();
+        canMove = true;
         canJump = false;
     }
 

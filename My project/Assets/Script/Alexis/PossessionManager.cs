@@ -6,7 +6,7 @@ using System.Collections;
 /// Requiert Externe: PlayerController(1)
 /// Input: Click Gauche = possession/dépossession
 /// État: Adéquat(temp)
-public class PossessionBehavior : MonoBehaviour
+public class PossessionManager : MonoBehaviour
 {
     //Variables
     [Header("Variables")]
@@ -18,13 +18,13 @@ public class PossessionBehavior : MonoBehaviour
 
     //Shortcuts
     PlayerController player;
-    PossessionController possession;
+    IPossessable possession;
 
     void Start()
     {
         player = FindFirstObjectByType<PlayerController>();
-        possession = gameObject.GetComponent<PossessionController>();
-        possession.enabled = false;
+        possession = gameObject.GetComponent<IPossessable>();
+        //possession.enabled = false;
         isPossessed = false;
         isAnimationFinished = true;
     }
@@ -43,7 +43,8 @@ public class PossessionBehavior : MonoBehaviour
         player.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSecondsRealtime(.5f);
         isAnimationFinished = true;
-        possession.enabled = true;
+        possession.OnPossessed();
+        //possession.enabled = true;
     }
 
     void FixedUpdate()
@@ -109,7 +110,8 @@ public class PossessionBehavior : MonoBehaviour
     void StopPossession()
     {
         isPossessed = false;
-        possession.enabled = false;
+        possession.OnDepossessed();
+        //possession.enabled = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
         gameObject.GetComponent<Rigidbody2D>().linearVelocityX = 0;
     }

@@ -2,12 +2,20 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+// Interface for every object that can be possessed
+public interface IPossessable
+{
+    void OnPossessed();
+    void OnDepossessed();
+}
+
+
 /// But: Controller un objet possédé
 /// Requiert: Rigidbody2D
 /// Requiert Externe: tag "Wall"
 /// Input: A = droite, D = gauche, SPACE = saut
 /// État: Adéquat(temp)
-public class PossessionController : MovementController
+public class PossessionController : MovementController, IPossessable
 {
     private bool isMoving;
     public bool IsMoving { get { return isMoving; } private set { isMoving = value; } } // Is the object moving?
@@ -45,6 +53,17 @@ public class PossessionController : MovementController
     {
         LastKnownPosition = this.transform.position;
         LastKnownRotation = this.transform.rotation;
+    }
+
+    public void OnPossessed()
+    {
+        canMove = true;
+        isJumping = false;
+    }
+
+    public void OnDepossessed()
+    {
+        canMove = false;
     }
     ////Variables
     //[Header("Variables")]
