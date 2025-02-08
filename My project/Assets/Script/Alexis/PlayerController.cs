@@ -42,7 +42,7 @@ public class PlayerController : MovementController
             stair.ClimbStair(this.gameObject, direction);
         }
     }
-        ////Mouvement
+        //Mouvement
         //[Header("Mouvement variables")]
         //[SerializeField] public float speed;                                //Vitesse du mouvement
         //[SerializeField] public float maxSpeed;                             //Vitesse maximale pouvant être atteinte
