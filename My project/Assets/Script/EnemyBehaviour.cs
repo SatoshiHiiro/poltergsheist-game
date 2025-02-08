@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -19,7 +21,15 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] protected Transform[] patrolPoints;    // Points were the NPC patrol
     protected int indexPatrolPoints;    // Next index patrol point
 
-    [SerializeField] protected float speed;
+    [SerializeField] protected float movementSpeed;
+
+    SpriteRenderer spriteRenderer;
+
+    [Header("Investigation Variables")]
+    protected bool isInvestigating = false;
+    protected AudioSource audioSource;
+    [SerializeField] protected float surpriseWaitTime = 2f;
+    [SerializeField] protected float investigationWaitTime = 3f;
     private void Start()
     {
         fieldOfViewAngle = 180f;
@@ -27,11 +37,17 @@ public class EnemyBehaviour : MonoBehaviour
         isCurrentlyObserving = false;
 
         indexPatrolPoints = 0;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
-        Patrol();
+        if (!isInvestigating)
+        {
+            Patrol();            
+        }
         DetectMovingObjects();
+
     }
 
     // Movement detection of the NPC
@@ -62,7 +78,7 @@ public class EnemyBehaviour : MonoBehaviour
 
                     // Check if the object is moving
                     PossessionController possessedObject = obj.GetComponent<PossessionController>();
-
+                    
                     if(possessedObject != null && possessedObject.IsMoving)
                     {
                         isObjectMoving = true;                        
@@ -114,12 +130,12 @@ public class EnemyBehaviour : MonoBehaviour
         Vector2 direction = (destination - (Vector2)transform.position).normalized;
 
         // Flip sprite based on direction
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        
         spriteRenderer.flipX = direction.x < 0;
         facingRight = !spriteRenderer.flipX;
 
         // Move towards destination
-        transform.position = Vector2.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
 
         // If the enemy reaches his destination, he is given a new destination to patrol
         if (Mathf.Abs(patrolPoints[indexPatrolPoints].position.x - transform.position.x) <= 0.2f)
@@ -131,13 +147,52 @@ public class EnemyBehaviour : MonoBehaviour
             }
         }
     }
+    // Start the investigation of the sound
+    public void InvestigateSound(GameObject objectsound, bool replaceObject)
+    {
+        isInvestigating = true;
+        StopAllCoroutines();
+        StartCoroutine(Investigate(objectsound, replaceObject));
+    }
+    // Enemy behaviour for the investigation
+    protected IEnumerator Investigate(GameObject objectsound, bool replaceObject)
+    {
+        // Take a surprise pause before going on investigation
+        audioSource.Play();
+        yield return new WaitForSeconds(surpriseWaitTime);
 
+        
 
+        // Go towards the sound
+        Vector2 destination = new Vector2(objectsound.transform.position.x, transform.position.y);
+        // Sprite face the right direction
+        Vector2 direction = (destination - (Vector2)transform.position).normalized;
+        spriteRenderer.flipX = direction.x < 0;
+
+        while (Mathf.Abs(transform.position.x - objectsound.transform.position.x) > 0.1f)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed*Time.deltaTime);
+            yield return null;
+        }
+
+        // One NPC must replace the object to it's initial position
+        FallingObject fallingObject = objectsound.GetComponent<FallingObject>();
+        if (fallingObject != null && replaceObject)
+        {
+            fallingObject.ReplaceObject();
+            // Animation ICI!
+            fallingObject.FinishReplacement();
+        }
+        // Wait a bit of time before going back to normal
+        yield return new WaitForSeconds(investigationWaitTime);
+        isInvestigating = false;
+
+    }
 
     // Debug method only
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
