@@ -541,12 +541,80 @@ MonoBehaviour:
   stopSpeed: 1.1
   jumpSpeed: 5
   horizontalDirection: 0
-  canMove: 0
+  curObject: []
+  canMove: 1
   canWalk: 1
   canJump: 1
-  isPossessing: 0
+  isInContact: 0
   isJumping: 0
+  move:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e51bb84d-90fb-4563-9b05-280e2d4953bd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: 7c9c4c0e-71e8-4792-8e3e-7df0fe6f3585
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: a3d0a917-d337-4dde-8dfa-4b175d159c35
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: f6fde2ac-592a-44fa-941e-fdc9b37a6992
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 0b83f505-6631-42a1-a3cf-3ae8662333a2
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 11a5215c-503e-4414-b899-a0a161685f7c
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    m_Flags: 0
+  jump:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 47cd1e86-cf39-4c3b-a681-e81b0a594f46
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 71403730-dcee-4548-93ec-c41539e72474
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
+    m_Flags: 0
   lastPossession: 
+  isPossessing: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,12 +1517,31 @@ MonoBehaviour:
   maxSpeed: 0
   stopSpeed: 0
   jumpSpeed: 0
+  horizontalDirection: 0
+  curObject: []
   canMove: 0
   canWalk: 0
   canJump: 0
   isInContact: 0
-  curObject: []
-  _possessionType: 1
+  isJumping: 0
+  move:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e1cfebdf-cb17-4f31-86bd-8c00a101f507
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 029458fc-77a2-4793-b160-ce9114fa3923
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &1607085031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,12 +1628,31 @@ MonoBehaviour:
   maxSpeed: 0
   stopSpeed: 0
   jumpSpeed: 0
+  horizontalDirection: 0
+  curObject: []
   canMove: 0
   canWalk: 0
   canJump: 0
   isInContact: 0
-  curObject: []
-  _possessionType: 2
+  isJumping: 0
+  move:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5e768f6e-aaba-400a-ae36-17eb380eda23
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9dc7908c-9600-41d4-92df-db14ce775963
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &1624362693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2727,12 +2833,31 @@ MonoBehaviour:
   maxSpeed: 0
   stopSpeed: 0
   jumpSpeed: 0
+  horizontalDirection: 0
+  curObject: []
   canMove: 0
   canWalk: 0
   canJump: 0
   isInContact: 0
-  curObject: []
-  _possessionType: 1
+  isJumping: 0
+  move:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a3c3bb65-4bd4-4bef-8fb9-27d58cfd4856
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6cab0387-e833-4cdd-9d01-ae5a02d2f6c5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

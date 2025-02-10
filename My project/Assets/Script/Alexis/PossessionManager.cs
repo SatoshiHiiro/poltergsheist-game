@@ -6,12 +6,11 @@ using System.Collections;
 /// Requiert Externe: PlayerController(1)
 /// Input: Click Gauche = possession/dépossession
 /// État: Adéquat(temp)
-public class PossessionBehavior : MonoBehaviour
+public class PossessionManager : MonoBehaviour
 {
     //Variables
     [Header("Variables")]
     [SerializeField] public float lerpSpeed;        //Vitesse du lerp
-    public float energyDrainSpeed;
 
     //Conditions
     bool isPossessed;                               //Pour savoir si l'objet possessible est possédé
@@ -19,18 +18,15 @@ public class PossessionBehavior : MonoBehaviour
 
     //Shortcuts
     PlayerController player;
-    PossessionController possession;
-    EnergySystem energy;
+    IPossessable possession;
 
     void Start()
     {
         player = FindFirstObjectByType<PlayerController>();
-        possession = gameObject.GetComponent<PossessionController>();
-        energy = FindFirstObjectByType<EnergySystem>();
-        possession.enabled = false;
+        possession = gameObject.GetComponent<IPossessable>();
+        //possession.enabled = false;
         isPossessed = false;
         isAnimationFinished = true;
-        energyDrainSpeed = 0.001f;
     }
 
     //Pour l'animation de possession
@@ -47,7 +43,8 @@ public class PossessionBehavior : MonoBehaviour
         player.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSecondsRealtime(.5f);
         isAnimationFinished = true;
-        possession.enabled = true;
+        possession.OnPossessed();
+        //possession.enabled = true;
     }
 
     void FixedUpdate()
@@ -69,12 +66,6 @@ public class PossessionBehavior : MonoBehaviour
             }
             
             player.transform.position = pos;
-            energy.ModifyEnergy(-energyDrainSpeed);
-
-            if (energy.CurrentEnergy() == 0)
-            {
-                GetOutOfPossession();
-            }
         }
 
         //Pour enlever la possession sur l'objet si le Player possède un autre objet avant de déposséder
@@ -89,27 +80,28 @@ public class PossessionBehavior : MonoBehaviour
         {
             player.GetComponent<Rigidbody2D>().linearVelocityX = 0;
 
-            if (!isPossessed && energy.CurrentEnergy() > 0)
+            //Si le joueur veut posséder l'objet en possédant déjà un autre
+            if (player.isPossessing && !isPossessed)
             {
-                //Si le joueur veut posséder l'objet en possédant déjà un autre
-                if (player.isPossessing)
-                {
-                    isPossessed = true;
-                    StartCoroutine(AnimationTime());
-                }
-                //Si le joueur veut posséder l'objet
-                else
-                {
-                    isPossessed = true;
-                    player.isPossessing = true;
-                    StartCoroutine(AnimationTime());
-                }
+                isPossessed = true;
+                StartCoroutine(AnimationTime());
             }
-            
+            //Si le joueur veut posséder l'objet
+            else if (!player.isPossessing && !isPossessed)
+            {
+                isPossessed = true;
+                player.isPossessing = true;
+                StartCoroutine(AnimationTime());
+            }
             //Si le joueur veut sortir de l'objet
             else if (player.isPossessing && isPossessed)
             {
-                GetOutOfPossession();
+                StopPossession();
+                player.isPossessing = false;
+                player.GetComponent<Collider2D>().enabled = true;
+                player.GetComponent<Rigidbody2D>().simulated = true;
+                player.GetComponent<SpriteRenderer>().enabled = true;
+                player.canMove = true;
             }
         }
     }
@@ -118,18 +110,9 @@ public class PossessionBehavior : MonoBehaviour
     void StopPossession()
     {
         isPossessed = false;
-        possession.enabled = false;
+        possession.OnDepossessed();
+        //possession.enabled = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
         gameObject.GetComponent<Rigidbody2D>().linearVelocityX = 0;
-    }
-
-    void GetOutOfPossession()
-    {
-        StopPossession();
-        player.isPossessing = false;
-        player.GetComponent<Collider2D>().enabled = true;
-        player.GetComponent<Rigidbody2D>().simulated = true;
-        player.GetComponent<SpriteRenderer>().enabled = true;
-        player.canMove = true;
     }
 }
