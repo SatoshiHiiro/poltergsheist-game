@@ -92,7 +92,7 @@ public abstract class MovementController : MonoBehaviour
             {
                 moveInput = move.ReadValue<Vector2>();
             }
-            if (move.WasReleasedThisFrame())
+            if (move.WasReleasedThisFrame() && !move.WasPressedThisFrame())
             {
                 moveInput = Vector2.zero;
             }
