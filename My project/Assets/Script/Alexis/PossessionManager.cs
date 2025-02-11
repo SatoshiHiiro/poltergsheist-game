@@ -33,14 +33,14 @@ public class PossessionManager : MonoBehaviour
     IEnumerator AnimationTime()
     {
         player.lastPossession = gameObject.name;
-        player.GetComponent<SpriteRenderer>().enabled = true;
+        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<Rigidbody2D>().simulated = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         player.GetComponent<Collider2D>().enabled = false;
         player.canMove = false;
         isAnimationFinished = false;
         yield return new WaitForSecondsRealtime(.5f);
-        player.GetComponent<SpriteRenderer>().enabled = false;
+        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSecondsRealtime(.5f);
         isAnimationFinished = true;
         possession.OnPossessed();
@@ -100,7 +100,7 @@ public class PossessionManager : MonoBehaviour
                 player.isPossessing = false;
                 player.GetComponent<Collider2D>().enabled = true;
                 player.GetComponent<Rigidbody2D>().simulated = true;
-                player.GetComponent<SpriteRenderer>().enabled = true;
+                player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
                 player.canMove = true;
             }
         }
