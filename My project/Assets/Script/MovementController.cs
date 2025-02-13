@@ -30,6 +30,7 @@ public abstract class MovementController : MonoBehaviour
     public bool canJump;                                                //Pour permettre l'arrêt du mouvement physique en Y
     public bool isInContact;                                        //Utiliser pour savoir si l'objet est en contact avec quelque chose lui permettant de sauter
     [HideInInspector] public bool isJumping;                            //Utilisé pour que le Player ne puisse pas sauter s'iel saute
+    private bool canClimbAgain;
 
     //Shortcuts
     Rigidbody2D rigid2D;
@@ -43,6 +44,7 @@ public abstract class MovementController : MonoBehaviour
     {
         playerInputEnable = true;
         moveInput = Vector2.zero;
+        canClimbAgain = true;
 
         move.Enable();
         jump.Enable();
@@ -91,10 +93,15 @@ public abstract class MovementController : MonoBehaviour
             if (canMove && move.WasPressedThisFrame())
             {
                 moveInput = move.ReadValue<Vector2>();
+                if(moveInput.y != 0)
+                {
+                    canClimbAgain = true;
+                }
             }
             if (move.WasReleasedThisFrame() && !move.WasPressedThisFrame())
             {
                 moveInput = Vector2.zero;
+                canClimbAgain = true;
             }
             if (canJump && !isJumping && jump.WasPressedThisFrame())
             {
@@ -136,5 +143,26 @@ public abstract class MovementController : MonoBehaviour
             }
         }
         isInContact = temp;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        // Detection of the stairs
+        if (collision.gameObject.tag == "Stair")
+        {
+            HandleStairClimbing(collision);
+        }
+    }
+
+    // Manage the climbing of the stair for the player
+    private void HandleStairClimbing(Collider2D collider)
+    {
+        StairController stair = collider.gameObject.GetComponent<StairController>();
+        if (moveInput.y != 0 && canClimbAgain)
+        {
+            canClimbAgain = false;
+            StairDirection direction = moveInput.y > 0 ? StairDirection.Upward : StairDirection.Downward;
+            stair.ClimbStair(this.gameObject, direction);
+        }
     }
 }

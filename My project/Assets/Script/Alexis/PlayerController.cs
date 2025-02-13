@@ -22,26 +22,6 @@ public class PlayerController : MovementController
         canMove = true;
         canJump = false;
     }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        // Detection of the stairs
-        if (collision.gameObject.tag == "Stair")
-        {
-            HandleStairClimbing(collision);
-        }
-    }
-
-    // Manage the climbing of the stair for the player
-    private void HandleStairClimbing(Collider2D collider)
-    {
-        StairController stair = collider.gameObject.GetComponent<StairController>();
-        if (moveInput.y != 0)
-        {
-            StairDirection direction = moveInput.y > 0 ? StairDirection.Upward : StairDirection.Downward;
-            stair.ClimbStair(this.gameObject, direction);
-        }
-    }
         //Mouvement
         //[Header("Mouvement variables")]
         //[SerializeField] public float speed;                                //Vitesse du mouvement
