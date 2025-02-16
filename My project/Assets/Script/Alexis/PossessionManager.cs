@@ -52,7 +52,7 @@ public class PossessionManager : MonoBehaviour
         //Pour le mouvement de l'animation
         if (isPossessed)
         {
-            Vector3 pos = Vector3.zero;
+            Vector3 pos = new Vector3(0,0,player.transform.position.z);
 
             if (!isAnimationFinished)
             {
