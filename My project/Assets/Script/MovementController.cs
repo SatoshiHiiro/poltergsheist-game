@@ -18,6 +18,7 @@ public abstract class MovementController : MonoBehaviour
     [SerializeField][HideInInspector] public int horizontalDirection;  //Direction du mouvement
     private bool playerInputEnable;
     protected Vector2 moveInput;
+    Vector2 lastInput;
     
     //Contacts
     [Header("GameObjets in contact")]
@@ -44,6 +45,7 @@ public abstract class MovementController : MonoBehaviour
     {
         playerInputEnable = true;
         moveInput = Vector2.zero;
+        lastInput = Vector2.zero;
         canClimbAgain = true;
 
         move.Enable();
@@ -62,6 +64,11 @@ public abstract class MovementController : MonoBehaviour
     {
         if (canMove)
         {
+            if (lastInput.x != moveInput.x && moveInput.x != 0)
+            {
+                rigid2D.linearVelocityX = 0;
+            }
+
             //Effectue le mouvement horizontal
             rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
 
@@ -82,6 +89,7 @@ public abstract class MovementController : MonoBehaviour
             //    rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
             //    isJumping = false;
             //}
+            lastInput = moveInput;
         }
     }
 
