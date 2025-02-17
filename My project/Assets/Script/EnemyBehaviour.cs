@@ -176,8 +176,8 @@ public class EnemyBehaviour : MonoBehaviour
 
         // Flip sprite based on direction
         
-        spriteRenderer.flipX = direction.x < 0;
-        facingRight = !spriteRenderer.flipX;
+        //spriteRenderer.flipX = direction.x < 0;
+        //facingRight = !spriteRenderer.flipX;
 
         // Move towards destination
         transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
