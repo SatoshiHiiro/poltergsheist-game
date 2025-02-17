@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class EnergySystem : MonoBehaviour
 {
+    [SerializeField] float energyRegen;
+    private float stockRegen;
     public float energyValue;
     float maxEnergy;
     float minEnergy;
@@ -16,6 +18,22 @@ public class EnergySystem : MonoBehaviour
         maxEnergy = slider.maxValue;
         minEnergy = slider.minValue;
         energyValue = slider.value;
+    }
+
+    void FixedUpdate()
+    {
+        ModifyEnergy(energyRegen);
+    }
+
+    public void StopResumeRegen(bool isRegenStopping)
+    {
+        if (isRegenStopping)
+        {
+            stockRegen = energyRegen;
+            energyRegen = 0;
+        }
+        else
+            energyRegen = stockRegen;
     }
 
     public float CurrentEnergy()

@@ -98,15 +98,16 @@ public abstract class MovementController : MonoBehaviour
     {
         if (playerInputEnable)
         {
-            if (canMove && move.WasPressedThisFrame())
+            if (canMove && move.IsPressed())
             {
                 moveInput = move.ReadValue<Vector2>();
-                if(moveInput.y != 0)
-                {
+                moveInput.x = Mathf.Round(moveInput.x);
+                moveInput.y = Mathf.Round(moveInput.y);
+
+                if (moveInput.y != 0)
                     canClimbAgain = true;
-                }
             }
-            if (move.WasReleasedThisFrame() && !move.WasPressedThisFrame())
+            else
             {
                 moveInput = Vector2.zero;
                 canClimbAgain = true;
