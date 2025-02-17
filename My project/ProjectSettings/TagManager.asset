@@ -18,8 +18,8 @@ TagManager:
   - Enemy
   - PossessedObject
   - FallingObject
-  - 
-  - 
+  - Wall
+  - Mirror
   - 
   - 
   - 
@@ -44,6 +44,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 1565016077
     locked: 0
   m_RenderingLayers:
   - Default

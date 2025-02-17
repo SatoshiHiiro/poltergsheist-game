@@ -8,8 +8,10 @@ public class EnemyBehaviour : MonoBehaviour
     protected float fieldOfViewAngle;
     [SerializeField]  protected float detectionRadius;  // NPC detection radius
     [SerializeField] protected bool facingRight;        // Is the NPC Sprite facing right    
-    [SerializeField] protected LayerMask detectLayer;   // Layer of objects to be detected by the NPC
-    [SerializeField] protected LayerMask ignoreLayer;   // Layer to ignore when raycasting
+    [SerializeField] protected LayerMask detectObjectLayer;   // Layer of objects to be detected by the NPC    
+    [SerializeField] protected LayerMask ignoreLayerDetectObject;   // Layer to ignore when raycasting to check if the view is blocked
+    [SerializeField] protected LayerMask mirrorLayer;   // Layer of objects to be detected by the NPC
+    [SerializeField] protected LayerMask ignoreLayerReflection;   // Layer to ignore when raycasting to check if the mirror reflection is blocked
     [SerializeField] protected GameObject player;
 
     // Variable manage suspicion of the NPC
@@ -39,6 +41,8 @@ public class EnemyBehaviour : MonoBehaviour
         indexPatrolPoints = 0;
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+
+        player = GameObject.FindWithTag("Player");
     }
     private void Update()
     {
@@ -47,6 +51,7 @@ public class EnemyBehaviour : MonoBehaviour
             Patrol();            
         }
         DetectMovingObjects();
+        CheckMirrorReflection();
 
     }
 
@@ -57,17 +62,14 @@ public class EnemyBehaviour : MonoBehaviour
         float objectSize = 0f;
 
         // Find all the possible possessed object in the room
-        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius,detectLayer);
+        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius,detectObjectLayer);
         foreach (Collider2D obj in objects)
-        {
-            // Check if the object is in the line of sight of the NPC
-            Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
-            float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
+        {            
 
-            if(angle <= fieldOfViewAngle / 2)
+            if(IsObjectInFieldOfView(obj))
             {
                 // Check if there is no object blocking the sight of the NPC
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position), detectionRadius, ~ignoreLayer);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position).normalized, detectionRadius, ~ignoreLayerDetectObject);
                 
                 // Is the path from the npc to the object clear?
                 if (hit.collider != null && hit.collider == obj)
@@ -121,6 +123,49 @@ public class EnemyBehaviour : MonoBehaviour
             SuspicionManager.Instance.UpdateMovementSuspicion(objectSize);
         }
         
+    }
+
+    // Check if we can see the player trough the mirror
+    protected void CheckMirrorReflection()
+    {
+        Collider2D[] mirrors = Physics2D.OverlapCircleAll(transform.position, detectionRadius, mirrorLayer);
+        foreach(Collider2D mirrorCollider in mirrors)
+        {
+            Mirror mirror = mirrorCollider.GetComponentInParent<Mirror>();//GetComponent<Mirror>();
+            if (mirror == null) continue;
+            
+            // Check if the mirror is in the field of view
+            if (!IsObjectInFieldOfView(mirrorCollider)) continue;
+
+            if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
+            {
+                if (!mirror.IsMirrorReflectionBlocked(player.GetComponent<Collider2D>()))
+                {
+                    print("DIE");
+                }
+
+            }
+        }
+    }
+
+    protected bool IsViewBlocked(Collider2D objectCollider)
+    {
+        //// Check if there is no object blocking the sight of the NPC
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position).normalized, detectionRadius, ~ignoreLayerDetectObject);
+
+        //// Is the path from the npc to the object clear?
+        //if (hit.collider != null && hit.collider == obj)
+        //Vector2 directionToObject = (objectCollider.transform.position - );
+        return false;
+
+    }
+
+    protected bool IsObjectInFieldOfView(Collider2D obj)
+    {
+        // Check if the object is in the line of sight of the NPC
+        Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
+        float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
+        return angle <= fieldOfViewAngle / 2;
     }
 
     protected void Patrol()
