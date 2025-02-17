@@ -11,6 +11,8 @@ public class PossessionManager : MonoBehaviour
     //Variables
     [Header("Variables")]
     [SerializeField] public float lerpSpeed;        //Vitesse du lerp
+    [SerializeField] public float initialEnergyLoss;
+    [SerializeField] public float continuousEnergyLoss;
 
     //Conditions
     bool isPossessed;                               //Pour savoir si l'objet possessible est possédé
@@ -32,6 +34,7 @@ public class PossessionManager : MonoBehaviour
     //Pour l'animation de possession
     IEnumerator AnimationTime()
     {
+        FindFirstObjectByType<EnergySystem>().ModifyEnergy(-initialEnergyLoss);
         player.lastPossession = gameObject.name;
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<Rigidbody2D>().simulated = false;
@@ -63,6 +66,7 @@ public class PossessionManager : MonoBehaviour
             {
                 pos.y = transform.position.y;
                 pos.x = transform.position.x;
+                FindFirstObjectByType<EnergySystem>().ModifyEnergy(-continuousEnergyLoss);
             }
             
             player.transform.position = pos;
