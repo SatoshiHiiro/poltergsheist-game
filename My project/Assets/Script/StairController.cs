@@ -21,6 +21,8 @@ public class StairController : MonoBehaviour
     [SerializeField] private float maximumWidth;    // Maximum Width of the object so he can climb the stair
 
     private bool isClimbing;
+    private bool canCharacterJump;
+    private bool canCharacterMove;
 
     private void Start()
     {
@@ -53,8 +55,10 @@ public class StairController : MonoBehaviour
         // Kepp the player from moving when climbing the stair
         if (character.GetComponent<PlayerController>() != null)
         {
+            canCharacterMove = character.GetComponent<PlayerController>().canMove;
+            canCharacterJump = character.GetComponent<PlayerController>().canJump;
             character.GetComponent<PlayerController>().canMove = false;
-            character.GetComponent<PlayerController>().canJump = false;
+            character.GetComponent<PlayerController>().canJump = false; 
         }
 
         // Move towards the center of the stairs
@@ -88,8 +92,8 @@ public class StairController : MonoBehaviour
         // Re-enable player movement
         if (character.GetComponent<PlayerController>() != null)
         {
-            character.GetComponent<PlayerController>().canMove = true;
-            character.GetComponent<PlayerController>().canJump = true;
+            character.GetComponent<PlayerController>().canMove = canCharacterMove;
+            character.GetComponent<PlayerController>().canJump = canCharacterJump;
         }
     }
 }
