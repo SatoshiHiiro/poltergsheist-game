@@ -8,12 +8,12 @@ public class JumpPlatform : MonoBehaviour
     private Collider2D objectCollider;
     Collider2D playerCollider;
     private LayerMask playerLayer;
-    [SerializeField]float threshold = 0.4f; // Prevent flickering when we enable the collision
+    //[SerializeField]float threshold = 0.4f; // Prevent flickering when we enable the collision
     private void Start()
     {
         objectCollider = GetComponent<Collider2D>();
-        playerCollider = GetComponent<Collider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerCollider = player.GetComponent<Collider2D>();
         playerLayer = 1 << player.layer;
 
         if(player == null)
@@ -29,11 +29,11 @@ public class JumpPlatform : MonoBehaviour
         // Find player feet position
         float playerFeetPosition = player.transform.position.y - (playerCollider.bounds.size.y / 2);
         // Check if the player is above the platform
-        if(playerFeetPosition > platformSurface + threshold)
+        if(playerFeetPosition > platformSurface)
         {
             EnableCollision();
         }
-        else if(playerFeetPosition < platformSurface - threshold)
+        else if(playerFeetPosition < platformSurface)
         {
             DisableCollision();
         }
@@ -47,5 +47,18 @@ public class JumpPlatform : MonoBehaviour
     private void DisableCollision()
     {
         objectCollider.excludeLayers |= playerLayer;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (objectCollider != null)
+        {
+            float platformSurface = transform.position.y + (objectCollider.bounds.size.y / 2);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(
+                new Vector3(transform.position.x - 0.5f, platformSurface, 0),
+                new Vector3(transform.position.x + 0.5f, platformSurface, 0)
+            );
+        }
     }
 }
