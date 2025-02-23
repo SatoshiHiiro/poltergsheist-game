@@ -9,21 +9,19 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
 {
     // Enemy patrol variables
     [Header("Patrol variables")]
-    [SerializeField] protected float movementSpeed = 6f;
     [SerializeField] protected PatrolPointData[] patrolPoints;    // Points were the NPC patrol
-    protected int indexPatrolPoints;    // Next index patrol point
-    SpriteRenderer npcSpriteRenderer;
+    protected int indexPatrolPoints;    // Next index patrol point    
     protected Animator animator;
     protected bool isBlocked;   // Is the NPC blocked in a room
     protected bool isWaiting;   // We wait for the animation to finish
     protected bool isInRoom;    // Is the NPC in a room
+    protected bool isEnteringOrExiting; // Is the NPC entering or exiting a room?
     PatrolPointData currentPoint;   // Point where the NPC is located
     PatrolPointData nextPatrolPoint; // Next NPC patrol point
 
     protected override void Start()
     {
         base.Start();
-        npcSpriteRenderer = GetComponent<SpriteRenderer>();
         indexPatrolPoints = 0;
         animator = GetComponent<Animator>();
         isBlocked = false;
@@ -44,9 +42,30 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         }
         if(!isWaiting && !isBlocked)
         {
-            Patrol();
+            if (!isInvestigating)
+            {
+                Patrol();
+            }
+            //Patrol();
         }
         
+    }
+    // Start the investigation of the sound
+    public override void InvestigateSound(GameObject objectsound, bool replaceObject)
+    {       
+       StartCoroutine(WaitBeforeInvestigate(objectsound, replaceObject));      
+    }
+    // When the NPC is no longer blocked or in a room he will then go and investigate
+    protected IEnumerator WaitBeforeInvestigate(GameObject objectsound, bool replaceObject)
+    {
+        while(isBlocked || isInRoom)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        isInvestigating = true;
+        isWaiting = false; // NOT SURE!!!
+        StopAllCoroutines();
+        StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
     }
 
     public void Patrol()
@@ -163,8 +182,8 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             if(!isInRoom && !IsRoomBlocked(currentPoint))
             {
                 animator.SetBool("EnterRoom", true);
-                yield return new WaitForSeconds(0.5f);
                 isInRoom = true;
+                yield return new WaitForSeconds(0.5f);                
                 yield return new WaitForSeconds(currentPoint.WaitTime); // Waiting in the room
 
                 // Check again if the room became blocked while waiting

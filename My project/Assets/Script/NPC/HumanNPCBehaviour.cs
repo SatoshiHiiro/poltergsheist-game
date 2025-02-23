@@ -1,7 +1,9 @@
 using UnityEngine;
+using System.Collections;
 
 public class HumanNPCBehaviour : BasicNPCBehaviour
 {
+    [SerializeField] protected float movementSpeed = 6f;
     // Variable manage suspicion of the NPC
     [SerializeField] protected float minSuspiciousRotation; // Minimum rotation change in degrees to trigger suspicion
     [SerializeField] protected float minSuspiciousPosition; // Minimum position change to trigger suspicion
@@ -10,11 +12,20 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [SerializeField] protected LayerMask mirrorLayer;   // Layer of the mirrors
 
     protected GameObject player;
+    protected SpriteRenderer npcSpriteRenderer;
+
+    [Header("Investigation Variables")]
+    protected bool isInvestigating = false;
+    protected AudioSource audioSource;
+    [SerializeField] protected float surpriseWaitTime = 2f;
+    [SerializeField] protected float investigationWaitTime = 3f;
 
     protected override void Start()
     {
         base.Start();
         player = GameObject.FindWithTag("Player");
+        audioSource = GetComponent<AudioSource>();
+        npcSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     protected override void Update()
@@ -88,5 +99,48 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
             }
         }
+    }
+
+    // Start the investigation of the sound
+    public virtual void InvestigateSound(GameObject objectsound, bool replaceObject)
+    {
+        isInvestigating = true;
+        StopAllCoroutines();
+        StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
+    }
+    // NPC behaviour for the investigation
+    protected IEnumerator InvestigateFallingObject(GameObject objectsound, bool replaceObject)
+    {
+        // Take a surprise pause before going on investigation
+        audioSource.Play();
+        yield return new WaitForSeconds(surpriseWaitTime);
+
+
+
+        // Go towards the sound
+        Vector2 destination = new Vector2(objectsound.transform.position.x, transform.position.y);
+        // Sprite face the right direction
+        Vector2 direction = (destination - (Vector2)transform.position).normalized;
+        npcSpriteRenderer.flipX = direction.x < 0;
+
+        while (Mathf.Abs(transform.position.x - objectsound.transform.position.x) > 0.1f)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        // One NPC must replace the object to it's initial position
+        FallingObject fallingObject = objectsound.GetComponent<FallingObject>();
+        if (fallingObject != null && replaceObject)
+        {
+            fallingObject.ReplaceObject();
+            // Animation ICI!
+            fallingObject.FinishReplacement();
+        }
+        // Wait a bit of time before going back to normal
+        yield return new WaitForSeconds(investigationWaitTime);
+        isInvestigating = false;
+        print("finish");
+
     }
 }

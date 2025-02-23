@@ -189,10 +189,10 @@ public class EnemyBehaviour : MonoBehaviour
     {
         isInvestigating = true;
         StopAllCoroutines();
-        StartCoroutine(Investigate(objectsound, replaceObject));
+        StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
     }
     // Enemy behaviour for the investigation
-    protected IEnumerator Investigate(GameObject objectsound, bool replaceObject)
+    protected IEnumerator InvestigateFallingObject(GameObject objectsound, bool replaceObject)
     {
         // Take a surprise pause before going on investigation
         audioSource.Play();
