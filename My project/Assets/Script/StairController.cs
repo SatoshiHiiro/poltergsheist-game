@@ -11,12 +11,18 @@ public class StairController : MonoBehaviour
     // This class manage stairs depending on the direction desired by the character
 
     [Header("Stairs")]
-    [SerializeField] private Transform startPoint;
-    [SerializeField] private Transform nextFloor;
-    [SerializeField] private Transform bottomFloor;
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private Transform startPoint;  // Center of the door on floor level
+    [SerializeField] private StairController upperFloor;   // Next upper floor
+    [SerializeField] private StairController bottomFloor; // Bottom floor
+    //[SerializeField] private Transform nextFloor;   // Next upper floor
+    //[SerializeField] private Transform bottomFloor; // Bottom floor
+    [SerializeField] private float speed = 5f;      // Speed to go at the center of the door before climbing
+    [SerializeField] private float maximumHeight;   // Maximum Height of the object so he can climb the stair
+    [SerializeField] private float maximumWidth;    // Maximum Width of the object so he can climb the stair
 
     private bool isClimbing;
+    private bool canCharacterJump;
+    private bool canCharacterMove;
 
     private void Start()
     {
@@ -25,15 +31,23 @@ public class StairController : MonoBehaviour
 
     public void ClimbStair(GameObject character, StairDirection direction)
     {        
-        StartCoroutine(HandleClimbingStair(character, direction));
+        Renderer characterRenderer = character.transform.GetChild(0).GetComponent<Renderer>();
+        print("Character size X: " + characterRenderer.bounds.size.x);
+        print("Character size Y: " + characterRenderer.bounds.size.y);
+        // If the character fit with the stair dimension, then he can climb
+        if (characterRenderer.bounds.size.x < maximumWidth && characterRenderer.bounds.size.y < maximumHeight)
+        {
+            StartCoroutine(HandleClimbingStair(character, direction));
+        }
+        
     }
 
     private IEnumerator HandleClimbingStair(GameObject character, StairDirection direction)
     {
         // Which floor does the character want to go to
-        Transform destination = direction == StairDirection.Upward ? nextFloor : bottomFloor;
+        StairController targetStair = direction == StairDirection.Upward ? upperFloor : bottomFloor;
 
-        if(destination == null)
+        if(targetStair == null)
         {
             yield break;
         }
@@ -41,8 +55,10 @@ public class StairController : MonoBehaviour
         // Kepp the player from moving when climbing the stair
         if (character.GetComponent<PlayerController>() != null)
         {
+            canCharacterMove = character.GetComponent<PlayerController>().canMove;
+            canCharacterJump = character.GetComponent<PlayerController>().canJump;
             character.GetComponent<PlayerController>().canMove = false;
-            character.GetComponent<PlayerController>().canJump = false;
+            character.GetComponent<PlayerController>().canJump = false; 
         }
 
         // Move towards the center of the stairs
@@ -54,12 +70,21 @@ public class StairController : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(0.1f);
-        
+
 
         // Climbing stair animation
 
-        
-        character.transform.position = destination.position;    // Teleport the player
+        // Calculate adjusted destination position based on character height
+        Renderer characterRenderer = character.transform.GetChild(0).GetComponent<Renderer>();
+        float characterHeight = characterRenderer.bounds.size.y;
+        Vector3 adjustedPosition = targetStair.startPoint.position;
+
+        // Adjust Y position so the character's feet are at the floor level
+        adjustedPosition.y += characterHeight / 2f;
+
+        // Teleport the player to the adjusted position
+        character.transform.position = adjustedPosition;
+        //character.transform.position = destination.position;    // Teleport the player
                
 
         // Finish climbing stair animation
@@ -67,8 +92,8 @@ public class StairController : MonoBehaviour
         // Re-enable player movement
         if (character.GetComponent<PlayerController>() != null)
         {
-            character.GetComponent<PlayerController>().canMove = true;
-            character.GetComponent<PlayerController>().canJump = true;
+            character.GetComponent<PlayerController>().canMove = canCharacterMove;
+            character.GetComponent<PlayerController>().canJump = canCharacterJump;
         }
     }
 }

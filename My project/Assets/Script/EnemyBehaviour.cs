@@ -8,14 +8,16 @@ public class EnemyBehaviour : MonoBehaviour
     protected float fieldOfViewAngle;
     [SerializeField]  protected float detectionRadius;  // NPC detection radius
     [SerializeField] protected bool facingRight;        // Is the NPC Sprite facing right    
-    [SerializeField] protected LayerMask detectLayer;   // Layer of objects to be detected by the NPC
-    [SerializeField] protected LayerMask ignoreLayer;   // Layer to ignore when raycasting
+    [SerializeField] protected LayerMask detectObjectLayer;   // Layer of objects to be detected by the NPC    
+    [SerializeField] protected LayerMask ignoreLayerDetectObject;   // Layer to ignore when raycasting to check if the view is blocked
+    [SerializeField] protected LayerMask mirrorLayer;   // Layer of objects to be detected by the NPC
+    [SerializeField] protected LayerMask ignoreLayerReflection;   // Layer to ignore when raycasting to check if the mirror reflection is blocked
     [SerializeField] protected GameObject player;
 
     // Variable manage suspicion of the NPC
     [SerializeField] protected float minSuspiciousRotation; // Minimum rotation change in degrees to trigger suspicion
     [SerializeField] protected float minSuspiciousPosition; // Minimum position change to trigger suspicion
-    private bool isCurrentlyObserving;                      // Is the NPC already watching an object moving
+    protected bool isCurrentlyObserving;                      // Is the NPC already watching an object moving
 
     // Enemy patrol variables
     [SerializeField] protected Transform[] patrolPoints;    // Points were the NPC patrol
@@ -30,7 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
     protected AudioSource audioSource;
     [SerializeField] protected float surpriseWaitTime = 2f;
     [SerializeField] protected float investigationWaitTime = 3f;
-    private void Start()
+    protected virtual void Start()
     {
         fieldOfViewAngle = 180f;
         detectionRadius = 10f;
@@ -39,14 +41,17 @@ public class EnemyBehaviour : MonoBehaviour
         indexPatrolPoints = 0;
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+
+        player = GameObject.FindWithTag("Player");
     }
-    private void Update()
+    protected virtual void Update()
     {
         if (!isInvestigating)
         {
             Patrol();            
         }
         DetectMovingObjects();
+        CheckMirrorReflection();
 
     }
 
@@ -57,17 +62,14 @@ public class EnemyBehaviour : MonoBehaviour
         float objectSize = 0f;
 
         // Find all the possible possessed object in the room
-        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius,detectLayer);
+        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius,detectObjectLayer);
         foreach (Collider2D obj in objects)
-        {
-            // Check if the object is in the line of sight of the NPC
-            Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
-            float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
+        {            
 
-            if(angle <= fieldOfViewAngle / 2)
+            if(IsObjectInFieldOfView(obj))
             {
                 // Check if there is no object blocking the sight of the NPC
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position), detectionRadius, ~ignoreLayer);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position).normalized, detectionRadius, ~ignoreLayerDetectObject);
                 
                 // Is the path from the npc to the object clear?
                 if (hit.collider != null && hit.collider == obj)
@@ -78,28 +80,32 @@ public class EnemyBehaviour : MonoBehaviour
 
                     // Check if the object is moving
                     PossessionController possessedObject = obj.GetComponent<PossessionController>();
-                    
-                    if(possessedObject != null && possessedObject.IsMoving)
-                    {
-                        isObjectMoving = true;                        
-                    }
-                    else
-                    {
-                        // Check if the object has changed significantly of position and rotation
-                        float positionChange = Vector2.Distance(possessedObject.LastKnownPosition, obj.transform.position);
-                        float rotationChange = Quaternion.Angle(possessedObject.LastKnownRotation, obj.transform.rotation);
 
-                        // The object moved or rotated too much out of sight of the NPC
-                        if(positionChange >= minSuspiciousPosition || rotationChange >= minSuspiciousRotation)
+                    if(possessedObject != null)
+                    {
+                        // Check if the object is moving in front of him
+                        if (possessedObject.IsMoving)
                         {
-
-                            print("HERE!");
-                            //possessedObject.UpdateLastKnownPositionRotation();
-                            SuspicionManager.Instance.UpdateDisplacementSuspicion(objectSize, rotationChange, positionChange);
+                            isObjectMoving = true;
                         }
+                        else
+                        {
+                            // Check if the object has changed significantly of position and rotation
+                            float positionChange = Vector2.Distance(possessedObject.LastKnownPosition, obj.transform.position);
+                            float rotationChange = Quaternion.Angle(possessedObject.LastKnownRotation, obj.transform.rotation);
+
+                            // The object moved or rotated too much out of sight of the NPC
+                            if (positionChange >= minSuspiciousPosition || rotationChange >= minSuspiciousRotation)
+                            {
+                                //possessedObject.UpdateLastKnownPositionRotation();
+                                SuspicionManager.Instance.UpdateDisplacementSuspicion(objectSize, rotationChange, positionChange);
+                            }
+                        }
+                        // Update the new position and rotation of the object
+                        possessedObject.UpdateLastKnownPositionRotation();
                     }
-                    // Update the new position and rotation of the object
-                    possessedObject.UpdateLastKnownPositionRotation();
+                    
+                    
                 }
             }
         }
@@ -123,6 +129,37 @@ public class EnemyBehaviour : MonoBehaviour
         
     }
 
+    // Check if we can see the player trough the mirror
+    protected void CheckMirrorReflection()
+    {
+        Collider2D[] mirrors = Physics2D.OverlapCircleAll(transform.position, detectionRadius, mirrorLayer);
+        foreach(Collider2D mirrorCollider in mirrors)
+        {
+            Mirror mirror = mirrorCollider.GetComponentInParent<Mirror>();//GetComponent<Mirror>();
+            if (mirror == null) continue;
+            
+            // Check if the mirror is in the field of view
+            if (!IsObjectInFieldOfView(mirrorCollider)) continue;
+
+            if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
+            {
+                if (!mirror.IsMirrorReflectionBlocked(player.GetComponent<Collider2D>()))
+                {
+                    print("DIE");
+                }
+
+            }
+        }
+    }
+
+    protected bool IsObjectInFieldOfView(Collider2D obj)
+    {
+        // Check if the object is in the line of sight of the NPC
+        Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
+        float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
+        return angle <= fieldOfViewAngle / 2;
+    }
+
     protected void Patrol()
     {
         // Get movement direction
@@ -131,8 +168,8 @@ public class EnemyBehaviour : MonoBehaviour
 
         // Flip sprite based on direction
         
-        spriteRenderer.flipX = direction.x < 0;
-        facingRight = !spriteRenderer.flipX;
+        //spriteRenderer.flipX = direction.x < 0;
+        //facingRight = !spriteRenderer.flipX;
 
         // Move towards destination
         transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
@@ -195,6 +232,5 @@ public class EnemyBehaviour : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
-
 
 }

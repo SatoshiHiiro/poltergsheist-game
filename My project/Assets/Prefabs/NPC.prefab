@@ -137,12 +137,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c5ff64ab3bedb40b4e4dc12486e35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 0
+  detectionRadius: 6
   facingRight: 0
-  detectLayer:
+  detectObjectLayer:
     serializedVersion: 2
     m_Bits: 128
-  ignoreLayer:
+  ignoreLayerDetectObject:
+    serializedVersion: 2
+    m_Bits: 1088
+  mirrorLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  ignoreLayerReflection:
     serializedVersion: 2
     m_Bits: 64
   player: {fileID: 0}
@@ -151,9 +157,9 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 7576180990802942900}
   - {fileID: 5469267255057408676}
-  movementSpeed: 4
+  movementSpeed: 6
   surpriseWaitTime: 2
-  investigationWaitTime: 3
+  investigationWaitTime: 4
 --- !u!50 &3415217366938077622
 Rigidbody2D:
   serializedVersion: 5
