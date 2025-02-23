@@ -6,16 +6,16 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
 {
     // NPC vision variables
     [Header("Field of view")]
-    protected float fieldOfViewAngle;
     [SerializeField] protected float detectionRadius;  // NPC detection radius
     [SerializeField] protected bool facingRight;        // Is the NPC Sprite facing right    
     [SerializeField] protected LayerMask detectObjectLayer;   // Layer of objects to be detected by the NPC    
     [SerializeField] protected LayerMask ignoreLayerSightBlocked;   // Layer to ignore when raycasting to check if the view is blocked
     protected bool isObjectMoving;    // Is there an object moving in front of him?
     protected bool isCurrentlyObserving;    // Is the NPC already watching an object moving?
+    protected float fieldOfViewAngle;
 
 
-    
+
     protected virtual void Start()
     {
         fieldOfViewAngle = 180f;
