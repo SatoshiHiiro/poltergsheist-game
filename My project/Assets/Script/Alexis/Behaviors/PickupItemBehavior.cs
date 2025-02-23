@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Collider2D))]
 public abstract class PickupItemBehavior : MonoBehaviour
 {
     protected bool isDestroy;

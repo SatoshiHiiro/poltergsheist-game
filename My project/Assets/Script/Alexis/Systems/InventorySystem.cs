@@ -32,3 +32,10 @@ public class InventorySystem : MonoBehaviour
         return isConditionsMet[index];
     }
 }
+
+public enum KeyObjectType
+{
+    None = -1,
+    DoorKey = 0,
+    ChestKey = 1
+}

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Slider))]
 public class EnergySystem : MonoBehaviour
 {
     [SerializeField] float energyRegen;

@@ -6,7 +6,7 @@ using System.Collections;
 /// Requiert Externe: PlayerController(1)
 /// Input: Click Gauche = possession/dépossession
 /// État: Adéquat(temp)
-public class PossessionManager : MonoBehaviour
+public class PossessionManager : InteractibleManager
 {
     //Variables
     [Header("Variables")]
@@ -23,8 +23,9 @@ public class PossessionManager : MonoBehaviour
     PlayerController player;
     IPossessable possession;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         player = FindFirstObjectByType<PlayerController>();
         energy = FindFirstObjectByType<EnergySystem>();
         possession = gameObject.GetComponent<IPossessable>();

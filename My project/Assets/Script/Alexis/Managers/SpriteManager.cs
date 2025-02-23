@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public abstract class SpriteManager : MonoBehaviour
 {
     [Header("Rotation Animation")]
