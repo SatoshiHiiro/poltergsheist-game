@@ -32,7 +32,6 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     }
     protected override void Update()
     {
-        // À CHANGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Pour le sons
         base.Update();
 
         if(isBlocked && currentPoint != null && !IsRoomBlocked(currentPoint))
@@ -46,7 +45,6 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             {
                 Patrol();
             }
-            //Patrol();
         }
         
     }

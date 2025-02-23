@@ -15,10 +15,14 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     protected SpriteRenderer npcSpriteRenderer;
 
     [Header("Investigation Variables")]
-    protected bool isInvestigating = false;
-    protected AudioSource audioSource;
     [SerializeField] protected float surpriseWaitTime = 2f;
     [SerializeField] protected float investigationWaitTime = 3f;
+    protected bool isInvestigating = false; // Is the NPC investigating a suspect sound
+    protected AudioSource audioSource;  // Source of the surprised sound
+
+    protected Vector2 initialPosition;
+    private bool initialFacingRight; // He's he facing right or left
+    
 
     protected override void Start()
     {
@@ -26,11 +30,12 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         player = GameObject.FindWithTag("Player");
         audioSource = GetComponent<AudioSource>();
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
+        initialPosition = transform.position;
+        initialFacingRight = !npcSpriteRenderer.flipX;
     }
 
     protected override void Update()
     {
-        // À CHANGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! MIRROIR et SONS (lui faire faire face à son truc original)!!
         base.Update();
         CheckMirrorReflection();
     }
@@ -106,7 +111,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         isInvestigating = true;
         StopAllCoroutines();
-        StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
+        StartCoroutine(InvestigateAndReturn(objectsound, replaceObject));
+        //StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
+        //StartCoroutine(ReturnToInitialPosition());
+    }
+
+    protected IEnumerator InvestigateAndReturn(GameObject objectsound, bool replaceObject)
+    {
+        yield return StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
+        yield return StartCoroutine(ReturnToInitialPosition());
     }
     // NPC behaviour for the investigation
     protected IEnumerator InvestigateFallingObject(GameObject objectsound, bool replaceObject)
@@ -140,7 +153,27 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         // Wait a bit of time before going back to normal
         yield return new WaitForSeconds(investigationWaitTime);
         isInvestigating = false;
-        print("finish");
 
+    }
+
+    // Return the NPC to it's initial position and facing direction
+    protected IEnumerator ReturnToInitialPosition()
+    {
+        // Calculate destination
+        Vector2 destination = new Vector2(initialPosition.x, transform.position.y);
+
+        // Flip sprite based on direction
+        Vector2 direction = (destination - (Vector2)transform.position).normalized;
+        npcSpriteRenderer.flipX = direction.x < 0;
+        facingRight = !npcSpriteRenderer.flipX;
+
+        // Move to initial position
+        while (Mathf.Abs(transform.position.x - initialPosition.x) > 0.1f)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
+            yield return null;
+        }
+        // Restore initial facing direction
+        npcSpriteRenderer.flipX = !initialFacingRight;
     }
 }
