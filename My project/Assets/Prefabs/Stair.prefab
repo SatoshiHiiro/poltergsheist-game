@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2683665245919204320}
   - component: {fileID: 1876316933075809272}
   - component: {fileID: 7870897076570347812}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Stair
   m_TagString: Stair
   m_Icon: {fileID: 0}
@@ -33,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8718829028397157644}
-  - {fileID: 3080905802024057273}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2683665245919204320
@@ -150,40 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPoint: {fileID: 8718829028397157644}
-  nextFloor: {fileID: 3080905802024057273}
+  upperFloor: {fileID: 0}
   bottomFloor: {fileID: 0}
   speed: 5
---- !u!1 &2313818087800737657
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3080905802024057273}
-  m_Layer: 0
-  m_Name: nextFloor
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3080905802024057273
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2313818087800737657}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.79, y: 15.54, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5915744775080875616}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  maximumHeight: 3
+  maximumWidth: 3
 --- !u!1 &3657065848115847376
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 3657065848115847376}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9, y: -2.34, z: 0}
+  m_LocalPosition: {x: -1.9, y: -3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
