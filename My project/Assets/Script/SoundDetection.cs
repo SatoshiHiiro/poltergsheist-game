@@ -17,22 +17,23 @@ public abstract class SoundDetection : MonoBehaviour
 
         foreach(Collider2D colliderNPC in colliderNearbyNPC)
         {
-            EnemyBehaviour enemy = colliderNPC.GetComponent<EnemyBehaviour>();
-            if (enemy != null)
+            //EnemyBehaviour enemy = colliderNPC.GetComponent<EnemyBehaviour>();
+            HumanNPCBehaviour npc = colliderNPC.GetComponent<HumanNPCBehaviour>();
+            if (npc != null)
             {
                 // Make sure the npc is on the same floor as the object
-                float enemyY = enemy.transform.position.y;
-                if(Mathf.Abs(enemyY - floorY) < floorThreshold)
+                float npcY = npc.transform.position.y;
+                if(Mathf.Abs(npcY - floorY) < floorThreshold)
                 {
                     // The first NPC is the one who will replace the object to it's original position
                     if (!firstNPCNotified)
                     {
                         firstNPCNotified = true;
-                        enemy.InvestigateSound(objectSound, true);
+                        npc.InvestigateSound(objectSound, true);
                     }
                     else
                     {
-                        enemy.InvestigateSound(objectSound, false);
+                        npc.InvestigateSound(objectSound, false);
                     }
                 }
             }
