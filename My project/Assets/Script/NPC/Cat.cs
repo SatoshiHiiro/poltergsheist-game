@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Cat : EnemyBehaviour
+public class Cat : BasicNPCBehaviour, IPatrol
 {
     protected bool isChasing;
    protected override void Start()
@@ -11,6 +11,7 @@ public class Cat : EnemyBehaviour
 
     protected override void Update()
     {
+        base.Update();
         if (!isChasing)
         {
             Patrol();
@@ -19,7 +20,6 @@ public class Cat : EnemyBehaviour
 
     protected override void DetectMovingObjects()
     {
-        bool isObjectMoving = false;
         float objectSize = 0f;
 
         // Find all the possible possessed object in the room
@@ -30,7 +30,7 @@ public class Cat : EnemyBehaviour
             if (IsObjectInFieldOfView(obj))
             {
                 // Check if there is no object blocking the sight of the NPC
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position).normalized, detectionRadius, ~ignoreLayerDetectObject);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position).normalized, detectionRadius, ~ignoreLayerSightBlocked);
 
                 // Is the path from the npc to the object clear?
                 if (hit.collider != null && hit.collider == obj)
@@ -53,6 +53,12 @@ public class Cat : EnemyBehaviour
                 }
             }
         }
+        
+    }
+
+    // Cat behavior when it sees a small object moving
+    protected override void HandleMovementSuspicion(float objectSize)
+    {
         // If the NPC sees an object moving for the first time
         if (isObjectMoving && !isCurrentlyObserving)
         {
@@ -66,7 +72,12 @@ public class Cat : EnemyBehaviour
         // If the object is still moving
         if (isObjectMoving && isCurrentlyObserving)
         {
-            
+
         }
+    }
+
+    public void Patrol()
+    {
+
     }
 }
