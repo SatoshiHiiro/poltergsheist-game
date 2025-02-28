@@ -1,16 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class InventorySystem : MonoBehaviour
 {
+    [SerializeField] KeyItemBehavior[] keyItems;
     [SerializeField] bool[] isConditionsMet;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        int length = FindObjectsByType<KeyItemBehavior>(FindObjectsSortMode.None).Length;
-        isConditionsMet = new bool[length];
-        for (int i = 0; i < length; i++)
+        keyItems = FindObjectsByType<KeyItemBehavior>(FindObjectsSortMode.InstanceID);
+        isConditionsMet = new bool[keyItems.Length];
+        for (int i = 0; i < keyItems.Length; i++)
             isConditionsMet[i] = false;
     }
 
@@ -22,20 +24,27 @@ public class InventorySystem : MonoBehaviour
         obj.transform.SetParent(gameObject.transform);
     }
 
-    public void StockItem(int index, bool condition)
+    public void StockItem(KeyItemBehavior keyItem, bool condition)
     {
-        isConditionsMet[index] = condition;
+        for (int i = 0; i < keyItems.Length; i++)
+        {
+            if (keyItems[i] == keyItem)
+                isConditionsMet[i] = condition;
+        }
     }
 
-    public bool ReadCondition(int index)
+    public bool[] ReadCondition(KeyItemBehavior keyItem)
     {
-        return isConditionsMet[index];
-    }
-}
+        bool[] condition = {false, false};
 
-public enum KeyObjectType
-{
-    None = -1,
-    DoorKey = 0,
-    ChestKey = 1
+        for (int i = 0; i < keyItems.Length; i++)
+        {
+            if (keyItems[i] == keyItem)
+            {
+                condition[0] = isConditionsMet[i];
+                condition[1] = true;
+            }
+        }
+        return condition;
+    }
 }

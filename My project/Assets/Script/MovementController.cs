@@ -7,6 +7,7 @@ using System.Collections.Generic;
 /// Requiert: Rigidbody2D
 /// Input: A = gauche, D = droit, SPACE = saut
 /// État: Optimal(temp)
+[RequireComponent(typeof(Rigidbody2D))]
 public abstract class MovementController : MonoBehaviour
 {
     //Mouvement
@@ -128,7 +129,7 @@ public abstract class MovementController : MonoBehaviour
     }
 
     //Stock les GameObjets en contact avec l'objet
-    void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         curObject.Add(collision.gameObject);
         if (!collision.gameObject.CompareTag("Wall"))

@@ -14,7 +14,10 @@ public abstract class InteractibleManager : MonoBehaviour
         baseColor = Vector4.one;
         hoverColor = new Vector4(.8f, .8f, .8f, 1);
 
-        sRender = gameObject.GetComponent<SpriteRenderer>();
+        if (gameObject.GetComponent<SpriteRenderer>() != null)
+            sRender = gameObject.GetComponent<SpriteRenderer>();
+        else
+            sRender = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     protected virtual void OnMouseOver()

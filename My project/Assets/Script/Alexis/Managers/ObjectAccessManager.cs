@@ -3,7 +3,7 @@ using UnityEngine;
 public class ObjectAccessManager : InteractibleManager
 {
     InventorySystem inventory;
-    [SerializeField] KeyObjectType _keyObjectType;
+    [SerializeField] KeyItemBehavior keyItemForActivation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -14,9 +14,9 @@ public class ObjectAccessManager : InteractibleManager
 
     protected virtual void OnMouseDown()
     {
-        if (inventory.ReadCondition((int)_keyObjectType))
+        if (inventory.ReadCondition(keyItemForActivation)[0] && inventory.ReadCondition(keyItemForActivation)[1])
         {
-            Debug.Log("in " + (int)_keyObjectType);
+            GetComponent<Collider2D>().isTrigger = true;
         }
     }
 }

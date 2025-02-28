@@ -18,12 +18,20 @@ public abstract class SpriteManager : MonoBehaviour
     protected virtual void Update()
     {
         float posDiff = lastPos - transform.position.x;
+        Vector2 input;
 
-        //To change target rotation depending on velocity
-        if (posDiff > 0)
-            direction = new Quaternion(0, 1, 0, 0);
-        else if (posDiff < 0)
-            direction = new Quaternion(0, 0, 0, 1);
+        if (transform.parent.GetComponent<PlayerController>() != null)
+        {
+            input = transform.parent.GetComponent<PlayerController>().move.ReadValue<Vector2>();
+        }
+        else
+            input = new Vector2(-posDiff, 0);
+
+        //To change target rotation depending on the last position
+        if (input.x < 0)
+            direction = new Quaternion(0, 1, 0, 0);     //Look left
+        else if (input.x > 0)
+            direction = new Quaternion(0, 0, 0, 1);     //Look right
 
         RotateSprite(direction);
         lastPos = transform.position.x;
