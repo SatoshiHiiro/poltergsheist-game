@@ -12,7 +12,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [SerializeField] protected LayerMask mirrorLayer;   // Layer of the mirrors
 
     protected GameObject player;
-    protected SpriteRenderer npcSpriteRenderer;
+    
 
     [Header("Investigation Variables")]
     [SerializeField] protected float surpriseWaitTime = 2f;
@@ -28,8 +28,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         base.Start();
         player = GameObject.FindWithTag("Player");
-        audioSource = GetComponent<AudioSource>();
-        npcSpriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();        
         initialPosition = transform.position;
         initialFacingRight = !npcSpriteRenderer.flipX;
     }

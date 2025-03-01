@@ -101,22 +101,28 @@ public class PossessionManager : MonoBehaviour
             else if (player.isPossessing && isPossessed)
             {
                 StopPossession();
-                player.isPossessing = false;
-                player.GetComponent<Collider2D>().enabled = true;
-                player.GetComponent<Rigidbody2D>().simulated = true;
-                player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-                player.canMove = true;
+                //player.isPossessing = false;
+                //player.GetComponent<Collider2D>().enabled = true;
+                //player.GetComponent<Rigidbody2D>().simulated = true;
+                //player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+                //player.canMove = true;
             }
         }
     }
 
     //Pour arrêter la possession
-    void StopPossession()
+    public void StopPossession()
     {
         isPossessed = false;
         possession.OnDepossessed();
         //possession.enabled = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
         gameObject.GetComponent<Rigidbody2D>().linearVelocityX = 0;
+
+        player.isPossessing = false;
+        player.GetComponent<Collider2D>().enabled = true;
+        player.GetComponent<Rigidbody2D>().simulated = true;
+        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+        player.canMove = true;
     }
 }
