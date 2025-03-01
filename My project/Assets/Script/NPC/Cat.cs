@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Cat : BasicNPCBehaviour, IPatrol
 {
@@ -7,10 +8,13 @@ public class Cat : BasicNPCBehaviour, IPatrol
     [SerializeField] PatrolPointData[] patrolPoints;  // All cat patrol destinations
     PatrolPointData nextPatrolPoint;  // Next cat patrol destination
     private int indexPatrolPoints;    // Keep track of patrol points
+    private bool canMove;
 
     [Header("Hunting variables")]
     [SerializeField] float attackTime = 3f;
     [SerializeField] float huntingSpeed = 8f;
+    [SerializeField] float maxHeightObject = 0.6f;  // Maximum height of an object that the cat can chase
+    [SerializeField] float maxWidthObject = 0.6f;   //Maximum width of an object thtat the cat can chase
     //[SerializeField] float distanceWithTarget;  // Object targeted by the cat
     protected bool isHunting;   // Is the cat chasing an objet
     private bool isAttacking;   // Is the cat attacking the object
@@ -25,6 +29,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         indexPatrolPoints = 0;
         nextPatrolPoint = patrolPoints[0];
         isHunting = false;
+        canMove = true;
 
         audioSource = GetComponent<AudioSource>();
         catCollider = GetComponent<Collider2D>();
@@ -32,20 +37,25 @@ public class Cat : BasicNPCBehaviour, IPatrol
 
     protected override void Update()
     {
-        base.Update();
-        if (!isHunting && !isAttacking)
+        if (canMove)
         {
-            Patrol();
-        }
-        else if(isHunting && targetPossessedObject != null)
-        {
-            ObjectHunting();
-        }
+            base.Update();
+            if (!isHunting && !isAttacking)
+            {
+                Patrol();
+            }
+            else if (isHunting && targetPossessedObject != null)
+            {
+                ObjectHunting();
+            }
+        }        
     }
 
+    // Cat movement detection
     protected override void DetectMovingObjects()
     {        
-        float objectSize = 0f;
+        float objectWidth = 0f;
+        float objectHeight = 0f;
 
         // Find all the possible possessed object in the room
         Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius, detectObjectLayer);
@@ -62,7 +72,10 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 {
                     // Get object size
                     Renderer objRenderer = obj.GetComponent<Renderer>();
-                    objectSize = Mathf.Max(objRenderer.bounds.size.x, objRenderer.bounds.size.y);
+
+                    //objectSize = Mathf.Max(objRenderer.bounds.size.x, objRenderer.bounds.size.y);
+                    objectWidth = objRenderer.bounds.size.x;
+                    objectHeight = objRenderer.bounds.size.y;
 
                     // Check if the object is moving
                     PossessionController possessedObject = obj.GetComponent<PossessionController>();
@@ -70,7 +83,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                     if (possessedObject != null)
                     {
                         // Check if the object is moving in front of him
-                        if (possessedObject.IsMoving && !isHunting)
+                        if (possessedObject.IsMoving && !isHunting && objectWidth <= maxWidthObject && objectHeight <= maxHeightObject)
                         {
                             isObjectMoving = true;
                             isHunting = true;
@@ -83,26 +96,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         
     }
 
-    //// Cat behavior when it sees a small object moving
-    //protected override void HandleMovementSuspicion(float objectSize)
-    //{
-    //    // If the NPC sees an object moving for the first time
-    //    if (isObjectMoving && !isCurrentlyObserving)
-    //    {
-    //        isCurrentlyObserving = true;
-    //    }
-    //    // If the object has stopped moving
-    //    else if (!isObjectMoving && isCurrentlyObserving)
-    //    {
-    //        isCurrentlyObserving = false;
-    //    }
-    //    // If the object is still moving
-    //    if (isObjectMoving && isCurrentlyObserving)
-    //    {
-    //        ChaseObject();
-    //    }
-    //}
-
+    // Patrolling of the cat
     public void Patrol()
     {
         if (patrolPoints.Length == 0 || nextPatrolPoint == null) return;   // If there is no patrolPoint
@@ -125,6 +119,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
             MoveToNextAvailablePatrolPoint();
         }
     }
+
+    // Which patrol point is the new destination of the cat
     public void MoveToNextAvailablePatrolPoint()
     {
         int patrolPointPossibilities = patrolPoints.Length;
@@ -157,38 +153,42 @@ public class Cat : BasicNPCBehaviour, IPatrol
         if (catCollider.bounds.Intersects(targetPossessedObject.GetComponent<Collider2D>().bounds))
         {
             isHunting = false;
-            Attack();
+            //Attack();
+            StartCoroutine(AttackObject());
         }
     }
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (isHunting && collision.gameObject == targetPossessedObject)
-    //    {
-    //        isHunting = false;
-    //        Attack();
-    //    }
-    //}
 
     // The cat attack the possessed object
-    private void Attack()
+    private IEnumerator AttackObject()
     {
         isAttacking = true;
         audioSource.Play();
         PossessionManager targetObjectManager = targetPossessedObject.GetComponent<PossessionManager>();
-        if(targetObjectManager == null)
+        if (targetObjectManager == null)
         {
             Debug.Log("Error: The possessed object should have a PossessionManager component");
-        }        
+        }
         targetObjectManager.StopPossession();
-        
-        
-        
+
+        yield return new WaitForSeconds(attackTime);
+
 
         // After the attack the object is no longer a target
         targetPossessedObject = null;
         isAttacking = false;
     }
 
-    // TODO:
-    // S'assurrer que la dépossession se fait bien, attendre après l'attaque et revenir à la patrouille.
+    // If the cat enters the cage it remains trapped.
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (canMove && collision.gameObject.CompareTag("Cage"))
+        {
+            if(collision.bounds.Contains(catCollider.bounds.min) && collision.bounds.Contains(catCollider.bounds.max))
+            {
+                audioSource.Play();
+                canMove = false;
+                collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);
+            }            
+        }
+    }
 }
