@@ -96,6 +96,14 @@ public class Cat : BasicNPCBehaviour, IPatrol
         
     }
 
+    //protected override bool IsObjectInFieldOfView(Collider2D obj)
+    //{
+    //    // Check if the object is in the line of sight of the NPC
+    //    Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
+    //    float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
+    //    return angle <= fieldOfViewAngle / 2;
+    //}
+
     // Patrolling of the cat
     public void Patrol()
     {

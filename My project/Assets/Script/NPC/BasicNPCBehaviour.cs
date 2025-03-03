@@ -6,7 +6,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
 {
     // NPC vision variables
     [Header("Field of view")]
-    [SerializeField] protected float detectionRadius;  // NPC detection radius
+    [SerializeField] protected float detectionRadius = 10f;  // NPC detection radius
     [SerializeField] protected bool facingRight;        // Is the NPC Sprite facing right    
     [SerializeField] protected LayerMask detectObjectLayer;   // Layer of objects to be detected by the NPC    
     [SerializeField] protected LayerMask ignoreLayerSightBlocked;   // Layer to ignore when raycasting to check if the view is blocked
@@ -21,7 +21,6 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
     protected virtual void Start()
     {
         fieldOfViewAngle = 180f;
-        detectionRadius = 10f;
         isCurrentlyObserving = false;
         isObjectMoving = false;
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -42,7 +41,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         foreach (Collider2D obj in objects)
         {
 
-            if (IsObjectInFieldOfView(obj))
+            if (this.IsObjectInFieldOfView(obj))
             {
                 // Check if there is no object blocking the sight of the NPC
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position).normalized, detectionRadius, ~ignoreLayerSightBlocked);
@@ -86,7 +85,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         // Will be override in HumanNPCBehaviour
     }
 
-    protected bool IsObjectInFieldOfView(Collider2D obj)
+    //protected abstract bool IsObjectInFieldOfView(Collider2D obj);
+    protected virtual bool IsObjectInFieldOfView(Collider2D obj)
     {
         // Check if the object is in the line of sight of the NPC
         Vector2 directionToObject = (obj.transform.position - transform.position).normalized;

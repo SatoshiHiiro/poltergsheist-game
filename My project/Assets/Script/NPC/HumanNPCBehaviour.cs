@@ -20,9 +20,13 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     protected bool isInvestigating = false; // Is the NPC investigating a suspect sound
     protected AudioSource audioSource;  // Source of the surprised sound
 
-    protected Vector2 initialPosition;
+    protected Vector2 initialPosition;  // Initial position of the NPC
     private bool initialFacingRight; // He's he facing right or left
-    
+
+    [Header("Lighting Variable")]
+    [SerializeField] float detectionRadiusLight = 20f;
+    [SerializeField] LayerMask lightLayer;  // Layer of the gameobject light
+    [SerializeField] LayerMask wallLayer;   // Layer of the gameobject wall
 
     protected override void Start()
     {
@@ -36,6 +40,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     protected override void Update()
     {
         base.Update();
+       // DetectMovingObjects();
         CheckMirrorReflection();
     }
 
@@ -79,6 +84,102 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         }
     }
 
+    protected override bool IsObjectInFieldOfView(Collider2D obj)
+    {
+        //Debug.Log("Appel de IsObjectInFieldOfView() dans HumanNPCBehaviour");
+        // Check if the object is in the line of sight of the NPC
+        Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
+        float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
+
+        // If the object is not within view angle, return false immediately
+        if(angle > fieldOfViewAngle / 2)
+        {
+            return false;
+        }
+
+        // Check if there is light toutching the object
+        if (!IsObjectLit(obj))
+        {
+            return false;
+        }
+
+        // Object is in field of view and area is sufficiently lit
+        return true;
+    }
+
+    protected bool IsObjectLit(Collider2D objCollider)
+    {
+        Collider2D[] lights = Physics2D.OverlapCircleAll(objCollider.bounds.center, detectionRadiusLight, lightLayer);
+        foreach(Collider2D lightCollider in lights)
+        {
+            UnityEngine.Rendering.Universal.Light2D light = lightCollider.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+
+            if(light == null || !light.enabled)
+                continue;
+                        
+
+            if(light.lightType == UnityEngine.Rendering.Universal.Light2D.LightType.Global)
+            {
+                continue;
+            }
+            else if(light.lightType == UnityEngine.Rendering.Universal.Light2D.LightType.Point)
+            {
+                Vector2[] samplePoints = GetSamplePointsFromObject(objCollider);
+
+                // Check if any parts of the object is hit by light
+                foreach(Vector2 point in samplePoints)
+                {
+                    // Calculate the distance from light to the point position
+                    float distance = Vector2.Distance(point, lightCollider.transform.position);
+                    if (distance <= light.pointLightOuterRadius)
+                    {
+                        // Calculate angle between light's forward direction and the point position
+                        Vector2 directionLightToPoint = (point - (Vector2) lightCollider.transform.position).normalized;
+                        float angle = Vector2.Angle(lightCollider.transform.up, directionLightToPoint);
+
+                        // Check if the point is within the outer spot angle
+                        if (angle <= light.pointLightOuterAngle / 2)
+                        {
+                            print("HIT by light!!");
+
+                            // Check if walls does not block the light
+                            if (!BlockedByWall(lightCollider.transform.position, directionLightToPoint, distance))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+        return false;
+    }
+
+    // Get multiple points across the object collider
+    protected Vector2[] GetSamplePointsFromObject(Collider2D objCollider)
+    {
+        Vector2[] samplePoints = {
+                                  objCollider.bounds.center, // Center
+                                  (Vector2)objCollider.bounds.min, // Bottom-left
+                                  (Vector2)objCollider.bounds.max, // Top-right
+                                  new Vector2(objCollider.bounds.min.x, objCollider.bounds.max.y), // Top-left
+                                  new Vector2(objCollider.bounds.max.x, objCollider.bounds.min.y) // Bottom-right
+                                  };
+        return samplePoints;
+    }
+
+    protected bool BlockedByWall(Vector2 lightPosition, Vector2 directionLightToObject, float distance)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(lightPosition, directionLightToObject, distance, wallLayer);
+
+        if(hit.collider == null)
+        {
+            return false;
+        }
+        return true;
+    }
+
     // Check if we can see the player trough the mirror
     protected void CheckMirrorReflection()
     {
@@ -90,7 +191,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
             // Check if the mirror is in the field of view of the NPC
             if (!IsObjectInFieldOfView(mirrorCollider)) continue;
-
+            
             // Check if the player reflection is in the mirror
             if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
             {
@@ -174,5 +275,14 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         }
         // Restore initial facing direction
         npcSpriteRenderer.flipX = !initialFacingRight;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, detectionRadiusLight);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

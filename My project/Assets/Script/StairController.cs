@@ -11,6 +11,7 @@ public class StairController : MonoBehaviour
     // This class manage stairs depending on the direction desired by the character
 
     [Header("Stairs")]
+    [SerializeField] int floorLevel;    // Floor where the staircase is located
     [SerializeField] private Transform startPoint;  // Center of the door on floor level
     [SerializeField] private StairController upperFloor;   // Next upper floor
     [SerializeField] private StairController bottomFloor; // Bottom floor
