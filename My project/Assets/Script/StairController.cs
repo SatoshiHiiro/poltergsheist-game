@@ -11,8 +11,10 @@ public class StairController : MonoBehaviour
     // This class manage stairs depending on the direction desired by the character
 
     [Header("Stairs")]
-    [SerializeField] int floorLevel;    // Floor where the staircase is located
+    [SerializeField] private float floorLevel;
+    [SerializeField] public float FloorLevel => floorLevel;
     [SerializeField] private Transform startPoint;  // Center of the door on floor level
+    //public Transform StartPoint => startPoint;
     [SerializeField] private StairController upperFloor;   // Next upper floor
     [SerializeField] private StairController bottomFloor; // Bottom floor
     //[SerializeField] private Transform nextFloor;   // Next upper floor
@@ -20,6 +22,13 @@ public class StairController : MonoBehaviour
     [SerializeField] private float speed = 5f;      // Speed to go at the center of the door before climbing
     [SerializeField] private float maximumHeight;   // Maximum Height of the object so he can climb the stair
     [SerializeField] private float maximumWidth;    // Maximum Width of the object so he can climb the stair
+
+    // Public properties to access from other scripts
+    public Transform StartPoint { get { return startPoint; } }
+    public StairController UpperFloor { get { return upperFloor; } }
+    public StairController BottomFloor { get { return bottomFloor; } }
+    public float MaximumHeight { get { return maximumHeight; } }
+    public float MaximumWidth { get { return maximumWidth; } }
 
     private bool isClimbing;
     private bool canCharacterJump;
@@ -31,8 +40,8 @@ public class StairController : MonoBehaviour
     }
 
     public void ClimbStair(GameObject character, StairDirection direction)
-    {        
-        Renderer characterRenderer = character.transform.GetChild(0).GetComponent<Renderer>();
+    {
+        Renderer characterRenderer = character.GetComponentInChildren<Renderer>();//character.transform.GetChild(0).GetComponent<Renderer>();
         print("Character size X: " + characterRenderer.bounds.size.x);
         print("Character size Y: " + characterRenderer.bounds.size.y);
         // If the character fit with the stair dimension, then he can climb
@@ -76,7 +85,7 @@ public class StairController : MonoBehaviour
         // Climbing stair animation
 
         // Calculate adjusted destination position based on character height
-        Renderer characterRenderer = character.transform.GetChild(0).GetComponent<Renderer>();
+        Renderer characterRenderer = character.GetComponentInChildren<Renderer>();//character.transform.GetChild(0).GetComponent<Renderer>();
         float characterHeight = characterRenderer.bounds.size.y;
         Vector3 adjustedPosition = targetStair.startPoint.position;
 

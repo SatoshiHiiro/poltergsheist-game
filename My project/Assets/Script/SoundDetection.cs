@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class SoundDetection : MonoBehaviour
@@ -7,6 +9,7 @@ public abstract class SoundDetection : MonoBehaviour
     [SerializeField] protected float soundRadius;       // Radius in which the sound is projected
     [SerializeField] protected float floorThreshold;    // Distance between two floor
     [SerializeField] protected LayerMask layerToDetect;
+    [SerializeField] protected float floorLevel;
     protected bool firstNPCNotified = false;    // Is there an NPC that was already notified of the sound
 
     // Notify every enemies in the zone of the sound
@@ -15,29 +18,43 @@ public abstract class SoundDetection : MonoBehaviour
         // Find all NPC within range
         Collider2D[] colliderNearbyNPC = Physics2D.OverlapCircleAll(transform.position, soundRadius, layerToDetect);
 
-        foreach(Collider2D colliderNPC in colliderNearbyNPC)
+        foreach (Collider2D colliderNPC in colliderNearbyNPC)
         {
             //EnemyBehaviour enemy = colliderNPC.GetComponent<EnemyBehaviour>();
             HumanNPCBehaviour npc = colliderNPC.GetComponent<HumanNPCBehaviour>();
             if (npc != null)
             {
-                // Make sure the npc is on the same floor as the object
-                float npcY = npc.transform.position.y;
-                if(Mathf.Abs(npcY - floorY) < floorThreshold)
+                // NPCs on the same floor get priority
+                if (npc.FloorLevel == floorLevel)
                 {
-                    // The first NPC is the one who will replace the object to it's original position
+
                     if (!firstNPCNotified)
                     {
                         firstNPCNotified = true;
-                        npc.InvestigateSound(objectSound, true);
+                        npc.InvestigateSound(objectSound, true, floorLevel);
                     }
                     else
                     {
-                        npc.InvestigateSound(objectSound, false);
+                        npc.InvestigateSound(objectSound, false, floorLevel);
                     }
                 }
+                else
+                {
+
+                    if (!firstNPCNotified)
+                    {
+                        npc.InvestigateSound(objectSound, true, floorLevel);
+                    }
+                    else
+                    {
+                        npc.InvestigateSound(objectSound, false, floorLevel);
+                    }
+
+                }
+
             }
         }
+
         firstNPCNotified = false;
     }
 

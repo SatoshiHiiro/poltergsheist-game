@@ -50,12 +50,12 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         
     }
     // Start the investigation of the sound
-    public override void InvestigateSound(GameObject objectsound, bool replaceObject)
+    public override void InvestigateSound(GameObject objectsound, bool replaceObject, float targetFloor)
     {       
-       StartCoroutine(WaitBeforeInvestigate(objectsound, replaceObject));      
+       StartCoroutine(WaitBeforeInvestigate(objectsound, replaceObject, targetFloor));      
     }
     // When the NPC is no longer blocked or in a room he will then go and investigate
-    protected IEnumerator WaitBeforeInvestigate(GameObject objectsound, bool replaceObject)
+    protected IEnumerator WaitBeforeInvestigate(GameObject objectsound, bool replaceObject, float targetFloor)
     {
         while(isBlocked || isInRoom)
         {
@@ -64,7 +64,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         isInvestigating = true;
         isWaiting = false; // NOT SURE!!!
         StopAllCoroutines();
-        StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
+        StartCoroutine(InvestigateFallingObject(objectsound, replaceObject, targetFloor));
     }
 
     public void Patrol()

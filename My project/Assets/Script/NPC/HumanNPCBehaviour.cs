@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class HumanNPCBehaviour : BasicNPCBehaviour
 {
@@ -17,6 +18,9 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [Header("Investigation Variables")]
     [SerializeField] protected float surpriseWaitTime = 2f;
     [SerializeField] protected float investigationWaitTime = 3f;
+    [SerializeField] private float floorLevel;   // Floor where the npc is located
+    private float initialFloorLevel;
+    public float FloorLevel { get { return floorLevel; } }
     protected bool isInvestigating = false; // Is the NPC investigating a suspect sound
     protected AudioSource audioSource;  // Source of the surprised sound
 
@@ -35,6 +39,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         audioSource = GetComponent<AudioSource>();        
         initialPosition = transform.position;
         initialFacingRight = !npcSpriteRenderer.flipX;
+        initialFloorLevel = floorLevel;
     }
 
     protected override void Update()
@@ -140,7 +145,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                         // Check if the point is within the outer spot angle
                         if (angle <= light.pointLightOuterAngle / 2)
                         {
-                            print("HIT by light!!");
+                            //print("HIT by light!!");
 
                             // Check if walls does not block the light
                             if (!BlockedByWall(lightCollider.transform.position, directionLightToPoint, distance))
@@ -207,34 +212,80 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     }
 
     // Start the investigation of the sound
-    public virtual void InvestigateSound(GameObject objectsound, bool replaceObject)
+    public virtual void InvestigateSound(GameObject objectsound, bool replaceObject, float targetFloor)
     {
         isInvestigating = true;
         StopAllCoroutines();
-        StartCoroutine(InvestigateAndReturn(objectsound, replaceObject));
+        StartCoroutine(InvestigateAndReturn(objectsound, replaceObject, targetFloor));
         //StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
         //StartCoroutine(ReturnToInitialPosition());
     }
 
-    protected IEnumerator InvestigateAndReturn(GameObject objectsound, bool replaceObject)
+    protected IEnumerator InvestigateAndReturn(GameObject objectsound, bool replaceObject, float targetFloor)
     {
-        yield return StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
+        yield return StartCoroutine(InvestigateFallingObject(objectsound, replaceObject, targetFloor));
         yield return StartCoroutine(ReturnToInitialPosition());
     }
     // NPC behaviour for the investigation
-    protected IEnumerator InvestigateFallingObject(GameObject objectsound, bool replaceObject)
+    protected IEnumerator InvestigateFallingObject(GameObject objectsound, bool replaceObject, float targetFloor)
     {
         // Take a surprise pause before going on investigation
         audioSource.Play();
         yield return new WaitForSeconds(surpriseWaitTime);
 
+        // Check if the npc need to use the stairs
+        if(floorLevel != targetFloor)
+        {
+            // Find a path using stairs to reach the target floor
+            List<StairController> path = FloorNavigation.Instance.FindPathToFloor(this, targetFloor);
+            
+            foreach(StairController stair in path)
+            {
+                // NPC must walk to the stair
+                Vector2 stairPosition = new Vector2(stair.StartPoint.position.x, transform.position.y);
 
+                // Flip sprite based on direction
+                Vector2 npcDirection = (stairPosition - (Vector2)transform.position).normalized;
+                // Sprite face the right direction
+                npcSpriteRenderer.flipX = npcDirection.x < 0;
+                facingRight = !npcSpriteRenderer.flipX;
+
+                // Move to stair
+                while (Mathf.Abs(transform.position.x - stairPosition.x) > 0.1f)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, stairPosition, movementSpeed * Time.deltaTime);
+                    yield return null;
+                }
+
+
+                // When the npc reached the stairs
+                // Determine if we need to go up or down
+                StairDirection stairDirection = (targetFloor > floorLevel) ? StairDirection.Upward : StairDirection.Downward;
+                stair.ClimbStair(this.gameObject, stairDirection);
+                
+                // Wait for stair climbing to finish
+                yield return new WaitForSeconds(1f);
+
+                //Update our current floor
+                if(stairDirection == StairDirection.Upward)
+                {
+                    floorLevel = stair.UpperFloor.FloorLevel;
+                }
+                else if(stairDirection == StairDirection.Downward)
+                {
+                    floorLevel = stair.BottomFloor.FloorLevel;
+                }
+            }
+        }
+
+        // The NPC is now on the same level has the object
 
         // Go towards the sound
         Vector2 destination = new Vector2(objectsound.transform.position.x, transform.position.y);
         // Sprite face the right direction
         Vector2 direction = (destination - (Vector2)transform.position).normalized;
         npcSpriteRenderer.flipX = direction.x < 0;
+        facingRight = !npcSpriteRenderer.flipX;
 
         while (Mathf.Abs(transform.position.x - objectsound.transform.position.x) > 0.1f)
         {
@@ -259,6 +310,53 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     // Return the NPC to it's initial position and facing direction
     protected IEnumerator ReturnToInitialPosition()
     {
+
+        // Check if the npc need to use the stairs
+        if (floorLevel != initialFloorLevel)
+        {
+            // Find a path using stairs to reach the target floor
+            List<StairController> path = FloorNavigation.Instance.FindPathToFloor(this, initialFloorLevel);
+            
+            foreach (StairController stair in path)
+            {
+                // NPC must walk to the stair
+                Vector2 stairPosition = new Vector2(stair.StartPoint.position.x, transform.position.y);
+
+                // Flip sprite based on direction
+                Vector2 npcDirection = (stairPosition - (Vector2)transform.position).normalized;
+                // Sprite face the right direction
+                npcSpriteRenderer.flipX = npcDirection.x < 0;
+                facingRight = !npcSpriteRenderer.flipX;
+
+                // Move to stair
+                while (Mathf.Abs(transform.position.x - stairPosition.x) > 0.1f)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, stairPosition, movementSpeed * Time.deltaTime);
+                    yield return null;
+                }
+
+
+                // When the npc reached the stairs
+                // Determine if we need to go up or down
+                StairDirection stairDirection = (initialFloorLevel > floorLevel) ? StairDirection.Upward : StairDirection.Downward;
+                stair.ClimbStair(this.gameObject, stairDirection);
+
+                // Wait for stair climbing to finish
+                yield return new WaitForSeconds(1f);
+
+                //Update our current floor
+                if (stairDirection == StairDirection.Upward)
+                {
+                    floorLevel = stair.UpperFloor.FloorLevel;
+                }
+                else if (stairDirection == StairDirection.Downward)
+                {
+                    floorLevel = stair.BottomFloor.FloorLevel;
+                }
+            }
+        }
+
+
         // Calculate destination
         Vector2 destination = new Vector2(initialPosition.x, transform.position.y);
 
@@ -275,6 +373,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         }
         // Restore initial facing direction
         npcSpriteRenderer.flipX = !initialFacingRight;
+    }
+
+    public void UpdateFloorLevel(float floor)
+    {
+        floorLevel = floor;
     }
 
     private void OnDrawGizmos()
