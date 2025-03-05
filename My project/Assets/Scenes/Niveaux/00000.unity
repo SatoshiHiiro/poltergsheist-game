@@ -1783,6 +1783,10 @@ PrefabInstance:
     - target: {fileID: 7870897076570347812, guid: 0d27a32d981105e4ea4848ef2793698a, type: 3}
       propertyPath: upperFloor
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870897076570347812, guid: 0d27a32d981105e4ea4848ef2793698a, type: 3}
+      propertyPath: bottomFloor
+      value: 
       objectReference: {fileID: 533093582}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1854,6 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194d1fbd5134bca4ba4d3d6bb85d924e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangeUntilObjectBecomesAPlatform: 0
 --- !u!1 &580309537
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,6 +2349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194d1fbd5134bca4ba4d3d6bb85d924e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangeUntilObjectBecomesAPlatform: 0
 --- !u!1 &712603313
 GameObject:
   m_ObjectHideFlags: 0
@@ -4673,6 +4679,10 @@ PrefabInstance:
     - target: {fileID: 7870897076570347812, guid: 0d27a32d981105e4ea4848ef2793698a, type: 3}
       propertyPath: upperFloor
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870897076570347812, guid: 0d27a32d981105e4ea4848ef2793698a, type: 3}
+      propertyPath: bottomFloor
+      value: 
       objectReference: {fileID: 2104011613}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6330,6 +6340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194d1fbd5134bca4ba4d3d6bb85d924e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangeUntilObjectBecomesAPlatform: 0
 --- !u!1001 &1933772056
 PrefabInstance:
   m_ObjectHideFlags: 0

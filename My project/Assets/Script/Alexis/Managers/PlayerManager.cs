@@ -93,7 +93,7 @@ public class PlayerManager : SpriteManager
     void RecoverySprite(float target)
     {
         float time = (Time.time - startTime) / recoveryDuration;
-        transform.localPosition = Vector3.Slerp(transform.localPosition, new Vector3(0, target, 0), time);
+       // transform.localPosition = Vector3.Slerp(transform.localPosition, new Vector3(0, target, 0), time);
         //transform.localPosition = new Vector3(0, Mathf.SmoothStep(iniPos, floatMin, time), 0);
     }
 
