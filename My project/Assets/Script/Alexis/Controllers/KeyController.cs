@@ -21,6 +21,9 @@ public class KeyController : PossessionController
         if (collision.gameObject == targetToUnlock)
         {
             collision.gameObject.GetComponent<Collider2D>().enabled = false;
+            GetComponent<PossessionManager>().StopPossession();
+            transform.position += new Vector3(0, -1000, 0);
+            ComponentChangeSwitch(false);
         }
     }
 

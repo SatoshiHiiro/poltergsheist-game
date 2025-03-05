@@ -23,7 +23,7 @@ public abstract class PickupItemBehavior : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerController>() != null || collision.GetComponent<PossessionController>() != null)
+        if (collision.GetComponent<PlayerController>() != null || (collision.GetComponent<PossessionController>() != null && collision.GetComponent<KeyController>() == null))
             HideItem();
     }
 

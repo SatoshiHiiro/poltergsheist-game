@@ -7,8 +7,8 @@ public class EnergySystem : MonoBehaviour
     [SerializeField] float energyRegen;
     private float stockRegen;
     public float energyValue;
-    float maxEnergy;
-    float minEnergy;
+    public float maxEnergy;
+    public float minEnergy;
 
     Slider slider;
 

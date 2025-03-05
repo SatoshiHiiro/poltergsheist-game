@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-/// But: Possï¿½der des objets
+/// But: Posséder des objets
 /// Requiert: PossessionController
 /// Requiert Externe: PlayerController(1)
-/// Input: Click Gauche = possession/dï¿½possession
-/// ï¿½tat: Adï¿½quat(temp)
+/// Input: Click Gauche = possession/dépossession
+/// État: Adéquat(temp)
 public class PossessionManager : InteractibleManager
 {
     //Variables
@@ -15,7 +15,7 @@ public class PossessionManager : InteractibleManager
     [SerializeField] public float continuousEnergyLoss;
 
     //Conditions
-    bool isPossessed;                               //Pour savoir si l'objet possessible est possï¿½dï¿½
+    bool isPossessed;                               //Pour savoir si l'objet possessible est possédé
     bool isAnimationFinished;                       //Pour savoir si l'animaation de possession est fini
 
     //Shortcuts
@@ -80,7 +80,7 @@ public class PossessionManager : InteractibleManager
             player.transform.position = pos;
         }
 
-        //Pour enlever la possession sur l'objet si le Player possï¿½de un autre objet avant de dï¿½possï¿½der
+        //Pour enlever la possession sur l'objet si le Player possède un autre objet avant de déposséder
         if ((player.lastPossession != gameObject.name && isPossessed) || (energy.CurrentEnergy() == 0 && isAnimationFinished))
             StopPossession();
     }
@@ -95,13 +95,13 @@ public class PossessionManager : InteractibleManager
             {
                 player.GetComponent<Rigidbody2D>().linearVelocityX = 0;
 
-                //Si le joueur veut possï¿½der l'objet en possï¿½dant dï¿½jï¿½ un autre
+                //Si le joueur veut posséder l'objet en possédant déjà un autre
                 if (player.isPossessing)
                 {
                     isPossessed = true;
                     StartCoroutine(AnimationTime());
                 }
-                //Si le joueur veut possï¿½der l'objet
+                //Si le joueur veut posséder l'objet
                 else if (!player.isPossessing)
                 {
                     isPossessed = true;
@@ -113,16 +113,11 @@ public class PossessionManager : InteractibleManager
             else if (player.isPossessing && isPossessed)
             {
                 StopPossession();
-                //player.isPossessing = false;
-                //player.GetComponent<Collider2D>().enabled = true;
-                //player.GetComponent<Rigidbody2D>().simulated = true;
-                //player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-                //player.canMove = true;
             }
         }
     }
 
-    //Pour arrï¿½ter la possession
+    //Pour arrêter la possession
     public void StopPossession()
     {
         isPossessed = false;
