@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class LightController : MonoBehaviour
+public class LightFlickering : MonoBehaviour
 {
     [Header("Light variables")]
     [SerializeField] float delayBeforeLightOn;  // Delay before the light turns on

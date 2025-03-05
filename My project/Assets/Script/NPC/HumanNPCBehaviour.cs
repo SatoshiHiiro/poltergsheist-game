@@ -30,7 +30,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [Header("Lighting Variable")]
     [SerializeField] float detectionRadiusLight = 20f;
     [SerializeField] LayerMask lightLayer;  // Layer of the gameobject light
-    [SerializeField] LayerMask wallLayer;   // Layer of the gameobject wall
+    [SerializeField] LayerMask wallFloorLayer;   // Layer of the gameobject wall
 
     protected override void Start()
     {
@@ -129,7 +129,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             }
             else if(light.lightType == UnityEngine.Rendering.Universal.Light2D.LightType.Point)
             {
-                Vector2[] samplePoints = GetSamplePointsFromObject(objCollider);
+                Vector2[] samplePoints = LightUtility.GetSamplePointsFromObject(objCollider);
 
                 // Check if any parts of the object is hit by light
                 foreach(Vector2 point in samplePoints)
@@ -148,7 +148,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                             //print("HIT by light!!");
 
                             // Check if walls does not block the light
-                            if (!BlockedByWall(lightCollider.transform.position, directionLightToPoint, distance))
+                            if (!LightUtility.BlockedByWall(lightCollider.transform.position, directionLightToPoint, distance, wallFloorLayer))
                             {
                                 return true;
                             }
@@ -159,30 +159,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             }
         }
         return false;
-    }
-
-    // Get multiple points across the object collider
-    protected Vector2[] GetSamplePointsFromObject(Collider2D objCollider)
-    {
-        Vector2[] samplePoints = {
-                                  objCollider.bounds.center, // Center
-                                  (Vector2)objCollider.bounds.min, // Bottom-left
-                                  (Vector2)objCollider.bounds.max, // Top-right
-                                  new Vector2(objCollider.bounds.min.x, objCollider.bounds.max.y), // Top-left
-                                  new Vector2(objCollider.bounds.max.x, objCollider.bounds.min.y) // Bottom-right
-                                  };
-        return samplePoints;
-    }
-
-    protected bool BlockedByWall(Vector2 lightPosition, Vector2 directionLightToObject, float distance)
-    {
-        RaycastHit2D hit = Physics2D.Raycast(lightPosition, directionLightToObject, distance, wallLayer);
-
-        if(hit.collider == null)
-        {
-            return false;
-        }
-        return true;
     }
 
     // Check if we can see the player trough the mirror
@@ -217,8 +193,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         isInvestigating = true;
         StopAllCoroutines();
         StartCoroutine(InvestigateAndReturn(objectsound, replaceObject, targetFloor));
-        //StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
-        //StartCoroutine(ReturnToInitialPosition());
     }
 
     protected IEnumerator InvestigateAndReturn(GameObject objectsound, bool replaceObject, float targetFloor)
