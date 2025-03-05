@@ -29,13 +29,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("UI_Accueil");
     }
 
-    public void Niveau1()
+    public void OuvreNiveaux(int niveauId)
     {
-        SceneManager.LoadScene("Niveau1");
+        string nomNiveau = "Niveau" + niveauId;
+        SceneManager.LoadScene(nomNiveau);
     }
 
-    public void Niveau2()
-    {
-        SceneManager.LoadScene("Niveau2");
-    }
 }
