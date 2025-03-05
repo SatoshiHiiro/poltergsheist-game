@@ -24,16 +24,28 @@ public class JumpPlatform : MonoBehaviour
 
     private void Update()
     {
+        //float platformSurface = this.transform.position.y + ((objectCollider.bounds.size.y / 2));
+        //// Raycast depuis les pieds du joueur vers le bas
+        //RaycastHit2D hit = Physics2D.Raycast(player.transform.position, Vector2.down, playerCollider.bounds.extents.y + 0.1f, 1 << gameObject.layer);
+
+        //if (hit.collider != null && hit.collider.gameObject == gameObject)
+        //{
+        //    EnableCollision();
+        //}
+        //else
+        //{
+        //    DisableCollision();
+        //}
         // Find platform surface position
         float platformSurface = this.transform.position.y + ((objectCollider.bounds.size.y / 2));
         // Find player feet position
         float playerFeetPosition = player.transform.position.y - (playerCollider.bounds.size.y / 2);
         // Check if the player is above the platform
-        if(playerFeetPosition > platformSurface)
+        if (playerFeetPosition > platformSurface)
         {
             EnableCollision();
         }
-        else if(playerFeetPosition < platformSurface)
+        else if (playerFeetPosition < platformSurface)
         {
             DisableCollision();
         }

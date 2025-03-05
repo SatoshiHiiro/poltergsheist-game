@@ -14,6 +14,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
     protected bool isCurrentlyObserving;    // Is the NPC already watching an object moving?
     protected float fieldOfViewAngle;
 
+    protected SpriteRenderer npcSpriteRenderer;
+
 
 
     protected virtual void Start()
@@ -22,6 +24,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         detectionRadius = 10f;
         isCurrentlyObserving = false;
         isObjectMoving = false;
+        npcSpriteRenderer = GetComponent<SpriteRenderer>();
     }
     protected virtual void Update()
     {

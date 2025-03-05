@@ -21,7 +21,7 @@ public class PlayerManager : SpriteManager
         base.Update();
 
         //To alternate between floatMin and floatMax
-        if (Mathf.FloorToInt(Time.time - startTime) == floatDuration)
+        if ((Time.time - startTime) >= floatDuration)
         {
             startTime = Time.time;
             isGoingUp = !isGoingUp;

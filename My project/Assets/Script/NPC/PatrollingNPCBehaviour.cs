@@ -4,6 +4,7 @@ using UnityEngine;
 public interface IPatrol
 {
     void Patrol();
+    void MoveToNextAvailablePatrolPoint();
 }
 public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
 {
@@ -138,7 +139,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         return blockPercentage >= point.BlockingThreshold;
     }
 
-    protected void MoveToNextAvailablePatrolPoint()
+    public void MoveToNextAvailablePatrolPoint()
     {
         int patrolPointPossibilities = patrolPoints.Length;
         //bool findNextPoint = false;
