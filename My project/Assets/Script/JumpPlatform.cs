@@ -4,6 +4,8 @@ using UnityEngine;
 public class JumpPlatform : MonoBehaviour
 {
     // This class allow the player to jump on specific objects
+    [SerializeField] float rangeUntilObjectBecomesAPlatform;
+
     private GameObject player;
     private Collider2D objectCollider;
     Collider2D playerCollider;
@@ -25,11 +27,13 @@ public class JumpPlatform : MonoBehaviour
     private void Update()
     {
         // Find platform surface position
-        float platformSurface = this.transform.position.y + ((objectCollider.bounds.size.y / 2));
+        //float platformSurface = this.transform.position.y + ((objectCollider.bounds.size.y / 2));
+        float platformSurface = transform.position.y + ((transform.lossyScale.y * gameObject.GetComponent<Collider2D>().bounds.size.y) / 2);
         // Find player feet position
-        float playerFeetPosition = player.transform.position.y - (playerCollider.bounds.size.y / 2);
+        //float playerFeetPosition = player.transform.position.y - (playerCollider.bounds.size.y / 2);
+        float playerFeetPosition = player.transform.position.y - player.GetComponent<PlayerController>().halfSizeOfObject;
         // Check if the player is above the platform
-        if(playerFeetPosition > platformSurface)
+        if (playerFeetPosition + rangeUntilObjectBecomesAPlatform > platformSurface)
         {
             EnableCollision();
         }

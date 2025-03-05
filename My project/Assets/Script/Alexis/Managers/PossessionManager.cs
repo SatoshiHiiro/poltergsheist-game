@@ -118,7 +118,7 @@ public class PossessionManager : InteractibleManager
     }
 
     //Pour arrêter la possession
-    void StopPossession()
+    public void StopPossession()
     {
         isPossessed = false;
         possession.OnDepossessed();

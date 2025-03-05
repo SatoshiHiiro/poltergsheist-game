@@ -1,19 +1,41 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class InventorySystem : MonoBehaviour
 {
     [SerializeField] KeyItemBehavior[] keyItems;
     [SerializeField] bool[] isConditionsMet;
 
+    EnergySystem energy;
+
+    public InputAction Ctrl;
+    public InputAction FullEnergy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        energy = FindFirstObjectByType<EnergySystem>();
         keyItems = FindObjectsByType<KeyItemBehavior>(FindObjectsSortMode.InstanceID);
         isConditionsMet = new bool[keyItems.Length];
         for (int i = 0; i < keyItems.Length; i++)
             isConditionsMet[i] = false;
+
+        Ctrl.Enable();
+        FullEnergy.Enable();
+    }
+
+    private void Update()
+    {
+        if (Ctrl.IsPressed())
+        {
+            Debug.Log("Ctrl pressed");
+            if (FullEnergy.WasPressedThisFrame())
+            {
+                Debug.Log("R is pressed");
+                energy.ModifyEnergy(energy.maxEnergy);
+            }
+        }
     }
 
     public void CreateUIItem(Sprite image)
