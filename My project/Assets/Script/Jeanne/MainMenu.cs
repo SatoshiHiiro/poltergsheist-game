@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 
     public void Jouer()
     {
-        // SceneManager.LoadScene("");
+        SceneManager.LoadScene("LevelSelect");
     }
 
     public void Controls()
@@ -27,5 +27,15 @@ public class MainMenu : MonoBehaviour
     public void Retour()
     {
         SceneManager.LoadScene("UI_Accueil");
+    }
+
+    public void Niveau1()
+    {
+        SceneManager.LoadScene("Niveau1");
+    }
+
+    public void Niveau2()
+    {
+        SceneManager.LoadScene("Niveau2");
     }
 }
