@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class SpriteManager : MonoBehaviour
@@ -6,18 +7,18 @@ public abstract class SpriteManager : MonoBehaviour
     [Header("Rotation Animation")]
     [SerializeField] public float rotationSpeed;        //Multiplier for the number of degrees to turn each frame
     Quaternion direction = new Quaternion(0, 0, 0, 1);
-    float lastPos;
+    protected Vector2 lastPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
-        lastPos = transform.position.x;
+        lastPos = transform.position;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        float posDiff = lastPos - transform.position.x;
+        float posDiff = lastPos.x - transform.position.x;
         Vector2 input;
 
         if (transform.parent.GetComponent<PlayerController>() != null)
@@ -34,7 +35,11 @@ public abstract class SpriteManager : MonoBehaviour
             direction = new Quaternion(0, 0, 0, 1);     //Look right
 
         RotateSprite(direction);
-        lastPos = transform.position.x;
+    }
+
+    private void LateUpdate()
+    {
+        lastPos = transform.position;
     }
 
     //The actual rotation on the y axis
