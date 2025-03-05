@@ -45,7 +45,7 @@ public class FloorNavigation : MonoBehaviour
         }
     }
 
-    public StairController FindNearestStairToFloor(HumanNPCBehaviour npc, float targetFloor,StairDirection neededDirection)
+    private StairController FindNearestStairToFloor(HumanNPCBehaviour npc, float targetFloor,StairDirection neededDirection)
     {
         float npcFloor = npc.FloorLevel;
 

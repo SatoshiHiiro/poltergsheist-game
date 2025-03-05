@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -9,6 +10,8 @@ public class PowerOutage : MonoBehaviour, IPossessable
     [SerializeField] private bool closeAllLightsInBuilding;  // Do we close all the lights inside the house
     [SerializeField] private GameObject[] closedLights; // Specific lights that should be close
     [SerializeField] private LayerMask wallFloorLayer;
+    [SerializeField] private float floorLevel;
+    [SerializeField] private float repairingTime;   // Time used by the npc to repair the lights
     private GameObject[] allBuildingLights;   // Every lights inside the building
     private GameObject[] lightsToClose;
 
@@ -20,12 +23,6 @@ public class PowerOutage : MonoBehaviour, IPossessable
         allBuildingLights = GameObject.FindGameObjectsWithTag("BuildingLight");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnDepossessed()
     {
         // Nothing to implement when player depossessed the object
@@ -33,7 +30,7 @@ public class PowerOutage : MonoBehaviour, IPossessable
 
     public void OnPossessed()
     {
-        lightsToClose = closeAllLightsInBuilding ? closedLights : allBuildingLights;
+        lightsToClose = closeAllLightsInBuilding ?  allBuildingLights : closedLights;
         CloseOpenLights(lightsToClose, false );
     }
 
@@ -44,31 +41,35 @@ public class PowerOutage : MonoBehaviour, IPossessable
         {
             light.SetActive(open);
         }
-        HandleNPCs(lights);
+        // If the lights are closed
+        if (!open)
+        {
+            HandleNPCs(lights);
+        }
     }
 
+    // Handle NPC behaviours when the lights are closed
     private void HandleNPCs(GameObject[] lightsClosed)
     {
         // Find all NPC in the scene
         HumanNPCBehaviour[] allNPCs = FindObjectsByType<HumanNPCBehaviour>(FindObjectsSortMode.None);
-
+        
         foreach (HumanNPCBehaviour npc in allNPCs)
         {
             if (IsNPCAffected(npc, lightsClosed))
             {
+                // Surprise sound
+                npc.audioSource.Play();
+
                 if (!isRepairing)
                 {
                     isRepairing = true;
-                    RepairLights();
+                    npc.EnqueueInvestigation(RepairLights(npc, lightsClosed));
+
+                    //StartCoroutine(RepairLights(npc, lightsClosed));
+                    
                 }
                 affectedNPCs.Add(npc);
-
-                PatrollingNPCBehaviour patrollingNPC = npc.gameObject.GetComponent<PatrollingNPCBehaviour>();
-                if (patrollingNPC != null)
-                {
-                    ///canMove = false;
-                    /////TODO
-                }
             }
         }
     }
@@ -88,21 +89,29 @@ public class PowerOutage : MonoBehaviour, IPossessable
         return false;
     }
 
-    private void RepairLights()
+    private IEnumerator RepairLights(HumanNPCBehaviour npc, GameObject[] lightsClosed)
     {
-        // TODO
+        // The NPC walk to the light switch
+        yield return StartCoroutine(npc.ReachTarget(this.transform.position, floorLevel));
+        // Time for the NPC to repair the problem        
+        yield return new WaitForSeconds(repairingTime);
+        RestoreLights();
     }
-
+    // Restore the closed lights
     private void RestoreLights()
     {
+        // Open the lights back on
         CloseOpenLights(lightsToClose, true);
         lightsToClose = null;
+
+        // NPCs have their normal behavior again
         foreach (HumanNPCBehaviour npc in affectedNPCs)
-        {
+        {            
             PatrollingNPCBehaviour patrollingNPC = npc.gameObject.GetComponent<PatrollingNPCBehaviour>();
             if (patrollingNPC != null)
             {
                 ///canMove = true;
+                // movementspeed réduit
                 /////TODO
             }
         }

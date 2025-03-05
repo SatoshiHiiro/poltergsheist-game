@@ -19,6 +19,11 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     protected bool isEnteringOrExiting; // Is the NPC entering or exiting a room?
     PatrolPointData currentPoint;   // Point where the NPC is located
     PatrolPointData nextPatrolPoint; // Next NPC patrol point
+    private bool rightFloor;    // Is the NPC on the right floor to do is patrol
+
+    // Public properties to access from other scripts
+    public bool IsBlocked => isBlocked;
+
 
     protected override void Start()
     {
@@ -28,6 +33,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         isBlocked = false;
         isWaiting = false;
         isInRoom = false;
+        rightFloor = true;
         currentPoint = null;
         nextPatrolPoint = patrolPoints[indexPatrolPoints];
     }
@@ -42,29 +48,61 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         }
         if(!isWaiting && !isBlocked)
         {
-            if (!isInvestigating)
+            if (!isInvestigating && rightFloor)
             {
                 Patrol();
             }
         }
         
     }
+    public override void Investigate()
+    {
+        // If the NPC is not blocked or in a room then he investigates
+        if (!isBlocked && !isInRoom)
+        {
+            StopCoroutine("HandleWaiting");
+            isInvestigating = true;
+            isWaiting = false; // NOT SURE!!!
+            rightFloor = false;
+            //StartCoroutine(InvestigateSituation(situationPosition, floorLevel));
+        }
+    }
+
     // Start the investigation of the sound
     public override void InvestigateSound(GameObject objectsound, bool replaceObject, float targetFloor)
-    {       
-       StartCoroutine(WaitBeforeInvestigate(objectsound, replaceObject, targetFloor));      
+    {  
+        // If the NPC is not blocked or in a room then he investigates
+        if(!isBlocked && !isInRoom)
+        {
+            //StopAllCoroutines();
+            //StopCoroutine("HandleWaiting");
+            Investigate();
+            StartCoroutine(WaitBeforeInvestigate(objectsound, replaceObject, targetFloor));
+        }            
     }
     // When the NPC is no longer blocked or in a room he will then go and investigate
     protected IEnumerator WaitBeforeInvestigate(GameObject objectsound, bool replaceObject, float targetFloor)
     {
-        while(isBlocked || isInRoom)
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-        isInvestigating = true;
-        isWaiting = false; // NOT SURE!!!
-        StopAllCoroutines();
-        StartCoroutine(InvestigateFallingObject(objectsound, replaceObject, targetFloor));
+        //while(isBlocked || isInRoom)
+        //{
+        //    yield return new WaitForSeconds(0.5f);
+        //}
+
+        //isInvestigating = true;
+        //isWaiting = false; // NOT SURE!!!
+        //rightFloor = false;
+
+        //StopAllCoroutines();
+
+        yield return StartCoroutine(InvestigateFallingObject(objectsound, replaceObject, targetFloor));
+        yield return StartCoroutine(ReturnRightFloor());
+    }
+
+    public IEnumerator ReturnRightFloor()
+    {
+        yield return StartCoroutine(ReachFloor(initialFloorLevel));
+        rightFloor = true;
+        isInvestigating = false;
     }
 
     public void Patrol()
@@ -149,27 +187,6 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             indexPatrolPoints = 0;
         }
         nextPatrolPoint = patrolPoints[indexPatrolPoints];
-        //for (int i = 0; i < patrolPointPossibilities; i++)
-        //{
-        //    indexPatrolPoints++;
-        //    if (indexPatrolPoints >= patrolPoints.Length)
-        //    {
-        //        indexPatrolPoints = 0;
-        //    }
-        //    nextPatrolPoint = patrolPoints[indexPatrolPoints];
-        //    //PatrolPointData nextPoint = patrolPoints[indexPatrolPoints];
-        //    //if (nextPoint.PatrolPointType != PatrolPointType.Room || !IsRoomBlocked(nextPoint))
-        //    //{
-        //    //    nextPatrolPoint = nextPoint;
-        //    //    findNextPoint = true;
-        //    //    break;
-        //    //}
-        //}
-        //if (!findNextPoint)
-        //{
-        //    nextPatrolPoint = null;    // All patrol points are blocked
-        //}
-
     }
 
     protected IEnumerator HandleWaiting(PatrolPointData currentPoint)
