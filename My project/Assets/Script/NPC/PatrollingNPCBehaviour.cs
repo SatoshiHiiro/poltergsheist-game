@@ -79,55 +79,6 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             Patrol();
         }
 
-        //// Priority 1: If the NPC is blocked but the room is no longer blocked, get unstuck
-        //if (isBlocked && currentPoint != null && !IsRoomBlocked(currentPoint))
-        //{
-        //    StartCoroutine(GetUnstuck());
-        //    return;
-        //}
-        //// Priority 2: Handle investigation queue if we're not currently investigating or getting unstuck
-        //if (investigationQueue.Count > 0 && !isInvestigating && !isGettingUnstuck)
-        //{
-        //    // Cancel any return to floor operation if there's a new investigation
-        //    if (isReturningToFloor)
-        //    {
-        //        StopCoroutine(returnToFloor);
-        //        //StopCoroutine("ReturnRightFloor");
-        //        isReturningToFloor = false;
-        //    }
-
-        //    StopCoroutine("HandleWaiting");
-        //    isAtInitialFloor = false;
-        //    IEnumerator investigationCoroutine = investigationQueue.Dequeue();
-        //    StartCoroutine(RunInvestigation(investigationCoroutine));
-        //}
-        //// Priority 3: Return to starting floor if we need to
-        //else if (investigationQueue.Count == 0 && !isInvestigating && !rightFloor && !isGettingUnstuck && !isAtInitialFloor && !isReturningToFloor)
-        //{
-        //    isReturningToFloor = true;
-        //    returnToFloor = StartCoroutine(ReturnRightFloor());
-        //}
-        //// Priority 4: Patrol if we're able to and should be
-        //else if (!isInvestigating && rightFloor && !isWaiting && !isBlocked && !isGettingUnstuck && isAtInitialFloor && !isReturningToFloor)
-        //{
-        //    Patrol();
-        //}
-
-        //base.Update();
-
-        //if(isBlocked && currentPoint != null && !IsRoomBlocked(currentPoint))
-        //{
-        //    StartCoroutine(GetUnstuck());
-        //    return;
-        //}
-        //if(!isWaiting && !isBlocked)
-        //{
-        //    if (!isInvestigating && rightFloor)
-        //    {
-        //        Patrol();
-        //    }
-        //}
-
     }
 
     protected override IEnumerator RunInvestigation(IEnumerator investigation)

@@ -146,22 +146,58 @@ public class Cat : BasicNPCBehaviour, IPatrol
     {
         audioSource.Play();
 
-        // Get movement direction
-        Vector2 destination = new Vector2(targetPossessedObject.transform.position.x, transform.position.y);
-        Vector2 direction = (destination - (Vector2)transform.position).normalized;
+        // Get the possessed object's position and movement
+        Vector2 objectPosition = targetPossessedObject.transform.position;
+        PossessionController possessionController = targetPossessedObject.GetComponent<PossessionController>();
 
-        // Flip sprite based on direction
-        npcSpriteRenderer.flipX = direction.x < 0;
-        facingRight = !npcSpriteRenderer.flipX;
+        // Check if cat is directly beneath the object
+        bool isCatUnderObject = Mathf.Abs(transform.position.x - objectPosition.x) < 0.5f;
+
+        if (isCatUnderObject && objectPosition.y > transform.position.y)
+        {
+            // If directly under and object is higher, use object's movement direction
+            if (possessionController != null)
+            {
+                // Get movement direction from the possessed object
+                Vector2 objectDirection = possessionController.GetMovementDirection();
+
+                // Only update facing if the object is actually moving horizontally
+                if (possessionController.IsMoving)
+                {
+                    npcSpriteRenderer.flipX = objectDirection.x < 0;
+                    facingRight = !npcSpriteRenderer.flipX;
+                }
+            }
+        }
+        else
+        {
+            // Regular behavior - move toward object
+            Vector2 destination = new Vector2(objectPosition.x, transform.position.y);
+            Vector2 direction = (destination - (Vector2)transform.position).normalized;
+
+            // Flip sprite based on direction
+            npcSpriteRenderer.flipX = direction.x < 0;
+            facingRight = !npcSpriteRenderer.flipX;
+        }
+
+        //// Get movement direction
+        //Vector2 destination = new Vector2(targetPossessedObject.transform.position.x, transform.position.y);
+        //Vector2 direction = (destination - (Vector2)transform.position).normalized;
+
+        //// Flip sprite based on direction
+        //npcSpriteRenderer.flipX = direction.x < 0;
+        //facingRight = !npcSpriteRenderer.flipX;
 
         // Cat is running towards the object target
-        transform.position = Vector2.MoveTowards(transform.position, destination, huntingSpeed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, destination, huntingSpeed * Time.deltaTime);
+
+        Vector2 moveDestination = new Vector2(objectPosition.x, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, moveDestination, huntingSpeed * Time.deltaTime);
 
         // Verify if the Cat toutched the object
         if (catCollider.bounds.Intersects(targetPossessedObject.GetComponent<Collider2D>().bounds))
         {
             isHunting = false;
-            //Attack();
             StartCoroutine(AttackObject());
         }
     }

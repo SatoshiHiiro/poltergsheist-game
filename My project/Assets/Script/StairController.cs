@@ -81,13 +81,12 @@ public class StairController : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
 
-
         // Climbing stair animation
 
         // Calculate adjusted destination position based on character height
         Renderer characterRenderer = character.GetComponentInChildren<Renderer>();//character.transform.GetChild(0).GetComponent<Renderer>();
         float characterHeight = characterRenderer.bounds.size.y;
-        Vector3 adjustedPosition = targetStair.startPoint.position;
+        Vector2 adjustedPosition = targetStair.startPoint.position;
 
         // Adjust Y position so the character's feet are at the floor level
         adjustedPosition.y += characterHeight / 2f;

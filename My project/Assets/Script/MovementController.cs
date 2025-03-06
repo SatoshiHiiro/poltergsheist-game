@@ -34,7 +34,7 @@ public abstract class MovementController : MonoBehaviour
     private bool canClimbAgain;
 
     //Shortcuts
-    Rigidbody2D rigid2D;
+    protected Rigidbody2D rigid2D;
 
     //Input action section, has to be public or can be private with a SerializeField statement
     [Header("Input Section")]
