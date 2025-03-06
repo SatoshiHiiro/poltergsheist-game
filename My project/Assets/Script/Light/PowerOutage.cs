@@ -53,36 +53,66 @@ public class PowerOutage : MonoBehaviour, IPossessable
     {
         // Find all NPC in the scene
         HumanNPCBehaviour[] allNPCs = FindObjectsByType<HumanNPCBehaviour>(FindObjectsSortMode.None);
-        
+
+        List<HumanNPCBehaviour> availableNPCs = new List<HumanNPCBehaviour>();
+        List<HumanNPCBehaviour> blockedNPCs = new List<HumanNPCBehaviour>();
+
         foreach (HumanNPCBehaviour npc in allNPCs)
         {
             if (IsNPCAffected(npc, lightsClosed))
             {
-                // Surprise sound
-                npc.audioSource.Play();
-
-                if (!isRepairing)
+                PatrollingNPCBehaviour npcPatrol = npc.GetComponent<PatrollingNPCBehaviour>();
+                // Check if the NPC is blocked
+                if (npcPatrol != null && (npcPatrol.IsBlocked || npcPatrol.IsInRoom))
                 {
-                    isRepairing = true;
-                    npc.EnqueueInvestigation(RepairLights(npc, lightsClosed));
-
-                    //StartCoroutine(RepairLights(npc, lightsClosed));
-                    
+                    blockedNPCs.Add(npcPatrol);
                 }
-                affectedNPCs.Add(npc);
+                else
+                {
+                    // The NPC is availabe to go an investigate
+                    availableNPCs.Add(npc);
+                }
             }
+        }
+        if(availableNPCs.Count > 0)
+        {
+            NotifyNPCs(availableNPCs, lightsClosed);
+        }
+        else if(blockedNPCs.Count > 0)
+        {
+            NotifyNPCs(blockedNPCs, lightsClosed);
+        }
+    }
+
+    private void NotifyNPCs(List<HumanNPCBehaviour> npcList, GameObject[] lightsClosed)
+    {
+        foreach (HumanNPCBehaviour npc in npcList)
+        {
+            // Surprise sound
+            npc.audioSource.Play();
+            if (!isRepairing)
+            {
+                isRepairing = true;
+                print("enqueue");
+                npc.EnqueueInvestigation(RepairLights(npc, lightsClosed));
+            }
+            affectedNPCs.Add(npc);
+
         }
     }
 
     // Check if the NPC is currently in an area affected by the closed lights
     private bool IsNPCAffected(HumanNPCBehaviour npc, GameObject[] lights)
     {
+        print("NPC");
         Collider2D npcCollider = npc.GetComponent<Collider2D>();
         foreach(GameObject gameObjectLight in lights)
         {
+            
             Collider2D lightCollider = gameObjectLight.GetComponent<Collider2D>();
             if (LightUtility.IsPointHitByLight(lightCollider, npcCollider, wallFloorLayer))
             {
+                print("HIT BY LIGHT!");
                 return true;
             }
         }
@@ -91,10 +121,13 @@ public class PowerOutage : MonoBehaviour, IPossessable
 
     private IEnumerator RepairLights(HumanNPCBehaviour npc, GameObject[] lightsClosed)
     {
+        print("repairlights");
+        print("POSITION À ATTEINDRE: " + this.transform.position);
         // The NPC walk to the light switch
         yield return StartCoroutine(npc.ReachTarget(this.transform.position, floorLevel));
         // Time for the NPC to repair the problem        
         yield return new WaitForSeconds(repairingTime);
+        isRepairing = false;
         RestoreLights();
     }
     // Restore the closed lights

@@ -33,7 +33,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [SerializeField] LayerMask lightLayer;  // Layer of the gameobject light
     [SerializeField] LayerMask wallFloorLayer;   // Layer of the gameobject wall
 
-    private Queue<IEnumerator> investigationQueue = new Queue<IEnumerator>();
+    protected Queue<IEnumerator> investigationQueue = new Queue<IEnumerator>();
     private bool isAtInitialPosition = false;
     private Coroutine currentInvestigation = null;
 
@@ -48,6 +48,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         isAtInitialPosition = true;
     }
 
+    bool test = false;
+    private Coroutine returnToInitialPositionCoroutine;
     protected override void Update()
     {
         base.Update();
@@ -56,15 +58,21 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
         if(investigationQueue.Count > 0 && !isInvestigating)
         {
+            if (returnToInitialPositionCoroutine != null)
+            {
+                StopCoroutine(returnToInitialPositionCoroutine);
+                //StopAllCoroutines();
+                returnToInitialPositionCoroutine = null;
+            }
+
             isAtInitialPosition = false;
             IEnumerator investigationCoroutine = investigationQueue.Dequeue();
             currentInvestigation = StartCoroutine(RunInvestigation(investigationCoroutine));
-            //StartCoroutine(investigationCoroutine);
         }
         else if(investigationQueue.Count == 0 && !isInvestigating && !isAtInitialPosition)
         {
             isAtInitialPosition = true;
-            StartCoroutine(ReturnToInitialPosition());
+            returnToInitialPositionCoroutine = StartCoroutine(ReturnToInitialPosition());
         }
     }
 
@@ -137,6 +145,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             if(LightUtility.IsPointHitByLight(lightCollider, objCollider, wallFloorLayer))
             {
+                
                 return true;
             }
         }
@@ -179,7 +188,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         investigationQueue.Enqueue(investigation);
     }
 
-    private IEnumerator RunInvestigation(IEnumerator investigation)
+    protected virtual IEnumerator RunInvestigation(IEnumerator investigation)
     {
         isInvestigating = true;
         yield return StartCoroutine(investigation);
@@ -202,7 +211,9 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         audioSource.Play();
         yield return new WaitForSeconds(surpriseWaitTime);
 
-        yield return StartCoroutine(ReachTarget(objectsound.transform.position, targetFloor));
+        yield return (ReachTarget(objectsound.transform.position, targetFloor));
+
+        //yield return StartCoroutine(ReachTarget(objectsound.transform.position, targetFloor));
 
         // One NPC must replace the object to it's initial position
         FallingObject fallingObject = objectsound.GetComponent<FallingObject>();
@@ -219,7 +230,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     // Pathfinding of the NPC to reach a target
     public IEnumerator ReachTarget(Vector2 target, float targetFloor)
     {
-        yield return StartCoroutine(ReachFloor(targetFloor));
+        yield return ReachFloor(targetFloor);
+        //yield return StartCoroutine(ReachFloor(targetFloor));
 
         // The NPC is now on the same level has the object
 
@@ -240,6 +252,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     protected IEnumerator ReachFloor(float targetFloor)
     {
+
         // Check if the npc need to use the stairs
         if (floorLevel != targetFloor)
         {
@@ -260,6 +273,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 // Move to stair
                 while (Mathf.Abs(transform.position.x - stairPosition.x) > 0.1f)
                 {
+                    //print("IM IN REACH!!!");
                     transform.position = Vector2.MoveTowards(transform.position, stairPosition, movementSpeed * Time.deltaTime);
                     yield return null;
                 }

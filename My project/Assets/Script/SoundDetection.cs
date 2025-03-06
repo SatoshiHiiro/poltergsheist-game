@@ -18,43 +18,47 @@ public abstract class SoundDetection : MonoBehaviour
         // Find all NPC within range
         Collider2D[] colliderNearbyNPC = Physics2D.OverlapCircleAll(transform.position, soundRadius, layerToDetect);
 
+        List<HumanNPCBehaviour> availableNPCs = new List<HumanNPCBehaviour>();
+        List<HumanNPCBehaviour> blockedNPCs = new List<HumanNPCBehaviour>();
+
         foreach (Collider2D colliderNPC in colliderNearbyNPC)
         {
-            //EnemyBehaviour enemy = colliderNPC.GetComponent<EnemyBehaviour>();
             HumanNPCBehaviour npc = colliderNPC.GetComponent<HumanNPCBehaviour>();
             if (npc != null)
             {
-                // NPCs on the same floor get priority
-                if (npc.FloorLevel == floorLevel)
+                PatrollingNPCBehaviour npcPatrol = npc.GetComponent<PatrollingNPCBehaviour>();
+                // Check if the NPC is blocked
+                if(npcPatrol != null && (npcPatrol.IsBlocked || npcPatrol.IsInRoom))
                 {
-
-                    if (!firstNPCNotified)
-                    {
-                        firstNPCNotified = true;
-                        npc.InvestigateSound(objectSound, true, floorLevel);
-                    }
-                    else
-                    {
-                        npc.InvestigateSound(objectSound, false, floorLevel);
-                    }
+                    blockedNPCs.Add(npcPatrol);
                 }
                 else
                 {
-
-                    if (!firstNPCNotified)
-                    {
-                        npc.InvestigateSound(objectSound, true, floorLevel);
-                    }
-                    else
-                    {
-                        npc.InvestigateSound(objectSound, false, floorLevel);
-                    }
-
+                    // The NPC is availabe to go an investigate
+                    availableNPCs.Add(npc);
                 }
-
             }
         }
 
+        if(availableNPCs.Count > 0)
+        {
+            NotifyNPCs(availableNPCs, floorLevel, objectSound);
+        }
+        else if(blockedNPCs.Count > 0)
+        {
+            // Every NPCs are blocked
+            NotifyNPCs(blockedNPCs, floorLevel, objectSound);
+        }
+    }
+
+    private void NotifyNPCs(List<HumanNPCBehaviour> npcsList, float floorLevel, GameObject objectSound)
+    {
+        foreach(HumanNPCBehaviour npc in npcsList)
+        {
+            bool isFirst = !firstNPCNotified;
+            npc.InvestigateSound(objectSound,isFirst,floorLevel);
+            firstNPCNotified = true;
+        }
         firstNPCNotified = false;
     }
 

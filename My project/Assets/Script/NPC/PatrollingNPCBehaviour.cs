@@ -1,4 +1,6 @@
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public interface IPatrol
@@ -21,10 +23,15 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     PatrolPointData nextPatrolPoint; // Next NPC patrol point
     private bool rightFloor;    // Is the NPC on the right floor to do is patrol
 
+    //private bool isAtInitialFloor = true;
+    //private bool isGettingUnstuck = false;
+    //private bool isReturningToFloor = false;
+
     // Public properties to access from other scripts
     public bool IsBlocked => isBlocked;
+    public bool IsInRoom => isInRoom;
 
-
+    private Coroutine returnToFloor;
     protected override void Start()
     {
         base.Start();
@@ -39,70 +46,114 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     }
     protected override void Update()
     {
-        base.Update();
+        DetectMovingObjects();
+        CheckMirrorReflection();
 
+        // Priority 1: If the NPC is blocked but the room is no longer blocked, get unstuck
         if(isBlocked && currentPoint != null && !IsRoomBlocked(currentPoint))
         {
             StartCoroutine(GetUnstuck());
             return;
         }
-        if(!isWaiting && !isBlocked)
+        // Priority 2: Handle investigation queue if we're not currently investigating or getting unstuck
+        if(investigationQueue.Count > 0 && !isInvestigating && !isWaiting)
         {
-            if (!isInvestigating && rightFloor)
+            if(returnToFloor != null)
             {
-                Patrol();
+                StopCoroutine(returnToFloor);
+                returnToFloor = null;
             }
-        }
-        
-    }
-    public override void Investigate()
-    {
-        // If the NPC is not blocked or in a room then he investigates
-        if (!isBlocked && !isInRoom)
-        {
             StopCoroutine("HandleWaiting");
-            isInvestigating = true;
-            isWaiting = false; // NOT SURE!!!
-            rightFloor = false;
-            //StartCoroutine(InvestigateSituation(situationPosition, floorLevel));
+            IEnumerator investigationCoroutine = investigationQueue.Dequeue();
+            StartCoroutine(RunInvestigation(investigationCoroutine));
         }
+        // Priority 3: Return to starting floor if we need to
+        else if(investigationQueue.Count == 0 && !isInvestigating && !rightFloor)
+        {
+            rightFloor = true;
+            returnToFloor = StartCoroutine(ReturnRightFloor());
+        }
+        // Priority 4: Patrol if we're able to and should be
+        else if(investigationQueue.Count == 0 && !isInvestigating && rightFloor && !isWaiting && !isBlocked)
+        {
+            Patrol();
+        }
+
+        //// Priority 1: If the NPC is blocked but the room is no longer blocked, get unstuck
+        //if (isBlocked && currentPoint != null && !IsRoomBlocked(currentPoint))
+        //{
+        //    StartCoroutine(GetUnstuck());
+        //    return;
+        //}
+        //// Priority 2: Handle investigation queue if we're not currently investigating or getting unstuck
+        //if (investigationQueue.Count > 0 && !isInvestigating && !isGettingUnstuck)
+        //{
+        //    // Cancel any return to floor operation if there's a new investigation
+        //    if (isReturningToFloor)
+        //    {
+        //        StopCoroutine(returnToFloor);
+        //        //StopCoroutine("ReturnRightFloor");
+        //        isReturningToFloor = false;
+        //    }
+
+        //    StopCoroutine("HandleWaiting");
+        //    isAtInitialFloor = false;
+        //    IEnumerator investigationCoroutine = investigationQueue.Dequeue();
+        //    StartCoroutine(RunInvestigation(investigationCoroutine));
+        //}
+        //// Priority 3: Return to starting floor if we need to
+        //else if (investigationQueue.Count == 0 && !isInvestigating && !rightFloor && !isGettingUnstuck && !isAtInitialFloor && !isReturningToFloor)
+        //{
+        //    isReturningToFloor = true;
+        //    returnToFloor = StartCoroutine(ReturnRightFloor());
+        //}
+        //// Priority 4: Patrol if we're able to and should be
+        //else if (!isInvestigating && rightFloor && !isWaiting && !isBlocked && !isGettingUnstuck && isAtInitialFloor && !isReturningToFloor)
+        //{
+        //    Patrol();
+        //}
+
+        //base.Update();
+
+        //if(isBlocked && currentPoint != null && !IsRoomBlocked(currentPoint))
+        //{
+        //    StartCoroutine(GetUnstuck());
+        //    return;
+        //}
+        //if(!isWaiting && !isBlocked)
+        //{
+        //    if (!isInvestigating && rightFloor)
+        //    {
+        //        Patrol();
+        //    }
+        //}
+
+    }
+
+    protected override IEnumerator RunInvestigation(IEnumerator investigation)
+    {
+        // Wait until we're not blocked, not in a room, and not getting unstuck
+        while (isBlocked || isInRoom || isWaiting)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        rightFloor = false;
+        isInvestigating = true;
+        yield return StartCoroutine(investigation);
+        isInvestigating = false;
+        
     }
 
     // Start the investigation of the sound
     public override void InvestigateSound(GameObject objectsound, bool replaceObject, float targetFloor)
-    {  
-        // If the NPC is not blocked or in a room then he investigates
-        if(!isBlocked && !isInRoom)
-        {
-            //StopAllCoroutines();
-            //StopCoroutine("HandleWaiting");
-            Investigate();
-            StartCoroutine(WaitBeforeInvestigate(objectsound, replaceObject, targetFloor));
-        }            
-    }
-    // When the NPC is no longer blocked or in a room he will then go and investigate
-    protected IEnumerator WaitBeforeInvestigate(GameObject objectsound, bool replaceObject, float targetFloor)
     {
-        //while(isBlocked || isInRoom)
-        //{
-        //    yield return new WaitForSeconds(0.5f);
-        //}
-
-        //isInvestigating = true;
-        //isWaiting = false; // NOT SURE!!!
-        //rightFloor = false;
-
-        //StopAllCoroutines();
-
-        yield return StartCoroutine(InvestigateFallingObject(objectsound, replaceObject, targetFloor));
-        yield return StartCoroutine(ReturnRightFloor());
+        print("Investigue le sons");
+        investigationQueue.Enqueue(InvestigateFallingObject(objectsound, replaceObject, targetFloor));      
     }
 
     public IEnumerator ReturnRightFloor()
     {
-        yield return StartCoroutine(ReachFloor(initialFloorLevel));
-        rightFloor = true;
-        isInvestigating = false;
+        yield return ReachFloor(initialFloorLevel);
     }
 
     public void Patrol()
@@ -234,6 +285,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         }
         else
         {
+            //isWaiting = false;
             yield return new WaitForSeconds(currentPoint.WaitTime);
         }
         isWaiting = false;
@@ -243,6 +295,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     // NPC is not blocked anymore
     protected IEnumerator GetUnstuck()
     {
+        //isGettingUnstuck = true;
         // Animation of NPC coming out of the room
         isWaiting = true;
         isBlocked = false;
@@ -251,9 +304,10 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         animator.SetBool("EnterRoom", false);
         isWaiting = false;
         isInRoom = false;
-        
+
 
         // After getting unstuck, move to the next patrol point
+        //isGettingUnstuck = false;
         MoveToNextAvailablePatrolPoint();
     }
 }
