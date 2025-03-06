@@ -35,7 +35,7 @@ public class PossessionManager : MonoBehaviour
     IEnumerator AnimationTime()
     {
         FindFirstObjectByType<EnergySystem>().ModifyEnergy(-initialEnergyLoss);
-        player.lastPossession = gameObject.name;
+        player.lastPossession = this;
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<Rigidbody2D>().simulated = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
@@ -72,9 +72,12 @@ public class PossessionManager : MonoBehaviour
             player.transform.position = pos;
         }
 
-        //Pour enlever la possession sur l'objet si le Player possède un autre objet avant de déposséder
-        if (player.lastPossession != gameObject.name && isPossessed)
-            StopPossession();
+        ////Pour enlever la possession sur l'objet si le Player possède un autre objet avant de déposséder
+        //if (player.lastPossession != gameObject.name && isPossessed)
+        //{
+        //    StopPossession();
+        //}
+            
     }
 
     //Input de possession
@@ -82,13 +85,22 @@ public class PossessionManager : MonoBehaviour
     {
         if (isAnimationFinished)
         {
+            
             player.GetComponent<Rigidbody2D>().linearVelocityX = 0;
 
             //Si le joueur veut posséder l'objet en possédant déjà un autre
             if (player.isPossessing && !isPossessed)
             {
+                
+                if (player.lastPossession != null)
+                {
+                    player.lastPossession.StopPossession();
+                }
+
                 isPossessed = true;
+                player.isPossessing = true;
                 StartCoroutine(AnimationTime());
+
             }
             //Si le joueur veut posséder l'objet
             else if (!player.isPossessing && !isPossessed)
