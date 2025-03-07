@@ -95,6 +95,7 @@ public class PowerOutage : MonoBehaviour, IPossessable
                 isRepairing = true;
                 npc.EnqueueInvestigation(RepairLights(npc, lightsClosed));
             }
+            npc.ChangeSpeed();
             affectedNPCs.Add(npc);
 
         }
@@ -140,14 +141,16 @@ public class PowerOutage : MonoBehaviour, IPossessable
 
         // NPCs have their normal behavior again
         foreach (HumanNPCBehaviour npc in affectedNPCs)
-        {            
-            PatrollingNPCBehaviour patrollingNPC = npc.gameObject.GetComponent<PatrollingNPCBehaviour>();
-            if (patrollingNPC != null)
-            {
-                ///canMove = true;
-                // movementspeed réduit
-                /////TODO
-            }
+        {
+            npc.ChangeSpeed();
+            //PatrollingNPCBehaviour patrollingNPC = npc.gameObject.GetComponent<PatrollingNPCBehaviour>();
+            //if (patrollingNPC != null)
+            //{
+            //    ///canMove = true;
+            //    // movementspeed réduit
+            //    /////TODO
+
+            //}
         }
         affectedNPCs.Clear();
     }

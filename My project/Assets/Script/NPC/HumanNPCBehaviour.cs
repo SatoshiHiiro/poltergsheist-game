@@ -40,6 +40,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [SerializeField] float detectionRadiusLight = 20f;
     [SerializeField] LayerMask lightLayer;  // Layer of the gameobject light
     [SerializeField] LayerMask wallFloorLayer;   // Layer of the gameobject wall
+    [SerializeField] protected float blindSpeed = 3f;
+    protected float normalSpeed;
 
 
 
@@ -52,6 +54,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         initialFacingRight = !npcSpriteRenderer.flipX;
         initialFloorLevel = floorLevel;
         isAtInitialPosition = true;
+        normalSpeed = movementSpeed;
     }
 
     bool test = false;
@@ -305,11 +308,17 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         npcSpriteRenderer.flipX = !initialFacingRight;
     }
 
-    public void UpdateFloorLevel(float floor)
+    public void ChangeSpeed()
     {
-        floorLevel = floor;
+        if (movementSpeed != normalSpeed)
+        {
+            movementSpeed = normalSpeed;
+        }
+        else
+        {
+            movementSpeed = blindSpeed;
+        }
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;

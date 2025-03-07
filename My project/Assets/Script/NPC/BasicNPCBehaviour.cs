@@ -18,6 +18,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
     [Header("NPC global variables")]
     [SerializeField] protected float movementSpeed = 6f;
 
+
+
     protected SpriteRenderer npcSpriteRenderer;
 
 
