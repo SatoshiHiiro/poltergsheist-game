@@ -11,7 +11,7 @@ public class PlayerController : MovementController
 
     //Possession
     [Header("Object possession")]
-    public string lastPossession;
+    public PossessionManager lastPossession;
 
     // TODO FAIRE DE LA BONNE MANIÈRE!!!
     // Conditions

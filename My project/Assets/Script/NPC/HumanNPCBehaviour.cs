@@ -1,9 +1,11 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class HumanNPCBehaviour : BasicNPCBehaviour
 {
-    [SerializeField] protected float movementSpeed = 6f;
+    
     // Variable manage suspicion of the NPC
     [SerializeField] protected float minSuspiciousRotation; // Minimum rotation change in degrees to trigger suspicion
     [SerializeField] protected float minSuspiciousPosition; // Minimum position change to trigger suspicion
@@ -17,12 +19,31 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [Header("Investigation Variables")]
     [SerializeField] protected float surpriseWaitTime = 2f;
     [SerializeField] protected float investigationWaitTime = 3f;
+    [SerializeField] private float floorLevel;   // Floor where the npc is located
+    protected float initialFloorLevel;
+    public float FloorLevel { get { return floorLevel; } }
     protected bool isInvestigating = false; // Is the NPC investigating a suspect sound
-    protected AudioSource audioSource;  // Source of the surprised sound
+    public AudioSource audioSource;  // Source of the surprised sound
 
-    protected Vector2 initialPosition;
+    protected Vector2 initialPosition;  // Initial position of the NPC
     private bool initialFacingRight; // He's he facing right or left
-    
+
+    protected Queue<IEnumerator> investigationQueue = new Queue<IEnumerator>();
+    private bool isAtInitialPosition = false;
+    private Coroutine currentInvestigation = null;
+
+    private bool canFindPath = true;
+
+    public bool CanFindPath => canFindPath;
+
+    [Header("Lighting Variable")]
+    [SerializeField] float detectionRadiusLight = 20f;
+    [SerializeField] LayerMask lightLayer;  // Layer of the gameobject light
+    [SerializeField] LayerMask wallFloorLayer;   // Layer of the gameobject wall
+    [SerializeField] protected float blindSpeed = 3f;
+    protected float normalSpeed;
+
+
 
     protected override void Start()
     {
@@ -31,12 +52,37 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         audioSource = GetComponent<AudioSource>();        
         initialPosition = transform.position;
         initialFacingRight = !npcSpriteRenderer.flipX;
+        initialFloorLevel = floorLevel;
+        isAtInitialPosition = true;
+        normalSpeed = movementSpeed;
     }
 
+    bool test = false;
+    private Coroutine returnToInitialPositionCoroutine;
     protected override void Update()
     {
         base.Update();
+       // DetectMovingObjects();
         CheckMirrorReflection();
+
+        if(investigationQueue.Count > 0 && !isInvestigating)
+        {
+            if (returnToInitialPositionCoroutine != null)
+            {
+                StopCoroutine(returnToInitialPositionCoroutine);
+                //StopAllCoroutines();
+                returnToInitialPositionCoroutine = null;
+            }
+
+            isAtInitialPosition = false;
+            IEnumerator investigationCoroutine = investigationQueue.Dequeue();
+            currentInvestigation = StartCoroutine(RunInvestigation(investigationCoroutine));
+        }
+        else if(investigationQueue.Count == 0 && !isInvestigating && !isAtInitialPosition)
+        {
+            isAtInitialPosition = true;
+            returnToInitialPositionCoroutine = StartCoroutine(ReturnToInitialPosition());
+        }
     }
 
     protected override void HandleChangedPositionSuspicion(PossessionController possessedObject, float objectSize)
@@ -79,6 +125,42 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         }
     }
 
+    protected override bool IsObjectInFieldOfView(Collider2D obj)
+    {
+        // Check if the object is in the line of sight of the NPC
+        Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
+        float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
+
+        // If the object is not within view angle, return false immediately
+        if(angle > fieldOfViewAngle / 2)
+        {
+            return false;
+        }
+
+        // Check if there is light toutching the object
+        if (!IsObjectLit(obj))
+        {
+            return false;
+        }
+
+        // Object is in field of view and area is sufficiently lit
+        return true;
+    }
+
+    protected bool IsObjectLit(Collider2D objCollider)
+    {
+        Collider2D[] lights = Physics2D.OverlapCircleAll(objCollider.bounds.center, detectionRadiusLight, lightLayer);
+        foreach(Collider2D lightCollider in lights)
+        {
+            if(LightUtility.IsPointHitByLight(lightCollider, objCollider, wallFloorLayer))
+            {
+                
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Check if we can see the player trough the mirror
     protected void CheckMirrorReflection()
     {
@@ -90,7 +172,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
             // Check if the mirror is in the field of view of the NPC
             if (!IsObjectInFieldOfView(mirrorCollider)) continue;
-
+            
             // Check if the player reflection is in the mirror
             if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
             {
@@ -104,42 +186,41 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             }
         }
     }
-
     // Start the investigation of the sound
-    public virtual void InvestigateSound(GameObject objectsound, bool replaceObject)
+    public virtual void InvestigateSound(GameObject objectsound, bool replaceObject, float targetFloor)
+    {
+        investigationQueue.Enqueue(InvestigateFallingObject(objectsound, replaceObject, targetFloor));
+    }
+
+    public void EnqueueInvestigation(IEnumerator investigation)
+    {
+        investigationQueue.Enqueue(investigation);
+    }
+
+    protected virtual IEnumerator RunInvestigation(IEnumerator investigation)
     {
         isInvestigating = true;
-        StopAllCoroutines();
-        StartCoroutine(InvestigateAndReturn(objectsound, replaceObject));
-        //StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
-        //StartCoroutine(ReturnToInitialPosition());
+        yield return StartCoroutine(investigation);
+        isInvestigating = false;
+        currentInvestigation = null;
     }
 
-    protected IEnumerator InvestigateAndReturn(GameObject objectsound, bool replaceObject)
+    // NPC behaviour for the falling object investigation
+    protected IEnumerator InvestigateFallingObject(GameObject objectsound, bool replaceObject, float targetFloor)
     {
-        yield return StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
-        yield return StartCoroutine(ReturnToInitialPosition());
-    }
-    // NPC behaviour for the investigation
-    protected IEnumerator InvestigateFallingObject(GameObject objectsound, bool replaceObject)
-    {
+
         // Take a surprise pause before going on investigation
         audioSource.Play();
         yield return new WaitForSeconds(surpriseWaitTime);
 
+        yield return (ReachTarget(objectsound.transform.position, targetFloor));
 
-
-        // Go towards the sound
-        Vector2 destination = new Vector2(objectsound.transform.position.x, transform.position.y);
-        // Sprite face the right direction
-        Vector2 direction = (destination - (Vector2)transform.position).normalized;
-        npcSpriteRenderer.flipX = direction.x < 0;
-
-        while (Mathf.Abs(transform.position.x - objectsound.transform.position.x) > 0.1f)
+        if (!canFindPath)
         {
-            transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
-            yield return null;
+            yield break;
         }
+
+        //yield return StartCoroutine(ReachTarget(objectsound.transform.position, targetFloor));
 
         // One NPC must replace the object to it's initial position
         FallingObject fallingObject = objectsound.GetComponent<FallingObject>();
@@ -150,29 +231,100 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             fallingObject.FinishReplacement();
         }
         // Wait a bit of time before going back to normal
-        yield return new WaitForSeconds(investigationWaitTime);
-        isInvestigating = false;
+        yield return new WaitForSeconds(investigationWaitTime);     
+    }
 
+    // Pathfinding of the NPC to reach a target
+    public IEnumerator ReachTarget(Vector2 target, float targetFloor)
+    {
+        canFindPath = true;
+        yield return ReachFloor(targetFloor);
+        //yield return StartCoroutine(ReachFloor(targetFloor));
+
+        if (!canFindPath)
+        {
+            yield break;
+        }
+
+        // The NPC is now on the same level has the object
+
+        Vector2 destination = new Vector2(target.x, transform.position.y);
+        // Flip sprite based on direction
+        UpdateSpriteDirection(destination);
+        // The NPC must walk to the target
+        yield return HorizontalMovementToTarget(destination);
+    }
+
+    protected IEnumerator ReachFloor(float targetFloor)
+    {
+        // Check if the npc need to use the stairs
+        if (floorLevel != targetFloor)
+        {
+            // Find a path using stairs to reach the target floor
+            List<StairController> path = FloorNavigation.Instance.FindPathToFloor(this, targetFloor);
+
+            if(path == null)
+            {
+                canFindPath = false;
+                yield break;
+            }
+
+            foreach (StairController stair in path)
+            {
+                // NPC must walk to the stair
+                Vector2 stairPosition = new Vector2(stair.StartPoint.position.x, transform.position.y);
+                // Flip sprite based on direction
+                UpdateSpriteDirection(stairPosition);
+
+                // Move to stair
+                yield return HorizontalMovementToTarget(stairPosition);
+
+                // When the npc reached the stairs
+                // Determine if we need to go up or down
+                StairDirection stairDirection = (targetFloor > floorLevel) ? StairDirection.Upward : StairDirection.Downward;
+                stair.ClimbStair(this.gameObject, stairDirection);
+
+                // Wait for stair climbing to finish
+                yield return new WaitForSeconds(1f);
+
+                //Update our current floor
+                if (stairDirection == StairDirection.Upward)
+                {
+                    floorLevel = stair.UpperFloor.FloorLevel;
+                }
+                else if (stairDirection == StairDirection.Downward)
+                {
+                    floorLevel = stair.BottomFloor.FloorLevel;
+                }
+            }
+        }
     }
 
     // Return the NPC to it's initial position and facing direction
-    protected IEnumerator ReturnToInitialPosition()
+    public  IEnumerator ReturnToInitialPosition()
     {
-        // Calculate destination
-        Vector2 destination = new Vector2(initialPosition.x, transform.position.y);
-
-        // Flip sprite based on direction
-        Vector2 direction = (destination - (Vector2)transform.position).normalized;
-        npcSpriteRenderer.flipX = direction.x < 0;
-        facingRight = !npcSpriteRenderer.flipX;
-
-        // Move to initial position
-        while (Mathf.Abs(transform.position.x - initialPosition.x) > 0.1f)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
-            yield return null;
-        }
+        yield return StartCoroutine(ReachTarget(initialPosition, initialFloorLevel));
         // Restore initial facing direction
         npcSpriteRenderer.flipX = !initialFacingRight;
+    }
+
+    public void ChangeSpeed()
+    {
+        if (movementSpeed != normalSpeed)
+        {
+            movementSpeed = normalSpeed;
+        }
+        else
+        {
+            movementSpeed = blindSpeed;
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, detectionRadiusLight);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class SoundDetection : MonoBehaviour
@@ -7,6 +9,7 @@ public abstract class SoundDetection : MonoBehaviour
     [SerializeField] protected float soundRadius;       // Radius in which the sound is projected
     [SerializeField] protected float floorThreshold;    // Distance between two floor
     [SerializeField] protected LayerMask layerToDetect;
+    [SerializeField] protected float floorLevel;
     protected bool firstNPCNotified = false;    // Is there an NPC that was already notified of the sound
 
     // Notify every enemies in the zone of the sound
@@ -15,28 +18,46 @@ public abstract class SoundDetection : MonoBehaviour
         // Find all NPC within range
         Collider2D[] colliderNearbyNPC = Physics2D.OverlapCircleAll(transform.position, soundRadius, layerToDetect);
 
-        foreach(Collider2D colliderNPC in colliderNearbyNPC)
+        List<HumanNPCBehaviour> availableNPCs = new List<HumanNPCBehaviour>();
+        List<HumanNPCBehaviour> blockedNPCs = new List<HumanNPCBehaviour>();
+
+        foreach (Collider2D colliderNPC in colliderNearbyNPC)
         {
-            //EnemyBehaviour enemy = colliderNPC.GetComponent<EnemyBehaviour>();
             HumanNPCBehaviour npc = colliderNPC.GetComponent<HumanNPCBehaviour>();
             if (npc != null)
             {
-                // Make sure the npc is on the same floor as the object
-                float npcY = npc.transform.position.y;
-                if(Mathf.Abs(npcY - floorY) < floorThreshold)
+                PatrollingNPCBehaviour npcPatrol = npc.GetComponent<PatrollingNPCBehaviour>();
+                // Check if the NPC is blocked
+                if(npcPatrol != null && (npcPatrol.IsBlocked || npcPatrol.IsInRoom))
                 {
-                    // The first NPC is the one who will replace the object to it's original position
-                    if (!firstNPCNotified)
-                    {
-                        firstNPCNotified = true;
-                        npc.InvestigateSound(objectSound, true);
-                    }
-                    else
-                    {
-                        npc.InvestigateSound(objectSound, false);
-                    }
+                    blockedNPCs.Add(npcPatrol);
+                }
+                else
+                {
+                    // The NPC is availabe to go an investigate
+                    availableNPCs.Add(npc);
                 }
             }
+        }
+
+        if(availableNPCs.Count > 0)
+        {
+            NotifyNPCs(availableNPCs, floorLevel, objectSound);
+        }
+        else if(blockedNPCs.Count > 0)
+        {
+            // Every NPCs are blocked
+            NotifyNPCs(blockedNPCs, floorLevel, objectSound);
+        }
+    }
+
+    private void NotifyNPCs(List<HumanNPCBehaviour> npcsList, float floorLevel, GameObject objectSound)
+    {
+        foreach(HumanNPCBehaviour npc in npcsList)
+        {
+            bool isFirst = !firstNPCNotified;
+            npc.InvestigateSound(objectSound,isFirst,floorLevel);
+            firstNPCNotified = true;
         }
         firstNPCNotified = false;
     }
