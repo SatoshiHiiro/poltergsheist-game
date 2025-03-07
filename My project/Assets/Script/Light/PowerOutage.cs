@@ -93,7 +93,6 @@ public class PowerOutage : MonoBehaviour, IPossessable
             if (!isRepairing)
             {
                 isRepairing = true;
-                print("enqueue");
                 npc.EnqueueInvestigation(RepairLights(npc, lightsClosed));
             }
             affectedNPCs.Add(npc);
@@ -104,7 +103,6 @@ public class PowerOutage : MonoBehaviour, IPossessable
     // Check if the NPC is currently in an area affected by the closed lights
     private bool IsNPCAffected(HumanNPCBehaviour npc, GameObject[] lights)
     {
-        print("NPC");
         Collider2D npcCollider = npc.GetComponent<Collider2D>();
         foreach(GameObject gameObjectLight in lights)
         {
@@ -112,7 +110,6 @@ public class PowerOutage : MonoBehaviour, IPossessable
             Collider2D lightCollider = gameObjectLight.GetComponent<Collider2D>();
             if (LightUtility.IsPointHitByLight(lightCollider, npcCollider, wallFloorLayer))
             {
-                print("HIT BY LIGHT!");
                 return true;
             }
         }
@@ -121,10 +118,14 @@ public class PowerOutage : MonoBehaviour, IPossessable
 
     private IEnumerator RepairLights(HumanNPCBehaviour npc, GameObject[] lightsClosed)
     {
-        print("repairlights");
-        print("POSITION À ATTEINDRE: " + this.transform.position);
         // The NPC walk to the light switch
         yield return StartCoroutine(npc.ReachTarget(this.transform.position, floorLevel));
+
+        if (!npc.CanFindPath)
+        {
+            yield break;
+        }
+
         // Time for the NPC to repair the problem        
         yield return new WaitForSeconds(repairingTime);
         isRepairing = false;

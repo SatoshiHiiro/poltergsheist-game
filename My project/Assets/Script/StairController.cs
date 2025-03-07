@@ -92,9 +92,7 @@ public class StairController : MonoBehaviour
         adjustedPosition.y += characterHeight / 2f;
 
         // Teleport the player to the adjusted position
-        character.transform.position = adjustedPosition;
-        //character.transform.position = destination.position;    // Teleport the player
-               
+        character.transform.position = adjustedPosition;               
 
         // Finish climbing stair animation
 

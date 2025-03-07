@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HumanNPCBehaviour : BasicNPCBehaviour
 {
-    [SerializeField] protected float movementSpeed = 6f;
+    
     // Variable manage suspicion of the NPC
     [SerializeField] protected float minSuspiciousRotation; // Minimum rotation change in degrees to trigger suspicion
     [SerializeField] protected float minSuspiciousPosition; // Minimum position change to trigger suspicion
@@ -28,14 +28,20 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     protected Vector2 initialPosition;  // Initial position of the NPC
     private bool initialFacingRight; // He's he facing right or left
 
+    protected Queue<IEnumerator> investigationQueue = new Queue<IEnumerator>();
+    private bool isAtInitialPosition = false;
+    private Coroutine currentInvestigation = null;
+
+    private bool canFindPath = true;
+
+    public bool CanFindPath => canFindPath;
+
     [Header("Lighting Variable")]
     [SerializeField] float detectionRadiusLight = 20f;
     [SerializeField] LayerMask lightLayer;  // Layer of the gameobject light
     [SerializeField] LayerMask wallFloorLayer;   // Layer of the gameobject wall
 
-    protected Queue<IEnumerator> investigationQueue = new Queue<IEnumerator>();
-    private bool isAtInitialPosition = false;
-    private Coroutine currentInvestigation = null;
+
 
     protected override void Start()
     {
@@ -196,22 +202,20 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         currentInvestigation = null;
     }
 
-    protected virtual IEnumerator WaitInvestigationFinished()
-    {
-        while (isInvestigating)
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
     // NPC behaviour for the falling object investigation
     protected IEnumerator InvestigateFallingObject(GameObject objectsound, bool replaceObject, float targetFloor)
     {
+
         // Take a surprise pause before going on investigation
         audioSource.Play();
         yield return new WaitForSeconds(surpriseWaitTime);
 
         yield return (ReachTarget(objectsound.transform.position, targetFloor));
+
+        if (!canFindPath)
+        {
+            yield break;
+        }
 
         //yield return StartCoroutine(ReachTarget(objectsound.transform.position, targetFloor));
 
@@ -230,54 +234,47 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     // Pathfinding of the NPC to reach a target
     public IEnumerator ReachTarget(Vector2 target, float targetFloor)
     {
+        canFindPath = true;
         yield return ReachFloor(targetFloor);
         //yield return StartCoroutine(ReachFloor(targetFloor));
 
+        if (!canFindPath)
+        {
+            yield break;
+        }
+
         // The NPC is now on the same level has the object
 
-        // Go towards the target
         Vector2 destination = new Vector2(target.x, transform.position.y);
-        // Sprite face the right direction
-        Vector2 direction = (destination - (Vector2)transform.position).normalized;
-        npcSpriteRenderer.flipX = direction.x < 0;
-        facingRight = !npcSpriteRenderer.flipX;
-
-        while (Mathf.Abs(transform.position.x - target.x) > 0.1f)
-        {
-            // Arrived at destination
-            transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
-            yield return null;
-        }
+        // Flip sprite based on direction
+        UpdateSpriteDirection(destination);
+        // The NPC must walk to the target
+        yield return HorizontalMovementToTarget(destination);
     }
 
     protected IEnumerator ReachFloor(float targetFloor)
     {
-
         // Check if the npc need to use the stairs
         if (floorLevel != targetFloor)
         {
             // Find a path using stairs to reach the target floor
             List<StairController> path = FloorNavigation.Instance.FindPathToFloor(this, targetFloor);
 
+            if(path == null)
+            {
+                canFindPath = false;
+                yield break;
+            }
+
             foreach (StairController stair in path)
             {
                 // NPC must walk to the stair
                 Vector2 stairPosition = new Vector2(stair.StartPoint.position.x, transform.position.y);
-
                 // Flip sprite based on direction
-                Vector2 npcDirection = (stairPosition - (Vector2)transform.position).normalized;
-                // Sprite face the right direction
-                npcSpriteRenderer.flipX = npcDirection.x < 0;
-                facingRight = !npcSpriteRenderer.flipX;
+                UpdateSpriteDirection(stairPosition);
 
                 // Move to stair
-                while (Mathf.Abs(transform.position.x - stairPosition.x) > 0.1f)
-                {
-                    //print("IM IN REACH!!!");
-                    transform.position = Vector2.MoveTowards(transform.position, stairPosition, movementSpeed * Time.deltaTime);
-                    yield return null;
-                }
-
+                yield return HorizontalMovementToTarget(stairPosition);
 
                 // When the npc reached the stairs
                 // Determine if we need to go up or down

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEditor.Experimental.GraphView;
+using static UnityEngine.GraphicsBuffer;
 
 public abstract class BasicNPCBehaviour : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
     protected bool isObjectMoving;    // Is there an object moving in front of him?
     protected bool isCurrentlyObserving;    // Is the NPC already watching an object moving?
     protected float fieldOfViewAngle;
+
+    [Header("NPC global variables")]
+    [SerializeField] protected float movementSpeed = 6f;
 
     protected SpriteRenderer npcSpriteRenderer;
 
@@ -85,13 +89,34 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         // Will be override in HumanNPCBehaviour
     }
 
-    //protected abstract bool IsObjectInFieldOfView(Collider2D obj);
     protected virtual bool IsObjectInFieldOfView(Collider2D obj)
     {
         // Check if the object is in the line of sight of the NPC
         Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
         float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
         return angle <= fieldOfViewAngle / 2;
+    }
+
+    // Change the sprite depending on the direction the npc is walking
+    protected void UpdateSpriteDirection(Vector2 destination)
+    {        
+        // Flip sprite based on direction
+        Vector2 npcDirection = (destination - (Vector2)transform.position).normalized;
+        // Sprite face the right direction
+        npcSpriteRenderer.flipX = npcDirection.x < 0;
+        facingRight = !npcSpriteRenderer.flipX;
+    }
+
+    // The NPC walks horizontally to a given destination
+    protected IEnumerator HorizontalMovementToTarget(Vector2 destination)
+    {
+        // The NPC must walk until it reaches its destination
+        while (Mathf.Abs(transform.position.x - destination.x) > 0.1f)
+        {
+            // NPC walk towards the destination
+            transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     // Debug method only
