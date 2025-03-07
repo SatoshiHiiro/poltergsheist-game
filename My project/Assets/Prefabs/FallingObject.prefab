@@ -182,7 +182,7 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 64
-  initialPosition: {x: 0, y: 0}
+  floorLevel: 0
 --- !u!114 &9143835790858712851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpSpeed: 6
+  initialEnergyLoss: 0
+  continuousEnergyLoss: 0
+  possessionDistance: 3
 --- !u!82 &8509185184217794267
 AudioSource:
   m_ObjectHideFlags: 0
