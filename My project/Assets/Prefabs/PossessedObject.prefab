@@ -180,7 +180,6 @@ MonoBehaviour:
   initialEnergyLoss: 1
   continuousEnergyLoss: 0.005
   possessionDistance: 3
-  continuousEnergyLoss: 0.01
 --- !u!114 &1009231874053363211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f5832247b185f44bb74d33a06eb716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpParam: jump
+  landParam: land
   speed: 0.5
   maxSpeed: 1
   stopSpeed: 2

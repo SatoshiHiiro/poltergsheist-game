@@ -42,7 +42,7 @@ public class PossessionManager : InteractibleManager
         energy.StopResumeRegen(true);
         float temp = continuousEnergyLoss;
         continuousEnergyLoss = 0;
-        player.lastPossession = gameObject.name;
+        player.lastPossession = this;
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<Rigidbody2D>().simulated = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
@@ -81,8 +81,8 @@ public class PossessionManager : InteractibleManager
             player.transform.position = pos;
         }
 
-        //Pour enlever la possession sur l'objet si le Player poss�de un autre objet avant de d�poss�der
-        if ((player.lastPossession != gameObject.name && isPossessed) || (energy.CurrentEnergy() == 0 && isAnimationFinished))
+        // There is no more energy to possessed the object
+        if ((energy.CurrentEnergy() == 0 && isAnimationFinished))
             StopPossession();
     }
 
@@ -91,6 +91,10 @@ public class PossessionManager : InteractibleManager
     {
         if(Vector2.Distance(this.transform.position, player.transform.position) <= possessionDistance)
         {
+            print("IN DISTANCE");
+            print(isPossessed);
+            print(player.isPossessing);
+            print(isAnimationFinished);
             if (isAnimationFinished)
             {
 
@@ -99,7 +103,7 @@ public class PossessionManager : InteractibleManager
                 //Si le joueur veut poss�der l'objet en poss�dant d�j� un autre
                 if (player.isPossessing && !isPossessed)
                 {
-
+                    print("PLAYER WANTS TO POSSESSED ANOTHER BOJECT");
                     if (player.lastPossession != null)
                     {
                         player.lastPossession.StopPossession();
@@ -116,13 +120,16 @@ public class PossessionManager : InteractibleManager
                     isPossessed = true;
                     player.isPossessing = true;
                     StartCoroutine(AnimationTime());
+                    print("POSSESSION");
+                }
+                //Si le joueur veut sortir de l'objet
+                else if (player.isPossessing && isPossessed)
+                {
+                    print("HERE!");
+                    StopPossession();
                 }
             }
-            //Si le joueur veut sortir de l'objet
-            else if (player.isPossessing && isPossessed)
-            {
-                StopPossession();
-            }
+            
         }
         
     }
@@ -130,6 +137,7 @@ public class PossessionManager : InteractibleManager
     //Pour arr�ter la possession
     public void StopPossession()
     {
+        print("STOP POSSESSION!");
         isPossessed = false;
         possession.OnDepossessed();
         //possession.enabled = false;
