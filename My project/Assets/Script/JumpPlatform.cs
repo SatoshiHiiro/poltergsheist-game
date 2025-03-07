@@ -9,6 +9,9 @@ public class JumpPlatform : MonoBehaviour
     Collider2D playerCollider;
     private LayerMask playerLayer;
     //[SerializeField]float threshold = 0.4f; // Prevent flickering when we enable the collision
+
+    [SerializeField] private float bufferDistance = 0.01f;
+    private bool isPlayerAbove = false;
     private void Start()
     {
         objectCollider = GetComponent<Collider2D>();
@@ -31,13 +34,20 @@ public class JumpPlatform : MonoBehaviour
         //float playerFeetPosition = player.transform.position.y - (playerCollider.bounds.size.y / 2);
         float playerFeetPosition = player.transform.position.y - player.GetComponent<PlayerController>().halfSizeOfObject;
         // Check if the player is above the platform
-        if (playerFeetPosition > platformSurface)
+        if (playerFeetPosition >= platformSurface + bufferDistance)
         {
+            isPlayerAbove = true;
             EnableCollision();
         }
-        else if(playerFeetPosition < platformSurface)
+        // Check if the player is under the top of the platform
+        else if(playerFeetPosition < platformSurface - bufferDistance && !isPlayerAbove)
         {
             DisableCollision();
+        }
+        // Check if the player is still above the object
+        if(playerFeetPosition < platformSurface)
+        {
+            isPlayerAbove = false;
         }
     }
     // Re-enable collision with player layer
