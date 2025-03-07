@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-/// But: Posséder des objets
+/// But: Possï¿½der des objets
 /// Requiert: PossessionController
 /// Requiert Externe: PlayerController(1)
-/// Input: Click Gauche = possession/dépossession
-/// État: Adéquat(temp)
-public class PossessionManager : MonoBehaviour
+/// Input: Click Gauche = possession/dï¿½possession
+/// ï¿½tat: Adï¿½quat(temp)
+public class PossessionManager : InteractibleManager
 {
     //Variables
     [Header("Variables")]
@@ -16,16 +16,19 @@ public class PossessionManager : MonoBehaviour
     [SerializeField] private float possessionDistance;  // Distance between the player and the object so he can possessed it
 
     //Conditions
-    bool isPossessed;                               //Pour savoir si l'objet possessible est possédé
+    bool isPossessed;                               //Pour savoir si l'objet possessible est possï¿½dï¿½
     bool isAnimationFinished;                       //Pour savoir si l'animaation de possession est fini
 
     //Shortcuts
+    EnergySystem energy;
     PlayerController player;
     IPossessable possession;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         player = FindFirstObjectByType<PlayerController>();
+        energy = FindFirstObjectByType<EnergySystem>();
         possession = gameObject.GetComponent<IPossessable>();
         //possession.enabled = false;
         isPossessed = false;
@@ -35,8 +38,11 @@ public class PossessionManager : MonoBehaviour
     //Pour l'animation de possession
     IEnumerator AnimationTime()
     {
-        FindFirstObjectByType<EnergySystem>().ModifyEnergy(-initialEnergyLoss);
-        player.lastPossession = this;
+        energy.ModifyEnergy(-initialEnergyLoss);
+        energy.StopResumeRegen(true);
+        float temp = continuousEnergyLoss;
+        continuousEnergyLoss = 0;
+        player.lastPossession = gameObject.name;
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<Rigidbody2D>().simulated = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
@@ -47,6 +53,8 @@ public class PossessionManager : MonoBehaviour
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSecondsRealtime(.5f);
         isAnimationFinished = true;
+        continuousEnergyLoss = temp;
+        energy.StopResumeRegen(false);
         possession.OnPossessed();
         //possession.enabled = true;
     }
@@ -67,18 +75,15 @@ public class PossessionManager : MonoBehaviour
             {
                 pos.y = transform.position.y;
                 pos.x = transform.position.x;
-                FindFirstObjectByType<EnergySystem>().ModifyEnergy(-continuousEnergyLoss);
             }
-            
+
+            energy.ModifyEnergy(-continuousEnergyLoss);
             player.transform.position = pos;
         }
 
-        ////Pour enlever la possession sur l'objet si le Player possède un autre objet avant de déposséder
-        //if (player.lastPossession != gameObject.name && isPossessed)
-        //{
-        //    StopPossession();
-        //}
-            
+        //Pour enlever la possession sur l'objet si le Player possï¿½de un autre objet avant de dï¿½possï¿½der
+        if ((player.lastPossession != gameObject.name && isPossessed) || (energy.CurrentEnergy() == 0 && isAnimationFinished))
+            StopPossession();
     }
 
     //Input de possession
@@ -91,7 +96,7 @@ public class PossessionManager : MonoBehaviour
 
                 player.GetComponent<Rigidbody2D>().linearVelocityX = 0;
 
-                //Si le joueur veut posséder l'objet en possédant déjà un autre
+                //Si le joueur veut possï¿½der l'objet en possï¿½dant dï¿½jï¿½ un autre
                 if (player.isPossessing && !isPossessed)
                 {
 
@@ -105,29 +110,24 @@ public class PossessionManager : MonoBehaviour
                     StartCoroutine(AnimationTime());
 
                 }
-                //Si le joueur veut posséder l'objet
+                //Si le joueur veut possï¿½der l'objet
                 else if (!player.isPossessing && !isPossessed)
                 {
                     isPossessed = true;
                     player.isPossessing = true;
                     StartCoroutine(AnimationTime());
                 }
-                //Si le joueur veut sortir de l'objet
-                else if (player.isPossessing && isPossessed)
-                {
-                    StopPossession();
-                    //player.isPossessing = false;
-                    //player.GetComponent<Collider2D>().enabled = true;
-                    //player.GetComponent<Rigidbody2D>().simulated = true;
-                    //player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-                    //player.canMove = true;
-                }
+            }
+            //Si le joueur veut sortir de l'objet
+            else if (player.isPossessing && isPossessed)
+            {
+                StopPossession();
             }
         }
         
     }
 
-    //Pour arrêter la possession
+    //Pour arrï¿½ter la possession
     public void StopPossession()
     {
         isPossessed = false;
@@ -135,7 +135,6 @@ public class PossessionManager : MonoBehaviour
         //possession.enabled = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
         gameObject.GetComponent<Rigidbody2D>().linearVelocityX = 0;
-
         player.isPossessing = false;
         player.GetComponent<Collider2D>().enabled = true;
         player.GetComponent<Rigidbody2D>().simulated = true;
