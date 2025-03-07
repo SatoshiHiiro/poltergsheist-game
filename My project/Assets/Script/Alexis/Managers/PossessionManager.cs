@@ -141,7 +141,7 @@ public class PossessionManager : InteractibleManager
         isPossessed = false;
         possession.OnDepossessed();
         //possession.enabled = false;
-        gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+        gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         gameObject.GetComponent<Rigidbody2D>().linearVelocityX = 0;
         player.isPossessing = false;
         player.GetComponent<Collider2D>().enabled = true;
