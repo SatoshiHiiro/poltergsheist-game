@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SuspicionManager : MonoBehaviour
 {
@@ -53,6 +54,12 @@ public class SuspicionManager : MonoBehaviour
     private void Update()
     {
         //UpdateSuspicion();
+        if (currentSuspicion >= maxSuspicion)
+        {
+            PlayerPrefs.SetInt("LastScene", SceneManager.GetActiveScene().buildIndex + 1);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     // Record how many NPCs witness a moving object
