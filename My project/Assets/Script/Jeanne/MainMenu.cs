@@ -1,14 +1,7 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : BaseSceneManager
 {
-
-    public void Jouer()
-    {
-        // SceneManager.LoadScene("");
-    }
-
     public void Controls()
     {
         SceneManager.LoadScene("Controls");
@@ -17,15 +10,5 @@ public class MainMenu : MonoBehaviour
     public void Histoire()
     {
         SceneManager.LoadScene("Histoire");
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
-    public void Retour()
-    {
-        SceneManager.LoadScene("UI_Accueil");
     }
 }

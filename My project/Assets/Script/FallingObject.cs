@@ -12,7 +12,7 @@ public class FallingObject : SoundDetection, IPossessable
 {
     // Behaviour of the falling object when he's possessed
 
-    public Vector2 initialPosition;    // Initial Position before Falling
+    protected Vector2 initialPosition;    // Initial Position before Falling
     private Vector2 floorY;            // Position of the floor
     private Rigidbody2D rb;
     private Collider2D objectCollider;

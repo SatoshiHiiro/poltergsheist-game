@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Slider))]
 public class EnergySystem : MonoBehaviour
 {
+    [SerializeField] float energyRegen;
+    private float stockRegen;
     public float energyValue;
-    float maxEnergy;
-    float minEnergy;
+    public float maxEnergy;
+    public float minEnergy;
 
     Slider slider;
 
@@ -16,6 +19,22 @@ public class EnergySystem : MonoBehaviour
         maxEnergy = slider.maxValue;
         minEnergy = slider.minValue;
         energyValue = slider.value;
+    }
+
+    void FixedUpdate()
+    {
+        ModifyEnergy(energyRegen);
+    }
+
+    public void StopResumeRegen(bool isRegenStopping)
+    {
+        if (isRegenStopping)
+        {
+            stockRegen = energyRegen;
+            energyRegen = 0;
+        }
+        else
+            energyRegen = stockRegen;
     }
 
     public float CurrentEnergy()

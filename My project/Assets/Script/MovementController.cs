@@ -1,40 +1,55 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 /// But: Control the player or an object movement
 /// Requiert: Rigidbody2D
 /// Input: A = gauche, D = droit, SPACE = saut
-/// État: Optimal(temp)
+/// ï¿½tat: Optimal(temp)
+[RequireComponent(typeof(Rigidbody2D))]
 public abstract class MovementController : MonoBehaviour
 {
+    //Delegates
+    public delegate void Callback(string parameter);
+    [HideInInspector] public string jumpParam = "jump";
+    [HideInInspector] public string landParam = "land";
+
+    //Events
+    public event Callback onJump;
+    public event Callback onLand;
+
     //Mouvement
     [Header("Mouvement variables")]
     [SerializeField] public float speed;                                //Vitesse du mouvement
-    [SerializeField] public float maxSpeed;                             //Vitesse maximale pouvant être atteinte
+    [SerializeField] public float maxSpeed;                             //Vitesse maximale pouvant ï¿½tre atteinte
     [SerializeField] public float stopSpeed;                            //Vitesse de ralentissage
     [SerializeField] public float jumpSpeed;                            //Vitesse de saut
-    [SerializeField][HideInInspector] public int horizontalDirection;  //Direction du mouvement
+    [SerializeField][HideInInspector] public int horizontalDirection;   //Direction du mouvement
     private bool playerInputEnable;
     protected Vector2 moveInput;
     Vector2 lastInput;
     
     //Contacts
     [Header("GameObjets in contact")]
-    public List<GameObject> curObject = new List<GameObject>();     //Pour stocker tous les GameObjets en contact avec l'objet
+    public List<Collision2D> curObject = new List<Collision2D>();       //Pour stocker tous les GameObjets en contact avec l'objet
+    [HideInInspector] public float halfSizeOfObject;
+    float slideDownWall;
 
     //Conditions
     [Header("Mouvement conditions")]
-    public bool canMove;                                                //Pour permettre l'arrêt total des lignes de physiques
-    public bool canWalk;                                                //Pour permettre l'arrêt du mouvement physique en X
-    public bool canJump;                                                //Pour permettre l'arrêt du mouvement physique en Y
-    public bool isInContact;                                        //Utiliser pour savoir si l'objet est en contact avec quelque chose lui permettant de sauter
-    [HideInInspector] public bool isJumping;                            //Utilisé pour que le Player ne puisse pas sauter s'iel saute
+    public bool canMove;                                                //Pour permettre l'arrï¿½t total des lignes de physiques
+    public bool canWalk;                                                //Pour permettre l'arrï¿½t du mouvement physique en X
+    public bool canJump;                                                //Pour permettre l'arrï¿½t du mouvement physique en Y
+    public bool isInContact;                                            //Utiliser pour savoir si l'objet est en contact avec quelque chose lui permettant de sauter
+    [HideInInspector] public bool isJumping;                            //Utilisï¿½ pour que le Player ne puisse pas sauter s'iel saute
     private bool canClimbAgain;
 
     //Shortcuts
-    Rigidbody2D rigid2D;
+    protected Rigidbody2D rigid2D;
+    Collider2D col2D;
 
     //Input action section, has to be public or can be private with a SerializeField statement
     [Header("Input Section")]
@@ -47,6 +62,8 @@ public abstract class MovementController : MonoBehaviour
         moveInput = Vector2.zero;
         lastInput = Vector2.zero;
         canClimbAgain = true;
+        halfSizeOfObject = (transform.lossyScale.y * gameObject.GetComponent<Collider2D>().bounds.size.y) / 2;
+        slideDownWall = 0;
 
         move.Enable();
         jump.Enable();
@@ -55,8 +72,7 @@ public abstract class MovementController : MonoBehaviour
     protected virtual void Start()
     {
         rigid2D = gameObject.transform.GetComponent<Rigidbody2D>();
-        //canMove = true;
-        //isJumping = false;
+        col2D = gameObject.GetComponent<Collider2D>();
     }
 
     //Pour la physique
@@ -81,14 +97,11 @@ public abstract class MovementController : MonoBehaviour
 
             if (isJumping && isInContact)
             {
+                if (onJump != null) { onJump(jumpParam); };
                 rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
                 isJumping = false;
             }
-            //if (isJumping && (rigid2D.linearVelocityY == 0))
-            //{
-            //    rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
-            //    isJumping = false;
-            //}
+
             lastInput = moveInput;
         }
     }
@@ -98,15 +111,16 @@ public abstract class MovementController : MonoBehaviour
     {
         if (playerInputEnable)
         {
-            if (canMove && move.WasPressedThisFrame())
+            if (canMove && move.IsPressed())
             {
                 moveInput = move.ReadValue<Vector2>();
-                if(moveInput.y != 0)
-                {
+                moveInput.x = Mathf.Round(moveInput.x);
+                moveInput.y = Mathf.Round(moveInput.y);
+
+                if (moveInput.y != 0)
                     canClimbAgain = true;
-                }
             }
-            if (move.WasReleasedThisFrame() && !move.WasPressedThisFrame())
+            else
             {
                 moveInput = Vector2.zero;
                 canClimbAgain = true;
@@ -119,7 +133,7 @@ public abstract class MovementController : MonoBehaviour
         }
     }
 
-    //Pour enlever de la mémoire le input de saut jusqu'à ce que l'avatar touche le sol
+    //Pour enlever de la mï¿½moire le input de saut jusqu'ï¿½ ce que l'avatar touche le sol
     IEnumerator InputReset()
     {
         yield return new WaitForSecondsRealtime(.2f);
@@ -127,30 +141,51 @@ public abstract class MovementController : MonoBehaviour
     }
 
     //Stock les GameObjets en contact avec l'objet
-    void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        curObject.Add(collision.gameObject);
-        if (!collision.gameObject.CompareTag("Wall"))
-            isInContact = true;
-    }
-
-    //Enlève les GameObjets en contact avec l'objet
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        curObject.Remove(collision.gameObject);
-        bool temp = false;
-        if (curObject.Count > 0)
+        curObject.Add(collision);
+        for (int i = 0; i < collision.contactCount; i++)
         {
-            for (int i = 0; i < curObject.Count; i++)
+            if (collision.GetContact(i).normal.y >= .8f && !isInContact)
             {
-                if (!curObject[i].gameObject.CompareTag("Wall"))
-                {
-                    temp = true;
-                    break;
-                }
+                if (onLand != null) { onLand(landParam); };
+                break;
             }
         }
-        isInContact = temp;
+    }
+
+    //Enlï¿½ve les GameObjets en contact avec l'objet
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        curObject.Remove(collision);
+        isInContact = false;
+    }
+
+    //Checks if the GameObjects in contact are below the controller
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        for (int i = 0; i < curObject.Count; i++)
+        {
+            if (collision.gameObject == curObject[i].gameObject)
+            {
+                for (int ii = 0; ii < collision.contactCount; ii++)
+                {
+                    if (collision.GetContact(ii).normal.y >= .8f)
+                    {
+                        isInContact = true;
+                        slideDownWall = 0;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        //Makes the controller slide down the sides of rigidbodies
+        if (!isInContact && rigid2D.linearVelocityY <= 0)
+        {
+            rigid2D.linearVelocityY = slideDownWall;
+            slideDownWall -= .133f;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

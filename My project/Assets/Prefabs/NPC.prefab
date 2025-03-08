@@ -216,7 +216,7 @@ MonoBehaviour:
     m_Bits: 128
   ignoreLayerSightBlocked:
     serializedVersion: 2
-    m_Bits: 3136
+    m_Bits: 15424
   movementSpeed: 6
   minSuspiciousRotation: 20
   minSuspiciousPosition: 1
@@ -225,6 +225,14 @@ MonoBehaviour:
     m_Bits: 1024
   surpriseWaitTime: 2
   investigationWaitTime: 3
+  floorLevel: 0
+  detectionRadiusLight: 20
+  lightLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  wallFloorLayer:
+    serializedVersion: 2
+    m_Bits: 33280
 --- !u!82 &1171068450181168371
 AudioSource:
   m_ObjectHideFlags: 0

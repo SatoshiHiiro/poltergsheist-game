@@ -1,17 +1,43 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class InventorySystem : MonoBehaviour
 {
+    [SerializeField] KeyItemBehavior[] keyItems;
     [SerializeField] bool[] isConditionsMet;
 
+    EnergySystem energy;
+
+    public InputAction Ctrl;
+    public InputAction FullEnergy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        int length = FindObjectsByType<KeyItemBehavior>(FindObjectsSortMode.None).Length;
-        isConditionsMet = new bool[length];
-        for (int i = 0; i < length; i++)
+        energy = FindFirstObjectByType<EnergySystem>();
+        keyItems = FindObjectsByType<KeyItemBehavior>(FindObjectsSortMode.InstanceID);
+        isConditionsMet = new bool[keyItems.Length];
+        for (int i = 0; i < keyItems.Length; i++)
             isConditionsMet[i] = false;
+
+        Ctrl.AddBinding("<Keyboard>/ctrl");
+        FullEnergy.AddBinding("<Keyboard>/r");
+        Ctrl.Enable();
+        FullEnergy.Enable();
+    }
+
+    private void Update()
+    {
+        if (Ctrl.IsPressed())
+        {
+            Debug.Log("Ctrl pressed");
+            if (FullEnergy.WasPressedThisFrame())
+            {
+                Debug.Log("R is pressed");
+                energy.ModifyEnergy(energy.maxEnergy);
+            }
+        }
     }
 
     public void CreateUIItem(Sprite image)
@@ -22,13 +48,27 @@ public class InventorySystem : MonoBehaviour
         obj.transform.SetParent(gameObject.transform);
     }
 
-    public void StockItem(int index, bool condition)
+    public void StockItem(KeyItemBehavior keyItem, bool condition)
     {
-        isConditionsMet[index] = condition;
+        for (int i = 0; i < keyItems.Length; i++)
+        {
+            if (keyItems[i] == keyItem)
+                isConditionsMet[i] = condition;
+        }
     }
 
-    public bool ReadCondition(int index)
+    public bool[] ReadCondition(KeyItemBehavior keyItem)
     {
-        return isConditionsMet[index];
+        bool[] condition = {false, false};
+
+        for (int i = 0; i < keyItems.Length; i++)
+        {
+            if (keyItems[i] == keyItem)
+            {
+                condition[0] = isConditionsMet[i];
+                condition[1] = true;
+            }
+        }
+        return condition;
     }
 }

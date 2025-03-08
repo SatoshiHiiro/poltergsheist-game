@@ -257,9 +257,9 @@ RectTransform:
   - {fileID: 2859540983025930157}
   m_Father: {fileID: 2698321244545663658}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 249.5, y: 159.4}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 33}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7163889867076057120
@@ -301,7 +301,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 8334863395868095563}
   m_FillRect: {fileID: 2271375801930070576}
   m_HandleRect: {fileID: 3824479582679282946}
@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 3207586875527084524}
   - component: {fileID: 4352676579715490752}
   - component: {fileID: 2103933659562559127}
+  - component: {fileID: 4655788986197172491}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -492,6 +493,21 @@ MonoBehaviour:
   maxRotationFactor: 4
   minRotationChange: 5
   minRotationFactor: 1.5
+--- !u!114 &4655788986197172491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4762292826325676370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e5ffd94fbc74d409881d74fe7c92fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stairLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &5292356812531688662
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba96d620cef3c445959764d93f5cbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyItems: []
+  isConditionsMet: 
 --- !u!1 &6484978401013239350
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,7 +735,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1391534652661570427}
   m_HandleRect: {fileID: 0}
@@ -741,6 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dae25840cb56644ea6fc8ef0ef4f705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energyRegen: 0.005
   energyValue: 0
 --- !u!1 &6917443028697483175
 GameObject:
