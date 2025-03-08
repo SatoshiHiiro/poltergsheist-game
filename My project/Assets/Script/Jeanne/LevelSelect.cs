@@ -39,4 +39,9 @@ public class LevelSelect : BaseSceneManager
             boutons[i] = levelButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
         }
     }
+
+    public void Retour()
+    {
+        SceneManager.LoadScene("UI_Accueil");
+    }
 }
