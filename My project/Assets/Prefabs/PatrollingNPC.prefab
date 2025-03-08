@@ -184,7 +184,7 @@ MonoBehaviour:
     m_Bits: 128
   ignoreLayerSightBlocked:
     serializedVersion: 2
-    m_Bits: 3136
+    m_Bits: 15424
   movementSpeed: 6
   minSuspiciousRotation: 20
   minSuspiciousPosition: 1
@@ -193,6 +193,14 @@ MonoBehaviour:
     m_Bits: 1024
   surpriseWaitTime: 2
   investigationWaitTime: 3
+  floorLevel: 0
+  detectionRadiusLight: 20
+  lightLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  wallFloorLayer:
+    serializedVersion: 2
+    m_Bits: 33280
   patrolPoints:
   - {fileID: 3495827379219480003}
   - {fileID: 3659877726675351806}
@@ -359,7 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b203731719a0724aa679f2441257e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: {fileID: 6628288931053690675}
   patrolPointType: 0
   waitTime: 3
   spriteRenderer: {fileID: 0}
@@ -410,7 +417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b203731719a0724aa679f2441257e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: {fileID: 8345070831918054905}
   patrolPointType: 0
   waitTime: 2
   spriteRenderer: {fileID: 0}

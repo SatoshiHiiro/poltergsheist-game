@@ -148,12 +148,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8eade497d2a49245bb1d32daf0e1fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorLevel: 0
   startPoint: {fileID: 8718829028397157644}
   upperFloor: {fileID: 0}
   bottomFloor: {fileID: 0}
   speed: 5
   maximumHeight: 3
   maximumWidth: 3
+  possessedObjectLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  minimumBlockHeight: 1
+  minimumBlockWidth: 1
+  blockingThreshold: 0.5
 --- !u!1 &3657065848115847376
 GameObject:
   m_ObjectHideFlags: 0

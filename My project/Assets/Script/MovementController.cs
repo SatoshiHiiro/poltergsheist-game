@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /// But: Control the player or an object movement
 /// Requiert: Rigidbody2D
 /// Input: A = gauche, D = droit, SPACE = saut
-/// État: Optimal(temp)
+/// ï¿½tat: Optimal(temp)
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class MovementController : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public abstract class MovementController : MonoBehaviour
     //Mouvement
     [Header("Mouvement variables")]
     [SerializeField] public float speed;                                //Vitesse du mouvement
-    [SerializeField] public float maxSpeed;                             //Vitesse maximale pouvant être atteinte
+    [SerializeField] public float maxSpeed;                             //Vitesse maximale pouvant ï¿½tre atteinte
     [SerializeField] public float stopSpeed;                            //Vitesse de ralentissage
     [SerializeField] public float jumpSpeed;                            //Vitesse de saut
     [SerializeField][HideInInspector] public int horizontalDirection;   //Direction du mouvement
@@ -40,15 +40,15 @@ public abstract class MovementController : MonoBehaviour
 
     //Conditions
     [Header("Mouvement conditions")]
-    public bool canMove;                                                //Pour permettre l'arrêt total des lignes de physiques
-    public bool canWalk;                                                //Pour permettre l'arrêt du mouvement physique en X
-    public bool canJump;                                                //Pour permettre l'arrêt du mouvement physique en Y
+    public bool canMove;                                                //Pour permettre l'arrï¿½t total des lignes de physiques
+    public bool canWalk;                                                //Pour permettre l'arrï¿½t du mouvement physique en X
+    public bool canJump;                                                //Pour permettre l'arrï¿½t du mouvement physique en Y
     public bool isInContact;                                            //Utiliser pour savoir si l'objet est en contact avec quelque chose lui permettant de sauter
-    [HideInInspector] public bool isJumping;                            //Utilisé pour que le Player ne puisse pas sauter s'iel saute
+    [HideInInspector] public bool isJumping;                            //Utilisï¿½ pour que le Player ne puisse pas sauter s'iel saute
     private bool canClimbAgain;
 
     //Shortcuts
-    Rigidbody2D rigid2D;
+    protected Rigidbody2D rigid2D;
     Collider2D col2D;
 
     //Input action section, has to be public or can be private with a SerializeField statement
@@ -133,7 +133,7 @@ public abstract class MovementController : MonoBehaviour
         }
     }
 
-    //Pour enlever de la mémoire le input de saut jusqu'à ce que l'avatar touche le sol
+    //Pour enlever de la mï¿½moire le input de saut jusqu'ï¿½ ce que l'avatar touche le sol
     IEnumerator InputReset()
     {
         yield return new WaitForSecondsRealtime(.2f);
@@ -154,7 +154,7 @@ public abstract class MovementController : MonoBehaviour
         }
     }
 
-    //Enlève les GameObjets en contact avec l'objet
+    //Enlï¿½ve les GameObjets en contact avec l'objet
     void OnCollisionExit2D(Collision2D collision)
     {
         curObject.Remove(collision);

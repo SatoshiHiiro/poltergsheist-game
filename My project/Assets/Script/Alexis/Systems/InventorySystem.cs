@@ -21,6 +21,8 @@ public class InventorySystem : MonoBehaviour
         for (int i = 0; i < keyItems.Length; i++)
             isConditionsMet[i] = false;
 
+        Ctrl.AddBinding("<Keyboard>/ctrl");
+        FullEnergy.AddBinding("<Keyboard>/r");
         Ctrl.Enable();
         FullEnergy.Enable();
     }

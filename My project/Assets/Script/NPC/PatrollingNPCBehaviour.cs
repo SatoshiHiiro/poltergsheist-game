@@ -1,4 +1,6 @@
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public interface IPatrol
@@ -16,10 +18,17 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     protected bool isBlocked;   // Is the NPC blocked in a room
     protected bool isWaiting;   // We wait for the animation to finish
     protected bool isInRoom;    // Is the NPC in a room
-    protected bool isEnteringOrExiting; // Is the NPC entering or exiting a room?
     PatrolPointData currentPoint;   // Point where the NPC is located
     PatrolPointData nextPatrolPoint; // Next NPC patrol point
+    private bool rightFloor;    // Does the NPC on the right floor to do is patrol
+    private bool isWalkingBack;    // Does the NPC go up the stairs
 
+
+    // Public properties to access from other scripts
+    public bool IsBlocked => isBlocked;
+    public bool IsInRoom => isInRoom;
+
+    private Coroutine returnToFloor;
     protected override void Start()
     {
         base.Start();
@@ -28,43 +37,74 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         isBlocked = false;
         isWaiting = false;
         isInRoom = false;
+        rightFloor = true;
+        isWalkingBack = false;
         currentPoint = null;
         nextPatrolPoint = patrolPoints[indexPatrolPoints];
     }
     protected override void Update()
     {
-        base.Update();
+        DetectMovingObjects();
+        CheckMirrorReflection();
 
+        // Priority 1: If the NPC is blocked but the room is no longer blocked, get unstuck
         if(isBlocked && currentPoint != null && !IsRoomBlocked(currentPoint))
         {
             StartCoroutine(GetUnstuck());
             return;
         }
-        if(!isWaiting && !isBlocked)
+        // Priority 2: Handle investigation queue if we're not currently investigating or getting unstuck
+        if(investigationQueue.Count > 0 && !isInvestigating && !isWaiting)
         {
-            if (!isInvestigating)
+            if(returnToFloor != null)
             {
-                Patrol();
+                StopCoroutine(returnToFloor);
+                returnToFloor = null;
             }
+            isInvestigating = true;
+            StopCoroutine("HandleWaiting");
+            IEnumerator investigationCoroutine = investigationQueue.Dequeue();
+            StartCoroutine(RunInvestigation(investigationCoroutine));
         }
-        
+        // Priority 3: Return to starting floor if we need to
+        else if(investigationQueue.Count == 0 && !isInvestigating && !rightFloor && isWalkingBack)
+        {
+            isWalkingBack = false;
+            returnToFloor = StartCoroutine(ReturnRightFloor());
+        }
+        // Priority 4: Patrol if we're able to and should be
+        else if(investigationQueue.Count == 0 && !isInvestigating && rightFloor && !isWaiting && !isBlocked)
+        {
+            Patrol();
+        }
+
     }
-    // Start the investigation of the sound
-    public override void InvestigateSound(GameObject objectsound, bool replaceObject)
-    {       
-       StartCoroutine(WaitBeforeInvestigate(objectsound, replaceObject));      
-    }
-    // When the NPC is no longer blocked or in a room he will then go and investigate
-    protected IEnumerator WaitBeforeInvestigate(GameObject objectsound, bool replaceObject)
+
+    protected override IEnumerator RunInvestigation(IEnumerator investigation)
     {
-        while(isBlocked || isInRoom)
+        // Wait until we're not blocked, not in a room, and not getting unstuck
+        while (isBlocked || isInRoom || isWaiting)
         {
             yield return new WaitForSeconds(0.5f);
         }
-        isInvestigating = true;
-        isWaiting = false; // NOT SURE!!!
-        StopAllCoroutines();
-        StartCoroutine(InvestigateFallingObject(objectsound, replaceObject));
+        isWalkingBack = true;
+        rightFloor = false;
+        print(investigation.ToString());
+        yield return StartCoroutine(investigation);
+        isInvestigating = false;
+        
+    }
+
+    // Start the investigation of the sound
+    public override void InvestigateSound(GameObject objectsound, bool replaceObject, float targetFloor)
+    {
+        investigationQueue.Enqueue(InvestigateFallingObject(objectsound, replaceObject, targetFloor));      
+    }
+
+    public IEnumerator ReturnRightFloor()
+    {
+        yield return ReachFloor(initialFloorLevel);
+        rightFloor = true;
     }
 
     public void Patrol()
@@ -73,11 +113,9 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         
         // Get movement direction
         Vector2 destination = new Vector2(nextPatrolPoint.Point.position.x, transform.position.y);
-        Vector2 direction = (destination - (Vector2)transform.position).normalized;
 
         // Flip sprite based on direction
-        npcSpriteRenderer.flipX = direction.x < 0;
-        facingRight = !npcSpriteRenderer.flipX;
+        UpdateSpriteDirection(destination);
 
         // Move towards destination
         transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
@@ -149,27 +187,6 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             indexPatrolPoints = 0;
         }
         nextPatrolPoint = patrolPoints[indexPatrolPoints];
-        //for (int i = 0; i < patrolPointPossibilities; i++)
-        //{
-        //    indexPatrolPoints++;
-        //    if (indexPatrolPoints >= patrolPoints.Length)
-        //    {
-        //        indexPatrolPoints = 0;
-        //    }
-        //    nextPatrolPoint = patrolPoints[indexPatrolPoints];
-        //    //PatrolPointData nextPoint = patrolPoints[indexPatrolPoints];
-        //    //if (nextPoint.PatrolPointType != PatrolPointType.Room || !IsRoomBlocked(nextPoint))
-        //    //{
-        //    //    nextPatrolPoint = nextPoint;
-        //    //    findNextPoint = true;
-        //    //    break;
-        //    //}
-        //}
-        //if (!findNextPoint)
-        //{
-        //    nextPatrolPoint = null;    // All patrol points are blocked
-        //}
-
     }
 
     protected IEnumerator HandleWaiting(PatrolPointData currentPoint)
@@ -217,6 +234,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         }
         else
         {
+            //isWaiting = false;
             yield return new WaitForSeconds(currentPoint.WaitTime);
         }
         isWaiting = false;
@@ -226,6 +244,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     // NPC is not blocked anymore
     protected IEnumerator GetUnstuck()
     {
+        //isGettingUnstuck = true;
         // Animation of NPC coming out of the room
         isWaiting = true;
         isBlocked = false;
@@ -234,9 +253,10 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         animator.SetBool("EnterRoom", false);
         isWaiting = false;
         isInRoom = false;
-        
+
 
         // After getting unstuck, move to the next patrol point
+        //isGettingUnstuck = false;
         MoveToNextAvailablePatrolPoint();
     }
 }

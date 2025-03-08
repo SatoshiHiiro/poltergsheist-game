@@ -102,12 +102,12 @@ public class PlayerManager : SpriteManager
         if (param == player.jumpParam)
         {
             isFinishedJumping = false;
-            Debug.Log("Jumped");
+            //Debug.Log("Jumped");
         }
         if (param == player.landParam)
         {
             isFinishedJumping = true;
-            Debug.Log("Landed");
+            //Debug.Log("Landed");
         }
     }
 }
