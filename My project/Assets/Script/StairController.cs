@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using UnityEngine;
 
 public enum StairDirection
@@ -23,6 +24,13 @@ public class StairController : MonoBehaviour
     [SerializeField] private float maximumHeight;   // Maximum Height of the object so he can climb the stair
     [SerializeField] private float maximumWidth;    // Maximum Width of the object so he can climb the stair
 
+    [SerializeField] private LayerMask possessedObjectLayer;    // Layer of objects that can block the stair
+    [SerializeField] private float minimumBlockHeight;  // Minimum height of an object to block the door
+    [SerializeField] private float minimumBlockWidth;   // Minimum width of an object to block the door
+    [SerializeField] private float blockingThreshold;   // How much of the stair width needs to be blocked (0.5 = 50%)
+
+    Collider2D stairCollider;
+
     // Public properties to access from other scripts
     public Transform StartPoint { get { return startPoint; } }
     public StairController UpperFloor { get { return upperFloor; } }
@@ -37,8 +45,8 @@ public class StairController : MonoBehaviour
     private void Start()
     {
         isClimbing = false;
+        stairCollider = GetComponent<Collider2D>();
     }
-
     public void ClimbStair(GameObject character, StairDirection direction)
     {
         Renderer characterRenderer = character.GetComponentInChildren<Renderer>();//character.transform.GetChild(0).GetComponent<Renderer>();
@@ -102,5 +110,42 @@ public class StairController : MonoBehaviour
             character.GetComponent<PlayerController>().canMove = canCharacterMove;
             character.GetComponent<PlayerController>().canJump = canCharacterJump;
         }
+    }
+
+    // Check if there is a possessed object in front of the stair
+    public bool isStairBlocked() 
+    {  
+        // Get the sprite bounds
+        Bounds stairBounds = stairCollider.bounds;
+
+        // Get stair width and height
+        float stairWidth = stairBounds.size.x;
+        float stairHeight = stairBounds.size.y;
+
+        // Get object colliders in front of the stair
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(stairCollider.bounds.center,
+                                                        new Vector2(stairWidth, stairHeight),
+                                                        0f, possessedObjectLayer
+                                                        );
+        float blockedWidth = 0f;
+
+        foreach (Collider2D collider in colliders)
+        {
+            // Skip if the object is not tall enough
+            if (collider.bounds.size.y < minimumBlockHeight)
+                continue;
+
+            // Calculate how much width of the room is the object taking
+            float objectWidth = Mathf.Min(collider.bounds.max.x, stairBounds.max.x)
+                                - Mathf.Max(collider.bounds.min.x, stairBounds.min.x);
+            if (objectWidth > 0)
+            {
+                blockedWidth += objectWidth;
+            }
+        }
+
+        // Calculate what percentage of the entrance is blocked
+        float blockPercentage = blockedWidth / stairWidth;
+        return blockPercentage >= blockingThreshold;
     }
 }

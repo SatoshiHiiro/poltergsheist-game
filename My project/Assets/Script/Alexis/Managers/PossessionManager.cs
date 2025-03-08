@@ -91,10 +91,6 @@ public class PossessionManager : InteractibleManager
     {
         if(Vector2.Distance(this.transform.position, player.transform.position) <= possessionDistance)
         {
-            print("IN DISTANCE");
-            print(isPossessed);
-            print(player.isPossessing);
-            print(isAnimationFinished);
             if (isAnimationFinished)
             {
 
@@ -120,12 +116,10 @@ public class PossessionManager : InteractibleManager
                     isPossessed = true;
                     player.isPossessing = true;
                     StartCoroutine(AnimationTime());
-                    print("POSSESSION");
                 }
                 //Si le joueur veut sortir de l'objet
                 else if (player.isPossessing && isPossessed)
                 {
-                    print("HERE!");
                     StopPossession();
                 }
             }

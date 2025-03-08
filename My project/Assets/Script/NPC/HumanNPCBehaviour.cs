@@ -271,18 +271,83 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
             foreach (StairController stair in path)
             {
+                StairController currentStair = stair;
                 // NPC must walk to the stair
-                Vector2 stairPosition = new Vector2(stair.StartPoint.position.x, transform.position.y);
+                Vector2 stairPosition = new Vector2(currentStair.StartPoint.position.x, transform.position.y);
                 // Flip sprite based on direction
                 UpdateSpriteDirection(stairPosition);
+
+                // Determine if we need to go up or down
+                StairDirection stairDirection = (targetFloor > floorLevel) ? StairDirection.Upward : StairDirection.Downward;
+
+                StairController nextStairFloor = null;
+                bool upward = false;
+
+                if (stairDirection == StairDirection.Upward)
+                {
+                    nextStairFloor = currentStair.UpperFloor;
+                    upward = true;
+                }
+                else if (stairDirection == StairDirection.Downward)
+                {
+                    nextStairFloor = currentStair.BottomFloor;
+                    upward = false;
+                }
 
                 // Move to stair
                 yield return HorizontalMovementToTarget(stairPosition);
 
-                // When the npc reached the stairs
+                // Keep track of stairs we've already tried and found blocked
+                List<StairController> blockedStairs = new List<StairController>();
+
+                if (currentStair.isStairBlocked() || nextStairFloor.isStairBlocked())
+                {
+                    bool findAlternative = false;
+                    blockedStairs.Add(currentStair);
+                    // Check if the stair is blocked
+                    while (!findAlternative)
+                    {
+                        for(int i = 0; i < FloorNavigation.Instance.StairsByFloorLevel[floorLevel].Count; i++)
+                        {
+                            StairController alternativeStair = FloorNavigation.Instance.FindNearestStairToFloor(this, targetFloor, stairDirection, blockedStairs);
+
+                            if (alternativeStair != null)
+                            {
+                                nextStairFloor = upward ? alternativeStair.UpperFloor : alternativeStair.BottomFloor;
+                            }                            
+
+                            if (alternativeStair!= null && !alternativeStair.isStairBlocked() && nextStairFloor != null && !nextStairFloor.isStairBlocked())
+                            {
+                                // NPC must walk to the stair
+                                Vector2 alternativeStairPosition = new Vector2(currentStair.StartPoint.position.x, transform.position.y);
+
+                                // Flip sprite based on direction
+                                UpdateSpriteDirection(stairPosition);
+
+                                // Move to stair
+                                yield return HorizontalMovementToTarget(stairPosition);
+
+                                if (!alternativeStair.isStairBlocked())
+                                {
+                                    currentStair = alternativeStair;
+                                    findAlternative = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    blockedStairs.Add(alternativeStair);
+                                }
+
+                            }
+                        }
+                        yield return new WaitForSeconds(0.5f);
+                        blockedStairs.Clear();
+                    }
+                }
                 // Determine if we need to go up or down
-                StairDirection stairDirection = (targetFloor > floorLevel) ? StairDirection.Upward : StairDirection.Downward;
-                stair.ClimbStair(this.gameObject, stairDirection);
+                //StairDirection stairDirection = (targetFloor > floorLevel) ? StairDirection.Upward : StairDirection.Downward;
+                // When the npc reached the stairs
+                currentStair.ClimbStair(this.gameObject, stairDirection);
 
                 // Wait for stair climbing to finish
                 yield return new WaitForSeconds(1f);
@@ -290,11 +355,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 //Update our current floor
                 if (stairDirection == StairDirection.Upward)
                 {
-                    floorLevel = stair.UpperFloor.FloorLevel;
+                    floorLevel = currentStair.UpperFloor.FloorLevel;
                 }
                 else if (stairDirection == StairDirection.Downward)
                 {
-                    floorLevel = stair.BottomFloor.FloorLevel;
+                    floorLevel = currentStair.BottomFloor.FloorLevel;
                 }
             }
         }

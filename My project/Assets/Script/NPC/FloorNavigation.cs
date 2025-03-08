@@ -10,6 +10,8 @@ public class FloorNavigation : MonoBehaviour
     // Dictionaries of all staircases ordered by floor
     private Dictionary<float, List<StairController>> stairsByFloorLevel = new Dictionary<float, List<StairController>>();
 
+    public Dictionary<float, List<StairController>> StairsByFloorLevel => stairsByFloorLevel;
+
     // Singleton pattern
     private static FloorNavigation instance;
     public static FloorNavigation Instance { get { return instance; } }
@@ -51,7 +53,7 @@ public class FloorNavigation : MonoBehaviour
     }
 
     // Find the closest staircase and on the same floor as the npc.
-    private StairController FindNearestStairToFloor(HumanNPCBehaviour npc, float targetFloor,StairDirection neededDirection)
+    public StairController FindNearestStairToFloor(HumanNPCBehaviour npc, float targetFloor,StairDirection neededDirection, List<StairController> excludeStairs)
     {
         float npcFloor = npc.FloorLevel;
 
@@ -74,7 +76,11 @@ public class FloorNavigation : MonoBehaviour
         // Find a stair that leads to the targeted floor level
         foreach (StairController stair in stairsByFloorLevel[npcFloor])
         {
-            
+            // Skip this stair if it's in the exclude list
+            if (excludeStairs != null && excludeStairs.Contains(stair))
+            {
+                continue;
+            }
             // Check if this stair leads to the right direction
             bool canUseStair = false;
 
@@ -122,7 +128,7 @@ public class FloorNavigation : MonoBehaviour
             // Determine if we need to go up or down
             StairDirection direction = (targetFloor > npcFloor) ? StairDirection.Upward : StairDirection.Downward;
             // Find the nearest stair to used to go to the targeted floor
-            StairController nextStair = FindNearestStairToFloor(npc,targetFloor, direction);
+            StairController nextStair = FindNearestStairToFloor(npc,targetFloor, direction, null);
 
             // If there is no path for the NPC
             if(nextStair == null)
