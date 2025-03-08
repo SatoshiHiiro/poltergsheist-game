@@ -3781,6 +3781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194d1fbd5134bca4ba4d3d6bb85d924e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bufferDistance: 0.01
 --- !u!1 &579225017
 GameObject:
   m_ObjectHideFlags: 0
@@ -8901,7 +8902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560402798226898856, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7560402798226898856, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13350,19 +13351,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560402798226898856, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.49937707
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7560402798226898856, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5670389
+      value: 0.908394
       objectReference: {fileID: 0}
     - target: {fileID: 7560402798226898856, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.49
+      value: -2.93
       objectReference: {fileID: 0}
     - target: {fileID: 7560402798226898856, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.58
+      value: -1.45
       objectReference: {fileID: 0}
     - target: {fileID: 7560402798226898856, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13396,6 +13397,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7560402798226898856, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13421,6 +13426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194d1fbd5134bca4ba4d3d6bb85d924e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bufferDistance: 0.01
 --- !u!1001 &1933772056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13443,11 +13449,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 918181812985153082, guid: 35fa1af5c75f53e4ebe182a7d1b329e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -200.28
+      value: -178.06
       objectReference: {fileID: 0}
     - target: {fileID: 918181812985153082, guid: 35fa1af5c75f53e4ebe182a7d1b329e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.38
+      value: -8.08
       objectReference: {fileID: 0}
     - target: {fileID: 918181812985153082, guid: 35fa1af5c75f53e4ebe182a7d1b329e4, type: 3}
       propertyPath: m_LocalPosition.z
