@@ -146,7 +146,7 @@ public abstract class MovementController : MonoBehaviour
         curObject.Add(collision);
         for (int i = 0; i < collision.contactCount; i++)
         {
-            if (collision.GetContact(i).normal.y >= .8f && !isInContact)
+            if (collision.GetContact(i).normal.y >= 1f && !isInContact)
             {
                 if (onLand != null) { onLand(landParam); };
                 break;
@@ -170,7 +170,7 @@ public abstract class MovementController : MonoBehaviour
             {
                 for (int ii = 0; ii < collision.contactCount; ii++)
                 {
-                    if (collision.GetContact(ii).normal.y >= .8f)
+                    if (collision.GetContact(ii).normal.y >= 1f)
                     {
                         isInContact = true;
                         slideDownWall = 0;
@@ -179,12 +179,6 @@ public abstract class MovementController : MonoBehaviour
                 }
                 break;
             }
-        }
-        //Makes the controller slide down the sides of rigidbodies
-        if (!isInContact && rigid2D.linearVelocityY <= 0)
-        {
-            rigid2D.linearVelocityY = slideDownWall;
-            slideDownWall -= .133f;
         }
 
         if (collision.gameObject.CompareTag("TrapDoor"))
