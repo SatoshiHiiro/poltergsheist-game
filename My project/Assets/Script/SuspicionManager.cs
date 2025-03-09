@@ -12,6 +12,8 @@ public class SuspicionManager : MonoBehaviour
     private int paranormalObserverCount;    // Number of NPC who sees an object moving
     private float currentSuspicion;
     private float maxSuspicion;
+    private float timeSinceSuspicionIncrease;
+    [SerializeField] private float timeUntilSuspicionDecrease;
 
     [SerializeField] protected float suspicionRate; // How much the npc becomes suspicious when the npc sees an object
     [SerializeField] protected float sizeFactor;    // Factor that increases suspicion depending on the size of the object.
@@ -49,6 +51,7 @@ public class SuspicionManager : MonoBehaviour
         paranormalObserverCount = 0;
         currentSuspicion = 0f;
         maxSuspicion = 100f;
+        timeSinceSuspicionIncrease = Time.time;
     }
 
     private void Update()
@@ -59,6 +62,13 @@ public class SuspicionManager : MonoBehaviour
             PlayerPrefs.SetInt("LastScene", SceneManager.GetActiveScene().buildIndex + 1);
             PlayerPrefs.Save();
             SceneManager.LoadScene("GameOver");
+        }
+
+        if (Time.time - timeSinceSuspicionIncrease >= timeUntilSuspicionDecrease)
+        {
+            currentSuspicion -= 0.01f;
+            if (currentSuspicion < 0f)
+                currentSuspicion = 0f;
         }
     }
 
@@ -86,6 +96,7 @@ public class SuspicionManager : MonoBehaviour
             currentSuspicion += suspicionRate * npcFactor * (sizeFactor * objectSize) * Time.deltaTime;
             currentSuspicion = Mathf.Clamp(currentSuspicion, 0f, maxSuspicion);
             OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion); // Change the UI
+            timeSinceSuspicionIncrease = Time.time;
         }
     }
 
@@ -133,5 +144,6 @@ public class SuspicionManager : MonoBehaviour
         currentSuspicion += displacementFactor * (sizeFactor * objectSize) * changeFactor;
         print(currentSuspicion);
         OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);    // Change the UI
+        timeSinceSuspicionIncrease = Time.time;
     }
 }
