@@ -219,7 +219,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             yield break;
         }
-
         //yield return StartCoroutine(ReachTarget(objectsound.transform.position, targetFloor));
 
         // One NPC must replace the object to it's initial position
@@ -368,6 +367,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 }
             }
         }
+    }
+
+    public void UpdateFloorLevel(float currenrFloorLevel)
+    {
+        floorLevel = currenrFloorLevel;
     }
 
     // Return the NPC to it's initial position and facing direction
