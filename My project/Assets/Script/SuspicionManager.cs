@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -85,6 +86,19 @@ public class SuspicionManager : MonoBehaviour
         paranormalObserverCount = Mathf.Max(0, paranormalObserverCount);
     }
 
+    // When the NPC see Polterg from a mirror or from bein a exorcist he dies instantly
+    public void UpdateSeeingPoltergSuspicion()
+    {
+        OnSuspicionChanged?.Invoke(100 / maxSuspicion);
+        StartCoroutine(WaitDying());
+    }
+
+    private IEnumerator WaitDying()
+    {
+        yield return new WaitForSeconds(1f);
+        currentSuspicion = 100;
+    }
+
     // Update suspicion when an NPC notices an objet moving in front of them
     public void UpdateMovementSuspicion(float objectSize)
     {
@@ -103,7 +117,6 @@ public class SuspicionManager : MonoBehaviour
     // Update suspicion when an NPC notices an object has moved
     public void UpdateDisplacementSuspicion(float objectSize, float rotationChange, float positionChange)
     {
-        print("ALLO");
         print("PositionChange: " + positionChange);
         float positionFactor = 1f;
         // If the object moved too much from it's initial position

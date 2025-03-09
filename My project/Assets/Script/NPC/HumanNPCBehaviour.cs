@@ -43,7 +43,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [SerializeField] protected float blindSpeed = 3f;
     protected float normalSpeed;
 
-
+    protected bool seePolterg = false;
 
     protected override void Start()
     {
@@ -57,7 +57,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         normalSpeed = movementSpeed;
     }
 
-    bool test = false;
     private Coroutine returnToInitialPositionCoroutine;
     protected override void Update()
     {
@@ -177,15 +176,24 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
             {
                 // If nothing is blocking the sight of the NPC to the reflection of the player
-                if (!mirror.IsMirrorReflectionBlocked(player.GetComponent<Collider2D>()))
+                if (!mirror.IsMirrorReflectionBlocked(player.GetComponent<Collider2D>()) && !seePolterg)
                 {
-                    // Player dies
-                    print("DIE");
+                    NPCSeePolterg();
                 }
 
             }
         }
     }
+
+    // When the Npc see Polterg it's gameover
+    protected void NPCSeePolterg()
+    {
+        seePolterg = true;
+        audioSource.Play();
+
+        SuspicionManager.Instance.UpdateSeeingPoltergSuspicion();
+    }
+
     // Start the investigation of the sound
     public virtual void InvestigateSound(GameObject objectsound, bool replaceObject, float targetFloor)
     {
@@ -368,6 +376,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             }
         }
     }
+
+
 
     public void UpdateFloorLevel(float currenrFloorLevel)
     {
