@@ -104,7 +104,7 @@ public class PossessionManager : InteractibleManager
                 raycastHits1 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(player.sizeofPlayer.x / 2, ySizeOfObject / 2, 0), Vector2.up, distance);
                 raycastHits2 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(-(player.sizeofPlayer.x / 2), ySizeOfObject / 2, 0), Vector2.up, distance);
 
-                Debug.Log("Ray1: " + raycastHits1.Length + "   Ray2: " + raycastHits2.Length);
+                //Debug.Log("Ray1: " + raycastHits1.Length + "   Ray2: " + raycastHits2.Length);
 
                 if (raycastHits1.Length > 0 || raycastHits2.Length > 0)
                     hasEnoughSpace = false;

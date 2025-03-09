@@ -40,7 +40,11 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         rightFloor = true;
         isWalkingBack = false;
         currentPoint = null;
-        nextPatrolPoint = patrolPoints[indexPatrolPoints];
+        if(patrolPoints.Length > 0)
+        {
+            nextPatrolPoint = patrolPoints[indexPatrolPoints];
+        }
+        
     }
     protected override void Update()
     {
