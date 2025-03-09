@@ -481,6 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf684c7f8e9af943942d02d99fabfd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeUntilSuspicionDecrease: 5
   suspicionRate: 1
   sizeFactor: 2
   npcFactor: 2
@@ -658,6 +659,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyItems: []
   isConditionsMet: 
+  Ctrl:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 90c8e032-102f-45cd-b6b7-a1ef3f57420e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  FullEnergy:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1f171499-5f9e-4304-a7b8-fba57b4f93b1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &6484978401013239350
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +780,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyRegen: 0.005
   energyValue: 0
+  maxEnergy: 0
+  minEnergy: 0
 --- !u!1 &6917443028697483175
 GameObject:
   m_ObjectHideFlags: 0
