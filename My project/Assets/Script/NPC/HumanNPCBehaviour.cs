@@ -300,13 +300,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 // Keep track of stairs we've already tried and found blocked
                 List<StairController> blockedStairs = new List<StairController>();
 
+                // Check if the stair is blocked
                 if (currentStair.isStairBlocked() || nextStairFloor.isStairBlocked())
                 {
                     bool findAlternative = false;
-                    blockedStairs.Add(currentStair);
-                    // Check if the stair is blocked
+                    blockedStairs.Add(currentStair);    // Remove these stairs from the possible alternative to find a path
+                    // As long as we did not find a new path
                     while (!findAlternative)
                     {
+                        // Find if there is any other stair on the same level that can reach the target floor
                         for(int i = 0; i < FloorNavigation.Instance.StairsByFloorLevel[floorLevel].Count; i++)
                         {
                             StairController alternativeStair = FloorNavigation.Instance.FindNearestStairToFloor(this, targetFloor, stairDirection, blockedStairs);
@@ -315,18 +317,19 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                             {
                                 nextStairFloor = upward ? alternativeStair.UpperFloor : alternativeStair.BottomFloor;
                             }                            
-
+                            // Check if the stair is not blocked and if the upstair or downstair door is also not blocked
                             if (alternativeStair!= null && !alternativeStair.isStairBlocked() && nextStairFloor != null && !nextStairFloor.isStairBlocked())
                             {
                                 // NPC must walk to the stair
-                                Vector2 alternativeStairPosition = new Vector2(currentStair.StartPoint.position.x, transform.position.y);
+                                Vector2 alternativeStairPosition = new Vector2(alternativeStair.StartPoint.position.x, transform.position.y);
 
                                 // Flip sprite based on direction
-                                UpdateSpriteDirection(stairPosition);
+                                UpdateSpriteDirection(alternativeStairPosition);
 
                                 // Move to stair
-                                yield return HorizontalMovementToTarget(stairPosition);
+                                yield return HorizontalMovementToTarget(alternativeStairPosition);
 
+                                // Once the NPC reached the alternative stair check if it's blocked
                                 if (!alternativeStair.isStairBlocked())
                                 {
                                     currentStair = alternativeStair;
@@ -335,11 +338,13 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                                 }
                                 else
                                 {
+                                    // This stair is blocked and should not be considered anymore
                                     blockedStairs.Add(alternativeStair);
                                 }
 
                             }
                         }
+                        // All stairs are blocked so we wait and check if any of them got unblocked
                         yield return new WaitForSeconds(0.5f);
                         blockedStairs.Clear();
                     }

@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
-using static UnityEngine.GraphicsBuffer;
 
 public abstract class BasicNPCBehaviour : MonoBehaviour
 {

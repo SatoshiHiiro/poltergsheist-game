@@ -186,6 +186,16 @@ public abstract class MovementController : MonoBehaviour
             rigid2D.linearVelocityY = slideDownWall;
             slideDownWall -= .133f;
         }
+
+        if (collision.gameObject.CompareTag("TrapDoor"))
+        {
+            TrapDoor trapDoor = collision.gameObject.GetComponent<TrapDoor>();
+            // If the player is on the trap door and press S
+            if (trapDoor != null && moveInput.y < 0)
+            {
+                trapDoor.OpenDoor();
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
