@@ -14,6 +14,7 @@ public class PossessionManager : InteractibleManager
     [SerializeField] public float initialEnergyLoss;
     [SerializeField] public float continuousEnergyLoss;
     [SerializeField] private float possessionDistance;  // Distance between the player and the object so he can possessed it
+    private Vector2 sizeOfObject;
     private float ySizeOfObject;
 
     //Conditions
@@ -35,7 +36,7 @@ public class PossessionManager : InteractibleManager
         //possession.enabled = false;
         isPossessed = false;
         isAnimationFinished = true;
-        ySizeOfObject = this.gameObject.GetComponent<Collider2D>().bounds.size.y;
+        sizeOfObject = this.gameObject.GetComponent<Collider2D>().bounds.size;
         hasEnoughSpace = true;
     }
 
@@ -95,14 +96,15 @@ public class PossessionManager : InteractibleManager
     {
         if (isPossessed)
         {
-            float distance = player.sizeofPlayer.y - ySizeOfObject;
+            float distanceY = player.sizeofPlayer.y - sizeOfObject.y;
+            float distanceX = player.sizeofPlayer.x - sizeOfObject.x;
 
-            if (distance > 0)
+            if (distanceY > 0 && distanceX > 0)
             {
                 RaycastHit2D[] raycastHits1;
                 RaycastHit2D[] raycastHits2;
-                raycastHits1 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(player.sizeofPlayer.x / 2, ySizeOfObject / 2, 0), Vector2.up, distance);
-                raycastHits2 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(-(player.sizeofPlayer.x / 2), ySizeOfObject / 2, 0), Vector2.up, distance);
+                raycastHits1 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(player.sizeofPlayer.x / 2, ySizeOfObject / 2, 0), Vector2.up, distanceY);
+                raycastHits2 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(-(player.sizeofPlayer.x / 2), ySizeOfObject / 2, 0), Vector2.up, distanceY);
 
                 //Debug.Log("Ray1: " + raycastHits1.Length + "   Ray2: " + raycastHits2.Length);
 
