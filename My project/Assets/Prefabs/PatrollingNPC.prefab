@@ -184,7 +184,7 @@ MonoBehaviour:
     m_Bits: 128
   ignoreLayerSightBlocked:
     serializedVersion: 2
-    m_Bits: 15424
+    m_Bits: 15680
   movementSpeed: 6
   minSuspiciousRotation: 20
   minSuspiciousPosition: 1
@@ -194,6 +194,7 @@ MonoBehaviour:
   surpriseWaitTime: 2
   investigationWaitTime: 3
   floorLevel: 0
+  audioSource: {fileID: 0}
   detectionRadiusLight: 20
   lightLayer:
     serializedVersion: 2
@@ -201,6 +202,7 @@ MonoBehaviour:
   wallFloorLayer:
     serializedVersion: 2
     m_Bits: 33280
+  blindSpeed: 3
   patrolPoints:
   - {fileID: 3495827379219480003}
   - {fileID: 3659877726675351806}
