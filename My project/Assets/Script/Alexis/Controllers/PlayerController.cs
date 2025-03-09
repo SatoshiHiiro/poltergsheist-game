@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 /// État: Optimal(temp)
 public class PlayerController : MovementController
 {
-
     //Possession
     [Header("Object possession")]
     public PossessionManager lastPossession;
@@ -16,12 +15,16 @@ public class PlayerController : MovementController
     // TODO FAIRE DE LA BONNE MANIÈRE!!!
     // Conditions
     [HideInInspector] public bool isPossessing; //Utilisé par PossessionBehavior pour vérifier si le Player possède un objet
+    [HideInInspector] public Vector2 sizeofPlayer;
+
     protected override void Start()
     {
         base.Start();
         canMove = true;
+        sizeofPlayer = GetComponent<Collider2D>().bounds.size;
         //canJump = false;
     }
+
     //Mouvement
     //[Header("Mouvement variables")]
     //[SerializeField] public float speed;                                //Vitesse du mouvement
