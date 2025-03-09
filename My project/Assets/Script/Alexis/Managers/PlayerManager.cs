@@ -12,6 +12,7 @@ public class PlayerManager : SpriteManager
     [SerializeField] float recoveryDuration;
     float iniPos;
     bool isFinishedJumping;
+    bool isLanding;
     bool isFirsTime;
 
     //General animation variables
@@ -23,6 +24,7 @@ public class PlayerManager : SpriteManager
         base.Start();
         startTime = Time.time;
         isFinishedJumping = true;
+        isLanding = false;
         isGoingUp = true;
         isFirsTime = true;
     }
@@ -30,21 +32,20 @@ public class PlayerManager : SpriteManager
     void OnEnable()
     {
         player = FindFirstObjectByType<PlayerController>();
-        player.onJump += CollisionConditionsForManager;
-        player.onLand += CollisionConditionsForManager;
+        //player.onJump += CollisionConditionsForManager;
+        //player.onLand += CollisionConditionsForManager;
     }
 
     void OnDisable()
     {
-        player.onJump -= CollisionConditionsForManager;
-
+        //player.onJump -= CollisionConditionsForManager;
     }
 
     protected override void Update()
     {
         base.Update();
         float posDiff = lastPos.y - transform.position.y;
-        if (isFinishedJumping)
+        if (/*isFinishedJumping*/ true)
         {
             //To alternate between floatMin and floatMax
             if ((Time.time - startTime) >= floatDuration)
@@ -55,7 +56,7 @@ public class PlayerManager : SpriteManager
 
             FloatingSprite(isGoingUp);
         }
-        else
+        /*else
         {
             if (isFirsTime)
             {
@@ -77,7 +78,7 @@ public class PlayerManager : SpriteManager
             {
                 RecoverySprite(floatMin);
             }
-        }
+        }*/
     }
 
     //The actual translation on y axis
@@ -90,10 +91,18 @@ public class PlayerManager : SpriteManager
             transform.localPosition = new Vector3(0, Mathf.SmoothStep(floatMax, floatMin, time), 0);
     }
 
-    void RecoverySprite(float target)
+    /*bool RecoverySprite(float target)
     {
+        bool landingFinished = false;
         float time = (Time.time - startTime) / recoveryDuration;
-       // transform.localPosition = Vector3.Slerp(transform.localPosition, new Vector3(0, target, 0), time);
+        transform.localPosition = Vector3.Slerp(transform.localPosition, new Vector3(0, target, 0), time);
+
+        if (true)
+        {
+            
+        }
+
+        return landingFinished;
         //transform.localPosition = new Vector3(0, Mathf.SmoothStep(iniPos, floatMin, time), 0);
     }
 
@@ -102,12 +111,12 @@ public class PlayerManager : SpriteManager
         if (param == player.jumpParam)
         {
             isFinishedJumping = false;
-            //Debug.Log("Jumped");
+            Debug.Log("Jumped");
         }
         if (param == player.landParam)
         {
-            isFinishedJumping = true;
-            //Debug.Log("Landed");
+            isLanding = true;
+            Debug.Log("Landed");
         }
-    }
+    }*/
 }
