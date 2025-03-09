@@ -12,6 +12,7 @@ public class StairController : MonoBehaviour
     // This class manage stairs depending on the direction desired by the character
 
     [Header("Stairs")]
+    [SerializeField] private bool canPoltergUseDoor = true;
     [SerializeField] private float floorLevel;
     [SerializeField] public float FloorLevel => floorLevel;
     [SerializeField] private Transform startPoint;  // Center of the door on floor level
@@ -49,15 +50,21 @@ public class StairController : MonoBehaviour
     }
     public void ClimbStair(GameObject character, StairDirection direction)
     {
+        PlayerController playerController = character.GetComponent<PlayerController>();
+        if(playerController != null && !canPoltergUseDoor)
+        {
+            return; // Polterg can't use the door
+        }
         Renderer characterRenderer = character.GetComponentInChildren<Renderer>();//character.transform.GetChild(0).GetComponent<Renderer>();
-        //print("Character size X: " + characterRenderer.bounds.size.x);
-        //print("Character size Y: " + characterRenderer.bounds.size.y);
-        // If the character fit with the stair dimension, then he can climb
+                                                                                  //print("Character size X: " + characterRenderer.bounds.size.x);
+                                                                                  //print("Character size Y: " + characterRenderer.bounds.size.y);
+                                                                                  // If the character fit with the stair dimension, then he can climb
         if (characterRenderer.bounds.size.x < maximumWidth && characterRenderer.bounds.size.y < maximumHeight)
         {
             StartCoroutine(HandleClimbingStair(character, direction));
         }
-        
+
+
     }
 
     private IEnumerator HandleClimbingStair(GameObject character, StairDirection direction)
@@ -90,6 +97,15 @@ public class StairController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         // Climbing stair animation
+
+        HumanNPCBehaviour npcBehaviour = character.GetComponent<HumanNPCBehaviour>();
+        if (npcBehaviour != null)
+        {
+            float newFloorLevel = (direction == StairDirection.Upward) ?
+                UpperFloor.FloorLevel : BottomFloor.FloorLevel;
+            npcBehaviour.UpdateFloorLevel(newFloorLevel);
+        }
+
 
         // Calculate adjusted destination position based on character height
         Renderer characterRenderer = character.GetComponentInChildren<Renderer>();//character.transform.GetChild(0).GetComponent<Renderer>();

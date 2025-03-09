@@ -103,8 +103,12 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
 
     public IEnumerator ReturnRightFloor()
     {
-        yield return ReachFloor(initialFloorLevel);
-        rightFloor = true;
+        yield return StartCoroutine(ReachFloor(initialFloorLevel));
+        if (FloorLevel == initialFloorLevel)
+        {
+            rightFloor = true;
+        }
+
     }
 
     public void Patrol()
