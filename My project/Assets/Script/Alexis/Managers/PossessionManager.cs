@@ -14,10 +14,12 @@ public class PossessionManager : InteractibleManager
     [SerializeField] public float initialEnergyLoss;
     [SerializeField] public float continuousEnergyLoss;
     [SerializeField] private float possessionDistance;  // Distance between the player and the object so he can possessed it
+    private float ySizeOfObject;
 
     //Conditions
     bool isPossessed;                               //Pour savoir si l'objet possessible est poss�d�
     bool isAnimationFinished;                       //Pour savoir si l'animaation de possession est fini
+    bool hasEnoughSpace;
 
     //Shortcuts
     EnergySystem energy;
@@ -33,6 +35,8 @@ public class PossessionManager : InteractibleManager
         //possession.enabled = false;
         isPossessed = false;
         isAnimationFinished = true;
+        ySizeOfObject = this.gameObject.GetComponent<Collider2D>().bounds.size.y;
+        hasEnoughSpace = true;
     }
 
     //Pour l'animation de possession
@@ -82,8 +86,32 @@ public class PossessionManager : InteractibleManager
         }
 
         // There is no more energy to possessed the object
-        if ((energy.CurrentEnergy() == 0 && isAnimationFinished))
+        if (energy.CurrentEnergy() == 0 && isAnimationFinished && hasEnoughSpace)
             StopPossession();
+
+    }
+
+    void Update()
+    {
+        if (isPossessed)
+        {
+            float distance = player.sizeofPlayer.y - ySizeOfObject;
+
+            if (distance > 0)
+            {
+                RaycastHit2D[] raycastHits1;
+                RaycastHit2D[] raycastHits2;
+                raycastHits1 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(player.sizeofPlayer.x / 2, ySizeOfObject / 2, 0), Vector2.up, distance);
+                raycastHits2 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(-(player.sizeofPlayer.x / 2), ySizeOfObject / 2, 0), Vector2.up, distance);
+
+                Debug.Log("Ray1: " + raycastHits1.Length + "   Ray2: " + raycastHits2.Length);
+
+                if (raycastHits1.Length > 0 || raycastHits2.Length > 0)
+                    hasEnoughSpace = false;
+                else
+                    hasEnoughSpace = true;
+            }
+        }
     }
 
     //Input de possession
@@ -118,14 +146,12 @@ public class PossessionManager : InteractibleManager
                     StartCoroutine(AnimationTime());
                 }
                 //Si le joueur veut sortir de l'objet
-                else if (player.isPossessing && isPossessed)
+                else if (player.isPossessing && isPossessed && hasEnoughSpace)
                 {
                     StopPossession();
                 }
             }
-            
         }
-        
     }
 
     //Pour arr�ter la possession

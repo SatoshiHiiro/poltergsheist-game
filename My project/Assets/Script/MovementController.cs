@@ -36,7 +36,6 @@ public abstract class MovementController : MonoBehaviour
     [Header("GameObjets in contact")]
     public List<Collision2D> curObject = new List<Collision2D>();       //Pour stocker tous les GameObjets en contact avec l'objet
     [HideInInspector] public float halfSizeOfObject;
-    float slideDownWall;
 
     //Conditions
     [Header("Mouvement conditions")]
@@ -63,7 +62,6 @@ public abstract class MovementController : MonoBehaviour
         lastInput = Vector2.zero;
         canClimbAgain = true;
         halfSizeOfObject = (transform.lossyScale.y * gameObject.GetComponent<Collider2D>().bounds.size.y) / 2;
-        slideDownWall = 0;
 
         move.Enable();
         jump.Enable();
@@ -173,7 +171,6 @@ public abstract class MovementController : MonoBehaviour
                     if (collision.GetContact(ii).normal.y >= 1f)
                     {
                         isInContact = true;
-                        slideDownWall = 0;
                         break;
                     }
                 }
