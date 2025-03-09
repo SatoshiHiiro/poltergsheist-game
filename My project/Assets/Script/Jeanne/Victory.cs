@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Victory : MonoBehaviour
 {
@@ -7,20 +8,21 @@ public class Victory : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
-            SceneManager.LoadScene("Victoire");
+        {  
             UnlockNewLevel();
+            SceneManager.LoadScene("Victoire");
+          
         } 
     }
 
     //Unlock un nouveau niveau 
     void UnlockNewLevel()
     {
-       if (SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
-       {
+        if (SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
             PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
             PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
             PlayerPrefs.Save();
-       } 
+        }
     }
 }

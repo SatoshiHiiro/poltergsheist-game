@@ -977,7 +977,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7247adade7443154a8e4ad29da262f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boutons: []
+  boutons:
+  - {fileID: 1793668636}
+  - {fileID: 1511929325}
+  - {fileID: 128495121}
+  - {fileID: 882211753}
+  - {fileID: 4989126}
+  - {fileID: 871107558}
   levelButtons: {fileID: 148597183}
 --- !u!114 &680244825
 MonoBehaviour:
@@ -2111,7 +2117,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 680244824}
-        m_TargetAssemblyTypeName: BaseSceneManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: LevelSelect, Assembly-CSharp
         m_MethodName: Retour
         m_Mode: 1
         m_Arguments:
