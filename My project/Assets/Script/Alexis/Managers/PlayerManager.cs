@@ -11,9 +11,9 @@ public class PlayerManager : SpriteManager
     [Header("Fall Animation")]
     [SerializeField] float recoveryDuration;
     float iniPos;
-    bool isFinishedJumping;
-    bool isLanding;
-    bool isFirsTime;
+    //bool isFinishedJumping;
+    //bool isLanding;
+    //bool isFirsTime;
 
     //General animation variables
     float startTime;
@@ -23,10 +23,10 @@ public class PlayerManager : SpriteManager
     {
         base.Start();
         startTime = Time.time;
-        isFinishedJumping = true;
-        isLanding = false;
+        //isFinishedJumping = true;
+        //isLanding = false;
         isGoingUp = true;
-        isFirsTime = true;
+        //isFirsTime = true;
     }
 
     void OnEnable()
