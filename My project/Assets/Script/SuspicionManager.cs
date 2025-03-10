@@ -32,7 +32,9 @@ public class SuspicionManager : MonoBehaviour
     [SerializeField] protected float maxRotationFactor; // Factor that increases suspicious when an object has rotated too much
     [SerializeField] protected float minRotationChange; // Minum rotation where the npc that the object has rotated.
     [SerializeField] protected float minRotationFactor; // Factor taht increases suspicious when an object has rotated
-    
+
+    [SerializeField] protected float suspicionDecrease;
+
     public event Action<float> OnSuspicionChanged;  // Event called when the suspicious changed
 
     private void Awake()
@@ -67,9 +69,10 @@ public class SuspicionManager : MonoBehaviour
 
         if (Time.time - timeSinceSuspicionIncrease >= timeUntilSuspicionDecrease)
         {
-            currentSuspicion -= 0.01f;
+            currentSuspicion -= suspicionDecrease;
             if (currentSuspicion < 0f)
                 currentSuspicion = 0f;
+            OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
         }
     }
 
