@@ -177,6 +177,7 @@ public class PossessionManager : InteractibleManager
         if (collision.CompareTag("SizeTrigger"))
         {
             hasEnoughSpace = false;
+            Debug.Log("Entered Trigger");
         }
     }
 
@@ -185,6 +186,8 @@ public class PossessionManager : InteractibleManager
         if (collision.CompareTag("SizeTrigger"))
         {
             hasEnoughSpace = true;
+            Debug.Log("Entered Trigger");
+
         }
     }
 }
