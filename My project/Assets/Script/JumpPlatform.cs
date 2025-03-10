@@ -29,7 +29,7 @@ public class JumpPlatform : MonoBehaviour
     {
         // Find platform surface position
         //float platformSurface = this.transform.position.y + ((objectCollider.bounds.size.y / 2));
-        float platformSurface = transform.position.y + (gameObject.GetComponent<Collider2D>().bounds.size.y / 2);
+        float platformSurface = gameObject.GetComponent<Collider2D>().bounds.center.y + gameObject.GetComponent<Collider2D>().bounds.extents.y;
         // Find player feet position
         //float playerFeetPosition = player.transform.position.y - (playerCollider.bounds.size.y / 2);
         float playerFeetPosition = player.transform.position.y - player.GetComponent<PlayerController>().halfSizeOfObject;
