@@ -29,7 +29,7 @@ public class JumpPlatform : MonoBehaviour
     {
         // Find platform surface position
         //float platformSurface = this.transform.position.y + ((objectCollider.bounds.size.y / 2));
-        float platformSurface = transform.position.y + (gameObject.GetComponent<Collider2D>().bounds.size.y / 2);
+        float platformSurface = gameObject.GetComponent<Collider2D>().bounds.center.y + gameObject.GetComponent<Collider2D>().bounds.extents.y; // transform.position.y + (gameObject.GetComponent<Collider2D>().bounds.size.y / 2);
         // Find player feet position
         //float playerFeetPosition = player.transform.position.y - (playerCollider.bounds.size.y / 2);
         float playerFeetPosition = player.transform.position.y - player.GetComponent<PlayerController>().halfSizeOfObject;
@@ -65,7 +65,7 @@ public class JumpPlatform : MonoBehaviour
     {
         if (objectCollider != null)
         {
-            float platformSurface = transform.position.y + (objectCollider.bounds.size.y / 2);
+            float platformSurface = gameObject.GetComponent<Collider2D>().bounds.center.y + gameObject.GetComponent<Collider2D>().bounds.extents.y + 0.1f;// transform.position.y + (objectCollider.bounds.size.y / 2);
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(
                 new Vector3(transform.position.x - 0.5f, platformSurface, 0),
