@@ -119,7 +119,7 @@ public class PossessionManager : InteractibleManager
     //Input de possession
     private void OnMouseDown()
     {
-        if(Vector2.Distance(this.transform.position, player.transform.position) <= possessionDistance)
+        if(Vector2.Distance(this.transform.position, player.transform.position) <= possessionDistance && energy.CurrentEnergy() > initialEnergyLoss)
         {
             if (isAnimationFinished)
             {
