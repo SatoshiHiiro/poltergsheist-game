@@ -94,7 +94,7 @@ public class PossessionManager : InteractibleManager
 
     void Update()
     {
-        if (isPossessed)
+        /*if (isPossessed)
         {
             float distanceY = player.sizeofPlayer.y - sizeOfObject.y;
             float distanceX = player.sizeofPlayer.x - sizeOfObject.x;
@@ -113,7 +113,7 @@ public class PossessionManager : InteractibleManager
                 else
                     hasEnoughSpace = true;
             }
-        }
+        }*/
     }
 
     //Input de possession
@@ -170,5 +170,21 @@ public class PossessionManager : InteractibleManager
         player.GetComponent<Rigidbody2D>().simulated = true;
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         player.canMove = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("SizeTrigger"))
+        {
+            hasEnoughSpace = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("SizeTrigger"))
+        {
+            hasEnoughSpace = true;
+        }
     }
 }
