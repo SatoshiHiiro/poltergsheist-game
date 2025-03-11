@@ -32,6 +32,8 @@ public class CameraBehavior : MonoBehaviour
     //Shortcut
     Camera cam;
 
+    [SerializeField] LayerMask onClickLayers;
+
     private void Awake()
     {
         if(Instance == null)
@@ -42,7 +44,6 @@ public class CameraBehavior : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     void Start()
@@ -53,6 +54,7 @@ public class CameraBehavior : MonoBehaviour
         minY = limiteBD.position.y;
         maxY = limiteHG.position.y;
         posSelf = transform.position;
+        cam.eventMask = onClickLayers;
     }
 
     //Pour le mouvement de la caméra

@@ -16,6 +16,7 @@ public class FogOfWar : MonoBehaviour
         if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Possess"))
         {
             animator.SetBool("ClearFog",true);
+            boxCollider.enabled = false;
         }
     }
 }
