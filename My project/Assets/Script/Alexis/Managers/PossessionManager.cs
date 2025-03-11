@@ -10,6 +10,8 @@ public class PossessionManager : InteractibleManager
 {
     //Variables
     [Header("Variables")]
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private Sprite possessedSprite;
     [SerializeField] public float lerpSpeed;        //Vitesse du lerp
     [SerializeField] public float initialEnergyLoss;
     [SerializeField] public float continuousEnergyLoss;
@@ -26,12 +28,14 @@ public class PossessionManager : InteractibleManager
     EnergySystem energy;
     PlayerController player;
     IPossessable possession;
+    SpriteRenderer spriteRenderer;
 
     protected override void Start()
     {
         base.Start();
         player = FindFirstObjectByType<PlayerController>();
         energy = FindFirstObjectByType<EnergySystem>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         possession = gameObject.GetComponent<IPossessable>();
         //possession.enabled = false;
         isPossessed = false;
@@ -57,6 +61,10 @@ public class PossessionManager : InteractibleManager
         yield return new WaitForSecondsRealtime(.5f);
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSecondsRealtime(.5f);
+        if(possessedSprite != null)
+        {
+            spriteRenderer.sprite = possessedSprite;
+        }
         isAnimationFinished = true;
         continuousEnergyLoss = temp;
         energy.StopResumeRegen(false);
@@ -161,6 +169,10 @@ public class PossessionManager : InteractibleManager
     {
         print("STOP POSSESSION!");
         isPossessed = false;
+        if(normalSprite != null)
+        {
+            spriteRenderer.sprite = normalSprite;
+        }
         possession.OnDepossessed();
         //possession.enabled = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
