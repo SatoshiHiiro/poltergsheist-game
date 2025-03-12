@@ -5,7 +5,7 @@ public class GameOver : BaseSceneManager
 {
     public void Restart()
     {
-        int sceneID = PlayerPrefs.GetInt("LastScene", 1);
-        SceneManager.LoadScene("Niveau" + sceneID);
+        string sceneName = PlayerPrefs.GetString("LastScene", "UI_Accueil");
+        SceneManager.LoadScene(sceneName);
     }
 }
