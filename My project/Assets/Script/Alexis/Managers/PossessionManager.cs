@@ -29,6 +29,8 @@ public class PossessionManager : InteractibleManager
     PlayerController player;
     IPossessable possession;
     SpriteRenderer spriteRenderer;
+    Collider2D col2D;
+    PossessionController posControl;
 
     protected override void Start()
     {
@@ -36,6 +38,8 @@ public class PossessionManager : InteractibleManager
         player = FindFirstObjectByType<PlayerController>();
         energy = FindFirstObjectByType<EnergySystem>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        col2D = this.GetComponent<Collider2D>();
+        posControl = this.GetComponent<PossessionController>();
         possession = gameObject.GetComponent<IPossessable>();
         //possession.enabled = false;
         isPossessed = false;
@@ -95,9 +99,8 @@ public class PossessionManager : InteractibleManager
         }
 
         // There is no more energy to possessed the object
-        if (energy.CurrentEnergy() == 0 && isAnimationFinished && hasEnoughSpace)
+        if (isPossessed && posControl.isInContact && isAnimationFinished && hasEnoughSpace && energy.CurrentEnergy() == 0)
             StopPossession();
-
     }
 
     void Update()
@@ -180,6 +183,10 @@ public class PossessionManager : InteractibleManager
         player.isPossessing = false;
         player.GetComponent<Collider2D>().enabled = true;
         player.GetComponent<Rigidbody2D>().simulated = true;
+        if (posControl.isInContact)
+        {
+            player.transform.position += new Vector3(0, player.GetComponent<Collider2D>().bounds.extents.y - col2D.bounds.extents.y, 0);
+        }
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         player.canMove = true;
     }

@@ -62,7 +62,7 @@ public class SuspicionManager : MonoBehaviour
         //UpdateSuspicion();
         if (currentSuspicion >= maxSuspicion)
         {
-            PlayerPrefs.SetInt("LastScene", SceneManager.GetActiveScene().buildIndex + 1);
+            PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
             PlayerPrefs.Save();
             SceneManager.LoadScene("GameOver");
         }
