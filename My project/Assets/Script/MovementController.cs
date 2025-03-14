@@ -144,7 +144,7 @@ public abstract class MovementController : MonoBehaviour
         curObject.Add(collision);
         for (int i = 0; i < collision.contactCount; i++)
         {
-            if (collision.GetContact(i).normal.y >= 1f && !isInContact)
+            if (collision.GetContact(i).normal.y >= .9f && !isInContact)
             {
                 if (onLand != null) { onLand(landParam); };
                 break;
@@ -168,7 +168,7 @@ public abstract class MovementController : MonoBehaviour
             {
                 for (int ii = 0; ii < collision.contactCount; ii++)
                 {
-                    if (collision.GetContact(ii).normal.y >= 1f)
+                    if (collision.GetContact(ii).normal.y >= .9f)
                     {
                         isInContact = true;
                         break;

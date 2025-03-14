@@ -12,6 +12,7 @@ public class InventorySystem : MonoBehaviour
 
     public InputAction Ctrl;
     public InputAction FullEnergy;
+    public InputAction MinEnergy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,19 +24,25 @@ public class InventorySystem : MonoBehaviour
 
         Ctrl.AddBinding("<Keyboard>/ctrl");
         FullEnergy.AddBinding("<Keyboard>/r");
+        MinEnergy.AddBinding("<Keyboard>/e");
         Ctrl.Enable();
         FullEnergy.Enable();
+        MinEnergy.Enable();
     }
 
     private void Update()
     {
         if (Ctrl.IsPressed())
         {
-            Debug.Log("Ctrl pressed");
             if (FullEnergy.WasPressedThisFrame())
             {
-                Debug.Log("R is pressed");
+                Debug.Log("Full energy");
                 energy.ModifyEnergy(energy.maxEnergy);
+            }
+            if (MinEnergy.WasPressedThisFrame())
+            {
+                Debug.Log("Min energy");
+                energy.ModifyEnergy(-energy.maxEnergy);
             }
         }
     }
