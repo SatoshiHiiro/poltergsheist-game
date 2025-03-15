@@ -73,7 +73,7 @@ public class FloorNavigation : MonoBehaviour
         StairController closestStair = null;
         float closestDistance = float.MaxValue;        
 
-        // Find a stair that leads to the targeted floor level
+        // Find an available stair that leads to the targeted floor level
         foreach (StairController stair in stairsByFloorLevel[npcFloor])
         {
             // Skip this stair if it's in the exclude list
