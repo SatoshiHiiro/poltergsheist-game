@@ -236,4 +236,9 @@ public class Cat : BasicNPCBehaviour, IPatrol
             }            
         }
     }
+
+    IEnumerator IPatrol.Patrol()
+    {
+        throw new System.NotImplementedException();
+    }
 }

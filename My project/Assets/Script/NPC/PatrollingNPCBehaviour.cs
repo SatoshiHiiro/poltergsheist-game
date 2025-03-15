@@ -5,7 +5,7 @@ using UnityEngine;
 
 public interface IPatrol
 {
-    void Patrol();
+    IEnumerator Patrol();
     void MoveToNextAvailablePatrolPoint();
 }
 public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
@@ -22,6 +22,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     PatrolPointData nextPatrolPoint; // Next NPC patrol point
     private bool rightFloor;    // Does the NPC on the right floor to do is patrol
     private bool isWalkingBack;    // Does the NPC go up the stairs
+    private bool isPatrolling;
 
 
     // Public properties to access from other scripts
@@ -39,6 +40,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         isInRoom = false;
         rightFloor = true;
         isWalkingBack = false;
+        isPatrolling = false;   
         currentPoint = null;
         if(patrolPoints.Length > 0)
         {
@@ -66,7 +68,8 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
                 returnToFloor = null;
             }
             isInvestigating = true;
-            StopCoroutine("HandleWaiting");
+            //StopCoroutine("HandleWaiting");
+            StopCoroutine("Patrol");
             IEnumerator investigationCoroutine = investigationQueue.Dequeue();
             StartCoroutine(RunInvestigation(investigationCoroutine));
         }
@@ -77,9 +80,9 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             returnToFloor = StartCoroutine(ReturnRightFloor());
         }
         // Priority 4: Patrol if we're able to and should be
-        else if(investigationQueue.Count == 0 && !isInvestigating && rightFloor && !isWaiting && !isBlocked)
+        else if(investigationQueue.Count == 0 && !isInvestigating && rightFloor && !isWaiting && !isBlocked && !isPatrolling)
         {
-            Patrol();
+            StartCoroutine(Patrol());
         }
 
     }
@@ -107,7 +110,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
 
     public IEnumerator ReturnRightFloor()
     {
-        yield return StartCoroutine(ReachFloor(initialFloorLevel));
+        yield return StartCoroutine(npcMovementController.ReachFloor(currentFloorLevel, initialFloorLevel));//ReachFloor(initialFloorLevel));
         if (FloorLevel == initialFloorLevel)
         {
             rightFloor = true;
@@ -115,30 +118,38 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
 
     }
 
-    public void Patrol()
+    public IEnumerator Patrol()
     {
-        if (patrolPoints.Length == 0 || nextPatrolPoint == null) return;   // If there is no patrolPoint
-        
+        if (patrolPoints.Length == 0 || nextPatrolPoint == null) yield break;   // If there is no patrolPoint
+        isPatrolling = true;
         // Get movement direction
         Vector2 destination = new Vector2(nextPatrolPoint.Point.position.x, transform.position.y);
 
+        currentPoint = null;
+        yield return npcMovementController.ReachTarget(destination, currentFloorLevel, nextPatrolPoint.FloorLevel);
+
+        // NPC has arrived to the patrol point
+        currentPoint = nextPatrolPoint;
+        yield return HandleWaiting(currentPoint);
+
+
         // Flip sprite based on direction
-        UpdateSpriteDirection(destination);
+        //npcMovementController.UpdateSpriteDirection(destination);
 
         // Move towards destination
-        transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, destination, npcMovementController.MovementSpeed * Time.deltaTime);
 
-        // Verify if the NPC has arrived
-        if (Mathf.Abs(nextPatrolPoint.Point.position.x - transform.position.x) <= 0.2f)
-        {
-            // NPC has arrived to the patrol point
-            currentPoint = nextPatrolPoint;
-            StartCoroutine(HandleWaiting(currentPoint));
-        }
-        else
-        {
-            currentPoint = null;    // He's walking to the next patrol point
-        }
+        //// Verify if the NPC has arrived
+        //if (Mathf.Abs(nextPatrolPoint.Point.position.x - transform.position.x) <= 0.2f)
+        //{
+        //    // NPC has arrived to the patrol point
+        //    currentPoint = nextPatrolPoint;
+        //    StartCoroutine(HandleWaiting(currentPoint));
+        //}
+        //else
+        //{
+        //    currentPoint = null;    // He's walking to the next patrol point
+        //}
     }
 
     // Check if there is a possessed object in front of a room
@@ -246,6 +257,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             yield return new WaitForSeconds(currentPoint.WaitTime);
         }
         isWaiting = false;
+        isPatrolling = false;
         MoveToNextAvailablePatrolPoint();
     }
 

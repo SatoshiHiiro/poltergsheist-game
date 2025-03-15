@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3444647450879541081}
   - component: {fileID: 2375456114127631376}
   - component: {fileID: 5139589349706782988}
+  - component: {fileID: 4046844470576449417}
   m_Layer: 6
   m_Name: NPC
   m_TagString: Untagged
@@ -185,7 +186,7 @@ MonoBehaviour:
   ignoreLayerSightBlocked:
     serializedVersion: 2
     m_Bits: 15680
-  movementSpeed: 6
+  currentFloorLevel: 0
   minSuspiciousRotation: 20
   minSuspiciousPosition: 1
   mirrorLayer:
@@ -193,7 +194,6 @@ MonoBehaviour:
     m_Bits: 1024
   surpriseWaitTime: 2
   investigationWaitTime: 3
-  floorLevel: 0
   audioSource: {fileID: 0}
   detectionRadiusLight: 20
   lightLayer:
@@ -202,7 +202,6 @@ MonoBehaviour:
   wallFloorLayer:
     serializedVersion: 2
     m_Bits: 33280
-  blindSpeed: 3
   patrolPoints:
   - {fileID: 3495827379219480003}
   - {fileID: 3659877726675351806}
@@ -325,6 +324,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4046844470576449417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96332612726348765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a490d66042ca7499694648e9aa3e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 6
+  blindSpeed: 3
 --- !u!1 &4655257145073335146
 GameObject:
   m_ObjectHideFlags: 0
