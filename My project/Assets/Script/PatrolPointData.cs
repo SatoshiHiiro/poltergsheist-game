@@ -11,6 +11,7 @@ public class PatrolPointData : MonoBehaviour
     // This class contains all the data for a patrol point of the NPC
     private Transform point;   // Destination point of the NPC
     [SerializeField] private PatrolPointType patrolPointType;   // Type of the destination
+    [SerializeField] private float floorLevel;   // On what floor is this patrol point
     [SerializeField] private float waitTime;  // Waiting time before going to the next point
     [SerializeField] private SpriteRenderer spriteRenderer; // Sprite renderer of the room
     [SerializeField] private float minimumBlockHeight;  // Minimum Height of an object to block a room
@@ -28,5 +29,6 @@ public class PatrolPointData : MonoBehaviour
     public float MinimumBlockHeight => minimumBlockHeight;
     public float BlockingThreshold => blockingThreshold;
     public float WaitTimeBlocked => waitTimeBlocked;
+    public float FloorLevel => floorLevel;
 
 }

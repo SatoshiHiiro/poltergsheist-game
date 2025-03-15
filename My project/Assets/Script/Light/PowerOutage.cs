@@ -95,7 +95,7 @@ public class PowerOutage : MonoBehaviour, IPossessable
                 isRepairing = true;
                 npc.EnqueueInvestigation(RepairLights(npc, lightsClosed));
             }
-            npc.ChangeSpeed();
+            npc.NpcMovementController.ChangeSpeed();
             affectedNPCs.Add(npc);
 
         }
@@ -120,9 +120,9 @@ public class PowerOutage : MonoBehaviour, IPossessable
     private IEnumerator RepairLights(HumanNPCBehaviour npc, GameObject[] lightsClosed)
     {
         // The NPC walk to the light switch
-        yield return StartCoroutine(npc.ReachTarget(this.transform.position, floorLevel));
+        yield return StartCoroutine(npc.NpcMovementController.ReachTarget(this.transform.position, npc.FloorLevel ,floorLevel));
 
-        if (!npc.CanFindPath)
+        if (!npc.NpcMovementController.CanFindPath)
         {
             yield break;
         }
@@ -142,7 +142,7 @@ public class PowerOutage : MonoBehaviour, IPossessable
         // NPCs have their normal behavior again
         foreach (HumanNPCBehaviour npc in affectedNPCs)
         {
-            npc.ChangeSpeed();
+            npc.NpcMovementController.ChangeSpeed();
             //PatrollingNPCBehaviour patrollingNPC = npc.gameObject.GetComponent<PatrollingNPCBehaviour>();
             //if (patrollingNPC != null)
             //{

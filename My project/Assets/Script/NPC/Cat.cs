@@ -3,8 +3,7 @@ using System.Collections;
 
 public class Cat : BasicNPCBehaviour, IPatrol
 {
-    [Header("Patrolling Variables")]
-    [SerializeField] float walkingSpeed = 3f;    
+    [Header("Patrolling Variables")]  
     [SerializeField] PatrolPointData[] patrolPoints;  // All cat patrol destinations
     PatrolPointData nextPatrolPoint;  // Next cat patrol destination
     private int indexPatrolPoints;    // Keep track of patrol points
@@ -18,10 +17,12 @@ public class Cat : BasicNPCBehaviour, IPatrol
     //[SerializeField] float distanceWithTarget;  // Object targeted by the cat
     protected bool isHunting;   // Is the cat chasing an objet
     private bool isAttacking;   // Is the cat attacking the object
+    private bool isPatrolling;
     GameObject targetPossessedObject; // Cat hunting target
 
     AudioSource audioSource;
     Collider2D catCollider;
+    Coroutine patrolCoroutine;
 
    protected override void Start()
    {
@@ -29,7 +30,9 @@ public class Cat : BasicNPCBehaviour, IPatrol
         indexPatrolPoints = 0;
         nextPatrolPoint = patrolPoints[0];
         isHunting = false;
+        isAttacking = false;
         canMove = true;
+        isPatrolling = false;
 
         audioSource = GetComponent<AudioSource>();
         catCollider = GetComponent<Collider2D>();
@@ -41,13 +44,17 @@ public class Cat : BasicNPCBehaviour, IPatrol
         if (canMove)
         {
             base.Update();
-            if (!isHunting && !isAttacking)
+            if (!isHunting && !isAttacking && !isPatrolling)
             {
-                Patrol();
+                isPatrolling = true;
+                patrolCoroutine = StartCoroutine(Patrol());
             }
-            else if (isHunting && targetPossessedObject != null)
-            {
-                ObjectHunting();
+            else if (isHunting && targetPossessedObject != null && !isAttacking)
+            { 
+                //StopAllCoroutines();
+                StopCoroutine(patrolCoroutine);
+                isPatrolling = false;
+                StartCoroutine(ObjectHunting());
             }
         }        
     }
@@ -97,36 +104,16 @@ public class Cat : BasicNPCBehaviour, IPatrol
         
     }
 
-    //protected override bool IsObjectInFieldOfView(Collider2D obj)
-    //{
-    //    // Check if the object is in the line of sight of the NPC
-    //    Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
-    //    float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
-    //    return angle <= fieldOfViewAngle / 2;
-    //}
-
     // Patrolling of the cat
-    public void Patrol()
+    public IEnumerator Patrol()
     {
-        if (patrolPoints.Length == 0 || nextPatrolPoint == null) return;   // If there is no patrolPoint
+        if (patrolPoints.Length == 0 || nextPatrolPoint == null) yield break;   // If there is no patrolPoint
 
         // Get movement direction
         Vector3 destination = new Vector3(nextPatrolPoint.Point.position.x, transform.position.y, transform.position.z);
-        Vector2 direction = (new Vector2(destination.x, destination.y) - (Vector2)transform.position).normalized;
-
-        // Flip sprite based on direction
-        npcSpriteRenderer.flipX = direction.x < 0;
-        facingRight = !npcSpriteRenderer.flipX;
-
-        // Move towards destination
-        transform.position = Vector3.MoveTowards(transform.position, destination, walkingSpeed * Time.deltaTime);
-
-        // Verify if the NPC has arrived
-        if (Mathf.Abs(nextPatrolPoint.Point.position.x - transform.position.x) <= 0.2f)
-        {
-            // NPC has arrived to the patrol point
-            MoveToNextAvailablePatrolPoint();
-        }
+        yield return npcMovementController.ReachTarget(destination, currentFloorLevel, nextPatrolPoint.FloorLevel);
+        isPatrolling = false;
+        MoveToNextAvailablePatrolPoint();
     }
 
     // Which patrol point is the new destination of the cat
@@ -143,64 +130,79 @@ public class Cat : BasicNPCBehaviour, IPatrol
     }
 
     // The cat must chase any object it sees moving
-    private void ObjectHunting()
+    private IEnumerator ObjectHunting()
     {
+        isAttacking = true;
         audioSource.Play();
 
-        // Get the possessed object's position and movement
-        Vector3 objectPosition = targetPossessedObject.transform.position;
-        PossessionController possessionController = targetPossessedObject.GetComponent<PossessionController>();
-
-        // Check if cat is directly beneath the object
-        bool isCatUnderObject = Mathf.Abs(transform.position.x - objectPosition.x) < 0.5f;
-
-        if (isCatUnderObject && objectPosition.y > transform.position.y)
+        // Continue hunting until the cat catches the object or loses track of it
+        while (isHunting && targetPossessedObject != null)
         {
-            // If directly under and object is higher, use object's movement direction
-            if (possessionController != null)
-            {
-                // Get movement direction from the possessed object
-                Vector2 objectDirection = possessionController.GetMovementDirection();
+            RaycastHit2D hit = Physics2D.Raycast(transform.position,
+                                     (targetPossessedObject.transform.position - transform.position).normalized,
+                                     detectionRadius,
+                                     ~ignoreLayerSightBlocked);
 
-                // Only update facing if the object is actually moving horizontally
-                if (possessionController.IsMoving)
+            // Check if the possessed object is still in the field of view of the cat
+            if (hit.collider == null || hit.collider.gameObject != targetPossessedObject)
+            {
+                isHunting = false;
+                isAttacking = false;
+                targetPossessedObject = null;
+                //StartCoroutine(Patrol());
+                yield break;
+            }
+
+            // Get the possessed object's position and movement
+            Vector3 objectPosition = targetPossessedObject.transform.position;
+            PossessionController possessionController = targetPossessedObject.GetComponent<PossessionController>();
+
+            // Check if cat is directly beneath the object
+            bool isCatUnderObject = Mathf.Abs(transform.position.x - objectPosition.x) < 0.5f;
+
+            if (isCatUnderObject && objectPosition.y > transform.position.y)
+            {
+                // If directly under and object is higher, use object's movement direction
+                if (possessionController != null)
                 {
-                    npcSpriteRenderer.flipX = objectDirection.x < 0;
-                    facingRight = !npcSpriteRenderer.flipX;
+                    // Get movement direction from the possessed object
+                    Vector2 objectDirection = possessionController.GetMovementDirection();
+
+                    // Only update facing if the object is actually moving horizontally
+                    if (possessionController.IsMoving)
+                    {
+                        npcSpriteRenderer.flipX = objectDirection.x < 0;
+                        facingRight = !npcSpriteRenderer.flipX;
+                    }
                 }
             }
+            else
+            {
+                // Regular behavior - move toward object
+                Vector3 destination = new Vector3(objectPosition.x, transform.position.y, objectPosition.z);
+                Vector2 direction = (new Vector2(destination.x, destination.y) - (Vector2)transform.position).normalized;
+
+                // Flip sprite based on direction
+                npcSpriteRenderer.flipX = direction.x < 0;
+                facingRight = !npcSpriteRenderer.flipX;
+            }
+
+            // Cat is running towards the object target
+            //transform.position = Vector2.MoveTowards(transform.position, destination, huntingSpeed * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y, objectPosition.z);
+
+            Vector3 moveDestination = new Vector3(objectPosition.x, transform.position.y, objectPosition.z);
+            transform.position = Vector3.MoveTowards(transform.position, moveDestination, huntingSpeed * Time.deltaTime);
+            // Verify if the Cat toutched the object
+            if (catCollider.bounds.Intersects(targetPossessedObject.GetComponent<Collider2D>().bounds))
+            {
+                isHunting = false;
+                yield return AttackObject();
+                break;
+            }
+            yield return null;
         }
-        else
-        {
-            // Regular behavior - move toward object
-            Vector3 destination = new Vector3(objectPosition.x, transform.position.y, objectPosition.z);
-            Vector2 direction = (new Vector2(destination.x, destination.y) - (Vector2)transform.position).normalized;
-
-            // Flip sprite based on direction
-            npcSpriteRenderer.flipX = direction.x < 0;
-            facingRight = !npcSpriteRenderer.flipX;
-        }
-
-        //// Get movement direction
-        //Vector2 destination = new Vector2(targetPossessedObject.transform.position.x, transform.position.y);
-        //Vector2 direction = (destination - (Vector2)transform.position).normalized;
-
-        //// Flip sprite based on direction
-        //npcSpriteRenderer.flipX = direction.x < 0;
-        //facingRight = !npcSpriteRenderer.flipX;
-
-        // Cat is running towards the object target
-        //transform.position = Vector2.MoveTowards(transform.position, destination, huntingSpeed * Time.deltaTime);
-        transform.position = new Vector3(transform.position.x, transform.position.y, objectPosition.z);
-
-        Vector3 moveDestination = new Vector3(objectPosition.x, transform.position.y, objectPosition.z);
-        transform.position = Vector3.MoveTowards(transform.position, moveDestination, huntingSpeed * Time.deltaTime);
-        // Verify if the Cat toutched the object
-        if (catCollider.bounds.Intersects(targetPossessedObject.GetComponent<Collider2D>().bounds))
-        {
-            isHunting = false;
-            StartCoroutine(AttackObject());
-        }
+        
     }
 
     // The cat attack the possessed object
@@ -212,11 +214,12 @@ public class Cat : BasicNPCBehaviour, IPatrol
         if (targetObjectManager == null)
         {
             Debug.Log("Error: The possessed object should have a PossessionManager component");
+            isAttacking = false;
+            yield break;
         }
         targetObjectManager.StopPossession();
 
         yield return new WaitForSeconds(attackTime);
-
 
         // After the attack the object is no longer a target
         targetPossessedObject = null;
