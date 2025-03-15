@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointType: 1
+  floorLevel: 0
   waitTime: 2
   spriteRenderer: {fileID: 5396489987797684528}
   minimumBlockHeight: 1
@@ -151,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointType: 0
+  floorLevel: 0
   waitTime: 2
   spriteRenderer: {fileID: 0}
   minimumBlockHeight: 0
@@ -204,9 +206,9 @@ GameObject:
   - component: {fileID: 56672723648012867}
   - component: {fileID: 66171971690578652}
   - component: {fileID: 615629787862216495}
+  - component: {fileID: 7909364727702336859}
   - component: {fileID: 1920225675460218937}
   - component: {fileID: 3134175910215897717}
-  - component: {fileID: 7909364727702336859}
   m_Layer: 6
   m_Name: NPC
   m_TagString: Untagged
@@ -397,6 +399,20 @@ MonoBehaviour:
   - {fileID: 2781399670405726049}
   - {fileID: 2276524294027496926}
   - {fileID: 5373824072166939343}
+--- !u!114 &7909364727702336859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566440865467703753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a490d66042ca7499694648e9aa3e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 6
+  blindSpeed: 3
 --- !u!82 &1920225675460218937
 AudioSource:
   m_ObjectHideFlags: 0
@@ -516,20 +532,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7909364727702336859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7566440865467703753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a490d66042ca7499694648e9aa3e33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 6
-  blindSpeed: 3
 --- !u!1 &8897339015579286660
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointType: 0
+  floorLevel: 0
   waitTime: 3
   spriteRenderer: {fileID: 0}
   minimumBlockHeight: 0

@@ -99,8 +99,8 @@ public class PossessionManager : InteractibleManager
         }
 
         // There is no more energy to possessed the object
-        if (isPossessed && isAnimationFinished && hasEnoughSpace && energy.CurrentEnergy() == 0)
-            StopPossession();
+        //if (isPossessed && posControl.isInContact && isAnimationFinished && hasEnoughSpace && energy.CurrentEnergy() == 0)
+        //    StopPossession();
     }
 
     void Update()
