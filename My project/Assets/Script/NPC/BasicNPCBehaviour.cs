@@ -24,6 +24,9 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
     public float FloorLevel { get { return currentFloorLevel; } }
     public NPCMovementController NpcMovementController { get { return npcMovementController; } }
 
+    //Getters and Setters
+    public bool FacingRight {  get { return facingRight; } set { facingRight = value; } }
+
     protected virtual void Start()
     {
         initialFloorLevel = currentFloorLevel;
@@ -99,6 +102,11 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
         float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
         return angle <= fieldOfViewAngle / 2;
+    }
+
+    public void UpdateFloorLevel(float currenrFloorLevel)
+    {
+        currentFloorLevel = currenrFloorLevel;
     }
 
     // Debug method only

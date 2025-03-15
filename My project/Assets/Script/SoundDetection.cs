@@ -30,10 +30,12 @@ public abstract class SoundDetection : MonoBehaviour
                 // Check if the NPC is blocked
                 if(npcPatrol != null && (npcPatrol.IsBlocked || npcPatrol.IsInRoom))
                 {
+                    print("not available");
                     blockedNPCs.Add(npcPatrol);
                 }
                 else
                 {
+                    print("Avaialble");
                     // The NPC is availabe to go an investigate
                     availableNPCs.Add(npc);
                 }

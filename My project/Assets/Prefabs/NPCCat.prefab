@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointType: 0
+  floorLevel: 0
   waitTime: 0
   spriteRenderer: {fileID: 0}
   minimumBlockHeight: 0
@@ -95,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointType: 0
+  floorLevel: 0
   waitTime: 0
   spriteRenderer: {fileID: 0}
   minimumBlockHeight: 0
@@ -110,6 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 784505872381245537}
   - component: {fileID: 2504298377488532621}
+  - component: {fileID: 5125243635790463774}
   - component: {fileID: 3730382630439531477}
   - component: {fileID: 4700009154862043946}
   - component: {fileID: 2354190293712629826}
@@ -179,7 +182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 6323fef7bb649794da65d6d92d2f5f22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -191,6 +194,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5125243635790463774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3199589612183537224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a490d66042ca7499694648e9aa3e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 6
+  blindSpeed: 3
 --- !u!114 &3730382630439531477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,8 +228,7 @@ MonoBehaviour:
   ignoreLayerSightBlocked:
     serializedVersion: 2
     m_Bits: 15680
-  movementSpeed: 6
-  walkingSpeed: 3
+  currentFloorLevel: 0
   patrolPoints:
   - {fileID: 6860574517290841608}
   - {fileID: 518815475024151674}
@@ -236,7 +252,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 8648
   m_LayerOverridePriority: 1
   m_ForceSendLayers:
     serializedVersion: 2

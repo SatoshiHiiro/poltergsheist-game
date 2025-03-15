@@ -131,25 +131,6 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         // NPC has arrived to the patrol point
         currentPoint = nextPatrolPoint;
         yield return HandleWaiting(currentPoint);
-
-
-        // Flip sprite based on direction
-        //npcMovementController.UpdateSpriteDirection(destination);
-
-        // Move towards destination
-        //transform.position = Vector2.MoveTowards(transform.position, destination, npcMovementController.MovementSpeed * Time.deltaTime);
-
-        //// Verify if the NPC has arrived
-        //if (Mathf.Abs(nextPatrolPoint.Point.position.x - transform.position.x) <= 0.2f)
-        //{
-        //    // NPC has arrived to the patrol point
-        //    currentPoint = nextPatrolPoint;
-        //    StartCoroutine(HandleWaiting(currentPoint));
-        //}
-        //else
-        //{
-        //    currentPoint = null;    // He's walking to the next patrol point
-        //}
     }
 
     // Check if there is a possessed object in front of a room

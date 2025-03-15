@@ -234,10 +234,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         yield return new WaitForSeconds(investigationWaitTime);     
     }
 
-    public void UpdateFloorLevel(float currenrFloorLevel)
-    {
-        currentFloorLevel = currenrFloorLevel;
-    }
+
 
     // Return the NPC to it's initial position and facing direction
     public  IEnumerator ReturnToInitialPosition()

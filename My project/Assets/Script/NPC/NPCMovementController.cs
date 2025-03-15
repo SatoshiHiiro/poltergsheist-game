@@ -37,19 +37,20 @@ public class NPCMovementController : MonoBehaviour
     // Updates sprite direction based on movement direction
     public void UpdateSpriteDirection(Vector2 destination)
     {
-        if(destination.x > transform.position.x)
-        {
-            npcSpriteRenderer.flipX = false;
-        }
-        else if (destination.x < transform.position.x)
-        {
-            npcSpriteRenderer.flipX = true;
-        }
-        //// Flip sprite based on direction
-        //Vector2 npcDirection = (destination - (Vector2)transform.position).normalized;
-        //// Sprite face the right direction
-        //npcSpriteRenderer.flipX = npcDirection.x < 0;
-        //facingRight = !npcSpriteRenderer.flipX;
+        BasicNPCBehaviour npc = GetComponent<BasicNPCBehaviour>();
+        //if(destination.x > transform.position.x)
+        //{
+        //    npcSpriteRenderer.flipX = false;
+        //}
+        //else if (destination.x < transform.position.x)
+        //{
+        //    npcSpriteRenderer.flipX = true;
+        //}
+        // Flip sprite based on direction
+        Vector2 npcDirection = (destination - (Vector2)transform.position).normalized;
+        // Sprite face the right direction
+        npcSpriteRenderer.flipX = npcDirection.x < 0;
+        npc.FacingRight = !npcSpriteRenderer.flipX;
     }
 
     // The NPC walks horizontally to a given destination
