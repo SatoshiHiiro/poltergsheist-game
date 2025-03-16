@@ -7,20 +7,19 @@ public abstract class SoundDetection : MonoBehaviour
     // Manage the detection of the sounds
 
     [SerializeField] protected float soundRadius;       // Radius in which the sound is projected
-    [SerializeField] protected float floorThreshold;    // Distance between two floor
-    [SerializeField] protected LayerMask layerToDetect;
-    [SerializeField] protected float floorLevel;
-    protected bool firstNPCNotified = false;    // Is there an NPC that was already notified of the sound
-    protected SoundEmittingObject objectType;
+    [SerializeField] protected LayerMask npcLayer;      // Layer of the NPCs who must be alerted by the sound
+    [SerializeField] protected float floorLevel;        // On which floor level is the object
+    protected bool firstNPCNotified = false;            // Is there an NPC that was already notified of the sound
+    protected SoundEmittingObject objectType;           // Which object type is the object
 
     // Getters
     public SoundEmittingObject ObjectType => objectType;
 
     // Notify every enemies in the zone of the sound
-    protected void NotifyNearbyEnemies(float floorY, SoundDetection objectSound)
+    protected void NotifyNearbyEnemies(SoundDetection objectSound)
     {
         // Find all NPC within range
-        Collider2D[] colliderNearbyNPC = Physics2D.OverlapCircleAll(transform.position, soundRadius, layerToDetect);
+        Collider2D[] colliderNearbyNPC = Physics2D.OverlapCircleAll(transform.position, soundRadius, npcLayer);
 
         List<HumanNPCBehaviour> availableNPCs = new List<HumanNPCBehaviour>();
         List<HumanNPCBehaviour> blockedNPCs = new List<HumanNPCBehaviour>();
@@ -67,6 +66,8 @@ public abstract class SoundDetection : MonoBehaviour
         }
         firstNPCNotified = false;
     }
+
+    public abstract void ResetObject();
 
     protected void OnDrawGizmosSelected()
     {

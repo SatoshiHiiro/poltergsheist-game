@@ -191,15 +191,19 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     // Start the investigation of the sound
     public virtual void InvestigateSound(SoundDetection objectsound, bool replaceObject, float targetFloor)
     {
-        switch (objectsound.ObjectType)
-        {
-            case SoundEmittingObject.FallingObject:
-                investigationQueue.Enqueue(InvestigateFallingObject((FallingObject)objectsound, replaceObject, targetFloor));
-                break;
-            default:
-                Debug.Log("Sound emitting object unknown");
-                break;
-        }
+        investigationQueue.Enqueue(InvestigateSoundObject(objectsound, replaceObject, targetFloor));
+        //switch (objectsound.ObjectType)
+        //{
+        //    case SoundEmittingObject.FallingObject:
+        //        investigationQueue.Enqueue(InvestigateFallingObject((FallingObject)objectsound, replaceObject, targetFloor));
+        //        break;
+        //    case SoundEmittingObject.SoundObject:
+        //        investigationQueue.Enqueue(InvestigateSoundObject((JukeBox)objectsound,replaceObject, targetFloor));
+        //        break;
+        //    default:
+        //        Debug.Log("Sound emitting object unknown");
+        //        break;
+        //}
 
     }
 
@@ -216,34 +220,81 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         currentInvestigation = null;
     }
 
-    // NPC behaviour for the falling object investigation
-    protected IEnumerator InvestigateFallingObject(FallingObject objectsound, bool replaceObject, float targetFloor)
+    // NPC behaviour for sound emitting object investigation
+    protected IEnumerator InvestigateSoundObject(SoundDetection objectsound, bool replaceObject, float targetFloor)
     {
-
         // Take a surprise pause before going on investigation
         audioSource.Play();
         yield return new WaitForSeconds(surpriseWaitTime);
 
-        yield return (npcMovementController.ReachTarget(objectsound.transform.position, currentFloorLevel ,targetFloor));
+        yield return (npcMovementController.ReachTarget(objectsound.transform.position, currentFloorLevel, targetFloor));
 
         // We can't find a path
         if (!npcMovementController.CanFindPath)
         {
             yield break;
         }
-        //yield return StartCoroutine(ReachTarget(objectsound.transform.position, targetFloor));
 
-        // One NPC must replace the object to it's initial position
-        FallingObject fallingObject = objectsound.GetComponent<FallingObject>();
-        if (fallingObject != null && replaceObject)
-        {
-            fallingObject.ReplaceObject();
-            // Animation ICI!
-            fallingObject.FinishReplacement();
-        }
         // Wait a bit of time before going back to normal
-        yield return new WaitForSeconds(investigationWaitTime);     
+        yield return new WaitForSeconds(investigationWaitTime);
+        if (replaceObject)
+        {
+            objectsound.ResetObject();
+        }
     }
+
+    //// NPC behaviour for the falling object investigation
+    //protected IEnumerator InvestigateFallingObject(FallingObject objectsound, bool replaceObject, float targetFloor)
+    //{
+
+    //    // Take a surprise pause before going on investigation
+    //    audioSource.Play();
+    //    yield return new WaitForSeconds(surpriseWaitTime);
+
+    //    yield return (npcMovementController.ReachTarget(objectsound.transform.position, currentFloorLevel ,targetFloor));
+
+    //    // We can't find a path
+    //    if (!npcMovementController.CanFindPath)
+    //    {
+    //        yield break;
+    //    }
+    //    //yield return StartCoroutine(ReachTarget(objectsound.transform.position, targetFloor));
+
+    //    // Wait a bit of time before going back to normal
+    //    yield return new WaitForSeconds(investigationWaitTime);
+
+    //    // One NPC must replace the object to it's initial position
+    //    FallingObject fallingObject = objectsound.GetComponent<FallingObject>();
+    //    if (fallingObject != null && replaceObject)
+    //    {
+    //        fallingObject.ReplaceObject();
+    //        // Animation ICI!
+    //        fallingObject.FinishReplacement();
+    //    }
+   
+    //}
+
+    //protected IEnumerator InvestigateSoundObject(JukeBox soundObject, bool replaceObject, float targetFloor)
+    //{
+    //    // Take a surprise pause before going on investigation
+    //    audioSource.Play();
+    //    yield return new WaitForSeconds(surpriseWaitTime);
+
+    //    yield return (npcMovementController.ReachTarget(soundObject.transform.position, currentFloorLevel, targetFloor));
+
+    //    // We can't find a path
+    //    if (!npcMovementController.CanFindPath)
+    //    {
+    //        yield break;
+    //    }
+
+    //    // Wait a bit of time before going back to normal
+    //    yield return new WaitForSeconds(investigationWaitTime);
+    //    if (replaceObject)
+    //    {
+    //        soundObject.StopSound();
+    //    }
+    //}
 
 
 

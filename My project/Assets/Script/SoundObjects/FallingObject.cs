@@ -46,17 +46,26 @@ public class FallingObject : SoundDetection, IPossessable
         if (collision.gameObject.CompareTag("Floor"))
         {
             audioSource.Play();
-            NotifyNearbyEnemies(collision.gameObject.transform.position.y, this);
+            NotifyNearbyEnemies(this);
         }
     }
+
+    // Replace the object to it's normal position
+    public override void ResetObject()
+    {
+        ReplaceObject();
+        // Animation ici
+        FinishReplacement();
+    }
+
     // Reset the object state and physics
-    public void ReplaceObject()
+    private void ReplaceObject()
     {
         State = ObjectState.BeingReplaced;
         rb.bodyType= RigidbodyType2D.Kinematic;
     }
     // Reset the object position and rotation
-    public void FinishReplacement()
+    private void FinishReplacement()
     {
         State = ObjectState.Normal;
         transform.position = initialPosition;

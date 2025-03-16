@@ -216,9 +216,9 @@ public class EnemyBehaviour : MonoBehaviour
         FallingObject fallingObject = objectsound.GetComponent<FallingObject>();
         if (fallingObject != null && replaceObject)
         {
-            fallingObject.ReplaceObject();
+            //fallingObject.ReplaceObject();
             // Animation ICI!
-            fallingObject.FinishReplacement();
+            //fallingObject.FinishReplacement();
         }
         // Wait a bit of time before going back to normal
         yield return new WaitForSeconds(investigationWaitTime);
