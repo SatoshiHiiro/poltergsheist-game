@@ -163,13 +163,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
             // Check if the mirror is in the field of view of the NPC
             if (!IsObjectInFieldOfView(mirrorCollider)) continue;
-            
+
             // Check if the player reflection is in the mirror
             if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
             {
+                //print("i dont see polterg");
                 // If nothing is blocking the sight of the NPC to the reflection of the player
                 if (!mirror.IsMirrorReflectionBlocked(player.GetComponent<Collider2D>()) && !seePolterg)
                 {
+                    print("see");
                     NPCSeePolterg();
                 }
 
