@@ -32,6 +32,9 @@ public class PossessionManager : InteractibleManager
     Collider2D col2D;
     PossessionController posControl;
 
+    // Getters
+    public bool IsPossessing => isPossessed;
+
     protected override void Start()
     {
         base.Start();
