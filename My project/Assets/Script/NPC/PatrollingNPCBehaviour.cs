@@ -20,8 +20,8 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     protected bool isInRoom;    // Is the NPC in a room
     PatrolPointData currentPoint;   // Point where the NPC is located
     PatrolPointData nextPatrolPoint; // Next NPC patrol point
-    private bool rightFloor;    // Does the NPC on the right floor to do is patrol
-    private bool isWalkingBack;    // Does the NPC go up the stairs
+    //private bool rightFloor;    // Does the NPC on the right floor to do is patrol
+    //private bool isWalkingBack;    // Does the NPC go up the stairs
     private bool isPatrolling;
 
 
@@ -30,6 +30,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     public bool IsInRoom => isInRoom;
 
     private Coroutine returnToFloor;
+    private Coroutine patrolling;
     protected override void Start()
     {
         base.Start();
@@ -38,8 +39,8 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         isBlocked = false;
         isWaiting = false;
         isInRoom = false;
-        rightFloor = true;
-        isWalkingBack = false;
+        //rightFloor = true;
+        //isWalkingBack = false;
         isPatrolling = false;   
         currentPoint = null;
         if(patrolPoints.Length > 0)
@@ -69,20 +70,22 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             }
             isInvestigating = true;
             //StopCoroutine("HandleWaiting");
-            StopCoroutine("Patrol");
+            //StopCoroutine("Patrol");
+            StopCoroutine(patrolling);
+            isPatrolling = false;
             IEnumerator investigationCoroutine = investigationQueue.Dequeue();
             StartCoroutine(RunInvestigation(investigationCoroutine));
         }
         // Priority 3: Return to starting floor if we need to
-        else if(investigationQueue.Count == 0 && !isInvestigating && !rightFloor && isWalkingBack)
-        {
-            isWalkingBack = false;
-            returnToFloor = StartCoroutine(ReturnRightFloor());
-        }
+        //else if(investigationQueue.Count == 0 && !isInvestigating && !rightFloor && isWalkingBack)
+        //{
+        //    isWalkingBack = false;
+        //    returnToFloor = StartCoroutine(ReturnRightFloor());
+        //}
         // Priority 4: Patrol if we're able to and should be
-        else if(investigationQueue.Count == 0 && !isInvestigating && rightFloor && !isWaiting && !isBlocked && !isPatrolling)
+        else if(investigationQueue.Count == 0 && !isInvestigating && !isWaiting && !isBlocked && !isPatrolling)
         {
-            StartCoroutine(Patrol());
+            patrolling = StartCoroutine(Patrol());
         }
 
     }
@@ -94,26 +97,25 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         {
             yield return new WaitForSeconds(0.5f);
         }
-        isWalkingBack = true;
-        rightFloor = false;
+        //isWalkingBack = true;
+        //rightFloor = false;
         print(investigation.ToString());
         yield return StartCoroutine(investigation);
-        isInvestigating = false;
-        
+        isInvestigating = false;        
     }
 
     // Start the investigation of the sound
-    public override void InvestigateSound(GameObject objectsound, bool replaceObject, float targetFloor)
-    {
-        investigationQueue.Enqueue(InvestigateFallingObject(objectsound, replaceObject, targetFloor));      
-    }
+    //public override void InvestigateSound(SoundDetection objectsound, bool replaceObject, float targetFloor)
+    //{
+    //    investigationQueue.Enqueue(InvestigateFallingObject(objectsound, replaceObject, targetFloor));      
+    //}
 
     public IEnumerator ReturnRightFloor()
     {
         yield return StartCoroutine(npcMovementController.ReachFloor(currentFloorLevel, initialFloorLevel));//ReachFloor(initialFloorLevel));
         if (FloorLevel == initialFloorLevel)
         {
-            rightFloor = true;
+            //rightFloor = true;
         }
 
     }

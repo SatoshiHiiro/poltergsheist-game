@@ -189,9 +189,18 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     }
 
     // Start the investigation of the sound
-    public virtual void InvestigateSound(GameObject objectsound, bool replaceObject, float targetFloor)
+    public virtual void InvestigateSound(SoundDetection objectsound, bool replaceObject, float targetFloor)
     {
-        investigationQueue.Enqueue(InvestigateFallingObject(objectsound, replaceObject, targetFloor));
+        switch (objectsound.ObjectType)
+        {
+            case SoundEmittingObject.FallingObject:
+                investigationQueue.Enqueue(InvestigateFallingObject((FallingObject)objectsound, replaceObject, targetFloor));
+                break;
+            default:
+                Debug.Log("Sound emitting object unknown");
+                break;
+        }
+
     }
 
     public void EnqueueInvestigation(IEnumerator investigation)
@@ -208,7 +217,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     }
 
     // NPC behaviour for the falling object investigation
-    protected IEnumerator InvestigateFallingObject(GameObject objectsound, bool replaceObject, float targetFloor)
+    protected IEnumerator InvestigateFallingObject(FallingObject objectsound, bool replaceObject, float targetFloor)
     {
 
         // Take a surprise pause before going on investigation

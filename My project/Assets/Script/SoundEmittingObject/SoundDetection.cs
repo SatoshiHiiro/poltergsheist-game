@@ -11,9 +11,13 @@ public abstract class SoundDetection : MonoBehaviour
     [SerializeField] protected LayerMask layerToDetect;
     [SerializeField] protected float floorLevel;
     protected bool firstNPCNotified = false;    // Is there an NPC that was already notified of the sound
+    protected SoundEmittingObject objectType;
+
+    // Getters
+    public SoundEmittingObject ObjectType => objectType;
 
     // Notify every enemies in the zone of the sound
-    protected void NotifyNearbyEnemies(float floorY, GameObject objectSound)
+    protected void NotifyNearbyEnemies(float floorY, SoundDetection objectSound)
     {
         // Find all NPC within range
         Collider2D[] colliderNearbyNPC = Physics2D.OverlapCircleAll(transform.position, soundRadius, layerToDetect);
@@ -53,7 +57,7 @@ public abstract class SoundDetection : MonoBehaviour
         }
     }
 
-    private void NotifyNPCs(List<HumanNPCBehaviour> npcsList, float floorLevel, GameObject objectSound)
+    private void NotifyNPCs(List<HumanNPCBehaviour> npcsList, float floorLevel, SoundDetection objectSound)
     {
         foreach(HumanNPCBehaviour npc in npcsList)
         {
@@ -69,4 +73,11 @@ public abstract class SoundDetection : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, soundRadius);
     }
+}
+
+public enum SoundEmittingObject
+{
+    FallingObject,
+    SoundObject,
+    BreakableObject
 }

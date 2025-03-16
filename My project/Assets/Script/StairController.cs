@@ -57,8 +57,8 @@ public class StairController : MonoBehaviour
         }
         Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
         //character.transform.GetChild(0).GetComponent<Renderer>();
-        print("Character size X: " + characterRenderer.bounds.size.x);
-        print("Character size Y: " + characterRenderer.bounds.size.y);
+       // print("Character size X: " + characterRenderer.bounds.size.x);
+       // print("Character size Y: " + characterRenderer.bounds.size.y);
         // If the character fit with the stair dimension, then he can climb
         if (characterRenderer.bounds.size.x < maximumWidth && characterRenderer.bounds.size.y < maximumHeight)
         {

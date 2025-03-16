@@ -16,6 +16,7 @@ public class FallingObject : SoundDetection, IPossessable
     private Vector2 floorY;            // Position of the floor
     private Rigidbody2D rb;
     private Collider2D objectCollider;
+
     public ObjectState State { get; private set; }
 
     // Sound
@@ -28,6 +29,7 @@ public class FallingObject : SoundDetection, IPossessable
         objectCollider= GetComponent<Collider2D>();
         audioSource= GetComponent<AudioSource>();
         State = ObjectState.Normal;
+        objectType = SoundEmittingObject.FallingObject;
     }
     public void OnPossessed()
     {
@@ -44,7 +46,7 @@ public class FallingObject : SoundDetection, IPossessable
         if (collision.gameObject.CompareTag("Floor"))
         {
             audioSource.Play();
-            NotifyNearbyEnemies(collision.gameObject.transform.position.y, this.gameObject);
+            NotifyNearbyEnemies(collision.gameObject.transform.position.y, this);
         }
     }
     // Reset the object state and physics
