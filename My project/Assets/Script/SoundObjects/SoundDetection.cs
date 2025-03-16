@@ -2,6 +2,10 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IResetObject
+{
+    public void ResetObject();
+}
 public abstract class SoundDetection : MonoBehaviour
 {
     // Manage the detection of the sounds
@@ -12,8 +16,15 @@ public abstract class SoundDetection : MonoBehaviour
     protected bool firstNPCNotified = false;            // Is there an NPC that was already notified of the sound
     protected SoundEmittingObject objectType;           // Which object type is the object
 
+    protected AudioSource audioSource;
+
     // Getters
     public SoundEmittingObject ObjectType => objectType;
+
+    protected virtual void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Notify every enemies in the zone of the sound
     protected void NotifyNearbyEnemies(SoundDetection objectSound)
@@ -66,8 +77,6 @@ public abstract class SoundDetection : MonoBehaviour
         }
         firstNPCNotified = false;
     }
-
-    public abstract void ResetObject();
 
     protected void OnDrawGizmosSelected()
     {

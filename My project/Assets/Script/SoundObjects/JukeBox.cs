@@ -1,17 +1,16 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class JukeBox : SoundDetection, IPossessable
+public class JukeBox : SoundDetection, IPossessable, IResetObject
 {
-    private AudioSource audioSource;
     private PossessionManager possessionManager;
     private bool isPlaying;
     
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         objectType = SoundEmittingObject.SoundObject;
         isPlaying = false;
-        audioSource = GetComponent<AudioSource>();
         possessionManager = GetComponent<PossessionManager>();
     }
 
@@ -36,7 +35,7 @@ public class JukeBox : SoundDetection, IPossessable
     }
 
     // Stop the sound
-    public override void ResetObject()
+    public void ResetObject()
     {
         audioSource.Stop();
         isPlaying = false;

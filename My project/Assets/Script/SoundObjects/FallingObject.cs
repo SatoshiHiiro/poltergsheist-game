@@ -8,26 +8,24 @@ public enum ObjectState
 }
 
 
-public class FallingObject : SoundDetection, IPossessable
+public class FallingObject : SoundDetection, IPossessable, IResetObject
 {
     // Behaviour of the falling object when he's possessed
 
     protected Vector2 initialPosition;    // Initial Position before Falling
-    private Vector2 floorY;            // Position of the floor
     private Rigidbody2D rb;
     private Collider2D objectCollider;
 
     public ObjectState State { get; private set; }
 
-    // Sound
-    private AudioSource audioSource;
+
     
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         initialPosition = transform.position;
         rb= GetComponent<Rigidbody2D>();
         objectCollider= GetComponent<Collider2D>();
-        audioSource= GetComponent<AudioSource>();
         State = ObjectState.Normal;
         objectType = SoundEmittingObject.FallingObject;
     }
@@ -51,7 +49,7 @@ public class FallingObject : SoundDetection, IPossessable
     }
 
     // Replace the object to it's normal position
-    public override void ResetObject()
+    public void ResetObject()
     {
         ReplaceObject();
         // Animation ici

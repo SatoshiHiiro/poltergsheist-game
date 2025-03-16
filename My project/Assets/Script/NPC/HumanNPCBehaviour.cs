@@ -237,9 +237,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
         // Wait a bit of time before going back to normal
         yield return new WaitForSeconds(investigationWaitTime);
-        if (replaceObject)
+
+        // The NPC who must reset the Object reset it (if it's the case)
+        IResetObject resetObject = objectsound.GetComponent<IResetObject>();
+        if(resetObject != null)
         {
-            objectsound.ResetObject();
+            if (replaceObject)
+            {
+                resetObject.ResetObject();
+            }
         }
     }
 
