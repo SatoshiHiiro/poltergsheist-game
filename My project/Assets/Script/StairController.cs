@@ -98,7 +98,7 @@ public class StairController : MonoBehaviour
 
         // Climbing stair animation
 
-        HumanNPCBehaviour npcBehaviour = character.GetComponent<HumanNPCBehaviour>();
+        BasicNPCBehaviour npcBehaviour = character.GetComponent<BasicNPCBehaviour>();
         if (npcBehaviour != null)
         {
             float newFloorLevel = (direction == StairDirection.Upward) ?

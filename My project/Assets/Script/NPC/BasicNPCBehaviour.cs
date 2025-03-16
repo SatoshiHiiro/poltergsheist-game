@@ -14,20 +14,27 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
     protected float fieldOfViewAngle;
 
     [Header("NPC global variables")]
-    [SerializeField] protected float movementSpeed = 6f;
-
-
-
+    [SerializeField] protected float currentFloorLevel;   // Floor where the npc is located
+    protected float initialFloorLevel;
+    protected NPCMovementController npcMovementController;
     protected SpriteRenderer npcSpriteRenderer;
 
 
+    // Getters
+    public float FloorLevel { get { return currentFloorLevel; } }
+    public NPCMovementController NpcMovementController { get { return npcMovementController; } }
+
+    //Getters and Setters
+    public bool FacingRight {  get { return facingRight; } set { facingRight = value; } }
 
     protected virtual void Start()
     {
+        initialFloorLevel = currentFloorLevel;
         fieldOfViewAngle = 180f;
         isCurrentlyObserving = false;
         isObjectMoving = false;
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
+        npcMovementController = GetComponent<NPCMovementController>();
     }
     protected virtual void Update()
     {
@@ -97,26 +104,9 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         return angle <= fieldOfViewAngle / 2;
     }
 
-    // Change the sprite depending on the direction the npc is walking
-    protected void UpdateSpriteDirection(Vector2 destination)
-    {        
-        // Flip sprite based on direction
-        Vector2 npcDirection = (destination - (Vector2)transform.position).normalized;
-        // Sprite face the right direction
-        npcSpriteRenderer.flipX = npcDirection.x < 0;
-        facingRight = !npcSpriteRenderer.flipX;
-    }
-
-    // The NPC walks horizontally to a given destination
-    protected IEnumerator HorizontalMovementToTarget(Vector2 destination)
+    public void UpdateFloorLevel(float currenrFloorLevel)
     {
-        // The NPC must walk until it reaches its destination
-        while (Mathf.Abs(transform.position.x - destination.x) > 0.1f)
-        {
-            // NPC walk towards the destination
-            transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
-            yield return null;
-        }
+        currentFloorLevel = currenrFloorLevel;
     }
 
     // Debug method only

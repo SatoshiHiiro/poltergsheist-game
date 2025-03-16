@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7345984778951268018}
   - component: {fileID: 7477523869567106515}
   - component: {fileID: 719027281930787979}
+  - component: {fileID: 5139380479391363131}
   - component: {fileID: 1171068450181168371}
   - component: {fileID: 6803608191436075544}
   m_Layer: 6
@@ -217,7 +218,7 @@ MonoBehaviour:
   ignoreLayerSightBlocked:
     serializedVersion: 2
     m_Bits: 15680
-  movementSpeed: 6
+  currentFloorLevel: 0
   minSuspiciousRotation: 20
   minSuspiciousPosition: 1
   mirrorLayer:
@@ -225,7 +226,6 @@ MonoBehaviour:
     m_Bits: 1024
   surpriseWaitTime: 2
   investigationWaitTime: 3
-  floorLevel: 0
   audioSource: {fileID: 0}
   detectionRadiusLight: 20
   lightLayer:
@@ -234,6 +234,19 @@ MonoBehaviour:
   wallFloorLayer:
     serializedVersion: 2
     m_Bits: 33280
+--- !u!114 &5139380479391363131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430824331534524123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a490d66042ca7499694648e9aa3e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 6
   blindSpeed: 3
 --- !u!82 &1171068450181168371
 AudioSource:

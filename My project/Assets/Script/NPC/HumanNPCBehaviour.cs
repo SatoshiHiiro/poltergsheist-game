@@ -19,9 +19,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [Header("Investigation Variables")]
     [SerializeField] protected float surpriseWaitTime = 2f;
     [SerializeField] protected float investigationWaitTime = 3f;
-    [SerializeField] private float floorLevel;   // Floor where the npc is located
-    protected float initialFloorLevel;
-    public float FloorLevel { get { return floorLevel; } }
+
     protected bool isInvestigating = false; // Is the NPC investigating a suspect sound
     public AudioSource audioSource;  // Source of the surprised sound
 
@@ -32,16 +30,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     private bool isAtInitialPosition = false;
     private Coroutine currentInvestigation = null;
 
-    private bool canFindPath = true;
-
-    public bool CanFindPath => canFindPath;
-
     [Header("Lighting Variable")]
     [SerializeField] float detectionRadiusLight = 20f;
     [SerializeField] LayerMask lightLayer;  // Layer of the gameobject light
     [SerializeField] LayerMask wallFloorLayer;   // Layer of the gameobject wall
-    [SerializeField] protected float blindSpeed = 3f;
-    protected float normalSpeed;
+
 
     protected bool seePolterg = false;
 
@@ -52,9 +45,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         audioSource = GetComponent<AudioSource>();        
         initialPosition = transform.position;
         initialFacingRight = !npcSpriteRenderer.flipX;
-        initialFloorLevel = floorLevel;
+        initialFloorLevel = currentFloorLevel;
         isAtInitialPosition = true;
-        normalSpeed = movementSpeed;
     }
 
     private Coroutine returnToInitialPositionCoroutine;
@@ -171,13 +163,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
             // Check if the mirror is in the field of view of the NPC
             if (!IsObjectInFieldOfView(mirrorCollider)) continue;
-            
+
             // Check if the player reflection is in the mirror
             if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
             {
+                //print("i dont see polterg");
                 // If nothing is blocking the sight of the NPC to the reflection of the player
                 if (!mirror.IsMirrorReflectionBlocked(player.GetComponent<Collider2D>()) && !seePolterg)
                 {
+                    print("see");
                     NPCSeePolterg();
                 }
 
@@ -221,9 +215,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         audioSource.Play();
         yield return new WaitForSeconds(surpriseWaitTime);
 
-        yield return (ReachTarget(objectsound.transform.position, targetFloor));
+        yield return (npcMovementController.ReachTarget(objectsound.transform.position, currentFloorLevel ,targetFloor));
 
-        if (!canFindPath)
+        // We can't find a path
+        if (!npcMovementController.CanFindPath)
         {
             yield break;
         }
@@ -241,168 +236,16 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         yield return new WaitForSeconds(investigationWaitTime);     
     }
 
-    // Pathfinding of the NPC to reach a target
-    public IEnumerator ReachTarget(Vector2 target, float targetFloor)
-    {
-        canFindPath = true;
-        yield return ReachFloor(targetFloor);
-        //yield return StartCoroutine(ReachFloor(targetFloor));
 
-        if (!canFindPath)
-        {
-            yield break;
-        }
-
-        // The NPC is now on the same level has the object
-
-        Vector2 destination = new Vector2(target.x, transform.position.y);
-        // Flip sprite based on direction
-        UpdateSpriteDirection(destination);
-        // The NPC must walk to the target
-        yield return HorizontalMovementToTarget(destination);
-    }
-
-    protected IEnumerator ReachFloor(float targetFloor)
-    {
-        // Check if the npc need to use the stairs
-        if (floorLevel != targetFloor)
-        {
-            // Find a path using stairs to reach the target floor
-            List<StairController> path = FloorNavigation.Instance.FindPathToFloor(this, targetFloor);
-
-            if(path == null)
-            {
-                canFindPath = false;
-                yield break;
-            }
-
-            foreach (StairController stair in path)
-            {
-                StairController currentStair = stair;
-                // NPC must walk to the stair
-                Vector2 stairPosition = new Vector2(currentStair.StartPoint.position.x, transform.position.y);
-                // Flip sprite based on direction
-                UpdateSpriteDirection(stairPosition);
-
-                // Determine if we need to go up or down
-                StairDirection stairDirection = (targetFloor > floorLevel) ? StairDirection.Upward : StairDirection.Downward;
-
-                StairController nextStairFloor = null;
-                bool upward = false;
-
-                if (stairDirection == StairDirection.Upward)
-                {
-                    nextStairFloor = currentStair.UpperFloor;
-                    upward = true;
-                }
-                else if (stairDirection == StairDirection.Downward)
-                {
-                    nextStairFloor = currentStair.BottomFloor;
-                    upward = false;
-                }
-
-                // Move to stair
-                yield return HorizontalMovementToTarget(stairPosition);
-
-                // Keep track of stairs we've already tried and found blocked
-                List<StairController> blockedStairs = new List<StairController>();
-
-                // Check if the stair is blocked
-                if (currentStair.isStairBlocked() || nextStairFloor.isStairBlocked())
-                {
-                    bool findAlternative = false;
-                    blockedStairs.Add(currentStair);    // Remove these stairs from the possible alternative to find a path
-                    // As long as we did not find a new path
-                    while (!findAlternative)
-                    {
-                        // Find if there is any other stair on the same level that can reach the target floor
-                        for(int i = 0; i < FloorNavigation.Instance.StairsByFloorLevel[floorLevel].Count; i++)
-                        {
-                            StairController alternativeStair = FloorNavigation.Instance.FindNearestStairToFloor(this, targetFloor, stairDirection, blockedStairs);
-
-                            if (alternativeStair != null)
-                            {
-                                nextStairFloor = upward ? alternativeStair.UpperFloor : alternativeStair.BottomFloor;
-                            }                            
-                            // Check if the stair is not blocked and if the upstair or downstair door is also not blocked
-                            if (alternativeStair!= null && !alternativeStair.isStairBlocked() && nextStairFloor != null && !nextStairFloor.isStairBlocked())
-                            {
-                                // NPC must walk to the stair
-                                Vector2 alternativeStairPosition = new Vector2(alternativeStair.StartPoint.position.x, transform.position.y);
-
-                                // Flip sprite based on direction
-                                UpdateSpriteDirection(alternativeStairPosition);
-
-                                // Move to stair
-                                yield return HorizontalMovementToTarget(alternativeStairPosition);
-
-                                // Once the NPC reached the alternative stair check if it's blocked
-                                if (!alternativeStair.isStairBlocked())
-                                {
-                                    currentStair = alternativeStair;
-                                    findAlternative = true;
-                                    break;
-                                }
-                                else
-                                {
-                                    // This stair is blocked and should not be considered anymore
-                                    blockedStairs.Add(alternativeStair);
-                                }
-
-                            }
-                        }
-                        // All stairs are blocked so we wait and check if any of them got unblocked
-                        yield return new WaitForSeconds(0.5f);
-                        blockedStairs.Clear();
-                    }
-                }
-                // Determine if we need to go up or down
-                //StairDirection stairDirection = (targetFloor > floorLevel) ? StairDirection.Upward : StairDirection.Downward;
-                // When the npc reached the stairs
-                currentStair.ClimbStair(this.gameObject, stairDirection);
-
-                // Wait for stair climbing to finish
-                yield return new WaitForSeconds(1f);
-
-                //Update our current floor
-                if (stairDirection == StairDirection.Upward)
-                {
-                    floorLevel = currentStair.UpperFloor.FloorLevel;
-                }
-                else if (stairDirection == StairDirection.Downward)
-                {
-                    floorLevel = currentStair.BottomFloor.FloorLevel;
-                }
-            }
-        }
-    }
-
-
-
-    public void UpdateFloorLevel(float currenrFloorLevel)
-    {
-        floorLevel = currenrFloorLevel;
-    }
 
     // Return the NPC to it's initial position and facing direction
     public  IEnumerator ReturnToInitialPosition()
     {
-        yield return StartCoroutine(ReachTarget(initialPosition, initialFloorLevel));
+        yield return StartCoroutine(npcMovementController.ReachTarget(initialPosition, currentFloorLevel, initialFloorLevel));//ReachTarget(initialPosition, initialFloorLevel));
         // Restore initial facing direction
         npcSpriteRenderer.flipX = !initialFacingRight;
     }
 
-    public void ChangeSpeed()
-    {
-        if (movementSpeed != normalSpeed)
-        {
-            movementSpeed = normalSpeed;
-        }
-        else
-        {
-            movementSpeed = blindSpeed;
-        }
-    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
