@@ -11,7 +11,12 @@ public abstract class InteractibleManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
-        baseColor = GetComponent<SpriteRenderer>().color;
+        if (gameObject.GetComponent<SpriteRenderer>() != null)
+            sRender = gameObject.GetComponent<SpriteRenderer>();
+        else
+            sRender = transform.GetChild(0).GetComponent<SpriteRenderer>();
+
+        baseColor = sRender.color;
         hoverColor = new Vector4(.8f, .8f, .8f, 1);
 
         if (baseColor != Vector4.one)
@@ -21,11 +26,6 @@ public abstract class InteractibleManager : MonoBehaviour
             hoverColor.z = baseColor.z + (1 - baseColor.z) / 2;
             hoverColor.w = baseColor.w + (1 - baseColor.w) / 2;
         }
-
-        if (gameObject.GetComponent<SpriteRenderer>() != null)
-            sRender = gameObject.GetComponent<SpriteRenderer>();
-        else
-            sRender = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     protected virtual void OnMouseOver()

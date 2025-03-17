@@ -23,6 +23,7 @@ public class PossessionManager : InteractibleManager
     bool isPossessed;                               //Pour savoir si l'objet possessible est poss�d�
     bool isAnimationFinished;                       //Pour savoir si l'animaation de possession est fini
     bool hasEnoughSpace;
+    bool hasPosControl;
 
     //Shortcuts
     EnergySystem energy;
@@ -42,7 +43,8 @@ public class PossessionManager : InteractibleManager
         energy = FindFirstObjectByType<EnergySystem>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         col2D = this.GetComponent<Collider2D>();
-        posControl = this.GetComponent<PossessionController>();
+        hasPosControl = false;
+        if (this.gameObject.TryGetComponent<PossessionController>(out posControl)) { hasPosControl = true; }
         possession = gameObject.GetComponent<IPossessable>();
         //possession.enabled = false;
         isPossessed = false;
@@ -102,32 +104,8 @@ public class PossessionManager : InteractibleManager
         }
 
         // There is no more energy to possessed the object
-        //if (isPossessed && posControl.isInContact && isAnimationFinished && hasEnoughSpace && energy.CurrentEnergy() == 0)
-        //    StopPossession();
-    }
-
-    void Update()
-    {
-        /*if (isPossessed)
-        {
-            float distanceY = player.sizeofPlayer.y - sizeOfObject.y;
-            float distanceX = player.sizeofPlayer.x - sizeOfObject.x;
-
-            if (distanceY > 0 && distanceX > 0)
-            {
-                RaycastHit2D[] raycastHits1;
-                RaycastHit2D[] raycastHits2;
-                raycastHits1 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(player.sizeofPlayer.x / 2, ySizeOfObject / 2, 0), Vector2.up, distanceY);
-                raycastHits2 = Physics2D.RaycastAll(this.gameObject.transform.position + new Vector3(-(player.sizeofPlayer.x / 2), ySizeOfObject / 2, 0), Vector2.up, distanceY);
-
-                //Debug.Log("Ray1: " + raycastHits1.Length + "   Ray2: " + raycastHits2.Length);
-
-                if (raycastHits1.Length > 0 || raycastHits2.Length > 0)
-                    hasEnoughSpace = false;
-                else
-                    hasEnoughSpace = true;
-            }
-        }*/
+        if (isPossessed && isAnimationFinished && hasEnoughSpace && energy.CurrentEnergy() == 0)
+            StopPossession();
     }
 
     //Input de possession
@@ -175,10 +153,10 @@ public class PossessionManager : InteractibleManager
     {
         print("STOP POSSESSION!");
         isPossessed = false;
+
         if(normalSprite != null)
-        {
             spriteRenderer.sprite = normalSprite;
-        }
+
         possession.OnDepossessed();
         //possession.enabled = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
@@ -186,10 +164,15 @@ public class PossessionManager : InteractibleManager
         player.isPossessing = false;
         player.GetComponent<Collider2D>().enabled = true;
         player.GetComponent<Rigidbody2D>().simulated = true;
-        //if (posControl.isInContact)
-        //{
-        //    player.transform.position += new Vector3(0, player.GetComponent<Collider2D>().bounds.extents.y - col2D.bounds.extents.y, 0);
-        //}
+
+        if (hasPosControl)
+        {
+            if (posControl.isInContact)
+                player.transform.position += new Vector3(0, player.GetComponent<Collider2D>().bounds.extents.y - col2D.bounds.extents.y, 0);
+        }
+        else
+            player.transform.position += new Vector3(0, player.GetComponent<Collider2D>().bounds.extents.y - col2D.bounds.extents.y + 0.1f, 0);
+
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         player.canMove = true;
     }
@@ -209,7 +192,6 @@ public class PossessionManager : InteractibleManager
         {
             hasEnoughSpace = true;
             Debug.Log("Entered Trigger");
-
         }
     }
 }
