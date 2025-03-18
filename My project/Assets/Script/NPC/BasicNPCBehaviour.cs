@@ -51,6 +51,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius, detectObjectLayer);
         foreach (Collider2D obj in objects)
         {
+            if(obj == null) continue;
 
             if (this.IsObjectInFieldOfView(obj))
             {
