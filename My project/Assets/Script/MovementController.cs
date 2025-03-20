@@ -206,7 +206,16 @@ public abstract class MovementController : MonoBehaviour
         {
             canClimbAgain = false;
             StairDirection direction = moveInput.y > 0 ? StairDirection.Upward : StairDirection.Downward;
-            stair.ClimbStair(this.gameObject, direction);
+            StairController nextStair = direction == StairDirection.Upward ? stair.UpperFloor : stair.BottomFloor;
+            if (nextStair != null)
+            {
+                // If the stairs are not blocked
+                if (!stair.IsStairBlocked() && !nextStair.IsStairBlocked())
+                {
+                    stair.ClimbStair(this.gameObject, direction);
+                }
+            }            
+                      
         }
     }
 }
