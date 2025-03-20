@@ -10,6 +10,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     // Variable manage suspicion of the NPC
     [SerializeField] protected float minSuspiciousRotation; // Minimum rotation change in degrees to trigger suspicion
     [SerializeField] protected float minSuspiciousPosition; // Minimum position change to trigger suspicion
+    protected bool canSee;  // Ability of the player to see
 
     [Header("Mirror")]
     [SerializeField] protected LayerMask mirrorLayer;   // Layer of the mirrors
@@ -48,6 +49,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         initialFacingRight = !npcSpriteRenderer.flipX;
         initialFloorLevel = currentFloorLevel;
         isAtInitialPosition = true;
+        canSee = true;
     }
 
     private Coroutine returnToInitialPositionCoroutine;
@@ -119,10 +121,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     protected override bool IsObjectInFieldOfView(Collider2D obj)
     {
-        // Check if any part of the object is seen 
-        Vector2[] colliderPoints = LightUtility.GetSamplePointsFromObject(obj);
+        if (canSee)
+        {
+            // Check if any part of the object is seen 
+            Vector2[] colliderPoints = LightUtility.GetSamplePointsFromObject(obj);
 
-        return IsPointInFieldOfView(colliderPoints, obj);
+            return IsPointInFieldOfView(colliderPoints, obj);
+        }
+        return false;
+       
         //foreach (Vector2 point in colliderPoints)
         //{
         //    // Check if the object is in the line of sight of the NPC
