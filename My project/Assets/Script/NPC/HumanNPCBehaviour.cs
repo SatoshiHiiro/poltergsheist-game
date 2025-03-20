@@ -224,7 +224,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                     if (!mirror.IsMirrorReflectionBlocked(reflectionPoints, playerCollider) && !seePolterg)
                     {
                         print("see");
-                        //NPCSeePolterg();
+                        NPCSeePolterg();
                     }
                 } 
 

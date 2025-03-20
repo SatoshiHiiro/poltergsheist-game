@@ -9,7 +9,7 @@ public class TrapDoor : MonoBehaviour
     private BoxCollider2D trapCollider;
     [SerializeField] private LayerMask possessedObjectLayer;
     [SerializeField] private float minimumBlockHeight;
-    [SerializeField] private float blockingThreshold;
+    [SerializeField] private float minimumBlockWidth;
     private void Awake()
     {
         hingeJoint2D = GetComponent<HingeJoint2D>();
@@ -42,10 +42,10 @@ public class TrapDoor : MonoBehaviour
 
     public bool IsTrapDoorBlocked()
     {
-        // Get the sprite bounds
+        // Get the collider bounds
         Bounds trapBounds = trapCollider.bounds;
 
-        // Get stair width and height
+        // Get trap width and height
         float trapWidth = trapBounds.size.x;
         float detectionHeight = trapBounds.size.y;
 
@@ -54,28 +54,18 @@ public class TrapDoor : MonoBehaviour
                                                         new Vector2(trapWidth, detectionHeight),
                                                         0f, possessedObjectLayer
                                                         );
-
-        print(colliders.Length);
-        return true;
-        //float blockedWidth = 0f;
-
-        //foreach (Collider2D collider in colliders)
-        //{
-        //    // Skip if the object is not tall enough
-        //    if (collider.bounds.size.y < minimumBlockHeight)
-        //        continue;
-
-        //    // Calculate how much width of the room is the object taking
-        //    float objectWidth = Mathf.Min(collider.bounds.max.x, trapBounds.max.x)
-        //                        - Mathf.Max(collider.bounds.min.x, trapBounds.min.x);
-        //    if (objectWidth > 0)
-        //    {
-        //        blockedWidth += objectWidth;
-        //    }
-        //}
-
-        //// Calculate what percentage of the entrance is blocked
-        //float blockPercentage = blockedWidth / stairWidth;
-        //return blockPercentage >= blockingThreshold;
+        foreach (Collider2D collider in colliders)
+        {
+            float objectWidth = collider.bounds.size.x;
+            float objectHeight = collider.bounds.size.y;
+            print("Object width " + objectWidth);
+            print("object height " + objectHeight);
+            if(objectWidth >= minimumBlockWidth || objectHeight >= minimumBlockHeight)
+            {
+                return true;
+            }
+        }
+        return false;
+       
     }
 }

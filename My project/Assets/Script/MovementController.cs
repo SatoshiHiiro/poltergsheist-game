@@ -182,7 +182,7 @@ public abstract class MovementController : MonoBehaviour
         {
             TrapDoor trapDoor = collision.gameObject.GetComponent<TrapDoor>();
             // If the player is on the trap door and press S
-            if (trapDoor != null && moveInput.y < 0)
+            if (trapDoor != null && moveInput.y < 0 && !trapDoor.IsTrapDoorBlocked())
             {
                 trapDoor.OpenDoor();
             }
