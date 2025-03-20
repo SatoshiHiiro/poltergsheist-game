@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class HumanNPCBehaviour : BasicNPCBehaviour
@@ -9,6 +10,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     // Variable manage suspicion of the NPC
     [SerializeField] protected float minSuspiciousRotation; // Minimum rotation change in degrees to trigger suspicion
     [SerializeField] protected float minSuspiciousPosition; // Minimum position change to trigger suspicion
+    protected bool canSee;  // Ability of the player to see
 
     [Header("Mirror")]
     [SerializeField] protected LayerMask mirrorLayer;   // Layer of the mirrors
@@ -47,6 +49,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         initialFacingRight = !npcSpriteRenderer.flipX;
         initialFloorLevel = currentFloorLevel;
         isAtInitialPosition = true;
+        canSee = true;
     }
 
     private Coroutine returnToInitialPositionCoroutine;
@@ -118,24 +121,38 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     protected override bool IsObjectInFieldOfView(Collider2D obj)
     {
-        // Check if the object is in the line of sight of the NPC
-        Vector2 directionToObject = (obj.transform.position - transform.position).normalized;
-        float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToObject);
-
-        // If the object is not within view angle, return false immediately
-        if(angle > fieldOfViewAngle / 2)
+        if (canSee)
         {
-            return false;
-        }
+            // Check if any part of the object is seen 
+            Vector2[] colliderPoints = LightUtility.GetSamplePointsFromObject(obj);
 
-        // Check if there is light toutching the object
-        if (!IsObjectLit(obj))
-        {
-            return false;
+            return IsPointInFieldOfView(colliderPoints, obj);
         }
+        return false;
+       
+        //foreach (Vector2 point in colliderPoints)
+        //{
+        //    // Check if the object is in the line of sight of the NPC
+        //    Vector2 directionToPoint = (point - (Vector2)transform.position).normalized;
+        //    float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToPoint);
 
-        // Object is in field of view and area is sufficiently lit
-        return true;
+        //    // If the object is not within view angle, return false immediately
+        //    if (angle > fieldOfViewAngle / 2)
+        //    {
+        //        continue;
+        //    }
+
+        //    // Check if there is light toutching the object
+        //    if (!IsObjectLit(obj))
+        //    {
+        //        continue;
+        //    }
+
+        //    // Object is in field of view and area is sufficiently lit
+        //    return true;
+        //}
+        //return false;
+
     }
 
     protected bool IsObjectLit(Collider2D objCollider)
@@ -148,6 +165,34 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 
                 return true;
             }
+        }
+        return false;
+    }
+
+    protected bool IsPointInFieldOfView(Vector2[] colliderPoints, Collider2D objectCollider)
+    {
+        foreach (Vector2 point in colliderPoints)
+        {
+
+
+            // Check if the object is in the line of sight of the NPC
+            Vector2 directionToPoint = (point - (Vector2)transform.position).normalized;
+            float angle = Vector2.Angle(facingRight ? Vector2.right : Vector2.left, directionToPoint);
+            
+            // If the object is not within view angle, return false immediately
+            if (angle > fieldOfViewAngle / 2)
+            {
+                continue;
+            }
+
+            // Check if there is light toutching the object
+            if (!IsObjectLit(objectCollider))
+            {
+                continue;
+            }
+
+            // Object is in field of view and area is sufficiently lit
+            return true;
         }
         return false;
     }
@@ -167,13 +212,21 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             // Check if the player reflection is in the mirror
             if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
             {
-                //print("i dont see polterg");
-                // If nothing is blocking the sight of the NPC to the reflection of the player
-                if (!mirror.IsMirrorReflectionBlocked(player.GetComponent<Collider2D>()) && !seePolterg)
+                Collider2D playerCollider = player.GetComponent<Collider2D>();
+                Vector2[] reflectionPoints = mirror.GetReflectionPoints(playerCollider);
+                //print(reflectionPoints[0]);
+                //print(reflectionPoints.Length);
+                //print("Is reflected in mirror");
+                if (IsPointInFieldOfView(reflectionPoints, playerCollider))
                 {
-                    print("see");
-                    NPCSeePolterg();
-                }
+                    //print("In field of view");
+                    // If nothing is blocking the sight of the NPC to the reflection of the player
+                    if (!mirror.IsMirrorReflectionBlocked(reflectionPoints, playerCollider) && !seePolterg)
+                    {
+                        print("see");
+                        //NPCSeePolterg();
+                    }
+                } 
 
             }
         }
@@ -314,10 +367,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.cyan;
+        Gizmos.color = UnityEngine.Color.cyan;
         Gizmos.DrawWireSphere(transform.position, detectionRadiusLight);
 
-        Gizmos.color = Color.red;
+        Gizmos.color = UnityEngine.Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Mirror : MonoBehaviour
@@ -25,8 +27,35 @@ public class Mirror : MonoBehaviour
         return GeometryUtility.TestPlanesAABB(planes, objCollider.bounds);
     }
 
+    public Vector2[] GetReflectionPoints(Collider2D objCollider)
+    {
+        // Sample points from the object collider
+        Vector2[] objectPoints = LightUtility.GetSamplePointsFromObject(objCollider);
+
+        List<Vector2> reflectedPoints = new List<Vector2>();
+
+        foreach (Vector2 point in objectPoints)
+        {
+            Vector3 reflectionPoint = mirrorCamera.WorldToViewportPoint(point);
+            
+            // If point is in camera's view it means the point is reflected
+            if (reflectionPoint.x >= 0 && reflectionPoint.x <= 1 &&
+               reflectionPoint.y >= 0 && reflectionPoint.y <= 1 &&
+               reflectionPoint.z >= 0)
+            {
+                // Convert the viewport point back to world space
+                Vector3 worldPoint = mirrorCamera.ViewportToWorldPoint(
+                    new Vector3(reflectionPoint.x, reflectionPoint.y, mirrorCamera.nearClipPlane));
+                reflectedPoints.Add(worldPoint);
+                //reflectedPoints.Add(reflectionPoint);
+            }
+        }
+        //print(reflectedPoints.Count);
+        return reflectedPoints.ToArray();
+    }
+
     // Check if there's anything blocking the mirror's view of the player
-    public bool IsMirrorReflectionBlocked(Collider2D playerCollider)
+    public bool IsMirrorReflectionBlocked(Vector2[] reflectedPoints, Collider2D playerCollider)
     {
         //// Check if there is no object blocking the sight of the NPC
         if (playerCollider == null) return true;
@@ -46,19 +75,19 @@ public class Mirror : MonoBehaviour
         new Vector2(mirrorBounds.max.x, mirrorBounds.max.y)};                      // Top-right
 
 
-        Vector2[] playerPoints = {
-        new Vector2(playerBounds.center.x, playerBounds.center.y),                  // Center
-        new Vector2(playerBounds.min.x, playerBounds.min.y),                        // Bottom-left
-        new Vector2(playerBounds.max.x, playerBounds.min.y),                        // Bottom-right
-        new Vector2(playerBounds.min.x, playerBounds.max.y),                        // Top-left
-        new Vector2(playerBounds.max.x, playerBounds.max.y)};                      // Top-right
+        //Vector2[] playerPoints = {
+        //new Vector2(playerBounds.center.x, playerBounds.center.y),                  // Center
+        //new Vector2(playerBounds.min.x, playerBounds.min.y),                        // Bottom-left
+        //new Vector2(playerBounds.max.x, playerBounds.min.y),                        // Bottom-right
+        //new Vector2(playerBounds.min.x, playerBounds.max.y),                        // Top-left
+        //new Vector2(playerBounds.max.x, playerBounds.max.y)};                      // Top-right
 
 
 
         // Check if any ray from the mirror to the player is unobstructed
         foreach (Vector2 mirrorPoint in mirrorPoints)
         {
-            foreach (Vector2 playerPoint in playerPoints)
+            foreach (Vector2 playerPoint in reflectedPoints)
             {
                 Vector2 direction = (playerPoint - mirrorPoint).normalized;
                 float distance = Vector2.Distance(mirrorPoint, playerPoint);

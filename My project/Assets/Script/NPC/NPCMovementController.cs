@@ -130,7 +130,7 @@ public class NPCMovementController : MonoBehaviour
                 List<StairController> blockedStairs = new List<StairController>();
 
                 // Check if the stair is blocked
-                if (currentStair.isStairBlocked() || nextStairFloor.isStairBlocked())
+                if (currentStair.IsStairBlocked() || nextStairFloor.IsStairBlocked())
                 {
                     bool findAlternative = false;
                     blockedStairs.Add(currentStair);    // Remove these stairs from the possible alternative to find a path
@@ -149,7 +149,7 @@ public class NPCMovementController : MonoBehaviour
                                 nextStairFloor = upward ? alternativeStair.UpperFloor : alternativeStair.BottomFloor;
                             }
                             // Check if the stair is not blocked and if the upstair or downstair door is also not blocked
-                            if (alternativeStair != null && !alternativeStair.isStairBlocked() && nextStairFloor != null && !nextStairFloor.isStairBlocked())
+                            if (alternativeStair != null && !alternativeStair.IsStairBlocked() && nextStairFloor != null && !nextStairFloor.IsStairBlocked())
                             {
                                 // NPC must walk to the stair
                                 Vector2 alternativeStairPosition = new Vector2(alternativeStair.StartPoint.position.x, transform.position.y);
@@ -161,7 +161,7 @@ public class NPCMovementController : MonoBehaviour
                                 yield return HorizontalMovementToTarget(alternativeStairPosition);
 
                                 // Once the NPC reached the alternative stair check if it's blocked
-                                if (!alternativeStair.isStairBlocked())
+                                if (!alternativeStair.IsStairBlocked())
                                 {
                                     currentStair = alternativeStair;
                                     findAlternative = true;

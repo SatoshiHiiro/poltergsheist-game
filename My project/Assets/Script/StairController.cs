@@ -130,7 +130,7 @@ public class StairController : MonoBehaviour
     }
 
     // Check if there is a possessed object in front of the stair
-    public bool isStairBlocked() 
+    public bool IsStairBlocked() 
     {  
         // Get the sprite bounds
         Bounds stairBounds = stairCollider.bounds;

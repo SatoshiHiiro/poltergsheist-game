@@ -201,7 +201,8 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             {
                 animator.SetBool("EnterRoom", true);
                 isInRoom = true;
-                yield return new WaitForSeconds(0.5f);                
+                yield return new WaitForSeconds(0.5f);
+                canSee = false;
                 yield return new WaitForSeconds(currentPoint.WaitTime); // Waiting in the room
 
                 // Check again if the room became blocked while waiting
@@ -210,6 +211,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
                     animator.SetTrigger("ExitRoom");
                     yield return new WaitForSeconds(0.5f);
                     isInRoom = false;
+                    canSee = true;
                     animator.SetBool("EnterRoom", false);
                 }
                 else
@@ -253,9 +255,12 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         isBlocked = false;
         animator.SetTrigger("ExitRoom");
         yield return new WaitForSeconds(0.5f);
+        canSee = true;
         animator.SetBool("EnterRoom", false);
         isWaiting = false;
+        print("ISWAITING2 " + isWaiting); 
         isInRoom = false;
+        isPatrolling = false;
 
 
         // After getting unstuck, move to the next patrol point

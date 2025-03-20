@@ -143,10 +143,10 @@ public class EnemyBehaviour : MonoBehaviour
 
             if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
             {
-                if (!mirror.IsMirrorReflectionBlocked(player.GetComponent<Collider2D>()))
-                {
-                    print("DIE");
-                }
+                //if (!mirror.IsMirrorReflectionBlocked(player.GetComponent<Collider2D>()))
+                //{
+                //    print("DIE");
+                //}
 
             }
         }
