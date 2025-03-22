@@ -39,13 +39,11 @@ public class StairController : MonoBehaviour
     public float MaximumHeight { get { return maximumHeight; } }
     public float MaximumWidth { get { return maximumWidth; } }
 
-    private bool isClimbing;
     private bool canCharacterJump;
     private bool canCharacterMove;
 
     private void Start()
     {
-        isClimbing = false;
         stairCollider = GetComponent<Collider2D>();
     }
     public void ClimbStair(GameObject character, StairDirection direction)
@@ -90,6 +88,7 @@ public class StairController : MonoBehaviour
         // Move towards the center of the stairs
         while (Mathf.Abs(character.transform.position.x - startPoint.position.x) > 0.1f)
         {
+            print("WE ARE MOVING!");
             // We center the player with the stair before climbing it
             Vector2 targetPosition = new Vector2(startPoint.position.x, character.transform.position.y);
             character.transform.position = Vector2.MoveTowards(character.transform.position, targetPosition, speed * Time.deltaTime);

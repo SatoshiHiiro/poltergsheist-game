@@ -109,19 +109,20 @@ public abstract class MovementController : MonoBehaviour
     {
         if (playerInputEnable)
         {
+            if (Keyboard.current.wKey.wasReleasedThisFrame)
+            {
+                canClimbAgain = true;
+            }
             if (canMove && move.IsPressed())
             {
                 moveInput = move.ReadValue<Vector2>();
                 moveInput.x = Mathf.Round(moveInput.x);
                 moveInput.y = Mathf.Round(moveInput.y);
 
-                if (moveInput.y != 0)
-                    canClimbAgain = true;
             }
             else
             {
                 moveInput = Vector2.zero;
-                canClimbAgain = true;
             }
             if (canJump && !isJumping && jump.WasPressedThisFrame())
             {
@@ -204,6 +205,8 @@ public abstract class MovementController : MonoBehaviour
         StairController stair = collider.gameObject.GetComponent<StairController>();
         if (moveInput.y != 0 && canClimbAgain)
         {
+            moveInput.x = 0f;
+            rigid2D.linearVelocityX = 0f;
             canClimbAgain = false;
             StairDirection direction = moveInput.y > 0 ? StairDirection.Upward : StairDirection.Downward;
             StairController nextStair = direction == StairDirection.Upward ? stair.UpperFloor : stair.BottomFloor;
