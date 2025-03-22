@@ -109,7 +109,8 @@ public abstract class MovementController : MonoBehaviour
     {
         if (playerInputEnable)
         {
-            if (Keyboard.current.wKey.wasReleasedThisFrame)
+            // The player has to release the W or S key to climb stairs again
+            if (Keyboard.current.wKey.wasReleasedThisFrame || Keyboard.current.sKey.wasReleasedThisFrame)
             {
                 canClimbAgain = true;
             }

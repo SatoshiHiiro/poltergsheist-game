@@ -88,7 +88,6 @@ public class StairController : MonoBehaviour
         // Move towards the center of the stairs
         while (Mathf.Abs(character.transform.position.x - startPoint.position.x) > 0.1f)
         {
-            print("WE ARE MOVING!");
             // We center the player with the stair before climbing it
             Vector2 targetPosition = new Vector2(startPoint.position.x, character.transform.position.y);
             character.transform.position = Vector2.MoveTowards(character.transform.position, targetPosition, speed * Time.deltaTime);
