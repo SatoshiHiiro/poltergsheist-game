@@ -167,12 +167,19 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 {
                     // Get movement direction from the possessed object
                     Vector2 objectDirection = possessionController.GetMovementDirection();
+                    bool faceRight = objectDirection.x >= 0;
 
                     // Only update facing if the object is actually moving horizontally
                     if (possessionController.IsMoving)
                     {
-                        npcSpriteRenderer.flipX = objectDirection.x < 0;
-                        facingRight = !npcSpriteRenderer.flipX;
+                        if(faceRight != FacingRight)
+                        {
+                            npcSpriteRenderer.flipX = !faceRight;
+                            FacingRight = faceRight;
+                            FlipFieldOfView();
+                        }
+                        //npcSpriteRenderer.flipX = objectDirection.x < 0;
+                        //facingRight = !npcSpriteRenderer.flipX;
                     }
                 }
             }
@@ -181,10 +188,19 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 // Regular behavior - move toward object
                 Vector3 destination = new Vector3(objectPosition.x, transform.position.y, objectPosition.z);
                 Vector2 direction = (new Vector2(destination.x, destination.y) - (Vector2)transform.position).normalized;
+                bool faceRight = direction.x >= 0;
 
                 // Flip sprite based on direction
-                npcSpriteRenderer.flipX = direction.x < 0;
-                facingRight = !npcSpriteRenderer.flipX;
+                if (faceRight != FacingRight)
+                {
+                    npcSpriteRenderer.flipX = !faceRight;
+                    FacingRight = faceRight;
+                    FlipFieldOfView();
+                }
+
+                // Flip sprite based on direction
+                //npcSpriteRenderer.flipX = direction.x < 0;
+                //facingRight = !npcSpriteRenderer.flipX;
             }
 
             // Cat is running towards the object target
@@ -235,6 +251,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
             {
                 audioSource.Play();
                 canMove = false;
+                fovLight.enabled = false;
                 collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);
             }            
         }

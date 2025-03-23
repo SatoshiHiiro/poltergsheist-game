@@ -36,6 +36,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [SerializeField] float detectionRadiusLight = 20f;
     [SerializeField] LayerMask lightLayer;  // Layer of the gameobject light
     [SerializeField] LayerMask wallFloorLayer;   // Layer of the gameobject wall
+    string visibleLayer = "Default";
+    string notVisibleLayer = "NotVisible";
+    int visibleLayerID;
+    int notVisibleLayerID;
 
 
     protected bool seePolterg = false;
@@ -50,6 +54,9 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         initialFloorLevel = currentFloorLevel;
         isAtInitialPosition = true;
         canSee = true;
+
+        visibleLayerID = SortingLayer.NameToID(visibleLayer);
+        notVisibleLayerID = SortingLayer.NameToID(notVisibleLayer);
     }
 
     private Coroutine returnToInitialPositionCoroutine;
@@ -119,6 +126,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         }
     }
 
+    // Verify if the object is in the field of view of the NPC
     protected override bool IsObjectInFieldOfView(Collider2D obj)
     {
         if (canSee)
@@ -155,6 +163,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     }
 
+    // Verifiy if the object is toutched by a light
     protected bool IsObjectLit(Collider2D objCollider)
     {
         Collider2D[] lights = Physics2D.OverlapCircleAll(objCollider.bounds.center, detectionRadiusLight, lightLayer);
@@ -169,6 +178,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         return false;
     }
 
+    // Verifiy if any parts of the object is in the field of view
     protected bool IsPointInFieldOfView(Vector2[] colliderPoints, Collider2D objectCollider)
     {
         foreach (Vector2 point in colliderPoints)
@@ -185,13 +195,23 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 continue;
             }
 
+            SpriteRenderer objectSprite = objectCollider.GetComponent<SpriteRenderer>();
             // Check if there is light toutching the object
             if (!IsObjectLit(objectCollider))
             {
+                if(objectSprite != null)
+                {
+                    objectSprite.sortingLayerID = notVisibleLayerID;
+                }
                 continue;
             }
 
             // Object is in field of view and area is sufficiently lit
+            if (objectSprite != null)
+            {
+                int objectSortingLayer = objectSprite.sortingLayerID;
+                objectSprite.sortingLayerID = visibleLayerID;
+            }
             return true;
         }
         return false;
@@ -361,8 +381,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     public  IEnumerator ReturnToInitialPosition()
     {
         yield return StartCoroutine(npcMovementController.ReachTarget(initialPosition, currentFloorLevel, initialFloorLevel));//ReachTarget(initialPosition, initialFloorLevel));
+
+
         // Restore initial facing direction
-        npcSpriteRenderer.flipX = !initialFacingRight;
+        if(npcSpriteRenderer.flipX == initialFacingRight)
+        {
+            npcSpriteRenderer.flipX = !initialFacingRight;
+            FlipFieldOfView();
+        }
+        
     }
 
     private void OnDrawGizmos()
