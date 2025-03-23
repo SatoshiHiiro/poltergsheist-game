@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public abstract class BasicNPCBehaviour : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
     protected NPCMovementController npcMovementController;
     protected SpriteRenderer npcSpriteRenderer;
 
+    protected GameObject fieldOfView;
+    protected Light2D fovLight;
 
     // Getters
     public float FloorLevel { get { return currentFloorLevel; } }
@@ -35,6 +38,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         isObjectMoving = false;
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
         npcMovementController = GetComponent<NPCMovementController>();
+        fieldOfView = transform.GetChild(0).gameObject;
+        fovLight = GetComponentInChildren<Light2D>();
     }
     protected virtual void Update()
     {
@@ -110,6 +115,12 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         currentFloorLevel = currenrFloorLevel;
     }
 
+    public void FlipFieldOfView()
+    {
+        Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
+        rotationDegrees.z = -rotationDegrees.z;
+        fieldOfView.transform.eulerAngles = rotationDegrees;
+    }
     // Debug method only
     private void OnDrawGizmos()
     {

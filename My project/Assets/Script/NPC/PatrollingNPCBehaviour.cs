@@ -199,10 +199,11 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
             // Case 1: NPC is not in a room and the room is not blocked
             if(!isInRoom && !IsRoomBlocked(currentPoint))
             {
+                canSee = false;
+                fovLight.enabled = false;
                 animator.SetBool("EnterRoom", true);
                 isInRoom = true;
                 yield return new WaitForSeconds(0.5f);
-                canSee = false;
                 yield return new WaitForSeconds(currentPoint.WaitTime); // Waiting in the room
 
                 // Check again if the room became blocked while waiting
@@ -212,6 +213,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
                     yield return new WaitForSeconds(0.5f);
                     isInRoom = false;
                     canSee = true;
+                    fovLight.enabled = true;
                     animator.SetBool("EnterRoom", false);
                 }
                 else
@@ -256,6 +258,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         animator.SetTrigger("ExitRoom");
         yield return new WaitForSeconds(0.5f);
         canSee = true;
+        fovLight.enabled = true;
         animator.SetBool("EnterRoom", false);
         isWaiting = false;
         print("ISWAITING2 " + isWaiting); 

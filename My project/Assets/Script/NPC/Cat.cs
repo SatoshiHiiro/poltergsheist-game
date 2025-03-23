@@ -235,6 +235,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
             {
                 audioSource.Play();
                 canMove = false;
+                fovLight.enabled = false;
                 collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);
             }            
         }

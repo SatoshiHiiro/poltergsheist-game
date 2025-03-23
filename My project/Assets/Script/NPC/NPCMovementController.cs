@@ -11,12 +11,15 @@ public class NPCMovementController : MonoBehaviour
     private SpriteRenderer npcSpriteRenderer;
     private bool canFindPath = true;
 
+    BasicNPCBehaviour basicNPCBehaviour;
+
     // Getters
     public bool CanFindPath => canFindPath;
     public float MovementSpeed => movementSpeed;
     private void Start()
     {
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
+        basicNPCBehaviour = GetComponent<BasicNPCBehaviour>();
         normalSpeed = movementSpeed;
     }
 
@@ -38,19 +41,24 @@ public class NPCMovementController : MonoBehaviour
     public void UpdateSpriteDirection(Vector2 destination)
     {
         BasicNPCBehaviour npc = GetComponent<BasicNPCBehaviour>();
-        //if(destination.x > transform.position.x)
-        //{
-        //    npcSpriteRenderer.flipX = false;
-        //}
-        //else if (destination.x < transform.position.x)
-        //{
-        //    npcSpriteRenderer.flipX = true;
-        //}
+        
         // Flip sprite based on direction
         Vector2 npcDirection = (destination - (Vector2)transform.position).normalized;
-        // Sprite face the right direction
-        npcSpriteRenderer.flipX = npcDirection.x < 0;
-        npc.FacingRight = !npcSpriteRenderer.flipX;
+        bool faceRight = npcDirection.x >= 0;
+
+        if (faceRight != npc.FacingRight)
+        {
+            // Sprite face the right direction
+            npcSpriteRenderer.flipX = !faceRight;
+            npc.FacingRight = faceRight;
+            npc.FlipFieldOfView();
+        }
+
+
+        ////// Sprite face the right direction
+        //npcSpriteRenderer.flipX = npcDirection.x < 0;
+        //npc.FacingRight = !npcSpriteRenderer.flipX;
+        //npc.FlipFieldOfView();
     }
 
     // The NPC walks horizontally to a given destination
