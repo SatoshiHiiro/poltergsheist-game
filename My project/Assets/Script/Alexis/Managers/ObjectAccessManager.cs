@@ -12,7 +12,7 @@ public class ObjectAccessManager : InteractibleManager
         inventory = FindFirstObjectByType<InventorySystem>().GetComponent<InventorySystem>();
     }
 
-    protected virtual void OnMouseDown()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (inventory.ReadCondition(keyItemForActivation)[0] && inventory.ReadCondition(keyItemForActivation)[1])
         {
