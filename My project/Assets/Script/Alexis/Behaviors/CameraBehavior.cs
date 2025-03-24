@@ -14,7 +14,8 @@ public class CameraBehavior : MonoBehaviour
     [Header("Other GameObjects")]
     [SerializeField] private Transform limiteHG;              //Pour limiter la caméra à un point haut-gauche
     [SerializeField] private Transform limiteBD;              //Pour limiter la caméra à un point bas-droit
-    [SerializeField] private Transform focus;                 //Pour centrer sur le joueur
+    //[SerializeField] private Transform focus;                 //Pour centrer sur le joueur
+    [HideInInspector] public Transform focus;
 
     //Camera Limits
     float minX;
@@ -55,6 +56,7 @@ public class CameraBehavior : MonoBehaviour
         maxY = limiteHG.position.y;
         posSelf = transform.position;
         cam.eventMask = onClickLayers;
+        focus = FindFirstObjectByType<PlayerController>().transform;
     }
 
     //Pour le mouvement de la caméra
