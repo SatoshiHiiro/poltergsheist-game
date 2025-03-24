@@ -1,9 +1,7 @@
 using UnityEngine;
-using System;
 using System.Collections;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using UnityEngine.Events;
 
 /// But: Control the player or an object movement
 /// Requiert: Rigidbody2D
@@ -16,10 +14,14 @@ public abstract class MovementController : MonoBehaviour
     public delegate void Callback(string parameter);
     [HideInInspector] public string jumpParam = "jump";
     [HideInInspector] public string landParam = "land";
+    [HideInInspector] public string bonkLeftParam = "bonkL";
+    [HideInInspector] public string bonkRightParam = "bonkR";
 
     //Events
     public event Callback onJump;
     public event Callback onLand;
+    public event Callback onBonkL;
+    public event Callback onBonkR;
 
     //Mouvement
     [Header("Mouvement variables")]
@@ -36,6 +38,10 @@ public abstract class MovementController : MonoBehaviour
     [Header("GameObjets in contact")]
     public List<Collision2D> curObject = new List<Collision2D>();       //Pour stocker tous les GameObjets en contact avec l'objet
     [HideInInspector] public float halfSizeOfObject;
+    protected virtual float velocityXForSquash { get; set; }
+    protected virtual float posDiffForSquash { get; set; }
+    [HideInInspector] public float lastVelocityX;
+    [HideInInspector] public float lastPosY;
 
     //Conditions
     [Header("Mouvement conditions")]
@@ -131,6 +137,11 @@ public abstract class MovementController : MonoBehaviour
                 StartCoroutine(InputReset());
             }
         }
+
+        if (rigid2D.linearVelocityY <= .1f && rigid2D.linearVelocityY >= -.1f)
+            lastPosY = this.transform.position.y;
+
+        lastVelocityX = Mathf.Abs(rigid2D.linearVelocityX);
     }
 
     //Pour enlever de la m�moire le input de saut jusqu'� ce que l'avatar touche le sol
@@ -146,10 +157,23 @@ public abstract class MovementController : MonoBehaviour
         curObject.Add(collision);
         for (int i = 0; i < collision.contactCount; i++)
         {
-            if (collision.GetContact(i).normal.y >= .9f && !isInContact)
+            if (collision.GetContact(i).normal.y >= .9f && !isInContact && (lastPosY - this.transform.position.y) > posDiffForSquash)
             {
                 if (onLand != null) { onLand(landParam); };
                 break;
+            }
+            if (lastVelocityX >= velocityXForSquash)
+            {
+                if (collision.GetContact(i).normal.x <= -.9f)
+                {
+                    if (onBonkR != null) { onBonkR(bonkRightParam); }
+                    break;
+                }
+                else if (collision.GetContact(i).normal.x >= .9f)
+                {
+                    if (onBonkL != null) { onBonkL(bonkLeftParam); }
+                    break;
+                }
             }
         }
     }
@@ -162,7 +186,7 @@ public abstract class MovementController : MonoBehaviour
     }
 
     //Checks if the GameObjects in contact are below the controller
-    private void OnCollisionStay2D(Collision2D collision)
+    protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         for (int i = 0; i < curObject.Count; i++)
         {
@@ -176,7 +200,8 @@ public abstract class MovementController : MonoBehaviour
                         break;
                     }
                 }
-                break;
+                if (isInContact)
+                    break;
             }
         }
 

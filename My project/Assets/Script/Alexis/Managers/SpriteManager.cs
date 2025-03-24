@@ -25,6 +25,10 @@ public abstract class SpriteManager : MonoBehaviour
         {
             input = transform.parent.GetComponent<PlayerController>().move.ReadValue<Vector2>();
         }
+        else if (transform.parent.parent.GetComponent<PlayerController>() != null)
+        {
+            input = transform.parent.parent.GetComponent<PlayerController>().move.ReadValue<Vector2>();
+        }
         else
             input = new Vector2(-posDiff, 0);
 

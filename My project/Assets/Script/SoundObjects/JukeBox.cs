@@ -5,13 +5,16 @@ public class JukeBox : SoundDetection, IPossessable, IResetObject
 {
     private PossessionManager possessionManager;
     private bool isPlaying;
-    
+
+    Animator jukeboxAnim;
+
     protected override void Start()
     {
         base.Start();
         objectType = SoundEmittingObject.SoundObject;
         isPlaying = false;
         possessionManager = GetComponent<PossessionManager>();
+        jukeboxAnim = this.transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void PlaySoundOnRepeat()
@@ -29,6 +32,7 @@ public class JukeBox : SoundDetection, IPossessable, IResetObject
     {
         if (!isPlaying)
         {
+            jukeboxAnim.SetBool("isPlaying", true);
             PlaySoundOnRepeat();
             NotifyNearbyEnemies(this);
         }
