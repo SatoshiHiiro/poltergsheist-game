@@ -249,6 +249,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                     if (!mirror.IsMirrorReflectionBlocked(reflectionPoints, playerCollider) && !seePolterg)
                     {
                         print("see");
+                        playerCollider.gameObject.GetComponent<MovementController>().canMove = false;
                         NPCSeePolterg();
                     }
                 } 
