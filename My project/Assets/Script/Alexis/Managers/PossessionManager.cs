@@ -12,12 +12,8 @@ public class PossessionManager : InteractibleManager
     [Header("Variables")]
     [SerializeField] private Sprite normalSprite;
     [SerializeField] private Sprite possessedSprite;
-    [SerializeField] public float lerpSpeed;        //Vitesse du lerp
-    [SerializeField] public float initialEnergyLoss;
-    [SerializeField] public float continuousEnergyLoss;
+    [SerializeField] public float lerpSpeed;            //Vitesse du lerp
     [SerializeField] private float possessionDistance;  // Distance between the player and the object so he can possessed it
-    private Vector2 sizeOfObject;
-    private float ySizeOfObject;
 
     //Conditions
     bool isPossessed;                               //Pour savoir si l'objet possessible est poss�d�
@@ -26,8 +22,8 @@ public class PossessionManager : InteractibleManager
     bool hasPosControl;
 
     //Shortcuts
-    EnergySystem energy;
     PlayerController player;
+    PlayerManager manager;
     IPossessable possession;
     SpriteRenderer spriteRenderer;
     Collider2D col2D;
@@ -40,8 +36,12 @@ public class PossessionManager : InteractibleManager
     {
         base.Start();
         player = FindFirstObjectByType<PlayerController>();
-        energy = FindFirstObjectByType<EnergySystem>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        manager = FindFirstObjectByType<PlayerManager>();
+        if (this.TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
+        else
+        {
+            spriteRenderer = this.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        }
         col2D = this.GetComponent<Collider2D>();
         hasPosControl = false;
         if (this.gameObject.TryGetComponent<PossessionController>(out posControl)) { hasPosControl = true; }
@@ -49,34 +49,27 @@ public class PossessionManager : InteractibleManager
         //possession.enabled = false;
         isPossessed = false;
         isAnimationFinished = true;
-        sizeOfObject = this.gameObject.GetComponent<Collider2D>().bounds.size;
         hasEnoughSpace = true;
     }
 
     //Pour l'animation de possession
     IEnumerator AnimationTime()
     {
-        energy.ModifyEnergy(-initialEnergyLoss);
-        energy.StopResumeRegen(true);
-        float temp = continuousEnergyLoss;
-        continuousEnergyLoss = 0;
         player.lastPossession = this;
-        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+        manager.GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<Rigidbody2D>().simulated = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         player.GetComponent<Collider2D>().enabled = false;
         player.canMove = false;
         isAnimationFinished = false;
         yield return new WaitForSecondsRealtime(.5f);
-        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        manager.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSecondsRealtime(.5f);
         if(possessedSprite != null)
         {
             spriteRenderer.sprite = possessedSprite;
         }
         isAnimationFinished = true;
-        continuousEnergyLoss = temp;
-        energy.StopResumeRegen(false);
         possession.OnPossessed();
         //possession.enabled = true;
     }
@@ -99,19 +92,14 @@ public class PossessionManager : InteractibleManager
                 pos.x = transform.position.x;
             }
 
-            energy.ModifyEnergy(-continuousEnergyLoss);
             player.transform.position = pos;
         }
-
-        // There is no more energy to possessed the object
-        if (isPossessed && isAnimationFinished && hasEnoughSpace && energy.CurrentEnergy() == 0)
-            StopPossession();
     }
 
     //Input de possession
     private void OnMouseDown()
     {
-        if(Vector2.Distance(this.transform.position, player.transform.position) <= possessionDistance && energy.CurrentEnergy() > initialEnergyLoss)
+        if(Vector2.Distance(this.transform.position, player.transform.position) <= possessionDistance)
         {
             if (isAnimationFinished)
             {
@@ -173,7 +161,8 @@ public class PossessionManager : InteractibleManager
         else
             player.transform.position += new Vector3(0, player.GetComponent<Collider2D>().bounds.extents.y - col2D.bounds.extents.y + 0.1f, 0);
 
-        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+        manager.GetComponent<PlayerManager>().VariablesToDefaultValues();
+        manager.GetComponent<SpriteRenderer>().enabled = true;
         player.canMove = true;
     }
 
