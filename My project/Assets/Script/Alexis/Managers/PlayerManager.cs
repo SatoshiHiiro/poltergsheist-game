@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using UnityEditor;
 
 public class PlayerManager : SpriteManager
 {
@@ -6,46 +8,63 @@ public class PlayerManager : SpriteManager
     [SerializeField] float floatDuration;        //Duration of going from a to b in seconds
     [SerializeField] float floatMin;             //Minimum y
     [SerializeField] float floatMax;             //Maximum y
+    [SerializeField] iTween.EaseType easeType;
+    private Vector3[] animationTargets;
     bool isGoingUp;
 
-    [Header("Fall Animation")]
-    [SerializeField] float recoveryDuration;
+    [Header("Collision Animation")]
+    [SerializeField] Vector3 scalePunch;
+    private Vector3 scaleIni;
+    [SerializeField] float collisionDuration;
     float iniPos;
-    //bool isFinishedJumping;
-    //bool isLanding;
-    //bool isFirsTime;
+    bool isFinishedJumping;
+    bool isLanding;
+    bool isFirsTime;
 
     //General animation variables
     float startTime;
     PlayerController player;
+    Animator heigth;
+
+    AnimationClip squashLand;
 
     protected override void Start()
     {
         base.Start();
+        scaleIni = this.transform.lossyScale;
         startTime = Time.time;
-        //isFinishedJumping = true;
-        //isLanding = false;
+        isFinishedJumping = true;
+        isLanding = false;
         isGoingUp = true;
-        //isFirsTime = true;
+        isFirsTime = true;
+        animationTargets = new Vector3[]{ new Vector3(0, transform.localPosition.y + floatMin, 0), new Vector3(0, transform.localPosition.y + floatMax, 0) };
+        FloatingSpriteAnimation();
     }
 
     void OnEnable()
     {
         player = FindFirstObjectByType<PlayerController>();
-        //player.onJump += CollisionConditionsForManager;
-        //player.onLand += CollisionConditionsForManager;
+        heigth = player.transform.GetChild(0).GetComponent<Animator>();
+        player.onJump += CollisionConditionsForManager;
+        player.onLand += CollisionConditionsForManager;
+        player.onBonkR += CollisionConditionsForManager;
+        player.onBonkL += CollisionConditionsForManager;
     }
 
     void OnDisable()
     {
-        //player.onJump -= CollisionConditionsForManager;
+        player.onJump -= CollisionConditionsForManager;
+        player.onLand -= CollisionConditionsForManager;
+        player.onBonkR -= CollisionConditionsForManager;
+        player.onBonkL -= CollisionConditionsForManager;
     }
 
     protected override void Update()
     {
         base.Update();
-        float posDiff = lastPos.y - transform.position.y;
-        if (/*isFinishedJumping*/ true)
+
+
+        /*if (true)
         {
             //To alternate between floatMin and floatMax
             if ((Time.time - startTime) >= floatDuration)
@@ -55,68 +74,51 @@ public class PlayerManager : SpriteManager
             }
 
             FloatingSprite(isGoingUp);
-        }
-        /*else
-        {
-            if (isFirsTime)
-            {
-                startTime = Time.time;
-                iniPos = transform.localPosition.y;
-                isFirsTime = false;
-            }
-            if ((Time.time - startTime) >= recoveryDuration)
-            {
-                isFinishedJumping = true;
-                isFirsTime = true;
-            }
-
-            if (player.GetComponent<Rigidbody2D>().linearVelocityY >= 0 && !player.isInContact)
-            {
-                RecoverySprite(floatMax);
-            }
-            else
-            {
-                RecoverySprite(floatMin);
-            }
         }*/
     }
 
-    //The actual translation on y axis
-    void FloatingSprite(bool _isGoingUp)
+    void FloatingSpriteAnimation()
     {
-        float time = (Time.time - startTime) / floatDuration;
-        if (_isGoingUp)
-            transform.localPosition = new Vector3(0, Mathf.SmoothStep(floatMin, floatMax, time), 0);
-        else
-            transform.localPosition = new Vector3(0, Mathf.SmoothStep(floatMax, floatMin, time), 0);
-    }
-
-    /*bool RecoverySprite(float target)
-    {
-        bool landingFinished = false;
-        float time = (Time.time - startTime) / recoveryDuration;
-        transform.localPosition = Vector3.Slerp(transform.localPosition, new Vector3(0, target, 0), time);
-
-        if (true)
+        if (isGoingUp)
         {
-            
+            isGoingUp = false;
+            iTween.MoveTo(this.gameObject, iTween.Hash("name", "FloatAnimation" , "easetype", easeType, "time", floatDuration, "islocal", true, "position", animationTargets[1], "oncomplete", "FloatingSpriteAnimation"));
         }
-
-        return landingFinished;
-        //transform.localPosition = new Vector3(0, Mathf.SmoothStep(iniPos, floatMin, time), 0);
+        else
+        {
+            isGoingUp = true;
+            iTween.MoveTo(this.gameObject, iTween.Hash("name", "FloatAnimation", "easetype", easeType, "time", floatDuration, "islocal", true, "position", animationTargets[0] , "oncomplete", "FloatingSpriteAnimation"));
+        }
     }
 
     void CollisionConditionsForManager(string param)
     {
         if (param == player.jumpParam)
         {
-            isFinishedJumping = false;
-            Debug.Log("Jumped");
+            heigth.SetTrigger("stretch");
         }
-        if (param == player.landParam)
+        else if (param == player.landParam)
         {
-            isLanding = true;
-            Debug.Log("Landed");
+            float temp = (player.lastPosY - player.transform.position.y) / 10f;
+            heigth.SetFloat("velocityY", temp);
+            heigth.SetTrigger("squashLand");
         }
-    }*/
+        else if (param == player.bonkRightParam)
+        {
+            float temp = player.lastVelocityX / player.maxSpeed;
+            heigth.SetFloat("velocityX", temp);
+            heigth.SetTrigger("squashRight");
+        }
+        else if (param == player.bonkLeftParam)
+        {
+            float temp = player.lastVelocityX / player.maxSpeed;
+            heigth.SetFloat("velocityX", temp);
+            heigth.SetTrigger("squashLeft");
+        }
+    }
+
+    public void VariablesToDefaultValues()
+    {
+        this.transform.localScale = scaleIni;
+    }
 }

@@ -11,6 +11,8 @@ public class PlayerController : MovementController
     //Possession
     [Header("Object possession")]
     public PossessionManager lastPossession;
+    protected override float velocityXForSquash { get => base.velocityXForSquash; set => base.velocityXForSquash = value; }
+    protected override float posDiffForSquash { get => base.posDiffForSquash; set => base.posDiffForSquash = value; }
 
     // TODO FAIRE DE LA BONNE MANIÈRE!!!
     // Conditions
@@ -21,6 +23,8 @@ public class PlayerController : MovementController
     {
         base.Start();
         canMove = true;
+        velocityXForSquash = .2f;
+        posDiffForSquash = .2f;
         sizeofPlayer = GetComponent<Collider2D>().bounds.size;
         //canJump = false;
     }
