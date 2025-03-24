@@ -16,6 +16,8 @@ public abstract class MovementController : MonoBehaviour
     [HideInInspector] public string landParam = "land";
     [HideInInspector] public string bonkLeftParam = "bonkL";
     [HideInInspector] public string bonkRightParam = "bonkR";
+    [HideInInspector] public string depossessParam = "depossess";
+    [HideInInspector] public string possessParam = "possess";
 
     //Events
     public event Callback onJump;

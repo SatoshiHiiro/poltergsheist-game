@@ -140,7 +140,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -221,9 +221,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b36426c4a10a74ea74ff50611fe105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalSprite: {fileID: 0}
+  possessedSprite: {fileID: 0}
   lerpSpeed: 6
-  initialEnergyLoss: 1
-  continuousEnergyLoss: 0.01
+  possessionDistance: 0
 --- !u!114 &4536471216668545166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,15 +237,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e78eab71881724468a56e32211f79bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpParam: jump
+  landParam: land
+  bonkLeftParam: bonkL
+  bonkRightParam: bonkR
   speed: 0.5
   maxSpeed: 1
   stopSpeed: 2
   jumpSpeed: 6
   horizontalDirection: 0
-  curObject: []
+  halfSizeOfObject: 0.5
+  lastVelocityX: 0
+  lastPosY: 0
   canMove: 0
   canWalk: 0
-  canJump: 1
+  canJump: 0
   isInContact: 0
   isJumping: 0
   move:

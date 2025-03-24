@@ -17,6 +17,9 @@ public interface IPossessable
 /// État: Adéquat(temp)
 public class PossessionController : MovementController, IPossessable
 {
+    public event Callback onDepossess;
+    public event Callback onPossess;
+
     private bool isMoving;
     private Vector2 lastPosition;
     private bool canObjectJump = false;
@@ -64,6 +67,7 @@ public class PossessionController : MovementController, IPossessable
 
     public void OnPossessed()
     {
+        if (onPossess != null) { onPossess(possessParam); };
         canMove = true;
         canJump = canObjectJump;
         isJumping = false;
@@ -71,6 +75,7 @@ public class PossessionController : MovementController, IPossessable
 
     public void OnDepossessed()
     {
+        if (onDepossess != null) { onDepossess(depossessParam); };
         canMove = false;
     }
 
