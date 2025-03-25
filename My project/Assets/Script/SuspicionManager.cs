@@ -59,12 +59,14 @@ public class SuspicionManager : MonoBehaviour
 
     private void Update()
     {
+        //print(currentSuspicion);
         //UpdateSuspicion();
         if (currentSuspicion >= maxSuspicion)
         {
             PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
             PlayerPrefs.Save();
-            SceneManager.LoadScene("GameOver");
+            CheckpointManager.Instance.Respawn();
+            //SceneManager.LoadScene("GameOver");
         }
 
         if (Time.time - timeSinceSuspicionIncrease >= timeUntilSuspicionDecrease)
@@ -74,6 +76,13 @@ public class SuspicionManager : MonoBehaviour
                 currentSuspicion = 0f;
             OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
         }
+    }
+
+    public void ResetSuspicion()
+    {
+        print("RESET SUSPICION");
+        currentSuspicion = 0f;
+        OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
     }
 
     // Record how many NPCs witness a moving object
@@ -89,7 +98,7 @@ public class SuspicionManager : MonoBehaviour
         paranormalObserverCount = Mathf.Max(0, paranormalObserverCount);
     }
 
-    // When the NPC see Polterg from a mirror or from bein a exorcist he dies instantly
+    // When the NPC see Polterg from a mirror or from being a exorcist he dies instantly
     public void UpdateSeeingPoltergSuspicion()
     {
         OnSuspicionChanged?.Invoke(100 / maxSuspicion);

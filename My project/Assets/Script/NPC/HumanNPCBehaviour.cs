@@ -25,8 +25,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     protected bool isInvestigating = false; // Is the NPC investigating a suspect sound
     public AudioSource audioSource;  // Source of the surprised sound
 
-    protected Vector2 initialPosition;  // Initial position of the NPC
-    private bool initialFacingRight; // He's he facing right or left
 
     protected Queue<IEnumerator> investigationQueue = new Queue<IEnumerator>();
     private bool isAtInitialPosition = false;
@@ -49,9 +47,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         base.Start();
         player = GameObject.FindWithTag("Player");
         audioSource = GetComponent<AudioSource>();        
-        initialPosition = transform.position;
-        initialFacingRight = !npcSpriteRenderer.flipX;
-        initialFloorLevel = currentFloorLevel;
         isAtInitialPosition = true;
         canSee = true;
 
@@ -237,6 +232,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             // Check if the player reflection is in the mirror
             if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
             {
+                //print("player in reflection");
                 Collider2D playerCollider = player.GetComponent<Collider2D>();
                 Vector2[] reflectionPoints = mirror.GetReflectionPoints(playerCollider);
                 //print(reflectionPoints[0]);
@@ -396,6 +392,20 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             FlipFieldOfView();
         }
         
+    }
+
+    public override void ResetInitialState()
+    {
+        base.ResetInitialState();
+        isAtInitialPosition = true;
+        canSee = true;
+        seePolterg = false;
+        print("RESETNPC");
+    }
+
+    public void ResetSeePolterg()
+    {
+        seePolterg = false;
     }
 
     private void OnDrawGizmos()
