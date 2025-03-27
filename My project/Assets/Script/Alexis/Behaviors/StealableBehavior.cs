@@ -6,9 +6,13 @@ public class StealableBehavior : PickupItemBehavior
     [SerializeField] public float energyGain;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    protected override void Start()
+
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
+    }
+    protected void Start()
+    {
         energy = FindFirstObjectByType<EnergySystem>();
     }
 
@@ -16,6 +20,9 @@ public class StealableBehavior : PickupItemBehavior
     {
         base.OnTriggerEnter2D(collision);
         if (collision.GetComponent<PlayerController>() != null || collision.GetComponent<PossessionController>() != null)
-            energy.ModifyEnergy(energyGain);
+        {
+            InventorySystem.Instance.AddStolenItemToInventory(this);
+        }
+            //energy.ModifyEnergy(energyGain);
     }
 }

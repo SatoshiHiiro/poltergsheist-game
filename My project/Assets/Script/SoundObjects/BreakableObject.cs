@@ -8,15 +8,22 @@ public class BreakableObject : SoundDetection
     private Collider2D objCollider;
     private Rigidbody2D rb;
     private LayerMask floorLayer;
+
+    protected void Awake()
+    {
+
+    }
     protected override void Start()
     {
         base.Start();
-        hiddenGameObject = gameObject.transform.GetChild(0).gameObject;
         objectType = SoundEmittingObject.BreakableObject;
         floorLayer = LayerMask.NameToLayer("Floor");
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         objCollider = gameObject.GetComponent<Collider2D>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        hiddenGameObject = gameObject.transform.GetChild(0).gameObject;
+        hiddenGameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

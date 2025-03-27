@@ -405,6 +405,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     public void ResetSeePolterg()
     {
+        print("resetSeePolterg");
         seePolterg = false;
     }
 

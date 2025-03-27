@@ -37,6 +37,7 @@ public class SuspicionManager : MonoBehaviour
 
     public event Action<float> OnSuspicionChanged;  // Event called when the suspicious changed
 
+    bool hasRespawn = false;
     private void Awake()
     {
         if (Instance == null)
@@ -61,15 +62,13 @@ public class SuspicionManager : MonoBehaviour
     {
         //print(currentSuspicion);
         //UpdateSuspicion();
-        if (currentSuspicion >= maxSuspicion)
+        if (currentSuspicion >= maxSuspicion && !hasRespawn)
         {
-            PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
-            PlayerPrefs.Save();
-            CheckpointManager.Instance.Respawn();
-            //SceneManager.LoadScene("GameOver");
+            hasRespawn = true;
+            StartCoroutine(WaitDying());
         }
 
-        if (Time.time - timeSinceSuspicionIncrease >= timeUntilSuspicionDecrease)
+        if (Time.time - timeSinceSuspicionIncrease >= timeUntilSuspicionDecrease && !hasRespawn)
         {
             currentSuspicion -= suspicionDecrease;
             if (currentSuspicion < 0f)
@@ -83,6 +82,7 @@ public class SuspicionManager : MonoBehaviour
         print("RESET SUSPICION");
         currentSuspicion = 0f;
         OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
+        hasRespawn = false;
     }
 
     // Record how many NPCs witness a moving object
@@ -101,14 +101,18 @@ public class SuspicionManager : MonoBehaviour
     // When the NPC see Polterg from a mirror or from being a exorcist he dies instantly
     public void UpdateSeeingPoltergSuspicion()
     {
-        OnSuspicionChanged?.Invoke(100 / maxSuspicion);
-        StartCoroutine(WaitDying());
+        print("100%");
+        currentSuspicion = 100;
+        OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
     }
 
     private IEnumerator WaitDying()
     {
-        yield return new WaitForSeconds(1f);
-        currentSuspicion = 100;
+        yield return new WaitForSeconds(2f);
+        PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
+        PlayerPrefs.Save();
+        CheckpointManager.Instance.Respawn();
+        //SceneManager.LoadScene("GameOver");
     }
 
     // Update suspicion when an NPC notices an objet moving in front of them

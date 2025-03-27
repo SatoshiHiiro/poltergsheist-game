@@ -17,7 +17,7 @@ public class ObjectAccessManager : InteractibleManager
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (inventory.ReadCondition(keyItemForActivation))
+        if (InventorySystem.Instance.IsKeyPickedUp(keyItemForActivation))
         {
             objCollider.isTrigger = true;
         }

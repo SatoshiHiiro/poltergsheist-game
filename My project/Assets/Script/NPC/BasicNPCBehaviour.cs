@@ -127,8 +127,11 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     public void FlipFieldOfView()
     {
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
-        rotationDegrees.z = -rotationDegrees.z;
-        fieldOfView.transform.eulerAngles = rotationDegrees;
+        float newZ = facingRight ? -90f : 90f;
+        //float currentZ = Mathf.Round(rotationDegrees.z);
+        //float newZ = currentZ == 90 ? -90 : 90;
+        //rotationDegrees.z = -rotationDegrees.z;
+        fieldOfView.transform.localRotation = Quaternion.Euler(0,0,newZ);
     }
     // Debug method only
     private void OnDrawGizmos()
@@ -142,6 +145,21 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         this.transform.position = initialPosition;
         this.transform.rotation = initialRotation;
         facingRight = initialFacingRight;
+        npcSpriteRenderer.flipX = !facingRight;
+
+        Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
+        if (facingRight)
+        {
+            
+            rotationDegrees.z = -90f;
+            
+        }
+        else
+        {
+            rotationDegrees.z = 90f;
+        }
+
+        fieldOfView.transform.eulerAngles = rotationDegrees;
         currentFloorLevel = initialFloorLevel;
 
     }
