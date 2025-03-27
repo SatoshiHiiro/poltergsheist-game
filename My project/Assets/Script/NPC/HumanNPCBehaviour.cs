@@ -195,6 +195,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 continue;
             }
 
+            if(Vector2.Distance(point, transform.position) > detectionRadius)
+            {
+                continue;
+            }
+
             SpriteRenderer objectSprite = objectCollider.GetComponent<SpriteRenderer>();
             // Check if there is light toutching the object
             if (!IsObjectLit(objectCollider))
@@ -244,6 +249,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                     if (!mirror.IsMirrorReflectionBlocked(reflectionPoints, playerCollider) && !seePolterg)
                     {
                         print("see");
+                        playerCollider.gameObject.GetComponent<MovementController>().canMove = false;
                         NPCSeePolterg();
                     }
                 } 

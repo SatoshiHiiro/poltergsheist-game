@@ -108,6 +108,11 @@ public abstract class MovementController : MonoBehaviour
 
             lastInput = moveInput;
         }
+        // Keep it from moving
+        else
+        {
+            rigid2D.linearVelocityX = 0;
+        }
     }
 
     //Pour les inputs
