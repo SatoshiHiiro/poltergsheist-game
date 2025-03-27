@@ -273,7 +273,10 @@ public class Cat : BasicNPCBehaviour, IPatrol
         fovLight.enabled = true;
         if(cage != null)
         {
-            cage.GetComponentInParent<Animator>().SetBool("CloseCage", false);
+            Animator cageAnimator = cage.GetComponentInParent<Animator>();
+            cageAnimator.SetBool("CloseCage", false);
+            cageAnimator.Play("Idle", -1, 0f);
+
         }
 
     }

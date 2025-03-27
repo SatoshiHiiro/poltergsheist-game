@@ -146,21 +146,10 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         this.transform.rotation = initialRotation;
         facingRight = initialFacingRight;
         npcSpriteRenderer.flipX = !facingRight;
-
-        Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
-        if (facingRight)
-        {
-            
-            rotationDegrees.z = -90f;
-            
-        }
-        else
-        {
-            rotationDegrees.z = 90f;
-        }
-
-        fieldOfView.transform.eulerAngles = rotationDegrees;
         currentFloorLevel = initialFloorLevel;
 
+        Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
+        rotationDegrees.z = facingRight ? -90f : 90f;
+        fieldOfView.transform.eulerAngles = rotationDegrees;
     }
 }
