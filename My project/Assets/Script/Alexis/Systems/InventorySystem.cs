@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System;
 using System.Linq;
+using static UnityEditor.Progress;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -107,8 +108,10 @@ public class InventorySystem : MonoBehaviour
         // Is the object we want to remove a key
         else if (keyItemsList.Contains(pickupItem))
         {
-            keyItemsList.Remove((KeyItemBehavior)pickupItem);
-            InventoryUI.Instance.UpdateCollectedItemBarUI((KeyItemBehavior)pickupItem, false);
+            KeyItemBehavior keyItem = (KeyItemBehavior)pickupItem;
+            keyItemsList.Remove(keyItem);
+            InventoryUI.Instance.UpdateCollectedItemBarUI(keyItem, false);
+            OnResetKey?.Invoke(keyItem);
         }
     }
 

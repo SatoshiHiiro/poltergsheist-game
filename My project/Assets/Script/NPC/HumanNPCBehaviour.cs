@@ -384,11 +384,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         yield return StartCoroutine(npcMovementController.ReachTarget(initialPosition, currentFloorLevel, initialFloorLevel));//ReachTarget(initialPosition, initialFloorLevel));
 
-
         // Restore initial facing direction
         if(npcSpriteRenderer.flipX == initialFacingRight)
         {
             npcSpriteRenderer.flipX = !initialFacingRight;
+            facingRight = false;
             FlipFieldOfView();
         }
         
@@ -400,6 +400,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         isAtInitialPosition = true;
         canSee = true;
         seePolterg = false;
+        isInvestigating = false;
+        investigationQueue.Clear(); // Clear all the investigations he should be doing
         print("RESETNPC");
     }
 

@@ -264,7 +264,6 @@ public class Cat : BasicNPCBehaviour, IPatrol
     public override void ResetInitialState()
     {
         base.ResetInitialState();
-        StopAllCoroutines();
         isHunting = false;
         isAttacking = false;
         isPatrolling = false;

@@ -151,5 +151,6 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
         rotationDegrees.z = facingRight ? -90f : 90f;
         fieldOfView.transform.eulerAngles = rotationDegrees;
+        StopAllCoroutines();
     }
 }
