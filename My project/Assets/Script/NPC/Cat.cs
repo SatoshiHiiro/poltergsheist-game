@@ -270,6 +270,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         nextPatrolPoint = initialPatrolPoint;
         canMove = true;
         fovLight.enabled = true;
+        indexPatrolPoints = 0;
         if(cage != null)
         {
             Animator cageAnimator = cage.GetComponentInParent<Animator>();
