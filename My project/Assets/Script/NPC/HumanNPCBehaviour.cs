@@ -61,7 +61,12 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
        // DetectMovingObjects();
         CheckMirrorReflection();
 
-        if(investigationQueue.Count > 0 && !isInvestigating)
+        if (npcSpriteRenderer == null)
+        {
+            print("WTF");
+        }
+
+        if (investigationQueue.Count > 0 && !isInvestigating)
         {
             if (returnToInitialPositionCoroutine != null)
             {

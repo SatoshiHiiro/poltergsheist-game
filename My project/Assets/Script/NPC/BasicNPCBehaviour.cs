@@ -142,6 +142,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
     public virtual void ResetInitialState()
     {
+        print("Here");
         this.transform.position = initialPosition;
         this.transform.rotation = initialRotation;
         facingRight = initialFacingRight;

@@ -15,7 +15,7 @@ public interface IPossessable
 /// Requiert Externe: tag "Wall"
 /// Input: A = droite, D = gauche, SPACE = saut
 /// État: Adéquat(temp)
-public class PossessionController : MovementController, IPossessable
+public class PossessionController : MovementController, IPossessable, IResetInitialState
 {
     private bool isMoving;
     private Vector2 lastPosition;
@@ -25,6 +25,9 @@ public class PossessionController : MovementController, IPossessable
     // Movement variables
     public Vector2 LastKnownPosition { get; private set; }          // Last known position of the object by an NPC
     public Quaternion LastKnownRotation { get; private set; }       // Last known rotation of the object by an NPC
+
+    private Vector2 initialPosition;
+    private Quaternion initialRotation;
    
     protected override void Awake()
     {
@@ -40,6 +43,9 @@ public class PossessionController : MovementController, IPossessable
         canMove = false;
         canObjectJump = canJump;
         canJump = false;
+
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
     }
 
     //Pour les inputs
@@ -81,5 +87,12 @@ public class PossessionController : MovementController, IPossessable
             return rigid2D.linearVelocity.normalized;
         }
         return IsMoving ? ((Vector2)transform.position - lastPosition).normalized : Vector2.zero;
+    }
+
+    public void ResetInitialState()
+    {
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        OnDepossessed();
     }
 }

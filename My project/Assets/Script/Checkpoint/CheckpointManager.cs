@@ -34,11 +34,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if(currentCheckpoint != null)
         {
-            if (player != null)
-            {
-                player.transform.position = currentCheckpoint.transform.position;
-                player.GetComponent<PlayerController>().canMove = true;                
-            }
+
             StartCoroutine(WaitBeforeReset());
         }
     }
@@ -57,6 +53,11 @@ public class CheckpointManager : MonoBehaviour
         foreach (IResetInitialState resetGameObject in currentCheckpoint.ResetGameObjects)
         {
             resetGameObject.ResetInitialState();
+        }
+        if (player != null)
+        {
+            player.transform.position = currentCheckpoint.transform.position;
+            player.GetComponent<PlayerController>().canMove = true;
         }
         ResetEnemies();
         SuspicionManager.Instance.ResetSuspicion();

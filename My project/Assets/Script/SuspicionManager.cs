@@ -35,6 +35,8 @@ public class SuspicionManager : MonoBehaviour
 
     [SerializeField] protected float suspicionDecrease;
 
+    GameObject player;
+
     public event Action<float> OnSuspicionChanged;  // Event called when the suspicious changed
 
     bool hasRespawn = false;
@@ -56,6 +58,7 @@ public class SuspicionManager : MonoBehaviour
         currentSuspicion = 0f;
         maxSuspicion = 100f;
         timeSinceSuspicionIncrease = Time.time;
+        player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
@@ -64,6 +67,17 @@ public class SuspicionManager : MonoBehaviour
         //UpdateSuspicion();
         if (currentSuspicion >= maxSuspicion && !hasRespawn)
         {
+            // We don't want the player to be able to move anymore
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            playerController.canMove = false;
+            // If the player is possessing an object we don't want him to be able to move anymore
+            if (playerController.isPossessing)
+            {
+                if(playerController.lastPossession.GetComponent<PossessionController>() != null)
+                {
+                    playerController.lastPossession.GetComponent<PossessionController>().canMove = false;
+                }                
+            }
             hasRespawn = true;
             StartCoroutine(WaitDying());
         }

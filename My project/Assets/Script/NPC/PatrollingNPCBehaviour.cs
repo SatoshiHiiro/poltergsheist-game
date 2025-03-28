@@ -8,7 +8,7 @@ public interface IPatrol
     IEnumerator Patrol();
     void MoveToNextAvailablePatrolPoint();
 }
-public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
+public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol//, IResetInitialState
 {
     // Enemy patrol variables
     [Header("Patrol variables")]
@@ -20,6 +20,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
     protected bool isInRoom;    // Is the NPC in a room
     PatrolPointData currentPoint;   // Point where the NPC is located
     PatrolPointData nextPatrolPoint; // Next NPC patrol point
+    private PatrolPointData initialPatrolPoint;
     //private bool rightFloor;    // Does the NPC on the right floor to do is patrol
     //private bool isWalkingBack;    // Does the NPC go up the stairs
     private bool isPatrolling;
@@ -46,11 +47,16 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         if(patrolPoints.Length > 0)
         {
             nextPatrolPoint = patrolPoints[indexPatrolPoints];
+            initialPatrolPoint = nextPatrolPoint;
         }
         
     }
     protected override void Update()
     {
+        if(npcSpriteRenderer == null)
+        {
+            print("WTF");
+        }
         DetectMovingObjects();
         CheckMirrorReflection();
 
@@ -270,4 +276,26 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
         //isGettingUnstuck = false;
         MoveToNextAvailablePatrolPoint();
     }
+
+    //public override void ResetInitialState()
+    //{
+    //    base.ResetInitialState();
+    //    animator.SetBool("EnterRoom", false);
+    //    fovLight.enabled = true;
+    //    isWaiting = false;
+    //    isInRoom = false;
+    //    isPatrolling = false;
+    //    isBlocked = false;
+    //    canSee = true;
+    //    currentPoint = null;
+    //    returnToFloor = null;
+    //    patrolling = null;
+    //    indexPatrolPoints = 0;
+
+    //    if(initialPatrolPoint != null)
+    //    {
+    //        nextPatrolPoint = initialPatrolPoint;
+    //    }
+    //    //cageAnimator.Play("Idle", -1, 0f);
+    //}
 }
