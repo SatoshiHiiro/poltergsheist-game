@@ -19,6 +19,7 @@ public class ObjectAccessManager : InteractibleManager
     {
         if (InventorySystem.Instance.IsKeyPickedUp(keyItemForActivation))
         {
+            // Animation lock open up
             objCollider.isTrigger = true;
         }
     }
@@ -29,5 +30,10 @@ public class ObjectAccessManager : InteractibleManager
         {
             objCollider.isTrigger = false;
         }
+    }
+
+    private void OnDisable()
+    {
+        InventorySystem.Instance.OnResetKey -= ResetObjectCollider;
     }
 }
