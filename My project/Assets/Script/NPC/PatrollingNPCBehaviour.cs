@@ -8,7 +8,7 @@ public interface IPatrol
     IEnumerator Patrol();
     void MoveToNextAvailablePatrolPoint();
 }
-public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol//, IResetInitialState
+public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialState
 {
     // Enemy patrol variables
     [Header("Patrol variables")]
@@ -277,25 +277,25 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol//, IResetInitia
         MoveToNextAvailablePatrolPoint();
     }
 
-    //public override void ResetInitialState()
-    //{
-    //    base.ResetInitialState();
-    //    animator.SetBool("EnterRoom", false);
-    //    fovLight.enabled = true;
-    //    isWaiting = false;
-    //    isInRoom = false;
-    //    isPatrolling = false;
-    //    isBlocked = false;
-    //    canSee = true;
-    //    currentPoint = null;
-    //    returnToFloor = null;
-    //    patrolling = null;
-    //    indexPatrolPoints = 0;
+    public override void ResetInitialState()
+    {
+        base.ResetInitialState();
+        animator.Rebind();      
+        fovLight.enabled = true;
+        isWaiting = false;
+        isInRoom = false;
+        isPatrolling = false;
+        isBlocked = false;
+        canSee = true;
+        currentPoint = null;
+        returnToFloor = null;
+        patrolling = null;
+        indexPatrolPoints = 0;
 
-    //    if(initialPatrolPoint != null)
-    //    {
-    //        nextPatrolPoint = initialPatrolPoint;
-    //    }
-    //    //cageAnimator.Play("Idle", -1, 0f);
-    //}
+        if (initialPatrolPoint != null)
+        {
+            nextPatrolPoint = initialPatrolPoint;
+        }
+        //cageAnimator.Play("Idle", -1, 0f);
+    }
 }
