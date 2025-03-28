@@ -34,7 +34,7 @@ public class Checkpoint : MonoBehaviour
     // Find all the objects that must be reset when failling a challenge
     private void FindAllResetObjects()
     {
-        resetGameObject = transform.parent.GetComponentsInChildren<IResetInitialState>().ToList<IResetInitialState>();
+        resetGameObject = transform.parent.GetComponentsInChildren<IResetInitialState>(true).ToList();
         print(resetGameObject.Count);
     }
 }

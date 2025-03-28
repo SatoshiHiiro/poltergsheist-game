@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class BreakableObject : SoundDetection
+public class BreakableObject : SoundDetection, IResetInitialState
 {
-    [SerializeField] private GameObject brokenObject;
+    [SerializeField] private GameObject prefabBrokenObject;
+    private GameObject brokenObject;
     private GameObject hiddenGameObject;
     private SpriteRenderer spriteRenderer;
     private Collider2D objCollider;
     private Rigidbody2D rb;
     private LayerMask floorLayer;
 
+    private Vector2 initialPosition;
+    private Sprite initialSprite;
     protected void Awake()
     {
 
@@ -21,6 +24,9 @@ public class BreakableObject : SoundDetection
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         objCollider = gameObject.GetComponent<Collider2D>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        initialPosition = transform.position;
+        initialSprite = spriteRenderer.sprite;
 
         hiddenGameObject = gameObject.transform.GetChild(0).gameObject;
         hiddenGameObject.SetActive(false);
@@ -44,13 +50,27 @@ public class BreakableObject : SoundDetection
             hiddenGameObject.transform.rotation = Quaternion.identity;
         }
         // Instantiate the broken object
-        if (brokenObject != null)
+        if (prefabBrokenObject != null)
         {
-            Instantiate(brokenObject, transform.position, Quaternion.identity);            
+            brokenObject = Instantiate(prefabBrokenObject, transform.position, Quaternion.identity);            
         }
         spriteRenderer.sprite = null;
         objCollider.isTrigger = true;
         rb.bodyType = RigidbodyType2D.Static;
         NotifyNearbyEnemies(this);
+    }
+
+    public void ResetInitialState()
+    {
+        Destroy(brokenObject);
+        transform.position = initialPosition;
+        transform.rotation = Quaternion.identity;
+        spriteRenderer.sprite = initialSprite;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        objCollider.isTrigger = false;
+        hiddenGameObject.transform.SetParent(this.transform);
+        hiddenGameObject.transform.localPosition = new Vector3(0,0,0);
+        hiddenGameObject.SetActive(false);
+
     }
 }
