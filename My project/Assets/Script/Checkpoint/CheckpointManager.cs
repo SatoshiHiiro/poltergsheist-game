@@ -50,6 +50,7 @@ public class CheckpointManager : MonoBehaviour
 
     private IEnumerator WaitBeforeReset()
     {
+        //print("RESET");
         yield return new WaitForSeconds(0.1f);
         foreach (IResetInitialState resetGameObject in currentCheckpoint.ResetGameObjects)
         {
@@ -57,8 +58,14 @@ public class CheckpointManager : MonoBehaviour
             if (component != null && component.gameObject.activeInHierarchy)
             {
                 resetGameObject.ResetInitialState();
+                
             }
-            
+            //print(component.gameObject.name);
+            //else
+            //{
+            //    print(component.gameObject.name);
+            //}
+
         }
         if (player != null)
         {
