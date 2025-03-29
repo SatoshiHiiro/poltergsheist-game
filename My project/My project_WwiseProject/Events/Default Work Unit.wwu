@@ -14,6 +14,364 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Folder Name="PLY" ID="{9EF3C695-66DD-481B-ACEE-4B4D28A15596}" ShortID="1024931279">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="2"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Event Name="PLY_Jump" ID="{071F4392-BFEF-417D-8938-79851B8B6750}">
+							<ChildrenList>
+								<Action Name="" ID="{C3FCC30A-345D-4BC2-9A81-AF95D191761D}" ShortID="1006723555"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="PLY_JumpBounce" ID="{888B18E3-E94F-42DF-BEA0-26476ADACB9B}">
+							<ChildrenList>
+								<Action Name="" ID="{7312D2C9-52D2-4D55-98B4-000EBEEEACB8}" ShortID="595430301"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="PLY_Hovering" ID="{74C67930-535D-443A-9406-F16FF2D2BAC4}">
+							<ChildrenList>
+								<Action Name="" ID="{B07C371C-DB8B-40AF-851F-9D3021FC5D6C}" ShortID="229572193"/>
+								<Action Name="" ID="{F6318723-6D2C-4B61-8254-5C0A7AADFC93}" ShortID="915841932">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList/>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="SFX" ID="{B97F13DB-0099-4C91-BBE0-03C24A05FC00}" ShortID="739632177">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="24"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Folder Name="Doors" ID="{E4E1CEEF-525E-4DCD-A447-68755966EA9F}" ShortID="569015361">
+							<ChildrenList>
+								<Event Name="SFX_DoorClose" ID="{EBFB9DED-03AC-48C9-B41F-60CEBD1E8E27}">
+									<ChildrenList>
+										<Action Name="" ID="{DBC28BCC-2F0C-4F54-A6AC-5576A7E56C79}" ShortID="604113989"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_DoorOpen" ID="{76E6A55A-5685-46AA-B4B7-4B080E6C0AAF}">
+									<ChildrenList>
+										<Action Name="" ID="{8F6A8F46-3CF4-492C-932C-F9E5ED6E1CD6}" ShortID="55135388"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_MouseDoorOpen" ID="{71766826-2F84-4DDC-8CD9-8E4A30B0E345}">
+									<ChildrenList>
+										<Action Name="" ID="{6C9AFD69-6B9F-43F0-BBFD-4D2E865FEE5F}" ShortID="1014742653"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_MouseDoorClose" ID="{03A7503A-468B-4A86-9F67-C003DB1E7D72}">
+									<ChildrenList>
+										<Action Name="" ID="{B73DC5E0-5FB7-4D55-9453-9B9D4756E3C4}" ShortID="521826706"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_DoorLocked" ID="{C4D3D94C-85C7-413D-81F3-45E01A713215}">
+									<ChildrenList>
+										<Action Name="" ID="{E6E4239F-7961-4F3B-8152-EA06CE235F59}" ShortID="540630701"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_DoorUnlocked" ID="{1E70B2C8-CE0F-4C70-8E8B-A2C42C115B2A}">
+									<ChildrenList>
+										<Action Name="" ID="{63681A02-0EBE-4054-BFBB-34A3B5DBFA4D}" ShortID="113185178"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_DoorEnd" ID="{345F0407-254F-463D-B86E-67495FBB634A}">
+									<ChildrenList>
+										<Action Name="" ID="{CF14DE11-F97C-4093-9277-C63529D60749}" ShortID="1060935411"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_TrapDoorOpen" ID="{450CAFE6-2D88-423B-92A1-BD1354500E33}">
+									<ChildrenList>
+										<Action Name="" ID="{5B3EF90C-2E40-47D6-AB1D-84CF21FEAADE}" ShortID="641219967"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_TrapDoorClose" ID="{845E71F2-E969-4E54-8B81-EC7EBCCD37AD}">
+									<ChildrenList>
+										<Action Name="" ID="{C98A6964-AF55-4B01-9B6A-40B470152412}" ShortID="160373604"/>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="House" ID="{C305A632-31E0-444C-A721-9CAB030F3EED}" ShortID="303163850">
+							<ChildrenList>
+								<Event Name="SFX_CookieJar" ID="{B5C432E6-509A-4956-A42E-925C6B307139}">
+									<ChildrenList>
+										<Action Name="" ID="{CA0B46AE-A754-4767-B930-182819172DAD}" ShortID="108923081"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_Bookshelf" ID="{9CB0C53B-C1D6-43CB-BC0E-7F5B997F3F26}">
+									<ChildrenList>
+										<Action Name="" ID="{6254CB2D-D20C-4743-AA67-DC12574FCC08}" ShortID="194119356"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_Doll" ID="{4EBED676-2DAD-44A5-86A8-EB1A61A0868F}">
+									<ChildrenList>
+										<Action Name="" ID="{FA21B9D3-2C4B-4136-B356-6F1D3B4399D4}" ShortID="302152678"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_CookieJarFall" ID="{A57E2B63-FD1F-4F07-8F34-DC0DAAE89C6B}">
+									<ChildrenList>
+										<Action Name="" ID="{60035687-0285-4ABF-9341-E9365066A088}" ShortID="609611641"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_Bed" ID="{A1BB8410-B33B-4344-9762-227D79B2D481}">
+									<ChildrenList>
+										<Action Name="" ID="{FA4C5EDA-9000-47BC-917C-420CC7642FB1}" ShortID="884577584"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_BallJump" ID="{4489FEEE-C97E-4828-8005-8CED639BB69E}">
+									<ChildrenList>
+										<Action Name="" ID="{B36813EF-96FE-4B03-94B5-32C8DCB6E13B}" ShortID="207843692"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_CouchFall" ID="{8AF8DA97-399B-4702-A033-291C80716FAA}">
+									<ChildrenList>
+										<Action Name="" ID="{694D43D3-D435-4D3C-9E1E-9C89E40CF2F0}" ShortID="880006974"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_Pillow" ID="{D401B3B0-D434-4AAD-89D6-F105074BAEE6}">
+									<ChildrenList>
+										<Action Name="" ID="{896F2ED1-0ED0-487F-B77D-B7BDB73237BC}" ShortID="908192310"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_DollFall" ID="{BBBC3FB2-63CB-4A2C-8ED6-A097D1A1220F}">
+									<ChildrenList>
+										<Action Name="" ID="{BC5FB92C-A597-486A-9A92-D0E4429F42F6}" ShortID="1039459739"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_PillowFall" ID="{67E4A634-0B56-4CC3-BC0B-90B2D9F8EA8B}">
+									<ChildrenList>
+										<Action Name="" ID="{10C9B2E7-8BAD-4C16-801B-CD6C1F31B45E}" ShortID="57420391"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_Couch" ID="{3D2BE735-718D-42C5-A1C5-0771F88E8B38}">
+									<ChildrenList>
+										<Action Name="" ID="{FC8F298E-6D55-4D15-9995-C22C9F55D1CA}" ShortID="321255100"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_BookshelfFall" ID="{3047C3A2-3D18-458A-89EB-3A63FB5A9961}">
+									<ChildrenList>
+										<Action Name="" ID="{9472E8EC-7E22-4F59-A8F1-08AF0AE66847}" ShortID="324596216"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_PillowJump" ID="{ADB64565-CCA5-44DE-94AA-D55D669B36DC}">
+									<ChildrenList>
+										<Action Name="" ID="{1ACB4B49-066D-49AD-B235-FCD011E59D25}" ShortID="121721603"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_Ball" ID="{4CFC1F17-E90D-470B-B174-FA55AF8880FF}">
+									<ChildrenList>
+										<Action Name="" ID="{A76AE2AE-AACD-4A82-BA48-E2864BB7A0E5}" ShortID="488951115"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_BallFall" ID="{2E1307C1-0322-427E-9128-7E6FB42DC093}">
+									<ChildrenList>
+										<Action Name="" ID="{CF767388-D632-44BC-B5DB-E9FB8604A036}" ShortID="328141919"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_Box" ID="{DB556024-7928-4EAB-8D03-24FD8F33712E}">
+									<ChildrenList>
+										<Action Name="" ID="{8D1444C5-1F2C-4368-ACD1-4DF4620CE869}" ShortID="244013102"/>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Museum" ID="{0052D8B5-90D0-4765-9372-803669E9596B}" ShortID="859260105">
+							<ChildrenList>
+								<Event Name="SFX_ArcheologyRack" ID="{185230DC-9E2E-440A-8F73-340B2061966E}">
+									<ChildrenList>
+										<Action Name="" ID="{3B693880-A725-4604-B8D6-1826629B6029}" ShortID="614603852"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_BoneDisplay" ID="{6F1A8189-B391-4BE5-A7E1-7BFC4C03AE44}">
+									<ChildrenList>
+										<Action Name="" ID="{6818284F-07DB-4C27-9400-E0D55B24C1BE}" ShortID="526025636"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_WoodBox" ID="{6CA93E6B-9986-4BF4-94F3-BC2105D32BF4}">
+									<ChildrenList>
+										<Action Name="" ID="{F8A80E03-3463-4C48-B7CC-A343CD648380}" ShortID="627888712"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_DinosaurDisplay" ID="{06AE86D5-95BD-409D-BFC9-C4C0C30B2D7C}">
+									<ChildrenList>
+										<Action Name="" ID="{218DFD54-F112-4D58-B84C-D420F1AE92A6}" ShortID="834732539"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_ArmorDisplay" ID="{3385EA8F-F085-487B-BBDD-02FD3462255A}">
+									<ChildrenList>
+										<Action Name="" ID="{2B1CAFB3-4C56-49D6-89B9-A06D92FE4968}" ShortID="4690599"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_ToolsDisplay" ID="{E25035CE-DFA9-4F64-B8AF-CF3870E157B6}">
+									<ChildrenList>
+										<Action Name="" ID="{E46ECCCB-C4A7-4847-B46E-7DF5F1DCA292}" ShortID="725846994"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_FlowerPotFall" ID="{E615E1F3-B9BF-4E29-B899-98AF8E818C7B}">
+									<ChildrenList>
+										<Action Name="" ID="{8F302090-D0AB-4AAE-9336-EE4A40EC6D77}" ShortID="354915654"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_MusicPlay" ID="{D402D07F-03AA-4F30-9F2F-4AF2DB44423A}">
+									<ChildrenList>
+										<Action Name="" ID="{41CFFBBA-B731-4985-9510-73F1D1E10DE3}" ShortID="1017959096"/>
+										<Action Name="" ID="{B565EEB1-705C-4428-AC5E-84C1C7DC174C}" ShortID="408496442">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList/>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Event Name="SFX_CageClosed" ID="{4BC24575-910A-4439-9CF7-F247CBE22506}">
+							<ChildrenList>
+								<Action Name="" ID="{FDC21F1E-227E-43C5-89D9-60B4103A202F}" ShortID="853633548"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="SFX_PossessedOn" ID="{0B4091CE-7148-4A82-B7E9-0D4D43A2D7FA}">
+							<ChildrenList>
+								<Action Name="" ID="{23469D91-F2FD-4BC8-A3AA-D30F3DC91C03}" ShortID="975862284"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="SFX_PossessedOff" ID="{D068E796-02DA-4895-BBA0-DF94FA568EB8}">
+							<ChildrenList>
+								<Action Name="" ID="{544278F8-7592-459D-BA2A-A1596A483C52}" ShortID="724427062"/>
+							</ChildrenList>
+						</Event>
+						<Folder Name="NPC" ID="{8DFA2067-1A6E-4729-8423-90AC27DBAEEA}" ShortID="558725454">
+							<ChildrenList>
+								<Event Name="SFX_FS_NPC" ID="{7D546FC9-40E6-4E12-BE8B-EEED0B34ACED}">
+									<ChildrenList>
+										<Action Name="" ID="{050BB20C-A2F5-483E-871F-833FABB303E4}" ShortID="884885188"/>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_NPC_CatSlap" ID="{E98B67A2-8379-42F5-8E7B-6987466255AC}">
+									<ChildrenList>
+										<Action Name="" ID="{58FCE7D0-4657-4B49-BB82-031C1705737A}" ShortID="672247845"/>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="UI" ID="{63038ABB-513D-43FC-A32A-AB33D68D7EB9}" ShortID="109762461">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="4"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Event Name="UI_ObjectPickup" ID="{26BB0D9E-4333-41AF-8A3B-D5C5F1326554}">
+							<ChildrenList>
+								<Action Name="" ID="{B5F4338B-1731-4BB1-A16D-E6076982A48B}" ShortID="839401773"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="UI_KeyPickup" ID="{4B77292F-D412-4209-82D7-19E4BACE66CB}">
+							<ChildrenList>
+								<Action Name="" ID="{BEFAE370-BDB6-4148-8686-8A677162E16B}" ShortID="374374651"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="UI_FowRemoved" ID="{F7E2C103-2BD6-4987-8BD8-EA2F45637CF8}">
+							<ChildrenList>
+								<Action Name="" ID="{233BC655-1BBC-4F6A-AD49-DA3459086A87}" ShortID="338943521"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="UI_MouseOver" ID="{2306E3D0-1EE4-4923-8FCA-F83F22873432}">
+							<ChildrenList>
+								<Action Name="" ID="{FE8DE37B-8E94-4E57-99D4-827EF1813987}" ShortID="704776280"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="UI_OnClick" ID="{7041D526-953D-45FC-83E9-3618E9D63756}">
+							<ChildrenList>
+								<Action Name="" ID="{B8566F7B-98EA-455A-A6F3-59DF476F44DB}" ShortID="125753412"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="UI_Victory" ID="{6D4875EE-A022-419E-9766-9F4C0394351F}">
+							<ChildrenList>
+								<Action Name="" ID="{A4918EA8-9DE2-4A0B-907E-DD0C5DF7413E}" ShortID="916146756"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="UI_Defeat" ID="{59CC2CBF-F737-4488-9986-1300AA7BC9F6}">
+							<ChildrenList>
+								<Action Name="" ID="{F144C7E8-029B-46D1-A451-24320062FF59}" ShortID="998627649"/>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="MUS" ID="{EEF52805-9547-41D0-AFD0-B93F9E764F74}" ShortID="377109924">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="7"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Event Name="MUS_House" ID="{E093FBB3-B00E-4CBF-80C0-8939AD0DCFA2}">
+							<ChildrenList>
+								<Action Name="" ID="{56CC627D-0D77-41AD-9140-274859B3E334}" ShortID="169885613"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="MUS_Museum" ID="{C524E1C5-73B2-48CD-A59B-137BFD755772}">
+							<ChildrenList>
+								<Action Name="" ID="{6E86FC05-3451-4E50-B4BC-D700084EF68E}" ShortID="286018434"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="MUS_Menu" ID="{F4D35B9C-635A-4269-B6BC-72F7A3755A6A}">
+							<ChildrenList>
+								<Action Name="" ID="{3F4784E3-F41A-4ED0-A64D-9C4F57D3B9B6}" ShortID="1018650334"/>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="VO" ID="{4F70599E-D038-406E-9B8A-BD8325C6CE19}" ShortID="29507421">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="9"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Event Name="VO_NPC_Surprised" ID="{FDC346FC-0B64-49E1-89D0-52B23909C023}">
+							<ChildrenList>
+								<Action Name="" ID="{EC6431FF-F110-43AE-A1CB-9939E20E36EA}" ShortID="68529345"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="VO_NPC_Curious" ID="{C1EBB42A-7D9A-4065-A881-39C8C4CE36DA}">
+							<ChildrenList>
+								<Action Name="" ID="{4CF156C8-9D05-4DA5-B08D-CFA51E2FB89A}" ShortID="768963566"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="VO_NPC_Whatever" ID="{4BABEE52-0304-455A-930A-3319BC98AA4F}">
+							<ChildrenList>
+								<Action Name="" ID="{BABBD4CF-4843-4F4D-8278-C6980123412E}" ShortID="92209118"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="VO_Player_Yay" ID="{C5192EEE-A3BE-407D-94E9-5B5812DD16F4}">
+							<ChildrenList>
+								<Action Name="" ID="{86AB1E48-A7CD-410F-B700-AEEEDD606ED5}" ShortID="570867516"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="VO_Player_Barks" ID="{8BA6CCD5-9A5D-4EE3-B917-1CDE9FCB3D5E}">
+							<ChildrenList>
+								<Action Name="" ID="{59E45BD0-A9BB-44B9-93E8-C58247672480}" ShortID="541302070"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="VO_NPC_Cat" ID="{CD57D34E-C575-4E4C-93F3-707735A72B87}">
+							<ChildrenList>
+								<Action Name="" ID="{1A8CE48F-8A0F-473E-80A5-A7ADB238768B}" ShortID="225560658"/>
+							</ChildrenList>
+						</Event>
+						<Event Name="VO_NPC_Cat_Chase" ID="{7BC19E11-D279-4B93-A439-629C745C74DE}">
+							<ChildrenList>
+								<Action Name="" ID="{9D27ED86-B189-4DE8-BEE5-BD0850DCA6DA}" ShortID="766732913"/>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
