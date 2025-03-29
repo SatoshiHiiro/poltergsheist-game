@@ -30,6 +30,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
     // Getters
     public float FloorLevel { get { return currentFloorLevel; } }
+
+    public SpriteRenderer SpriteRenderer { get { return npcSpriteRenderer; } }
     public NPCMovementController NpcMovementController { get { return npcMovementController; } }
 
     //Getters and Setters

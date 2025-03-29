@@ -20,6 +20,7 @@ public abstract class SoundDetection : MonoBehaviour
 
     // Getters
     public SoundEmittingObject ObjectType => objectType;
+    public float FloorLevel => floorLevel;
 
     protected virtual void Start()
     {
