@@ -8,6 +8,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
     PatrolPointData nextPatrolPoint;  // Next cat patrol destination
     private int indexPatrolPoints;    // Keep track of patrol points
     private bool canMove;
+    private PatrolPointData initialPatrolPoint;
 
     [Header("Hunting variables")]
     [SerializeField] float attackTime = 3f;
@@ -24,11 +25,13 @@ public class Cat : BasicNPCBehaviour, IPatrol
     Collider2D catCollider;
     Coroutine patrolCoroutine;
 
+    GameObject cage;    // Cage the cat is trapped in
    protected override void Start()
    {
         base.Start();
         indexPatrolPoints = 0;
         nextPatrolPoint = patrolPoints[0];
+        initialPatrolPoint = nextPatrolPoint;
         isHunting = false;
         isAttacking = false;
         canMove = true;
@@ -253,7 +256,28 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 canMove = false;
                 fovLight.enabled = false;
                 collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);
+                cage = collision.gameObject;
             }            
         }
+    }
+
+    public override void ResetInitialState()
+    {
+        base.ResetInitialState();
+        isHunting = false;
+        isAttacking = false;
+        isPatrolling = false;
+        nextPatrolPoint = initialPatrolPoint;
+        canMove = true;
+        fovLight.enabled = true;
+        indexPatrolPoints = 0;
+        if(cage != null)
+        {
+            Animator cageAnimator = cage.GetComponentInParent<Animator>();
+            cageAnimator.SetBool("CloseCage", false);
+            cageAnimator.Play("Idle", -1, 0f);
+
+        }
+
     }
 }

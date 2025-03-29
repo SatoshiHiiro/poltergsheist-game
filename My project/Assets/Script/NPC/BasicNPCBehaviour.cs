@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Rendering.Universal;
 
-public abstract class BasicNPCBehaviour : MonoBehaviour
+public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 {
     // NPC vision variables
     [Header("Field of view")]
@@ -23,6 +23,11 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
     protected GameObject fieldOfView;
     protected Light2D fovLight;
 
+    // Initial variables
+    protected Vector3 initialPosition;  // Initial position of the NPC
+    protected Quaternion initialRotation;
+    protected bool initialFacingRight;  // He's he facing right or left
+
     // Getters
     public float FloorLevel { get { return currentFloorLevel; } }
     public NPCMovementController NpcMovementController { get { return npcMovementController; } }
@@ -32,7 +37,6 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
 
     protected virtual void Start()
     {
-        initialFloorLevel = currentFloorLevel;
         fieldOfViewAngle = 180f;
         isCurrentlyObserving = false;
         isObjectMoving = false;
@@ -40,6 +44,11 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
         npcMovementController = GetComponent<NPCMovementController>();
         fieldOfView = transform.GetChild(0).gameObject;
         fovLight = GetComponentInChildren<Light2D>();
+
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+        initialFacingRight = !npcSpriteRenderer.flipX;
+        initialFloorLevel = currentFloorLevel;
     }
     protected virtual void Update()
     {
@@ -118,13 +127,30 @@ public abstract class BasicNPCBehaviour : MonoBehaviour
     public void FlipFieldOfView()
     {
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
-        rotationDegrees.z = -rotationDegrees.z;
-        fieldOfView.transform.eulerAngles = rotationDegrees;
+        float newZ = facingRight ? -90f : 90f;
+        //float currentZ = Mathf.Round(rotationDegrees.z);
+        //float newZ = currentZ == 90 ? -90 : 90;
+        //rotationDegrees.z = -rotationDegrees.z;
+        fieldOfView.transform.localRotation = Quaternion.Euler(0,0,newZ);
     }
     // Debug method only
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+
+    public virtual void ResetInitialState()
+    {
+        this.transform.position = initialPosition;
+        this.transform.rotation = initialRotation;
+        facingRight = initialFacingRight;
+        npcSpriteRenderer.flipX = !facingRight;
+        currentFloorLevel = initialFloorLevel;
+
+        Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
+        rotationDegrees.z = facingRight ? -90f : 90f;
+        fieldOfView.transform.eulerAngles = rotationDegrees;
+        StopAllCoroutines();
     }
 }

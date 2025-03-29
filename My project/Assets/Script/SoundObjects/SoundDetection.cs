@@ -83,6 +83,7 @@ public abstract class SoundDetection : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, soundRadius);
     }
+
 }
 
 public enum SoundEmittingObject
