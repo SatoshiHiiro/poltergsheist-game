@@ -9,6 +9,9 @@ public class CheckpointManager : MonoBehaviour
     public static CheckpointManager Instance { get; private set; }  // Singleton
     private Checkpoint currentCheckpoint;    // Current checkpoint when player dies
     private GameObject player;
+
+    // Tempory getters
+    public Checkpoint CurrentCheckpoint { get { return currentCheckpoint; } }
     private void Awake()
     {
         if (Instance == null)

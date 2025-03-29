@@ -125,8 +125,16 @@ public class SuspicionManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
         PlayerPrefs.Save();
-        CheckpointManager.Instance.Respawn();
-        //SceneManager.LoadScene("GameOver");
+        if(CheckpointManager.Instance.CurrentCheckpoint != null)
+        {
+            CheckpointManager.Instance.Respawn();
+        }
+        else
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+        
+        //
     }
 
     // Update suspicion when an NPC notices an objet moving in front of them

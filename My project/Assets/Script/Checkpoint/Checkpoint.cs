@@ -15,12 +15,14 @@ public class Checkpoint : MonoBehaviour
 
     List<IResetInitialState> resetGameObject;   // All objects and enemies that must be reset when dying at this checkpoint
     private GameObject checkpointLight;
+    private Collider2D checkpointCollider;
 
     // Getters
     public List<IResetInitialState> ResetGameObjects => resetGameObject;
 
     private void Start()
     {
+        checkpointCollider = GetComponent<Collider2D>();
         checkpointLight = transform.GetChild(0).gameObject;
         FindAllResetObjects();
     }
@@ -29,6 +31,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerController>())
         {
+            checkpointCollider.enabled = false; // The player can't reactivate the same checkpoint
             CheckpointManager.Instance.SetCheckPoint(this);
             checkpointLight.SetActive(true);
         }
