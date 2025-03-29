@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
@@ -52,7 +53,12 @@ public class CheckpointManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         foreach (IResetInitialState resetGameObject in currentCheckpoint.ResetGameObjects)
         {
-            resetGameObject.ResetInitialState();
+            MonoBehaviour component = resetGameObject as MonoBehaviour; // Cast en MonoBehaviour
+            if (component != null && component.gameObject.activeInHierarchy)
+            {
+                resetGameObject.ResetInitialState();
+            }
+            
         }
         if (player != null)
         {

@@ -40,11 +40,11 @@ public class Checkpoint : MonoBehaviour
         resetGameObject = transform.parent.GetComponentsInChildren<IResetInitialState>(true).ToList();
         foreach (var obj in resetGameObject)
         {
-            MonoBehaviour component = obj as MonoBehaviour; // Cast en MonoBehaviour
-            if (component != null)
-            {
-                Debug.Log(component.gameObject.name);
-            }
+            //MonoBehaviour component = obj as MonoBehaviour; // Cast en MonoBehaviour
+            //if (component != null)
+            //{
+            //    Debug.Log(component.gameObject.name);
+            //}
         }
         print(resetGameObject.Count);
     }
