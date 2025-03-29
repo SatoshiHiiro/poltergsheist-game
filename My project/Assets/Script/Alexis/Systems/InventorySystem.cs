@@ -1,26 +1,51 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System;
+using System.Linq;
+using static UnityEditor.Progress;
 
 public class InventorySystem : MonoBehaviour
 {
-    [SerializeField] KeyItemBehavior[] keyItems;
-    [SerializeField] bool[] isConditionsMet;
+    public static InventorySystem Instance { get; private set; }
+
+    List<StealableBehavior> stolenItemList = new List<StealableBehavior>();
+    List<KeyItemBehavior> keyItemsList = new List<KeyItemBehavior>();
+
+
+    //List<KeyItemBehavior> items = new List<KeyItemBehavior>();
+    //private Dictionary<KeyItemBehavior, ItemData> inventoryItems = new Dictionary<KeyItemBehavior, ItemData>();
+
+
+    //List<ItemData> itemsDataList = new List<ItemData>();
+
+    //[SerializeField] KeyItemBehavior[] keyItems;
+    //[SerializeField] bool[] isConditionsMet;
+    //private Dictionary<KeyItemBehavior, GameObject> itemUI = new Dictionary<KeyItemBehavior, GameObject>();
+    //private Dictionary<KeyItemBehavior, bool> inventoryItems = new Dictionary<KeyItemBehavior, bool>();
+    public event Action<KeyItemBehavior> OnResetKey;
 
     EnergySystem energy;
 
     public InputAction Ctrl;
     public InputAction FullEnergy;
     public InputAction MinEnergy;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         energy = FindFirstObjectByType<EnergySystem>();
-        keyItems = FindObjectsByType<KeyItemBehavior>(FindObjectsSortMode.InstanceID);
-        isConditionsMet = new bool[keyItems.Length];
-        for (int i = 0; i < keyItems.Length; i++)
-            isConditionsMet[i] = false;
 
         Ctrl.AddBinding("<Keyboard>/ctrl");
         FullEnergy.AddBinding("<Keyboard>/r");
@@ -47,35 +72,148 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void CreateUIItem(Sprite image)
+    // The player stole an item
+    public void AddStolenItemToInventory(StealableBehavior stolenItem)
     {
-        GameObject obj = new GameObject("KeyObj");
-        obj.AddComponent<Image>();
-        obj.GetComponent<Image>().sprite = image;
-        obj.transform.SetParent(gameObject.transform);
+        stolenItemList.Add(stolenItem);
+        InventoryUI.Instance.UpdateStealableBarUI(stolenItem, true);
     }
 
-    public void StockItem(KeyItemBehavior keyItem, bool condition)
+    // The player found a key
+    public void AddKeyToInventory(KeyItemBehavior keyItem)
     {
-        for (int i = 0; i < keyItems.Length; i++)
+        keyItemsList.Add(keyItem);
+        InventoryUI.Instance.UpdateCollectedItemBarUI(keyItem, true);
+    }
+
+    // Did the player picked up a particular key item
+    public bool IsKeyPickedUp(KeyItemBehavior keyItem)
+    {
+        if (keyItemsList.Contains(keyItem))
         {
-            if (keyItems[i] == keyItem)
-                isConditionsMet[i] = condition;
+            return true;
+        }
+        return false;
+    }
+
+    // Remove a specefic object from the inventory
+    public void RemoveObject(PickupItemBehavior pickupItem)
+    {
+        // Is the object we want to remove stealable
+        if (stolenItemList.Contains(pickupItem))
+        {
+            stolenItemList.Remove((StealableBehavior)pickupItem);
+            InventoryUI.Instance.UpdateStealableBarUI((StealableBehavior)pickupItem, false);
+        }
+        // Is the object we want to remove a key
+        else if (keyItemsList.Contains(pickupItem))
+        {
+            KeyItemBehavior keyItem = (KeyItemBehavior)pickupItem;
+            keyItemsList.Remove(keyItem);
+            InventoryUI.Instance.UpdateCollectedItemBarUI(keyItem, false);
+            OnResetKey?.Invoke(keyItem);
         }
     }
 
-    public bool[] ReadCondition(KeyItemBehavior keyItem)
-    {
-        bool[] condition = {false, false};
+    // Add object UI in inventory
+    //public void SetUpInventory()
+    //{
+    //    foreach(KeyItemBehavior item in items)
+    //    {
+    //        // Add to the inventory the shadow of the picture to find
+    //        GameObject obj = new GameObject("InventoryObj");
+    //        obj.AddComponent<Image>();
+    //        Image objectImage= obj.GetComponent<Image>();
+    //        objectImage.sprite = item.ItemSpriteRenderer.sprite;
+    //        objectImage.color = Color.black;
+    //        objectImage.preserveAspect = true;
+    //        obj.transform.SetParent(gameObject.transform);
 
-        for (int i = 0; i < keyItems.Length; i++)
-        {
-            if (keyItems[i] == keyItem)
-            {
-                condition[0] = isConditionsMet[i];
-                condition[1] = true;
-            }
-        }
-        return condition;
-    }
+    //        ItemData itemData = new ItemData(obj, false);
+
+    //        inventoryItems.Add(item, itemData);
+    //        // Stock reference of image and key
+    //        //itemUI[item] = obj;
+    //    }
+
+    //}
+
+    //// The player collected one item
+    //public void UpdateInventory(KeyItemBehavior pickedUpItem)
+    //{
+    //    // Make sure the item is recorded in the inventory
+    //    if (inventoryItems.ContainsKey(pickedUpItem))
+    //    {
+    //        inventoryItems[pickedUpItem].isPickedUp = true;
+    //        inventoryItems[pickedUpItem].itemGameObject.GetComponent<Image>().color = Color.white;
+    //    }
+    //    //foreach(ItemData item in itemsDataList)
+    //    //{
+    //    //    if(item.pickedUpItem == pickedUpItem)
+    //    //    {
+    //    //        item.isPickedUp = true;
+    //    //        item.itemGameObject.GetComponent<Image>().color = Color.white;
+    //    //    }
+    //    //}
+    //    //for (int i = 0; i < keyItems.Length; i++)
+    //    //{
+    //    //    if (keyItems[i] == item)
+    //    //    {
+    //    //        isConditionsMet[i] = true;
+    //    //        // When the player pick up the object the object replace the shadow
+    //    //        itemUI[item].GetComponent<Image>().color = Color.white;
+    //    //    }
+
+    //    //}
+    //}
+
+    //// Is the item collected by the player
+    //public bool IsItemPickedUp(KeyItemBehavior keyItem)
+    //{
+    //    if (inventoryItems.ContainsKey(keyItem))
+    //    {
+    //        if (inventoryItems[keyItem].isPickedUp)
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
+
+    //// Remove an object from the inventory and UI
+    //public void RemoveObject(PickupItemBehavior item)
+    //{
+    //    //if (inventoryItems.ContainsKey(item))
+    //    //{
+    //    //    inventoryItems[item].isPickedUp = false;
+    //    //    inventoryItems[item].itemGameObject.GetComponent<Image>().color = Color.black;
+    //    //    OnResetKey?.Invoke(item);
+    //    //}
+
+
+
+    //    //for(int i = 0; i < keyItems.Length; i++)
+    //    //{
+    //    //    if(keyItems[i] == keyItem)
+    //    //    {
+    //    //        isConditionsMet[i] = false;
+    //    //        GameObject keyImage = itemUI[keyItem];
+    //    //        Destroy(keyImage);
+    //    //        OnResetKey?.Invoke(keyItem);
+    //    //    }
+    //    //}
+    //}
 }
+
+//[System.Serializable]
+//public class ItemData
+//{
+//    public GameObject itemGameObject;
+//    public bool isPickedUp;
+
+//    public ItemData(GameObject itemImage, bool pickedUp)
+//    {
+//        this.itemGameObject = itemImage;
+//        this.isPickedUp = pickedUp;
+//    }
+//}
