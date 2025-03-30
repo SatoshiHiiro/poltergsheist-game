@@ -12,6 +12,8 @@ public class InventorySystem : MonoBehaviour
     List<StealableBehavior> stolenItemList = new List<StealableBehavior>();
     List<KeyItemBehavior> keyItemsList = new List<KeyItemBehavior>();
 
+    // Getters
+    public List<StealableBehavior> StolenItemList => stolenItemList;
 
     //List<KeyItemBehavior> items = new List<KeyItemBehavior>();
     //private Dictionary<KeyItemBehavior, ItemData> inventoryItems = new Dictionary<KeyItemBehavior, ItemData>();

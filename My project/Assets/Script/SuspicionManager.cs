@@ -125,6 +125,7 @@ public class SuspicionManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
         PlayerPrefs.Save();
+        ScoreManager.Instance.AddDeath();
         if(CheckpointManager.Instance.CurrentCheckpoint != null)
         {
             CheckpointManager.Instance.Respawn();
