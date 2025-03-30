@@ -77,7 +77,11 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
             isInvestigating = true;
             //StopCoroutine("HandleWaiting");
             //StopCoroutine("Patrol");
-            StopCoroutine(patrolling);
+            if(patrolling != null)
+            {
+                StopCoroutine(patrolling);
+            }
+            
             isPatrolling = false;
             IEnumerator investigationCoroutine = investigationQueue.Dequeue();
             StartCoroutine(RunInvestigation(investigationCoroutine));
