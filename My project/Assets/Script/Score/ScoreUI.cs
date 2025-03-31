@@ -8,9 +8,12 @@ public class ScoreUI : MonoBehaviour
 {
     // This class manage the UI for the Score
     [SerializeField] GameObject scorePanel;
+    [SerializeField] GameObject timerGroup;
+    [SerializeField] GameObject deathsGroup;
+    [SerializeField] GameObject collectedItemGroup;
     [SerializeField] TMP_Text numberOfDeathsTxt;
     [SerializeField] TMP_Text numberOfTimeTxt;
-    [SerializeField] TMP_Text numberItemsCollectedTxt;
+    [SerializeField] TMP_Text collectedItemTxt;
     [SerializeField] GameObject[] starsImageTimer;
     [SerializeField] GameObject[] starsImageDeaths;
     [SerializeField] GameObject[] starsImageItemCollected;
@@ -39,16 +42,16 @@ public class ScoreUI : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.5f);
 
 
-        numberOfTimeTxt.text = "Time: " + time.ToString(@"mm\:ss");
-        yield return StartCoroutine(ShowText(numberOfTimeTxt));
+        numberOfTimeTxt.text = time.ToString(@"mm\:ss");
+        yield return StartCoroutine(ShowText(timerGroup));
         yield return StartCoroutine(ShowStars(numberStarsTime, starsImageTimer));
 
-        numberOfDeathsTxt.text = "Deaths: " + numberDeaths.ToString();
-        yield return StartCoroutine(ShowText(numberOfDeathsTxt));
+        numberOfDeathsTxt.text = numberDeaths.ToString();
+        yield return StartCoroutine(ShowText(deathsGroup));
         yield return (StartCoroutine(ShowStars(numberStarsDeaths, starsImageDeaths)));
 
-        numberItemsCollectedTxt.text = "Items Collected: " + collectedItems.ToString();
-        yield return StartCoroutine(ShowText(numberItemsCollectedTxt));
+        collectedItemTxt.text = collectedItems.ToString();
+        yield return StartCoroutine(ShowText(collectedItemGroup));
         yield return (StartCoroutine(ShowStars(numberStarsItems, starsImageItemCollected)));
     }
 
@@ -59,6 +62,7 @@ public class ScoreUI : MonoBehaviour
         {
             numberStars = 3;
         }
+
         for(int i = 0; i < numberStars; i++)
         {
             //starsUI[i].gameObject.SetActive(true);
@@ -68,7 +72,7 @@ public class ScoreUI : MonoBehaviour
     }
 
     // Manage animation text
-    private IEnumerator ShowText(TMP_Text text)
+    private IEnumerator ShowText(GameObject text)
     {
         text.GetComponent<Animator>().SetBool("ShowText", true);
         yield return new WaitForSecondsRealtime(0.2f);
