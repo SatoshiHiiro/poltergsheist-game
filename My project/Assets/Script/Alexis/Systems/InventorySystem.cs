@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System;
 using System.Linq;
-using static UnityEditor.Progress;
 
 public class InventorySystem : MonoBehaviour
 {

@@ -72,7 +72,8 @@ public class BreakableObject : SoundDetection, IResetInitialState
         {
             hiddenGameObject.transform.SetParent(this.transform);
             hiddenGameObject.transform.localPosition = new Vector3(0, 0, 0);
-            hiddenGameObject.GetComponent<PickupItemBehavior>().ResetInitialState();
+            //hiddenGameObject.GetComponent<PickupItemBehavior>().ResetInitialState();
+            hiddenGameObject.GetComponent<IResetInitialState>().ResetInitialState();
             hiddenGameObject.SetActive(false);
         }
         
