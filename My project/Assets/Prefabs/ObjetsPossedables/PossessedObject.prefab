@@ -44,7 +44,7 @@ Animator:
   m_GameObject: {fileID: 365516964881570087}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 396ba603fe9a7d043846d9ba535921ce, type: 2}
+  m_Controller: {fileID: 9100000, guid: 41aea40e974f76243a17df4be376962b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365516964881570087}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28c04caad227c11449622706a442ae87, type: 3}
   m_Name: 
@@ -209,6 +209,10 @@ MonoBehaviour:
   landParam: land
   bonkLeftParam: bonkL
   bonkRightParam: bonkR
+  cantWalkLeftParam: shakeL
+  cantWalkRightParam: shakeR
+  depossessParam: depossess
+  possessParam: possess
   speed: 0.5
   maxSpeed: 1
   stopSpeed: 2
@@ -288,6 +292,7 @@ MonoBehaviour:
       m_Action: Jump
       m_Flags: 0
     m_Flags: 0
+  weightOfAnimation: 6
 --- !u!1 &5598790036096288590
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4264140396010334442}
   - component: {fileID: 5931355310702177097}
-  - component: {fileID: 7697554178045726901}
+  - component: {fileID: 2980064545475917450}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -376,7 +381,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7697554178045726901
+--- !u!114 &2980064545475917450
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

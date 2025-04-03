@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 
-public class PlayerManager : RotationManager
+public class PlayerAnimationManager : RotationManager
 {
     [Header("Float Animation")]
     [SerializeField] float floatDuration;        //Duration of going from a to b in seconds
     [SerializeField] float floatMin;             //Minimum y
     [SerializeField] float floatMax;             //Maximum y
-    [SerializeField] iTween.EaseType easeType;
+    //[SerializeField] iTween.EaseType easeType;
     private Vector3[] animationTargets;
     bool isGoingUp;
 
@@ -26,7 +26,7 @@ public class PlayerManager : RotationManager
         base.Start();
         scaleIni = this.transform.lossyScale;
         animationTargets = new Vector3[]{ new Vector3(0, transform.localPosition.y + floatMin, 0), new Vector3(0, transform.localPosition.y + floatMax, 0) };
-        FloatingSpriteAnimation();
+        //FloatingSpriteAnimation();
     }
 
     void OnEnable()
@@ -51,7 +51,7 @@ public class PlayerManager : RotationManager
         base.Update();
     }
 
-    void FloatingSpriteAnimation()
+    /*void FloatingSpriteAnimation()
     {
         if (isGoingUp)
         {
@@ -63,7 +63,7 @@ public class PlayerManager : RotationManager
             isGoingUp = true;
             iTween.MoveTo(this.gameObject, iTween.Hash("name", "FloatAnimation", "easetype", easeType, "time", floatDuration, "islocal", true, "position", animationTargets[0] , "oncomplete", "FloatingSpriteAnimation"));
         }
-    }
+    }*/
 
     public void EventParameter(string param)
     {

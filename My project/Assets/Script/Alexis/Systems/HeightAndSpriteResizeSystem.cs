@@ -20,7 +20,7 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
     {
         if (Application.isEditor && !Application.isPlaying)
         {
-            Vector3 temp = new Vector3(0, -col2D.bounds.extents.y, 0);
+            Vector3 temp = new Vector3(0, -col2D.bounds.extents.y/col2D.transform.localScale.y, 0);
             height.localPosition = temp;
             sprite.localPosition = -temp;
         }

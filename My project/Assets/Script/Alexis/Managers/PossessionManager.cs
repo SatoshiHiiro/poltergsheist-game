@@ -23,7 +23,7 @@ public class PossessionManager : InteractibleManager
 
     //Shortcuts
     PlayerController player;
-    PlayerManager manager;
+    PlayerAnimationManager manager;
     IPossessable possession;
     SpriteRenderer spriteRenderer;
     Collider2D col2D;
@@ -36,7 +36,7 @@ public class PossessionManager : InteractibleManager
     {
         base.Start();
         player = FindFirstObjectByType<PlayerController>();
-        manager = FindFirstObjectByType<PlayerManager>();
+        manager = FindFirstObjectByType<PlayerAnimationManager>();
         if (this.TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
         else
         {
@@ -161,7 +161,7 @@ public class PossessionManager : InteractibleManager
         else
             player.transform.position += new Vector3(0, player.GetComponent<Collider2D>().bounds.extents.y - col2D.bounds.extents.y + 0.1f, 0);
 
-        manager.GetComponent<PlayerManager>().VariablesToDefaultValues();
+        manager.GetComponent<PlayerAnimationManager>().VariablesToDefaultValues();
         manager.GetComponent<SpriteRenderer>().enabled = true;
         player.canMove = true;
     }

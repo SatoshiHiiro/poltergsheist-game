@@ -28,7 +28,9 @@ public class PossessionController : MovementController, IPossessable
     // Movement variables
     public Vector2 LastKnownPosition { get; private set; }          // Last known position of the object by an NPC
     public Quaternion LastKnownRotation { get; private set; }       // Last known rotation of the object by an NPC
-   
+    //public objecType objecType;
+    public objecType weightOfAnimation;
+
     protected override void Awake()
     {
         base.Awake();

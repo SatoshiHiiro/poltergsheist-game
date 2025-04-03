@@ -16,6 +16,8 @@ public abstract class MovementController : MonoBehaviour
     [HideInInspector] public string landParam = "land";
     [HideInInspector] public string bonkLeftParam = "bonkL";
     [HideInInspector] public string bonkRightParam = "bonkR";
+    [HideInInspector] public string cantWalkLeftParam = "shakeL";
+    [HideInInspector] public string cantWalkRightParam = "shakeR";
     [HideInInspector] public string depossessParam = "depossess";
     [HideInInspector] public string possessParam = "possess";
 
@@ -24,6 +26,9 @@ public abstract class MovementController : MonoBehaviour
     public event Callback onLand;
     public event Callback onBonkL;
     public event Callback onBonkR;
+    public event Callback onShakeL;
+    public event Callback onShakeR;
+    public event Callback onPossess;
 
     //Mouvement
     [Header("Mouvement variables")]
@@ -56,7 +61,6 @@ public abstract class MovementController : MonoBehaviour
 
     //Shortcuts
     protected Rigidbody2D rigid2D;
-    Collider2D col2D;
 
     //Input action section, has to be public or can be private with a SerializeField statement
     [Header("Input Section")]
@@ -78,7 +82,6 @@ public abstract class MovementController : MonoBehaviour
     protected virtual void Start()
     {
         rigid2D = gameObject.transform.GetComponent<Rigidbody2D>();
-        col2D = gameObject.GetComponent<Collider2D>();
     }
 
     //Pour la physique
@@ -87,12 +90,11 @@ public abstract class MovementController : MonoBehaviour
         if (canMove)
         {
             if (lastInput.x != moveInput.x && moveInput.x != 0)
-            {
                 rigid2D.linearVelocityX = 0;
-            }
 
             //Effectue le mouvement horizontal
-            rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
+            if (canWalk)
+                rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
 
             ////Limite la vitesse horizontale en fonction du maxSpeed
             rigid2D.linearVelocityX = Mathf.Clamp(rigid2D.linearVelocityX, -maxSpeed, maxSpeed);
@@ -122,21 +124,42 @@ public abstract class MovementController : MonoBehaviour
             {
                 canClimbAgain = true;
             }
-            if (canMove && move.IsPressed())
+
+            if (move.IsPressed())
             {
                 moveInput = move.ReadValue<Vector2>();
-                moveInput.x = Mathf.Round(moveInput.x);
-                moveInput.y = Mathf.Round(moveInput.y);
 
+                if (canWalk)
+                {
+                    moveInput.x = Mathf.Round(moveInput.x);
+                    moveInput.y = Mathf.Round(moveInput.y);
+                }
+                else if (canMove && move.WasPressedThisFrame())
+                {
+                    if (moveInput.x > 0)
+                    {
+                        if (onShakeR != null) { onShakeL(cantWalkRightParam); }
+                    }
+                    else if (moveInput.x < 0)
+                    {
+                        if (onShakeL != null) { onShakeR(cantWalkLeftParam); }
+                    }
+                }
             }
             else
             {
                 moveInput = Vector2.zero;
             }
-            if (canJump && !isJumping && jump.WasPressedThisFrame())
+
+            if (!isJumping && jump.WasPressedThisFrame())
             {
-                isJumping = true;
-                StartCoroutine(InputReset());
+                if (canJump)
+                {
+                    isJumping = true;
+                    StartCoroutine(InputReset());
+                }
+                else if (canMove)
+                    if (onJump != null) { onJump(jumpParam); };
             }
         }
 
