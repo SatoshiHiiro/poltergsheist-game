@@ -3,28 +3,1714 @@
 	<AudioObjects>
 		<WorkUnit Name="Default Work Unit" ID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}" PersistMode="Standalone">
 			<ChildrenList>
-				<Sound Name="Test" ID="{5DDCAE88-8A59-44B2-9A59-A8B1D1E7CBB6}" ShortID="42455524">
-					<ReferenceList>
-						<Reference Name="Conversion">
-							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-						</Reference>
-						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-						</Reference>
-					</ReferenceList>
+				<Folder Name="Placeholders" ID="{A65C8132-648C-4292-A9EE-C85E06F923A0}" ShortID="666996775">
 					<ChildrenList>
-						<AudioFileSource Name="Collectable" ID="{8BECA2AC-0753-406A-B4B4-3D84E7CF30CD}">
-							<Language>SFX</Language>
-							<AudioFile>Collectable.wav</AudioFile>
-							<MediaIDList>
-								<MediaID ID="529503398"/>
-							</MediaIDList>
-						</AudioFileSource>
+						<Sound Name="PH-Player_Hovering" ID="{B881A4AA-08A5-48D5-A4A8-DB54887332E0}" ShortID="649672988">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-Player_Hovering" ID="{80321CE3-0416-4599-B424-9ED4A326AFB9}">
+									<Language>SFX</Language>
+									<AudioFile>PH-Player_Hovering.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="874622660"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-Player_Hovering" ID="{80321CE3-0416-4599-B424-9ED4A326AFB9}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-Player_Jump" ID="{52A59224-78BB-4459-AD73-24AB8E223B76}" ShortID="36515331">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-Player_Jump" ID="{80E3DF9A-2AF2-4E74-9788-53D54774498C}">
+									<Language>SFX</Language>
+									<AudioFile>PH-Player_Jump.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="985117434"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-Player_Jump" ID="{80E3DF9A-2AF2-4E74-9788-53D54774498C}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-Player_JumpBounce" ID="{9064B7DE-D6DB-469B-9755-E537ABD74096}" ShortID="997954014">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-Player_JumpBounce" ID="{32630A02-8979-47E9-82D6-B09511FD2576}">
+									<Language>SFX</Language>
+									<AudioFile>PH-Player_JumpBounce.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="39442585"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-Player_JumpBounce" ID="{32630A02-8979-47E9-82D6-B09511FD2576}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_Ball" ID="{435416E0-8C1F-4286-A508-1117CFD2D826}" ShortID="628602309">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_Ball" ID="{E435381E-E046-4F8C-A163-6FBE688885D1}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_Ball.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="609893734"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_Ball" ID="{E435381E-E046-4F8C-A163-6FBE688885D1}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_BallFall" ID="{8D9269CF-90AC-45EA-AD81-4DE94D65FCD1}" ShortID="500207948">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_BallFall" ID="{0999C76F-305A-4282-9390-F36256A7BC50}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_BallFall.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="662366849"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-SFX_MusicStop" ID="{C8CCB1DE-CB7F-416A-9FFE-EA2968B7BC98}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_MusicStop.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="578823085"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-SFX_PlayerNotMoving" ID="{A936D078-F954-4880-9E09-765E19A1FCF6}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_PlayerNotMoving.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="987789638"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCat" ID="{4AC45C93-BCE3-4263-9CF4-AE6D9E22D3C0}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCat.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="51755562"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCatChase" ID="{421FD60E-F6F2-4B2F-BA9B-08848690ADBA}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCatChase.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="967137326"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCurious" ID="{7851F179-82F2-4EE1-AD2E-66F8C19B53F2}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCurious.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="409932321"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCLocked" ID="{42B4DB22-7A47-48BB-BE32-2E5FA34F7C71}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCLocked.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="608843293"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCWhatever" ID="{6C66E143-D1C2-4E21-86E2-26FD3187E4E5}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCWhatever.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="772057789"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_PlayerBarks" ID="{04D5E94B-92CC-4F8F-AADE-15CCE564B071}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerBarks.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="364952126"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_PlayerYay" ID="{5396C6EB-3E6C-4B8B-A440-E9C698955522}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerYay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="995335852"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_PlayerYay" ID="{5396C6EB-3E6C-4B8B-A440-E9C698955522}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_BallJump" ID="{70BDE540-6BE5-47F9-9244-0EA9BD72BBD6}" ShortID="82784700">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_BallJump" ID="{B256BE03-D57E-4E05-8B05-FF87A535FE84}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_BallJump.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="581281525"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_BallJump" ID="{B256BE03-D57E-4E05-8B05-FF87A535FE84}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_Bed" ID="{AB1202AE-B875-46BA-A730-15B3985A649F}" ShortID="922612832">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_Bed" ID="{D4B11CF8-1A7E-4273-8A78-CCDBC7A487B6}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_Bed.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="132310827"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_Bed" ID="{D4B11CF8-1A7E-4273-8A78-CCDBC7A487B6}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_Bookshelf" ID="{D90592B1-1962-4085-84B6-F1739317D722}" ShortID="413978836">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_Bookshelf" ID="{98AC44E9-A18B-40EB-BCC6-CC11E7291955}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_Bookshelf.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="351505150"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_Bookshelf" ID="{98AC44E9-A18B-40EB-BCC6-CC11E7291955}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_Bookshelffall" ID="{7043F0B5-6384-4B91-878C-FB82BE94EAC8}" ShortID="957456645">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_Bookshelffall" ID="{7BD4683C-776D-4CBA-A2FA-542BF0E86598}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_Bookshelffall.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="394594397"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_Bookshelffall" ID="{7BD4683C-776D-4CBA-A2FA-542BF0E86598}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_Box" ID="{758DA8DC-151D-4F7D-B801-46E00BCBF2A8}" ShortID="785212643">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_Box" ID="{E4A57BC1-1A65-4FD1-8896-943E7C04626B}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_Box.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="690962228"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_Box" ID="{E4A57BC1-1A65-4FD1-8896-943E7C04626B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_CookieJar" ID="{1CB5C44E-B2FE-4315-A887-D4F1520E48C1}" ShortID="868875504">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_CookieJar" ID="{BC8012CC-4A5F-4C4A-8C18-A3C2AF0A29AB}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_CookieJar.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="298575687"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_CookieJar" ID="{BC8012CC-4A5F-4C4A-8C18-A3C2AF0A29AB}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_CookieJarFall" ID="{0C2469F8-5B51-47C5-A4CA-C0106E8B84E4}" ShortID="845335752">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_CookieJarFall" ID="{559C87B3-0B41-466C-A143-7890EB32FB8F}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_CookieJarFall.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="776367044"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_CookieJarFall" ID="{559C87B3-0B41-466C-A143-7890EB32FB8F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_Couch" ID="{2C3B84B8-4186-49E3-8E38-664ABC4C878A}" ShortID="1058113676">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_Couch" ID="{07A6B26B-DDE3-474D-A01E-C6FE9529AD9B}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_Couch.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="820128426"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_Couch" ID="{07A6B26B-DDE3-474D-A01E-C6FE9529AD9B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_CouchFall" ID="{6D718CEA-8670-4361-91B9-32495E568135}" ShortID="188930125">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_CouchFall" ID="{6F087660-5F63-472B-9944-AF81D3A7853C}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_CouchFall.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="155691392"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_CouchFall" ID="{6F087660-5F63-472B-9944-AF81D3A7853C}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_Doll" ID="{50BEF35A-F488-4CAB-9195-E80F703824F5}" ShortID="470393808">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_Doll" ID="{178381DB-F047-4BC2-AC08-8F857C1EA888}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_Doll.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="636353517"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_Doll" ID="{178381DB-F047-4BC2-AC08-8F857C1EA888}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_DollFall" ID="{91208B26-D71F-488D-AB6C-31E4A5552153}" ShortID="313415030">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_DollFall" ID="{44A9BE51-EDC3-43F2-882C-EBED838FF116}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_DollFall.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="82748322"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_DollFall" ID="{44A9BE51-EDC3-43F2-882C-EBED838FF116}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_DoorClose" ID="{3A6C4123-747E-400E-B84E-3F650B422E01}" ShortID="928277082">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_DoorClose" ID="{71167D7D-B864-4459-A0D6-7B2B9C94BAC2}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_DoorClose.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="373353187"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_DoorClose" ID="{71167D7D-B864-4459-A0D6-7B2B9C94BAC2}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_DoorEnd" ID="{9086F410-9A75-4B4C-A8EC-FB4D1CFFB16C}" ShortID="1100118">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_DoorEnd" ID="{F99C476B-DAB2-4E78-8EDF-3CA8019E3345}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_DoorEnd.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="809876977"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_DoorEnd" ID="{F99C476B-DAB2-4E78-8EDF-3CA8019E3345}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_DoorLocked" ID="{EA793B8A-7EA9-46A8-8F3E-969DF2D8FF48}" ShortID="438967164">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_DoorLocked" ID="{E447E259-8A62-4A59-9605-B6C988DCF71D}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_DoorLocked.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="192613656"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_DoorLocked" ID="{E447E259-8A62-4A59-9605-B6C988DCF71D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_DoorOpen" ID="{82040872-B48A-43B9-9283-C7E28314D846}" ShortID="260734182">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_DoorOpen" ID="{2BD8EBB4-050F-41A0-B8E8-C412E0622DFA}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_DoorOpen.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="960210754"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_DoorOpen" ID="{2BD8EBB4-050F-41A0-B8E8-C412E0622DFA}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_DoorUnlocked" ID="{C7EFFEC6-3171-4C2E-8D36-43200234AFD2}" ShortID="109663432">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_DoorUnlocked" ID="{C95C07B3-9CAE-4AC9-9B30-2F393E701F8F}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_DoorUnlocked.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="347273864"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_DoorUnlocked" ID="{C95C07B3-9CAE-4AC9-9B30-2F393E701F8F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_MouseDoorClose" ID="{6995A583-0A69-42EB-B7EA-37A5D1019E88}" ShortID="179797416">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_MouseDoorClose" ID="{33D2F24B-C913-4A13-AD70-9D1CCCA08141}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_MouseDoorClose.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="663541840"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_MouseDoorClose" ID="{33D2F24B-C913-4A13-AD70-9D1CCCA08141}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_MouseDoorOpen" ID="{1DA82247-BADF-4DED-92B1-87034D7D1251}" ShortID="634379183">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_MouseDoorOpen" ID="{5C5E6FE3-D399-4FCA-8120-BE17232FF244}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_MouseDoorOpen.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="623901723"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_MouseDoorOpen" ID="{5C5E6FE3-D399-4FCA-8120-BE17232FF244}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_Pillow" ID="{709A109A-9257-479D-865C-C56AF597332B}" ShortID="908523851">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_Pillow" ID="{3EF606E0-29FA-4C2B-BFA6-98228C5950EA}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_Pillow.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="780691968"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_Pillow" ID="{3EF606E0-29FA-4C2B-BFA6-98228C5950EA}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_PillowFall" ID="{3FDE5CF5-EC62-4FB5-AF5A-4B6FC41CBAC5}" ShortID="776868762">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_PillowFall" ID="{D88D9184-2729-4CA1-AAF0-3243F828577C}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_PillowFall.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="341287136"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_PillowFall" ID="{D88D9184-2729-4CA1-AAF0-3243F828577C}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_PillowJump" ID="{4A9816D2-8FF5-46F1-9928-B3C164E69B12}" ShortID="891177734">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_PillowJump" ID="{3DE10302-B049-4B50-9975-B68C198A5FB6}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_PillowJump.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="47934121"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-SFX_MusicStop" ID="{4BE85DC1-D9F0-4352-B560-BA132456A728}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_MusicStop.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="578823085"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-SFX_PlayerNotMoving" ID="{53836513-0880-4BFF-B6EE-8D717CFD0AE2}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_PlayerNotMoving.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="987789638"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCat" ID="{55BD51DF-7B6B-4D19-ABE6-6847735A43EB}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCat.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="51755562"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCatChase" ID="{26DD8D63-1F56-4023-A7C7-9AF8688D1E92}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCatChase.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="967137326"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCurious" ID="{57F5D28C-947C-40D9-B83F-D6B8DF01D73B}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCurious.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="409932321"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCLocked" ID="{F2F573EE-429F-4657-B131-8744A979FD79}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCLocked.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="608843293"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCWhatever" ID="{6DF79407-660E-47D2-B893-5D2CB0A7509F}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCWhatever.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="772057789"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_PlayerBarks" ID="{0E9B31E5-A938-4492-8F3A-D7D186FE2EF6}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerBarks.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="364952126"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_PlayerYay" ID="{F66C6289-80C3-4AD9-9920-B512814F8F1E}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerYay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="995335852"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_PlayerYay" ID="{F66C6289-80C3-4AD9-9920-B512814F8F1E}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_TrapDoorClose" ID="{6F9A222F-56BF-40D9-AE3B-34A31CA9848D}" ShortID="1058816424">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_TrapDoorClose" ID="{EF5E9AD9-2940-4F06-B117-CBDA5EB076E7}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_TrapDoorClose.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="271680117"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_TrapDoorClose" ID="{EF5E9AD9-2940-4F06-B117-CBDA5EB076E7}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_TrapDoorOpen" ID="{7B15FE4B-8D2F-4B80-9EED-60916849C31F}" ShortID="303388741">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_TrapDoorOpen" ID="{DB401F53-DDD2-4239-B3C2-DA6D81AD3144}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_TrapDoorOpen.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="734267828"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_TrapDoorOpen" ID="{DB401F53-DDD2-4239-B3C2-DA6D81AD3144}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-MUS_House" ID="{4A0232FA-1D2C-4652-8F0A-90369061B7F2}" ShortID="696194041">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-MUS_House" ID="{11E37070-F728-4238-A048-E1FDDDF7FBEB}">
+									<Language>SFX</Language>
+									<AudioFile>PH-MUS_House.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="316659062"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-MUS_House" ID="{11E37070-F728-4238-A048-E1FDDDF7FBEB}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-MUS_Menu" ID="{1958B9CD-3A1F-44F8-99A0-F01FEEBCC004}" ShortID="733116398">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-MUS_Menu" ID="{A84C043F-0885-4648-9977-90684EEB1B36}">
+									<Language>SFX</Language>
+									<AudioFile>PH-MUS_Menu.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="221949706"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-MUS_Menu" ID="{A84C043F-0885-4648-9977-90684EEB1B36}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-MUS_Museum" ID="{F905B1A4-6D87-4A3A-B296-56EA71722DA3}" ShortID="996620909">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-MUS_Museum" ID="{86A9893F-8216-4E3A-9FC8-D8D5888BFD68}">
+									<Language>SFX</Language>
+									<AudioFile>PH-MUS_Museum.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="115056231"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-MUS_Museum" ID="{86A9893F-8216-4E3A-9FC8-D8D5888BFD68}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-MUS_Win" ID="{63B1EA1C-C577-4A10-81D6-C0AECDCDF8CC}" ShortID="577488027">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-MUS_Win" ID="{CCAE1ADE-3991-463B-9D31-1F7C142CEE4C}">
+									<Language>SFX</Language>
+									<AudioFile>PH-MUS_Win.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="696681815"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-MUS_Win" ID="{CCAE1ADE-3991-463B-9D31-1F7C142CEE4C}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_ArcheologyRack" ID="{E38E8437-C22E-418F-A0E4-C0535F87B2F3}" ShortID="311208970">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_ArcheologyRack" ID="{8EF65422-6901-4B35-B9EA-328D2C6DEADF}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_ArcheologyRack.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="853475901"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_ArcheologyRack" ID="{8EF65422-6901-4B35-B9EA-328D2C6DEADF}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_ArmorDisplay" ID="{189107DA-E9F9-4609-A4D1-0DAD343B5195}" ShortID="857543017">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_ArmorDisplay" ID="{EA90E403-7574-458B-A8D8-7D568CB2F3DC}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_ArmorDisplay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="732307201"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_ArmorDisplay" ID="{EA90E403-7574-458B-A8D8-7D568CB2F3DC}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_BoneDisplay" ID="{7E3FC9DD-1CFC-4F30-B1B2-59F3FC42590C}" ShortID="947647274">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_BoneDisplay" ID="{C29B6AF2-68A4-4097-BF01-13BA48955731}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_BoneDisplay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="615600526"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_BoneDisplay" ID="{C29B6AF2-68A4-4097-BF01-13BA48955731}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_CageClosed" ID="{04015F92-251F-4BDD-A63D-4D5C6FFBED12}" ShortID="1003161007">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_CageClosed" ID="{0563CFC5-2034-43D0-ABEB-C64F0CC30188}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_CageClosed.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="835536888"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_CageClosed" ID="{0563CFC5-2034-43D0-ABEB-C64F0CC30188}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_CatSlap" ID="{35F7600F-312C-49A4-BA1C-B187BC6B7F6A}" ShortID="752648658">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_CatSlap" ID="{E6DCE735-69E5-4ED4-B88C-FAB3F6386CC0}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_CatSlap.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="846601086"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_CatSlap" ID="{E6DCE735-69E5-4ED4-B88C-FAB3F6386CC0}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_DinosaurDisplay" ID="{5915327E-CC42-4780-B93D-890DCFB14AFA}" ShortID="191454474">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_DinosaurDisplay" ID="{EE2A084E-8D23-4D7D-AC78-AD365F754E47}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_DinosaurDisplay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="807966768"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_DinosaurDisplay" ID="{EE2A084E-8D23-4D7D-AC78-AD365F754E47}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_FlowerPotFall" ID="{614098B2-5E31-462A-A354-A6209F2CA35A}" ShortID="595316762">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_FlowerPotFall" ID="{425BCF12-AC40-46CC-AE84-4E46983ED795}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_FlowerPotFall.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="151756865"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_FlowerPotFall" ID="{425BCF12-AC40-46CC-AE84-4E46983ED795}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_FS_NPC" ID="{FEA19D2E-82B2-4377-A963-913DBBF40B94}" ShortID="160125955">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_FS_NPC" ID="{8DE80E02-F39E-4461-9BDF-5B458C63B729}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_FS_NPC.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="766424980"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_FS_NPC" ID="{8DE80E02-F39E-4461-9BDF-5B458C63B729}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_MusicPlay" ID="{8C616DD0-8876-4A9C-9EB3-24DACC90A148}" ShortID="729107355">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_MusicPlay" ID="{440C7EA3-9976-4985-A544-BD69CE7E6F08}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_MusicPlay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="693263473"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-SFX_MusicStop" ID="{20C52C74-EA0F-46A2-B479-3EE239F3F68D}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_MusicStop.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="578823085"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-SFX_PlayerNotMoving" ID="{877C98ED-3647-448F-949A-C10EE556F553}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_PlayerNotMoving.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="987789638"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCat" ID="{D96194D6-FD93-46AD-9B01-31A842F2AED3}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCat.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="51755562"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCatChase" ID="{CA53AE62-CF80-4F53-A0D2-FF23DCC4B341}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCatChase.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="967137326"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCurious" ID="{3F9E2206-ABAD-4216-98DE-D13E8343BE57}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCurious.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="409932321"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCLocked" ID="{4F8CB412-8E69-4371-8199-764D1E3760A6}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCLocked.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="608843293"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCWhatever" ID="{9267E761-8EA3-4875-9FF3-3DA9CBBDDC65}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCWhatever.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="772057789"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_PlayerBarks" ID="{4F1D1ECE-E6D4-445F-8887-22C044F3899C}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerBarks.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="364952126"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_PlayerYay" ID="{C516988E-1543-4F3C-B007-F37CBBBA297F}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerYay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="995335852"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_PlayerYay" ID="{C516988E-1543-4F3C-B007-F37CBBBA297F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_PossessedOff" ID="{80F9FB2C-AA5D-48DF-833B-D7DB79B824F0}" ShortID="177145946">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_PossessedOff" ID="{6C195DF2-CB66-4A99-8544-D1FAA5FD5AE4}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_PossessedOff.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="317779275"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_PossessedOff" ID="{6C195DF2-CB66-4A99-8544-D1FAA5FD5AE4}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_PossessedOn" ID="{150A1F1F-0231-45EE-9291-C14168594DCF}" ShortID="583702919">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_PossessedOn" ID="{A73550CE-51B3-4F74-9AA1-821498C3FF25}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_PossessedOn.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="435817650"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_PossessedOn" ID="{A73550CE-51B3-4F74-9AA1-821498C3FF25}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_ToolsDisplay" ID="{160A9783-D9E7-4BF9-8996-59F12EC237B6}" ShortID="437593877">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_ToolsDisplay" ID="{557DE6CD-4704-4251-B9EB-F2278F17D4BE}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_ToolsDisplay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="130928180"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_ToolsDisplay" ID="{557DE6CD-4704-4251-B9EB-F2278F17D4BE}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_WoodBox" ID="{9D298E6D-5A27-4AB7-A7E1-4EEC2D6DBCAB}" ShortID="244561536">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_WoodBox" ID="{FD741755-58BB-414F-84F0-CC149ABB74FA}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_WoodBox.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="605678295"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_WoodBox" ID="{FD741755-58BB-414F-84F0-CC149ABB74FA}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_Defeat" ID="{AB8BF231-AF53-4F96-AC60-D1739D4F8285}" ShortID="769802894">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_Defeat" ID="{8BF204DB-3BD1-47AF-95D5-056F722C4D21}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_Defeat.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="163706350"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_Defeat" ID="{8BF204DB-3BD1-47AF-95D5-056F722C4D21}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_FowRemoved" ID="{FB38FC31-458E-46BA-876E-85C9F04E7824}" ShortID="149453969">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_FowRemoved" ID="{02FAC8DC-68C6-4E6E-B653-665EC9FB7AA7}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_FowRemoved.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="225569433"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_FowRemoved" ID="{02FAC8DC-68C6-4E6E-B653-665EC9FB7AA7}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_KeyPickup" ID="{39ED4BEE-9AF5-4DB5-B4FE-EDF60815111E}" ShortID="467209407">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_KeyPickup" ID="{8567A916-76E1-4ED1-93AA-312C6B0DF7F8}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_KeyPickup.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="710994095"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_KeyPickup" ID="{8567A916-76E1-4ED1-93AA-312C6B0DF7F8}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_MouseOver" ID="{2A6DC84F-8B68-49AB-BF63-BDAD7BA0D492}" ShortID="288322443">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_MouseOver" ID="{648A3233-93CB-4F43-829B-9D6DED086DEC}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_MouseOver.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="82008392"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_MouseOver" ID="{648A3233-93CB-4F43-829B-9D6DED086DEC}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_ObjectPickup" ID="{0CA77400-DD33-4F1D-947C-728A822920CC}" ShortID="157310635">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_ObjectPickup" ID="{2443E6B3-BDFC-4777-8D4F-20C382DB520C}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_ObjectPickup.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="1015587783"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-SFX_MusicStop" ID="{064A3DB6-5FB5-4FF7-8B34-D968E53A179C}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_MusicStop.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="578823085"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-SFX_PlayerNotMoving" ID="{DEE9EABD-BAC8-417E-A113-4390681DE2DE}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_PlayerNotMoving.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="987789638"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCat" ID="{E3B3CA8C-9E26-497E-9FED-E37A727030DA}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCat.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="51755562"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCatChase" ID="{42AD9D8D-4F02-40DF-91D5-E4A996C83FFA}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCatChase.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="967137326"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCCurious" ID="{71CA1F5E-0BF2-4322-A074-33B18E2EA176}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCurious.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="409932321"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCLocked" ID="{24176F76-10BB-489F-8A9A-37765539CDC7}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCLocked.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="608843293"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_NPCWhatever" ID="{721104C1-B6BE-44B6-8E14-B251AAB55C8F}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCWhatever.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="772057789"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_PlayerBarks" ID="{94D6C889-CBC5-464B-AC31-41E0CA24526D}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerBarks.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="364952126"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="PH-VO_PlayerYay" ID="{5290C5B7-025C-4789-89AF-6880A2C214FF}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerYay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="995335852"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_PlayerYay" ID="{5290C5B7-025C-4789-89AF-6880A2C214FF}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_OnClick" ID="{0F499673-0655-4A24-BCC8-524245B42516}" ShortID="561587190">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_OnClick" ID="{528A545E-3E57-4023-AE51-E64904D9EB2F}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_OnClick.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="964011004"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_OnClick" ID="{528A545E-3E57-4023-AE51-E64904D9EB2F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_Star1" ID="{8DB76ACC-A4AB-4098-A965-71B4D94E0B79}" ShortID="505660843">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_Star1" ID="{89405AFA-DE75-47B6-84A7-132AF81A28A1}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_Star1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="1033595569"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_Star1" ID="{89405AFA-DE75-47B6-84A7-132AF81A28A1}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_Star2" ID="{6F256B47-1B7B-4B8A-B46C-9EA40549C32D}" ShortID="74435687">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_Star2" ID="{36B6302A-3A97-4F37-8211-2893E74E1905}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_Star2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="520423933"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_Star2" ID="{36B6302A-3A97-4F37-8211-2893E74E1905}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_Star3" ID="{AA618B6B-54AB-49F8-9C55-B02AA1982588}" ShortID="224426298">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_Star3" ID="{E9677085-5C02-49C6-90B2-4EF9FC916F5B}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_Star3.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="969771039"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_Star3" ID="{E9677085-5C02-49C6-90B2-4EF9FC916F5B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_Stats" ID="{1555C162-53BD-458F-94F8-1C50D899A954}" ShortID="7420909">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_Stats" ID="{2E3BD3F8-3571-4458-92D5-E814640BB991}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_Stats.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="920456870"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_Stats" ID="{2E3BD3F8-3571-4458-92D5-E814640BB991}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-UI_Victory" ID="{8713545F-1AA0-49BD-924B-1A9310722E6A}" ShortID="896441322">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-UI_Victory" ID="{AAF43156-61A6-4C5F-BD16-C071D9BE9406}">
+									<Language>SFX</Language>
+									<AudioFile>PH-UI_Victory.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="914413484"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-UI_Victory" ID="{AAF43156-61A6-4C5F-BD16-C071D9BE9406}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-VO_NPC_Surprised" ID="{094A8922-C3D9-414B-A603-917333038BD9}" ShortID="811884036">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_NPC_Surprised" ID="{01F3DBB2-EDDE-4488-88B2-FF238D9E9D57}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPC_Surprised.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="858673148"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_NPC_Surprised" ID="{01F3DBB2-EDDE-4488-88B2-FF238D9E9D57}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-VO_NPCCurious" ID="{2D094A30-9D6C-44E3-B545-BC0FCABEC912}" ShortID="642610355">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_NPCCurious" ID="{3BFF2FA5-A8F9-4098-AB1A-99CA41E5521F}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCurious.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="409932321"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_NPCCurious" ID="{3BFF2FA5-A8F9-4098-AB1A-99CA41E5521F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-VO_NPCCatChase" ID="{29C138F1-7047-4C8D-9822-15190978811D}" ShortID="1072151733">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_NPCCatChase" ID="{0AEDB195-57E0-429B-ADE4-3193C832C4F6}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCatChase.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="967137326"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_NPCCatChase" ID="{0AEDB195-57E0-429B-ADE4-3193C832C4F6}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_PlayerNotMoving" ID="{E75A5A3A-8B35-4023-9EBA-4B248B2AAF51}" ShortID="500369444">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_PlayerNotMoving" ID="{62749CCC-8734-4116-B3F9-19AE632E6486}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_PlayerNotMoving.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="987789638"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_PlayerNotMoving" ID="{62749CCC-8734-4116-B3F9-19AE632E6486}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-VO_NPCLocked" ID="{3B59D09E-A735-4E74-A1F7-61C2F681B0C3}" ShortID="974447751">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_NPCLocked" ID="{7DC2741B-86A9-4482-BD8B-C72BA5F456E9}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCLocked.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="608843293"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_NPCLocked" ID="{7DC2741B-86A9-4482-BD8B-C72BA5F456E9}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-VO_NPCWhatever" ID="{080DDB60-B8EA-42C4-81CC-CB60C6F4462F}" ShortID="604690822">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_NPCWhatever" ID="{3AAD39F4-DD0C-4CEB-86DA-19A0FF9F2D4D}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCWhatever.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="772057789"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_NPCWhatever" ID="{3AAD39F4-DD0C-4CEB-86DA-19A0FF9F2D4D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_MusicStop" ID="{4A63B38D-57E3-45F7-BA2E-75D4F38E243B}" ShortID="217888049">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_MusicStop" ID="{FB0DDD0D-922C-4040-A64E-BD3C500FFE94}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_MusicStop.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="578823085"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_MusicStop" ID="{FB0DDD0D-922C-4040-A64E-BD3C500FFE94}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-VO_PlayerYay" ID="{6B3D5257-4EFF-4AE5-8035-0C864F786383}" ShortID="980261903">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_PlayerYay" ID="{39B443DA-5441-4615-82CD-F86316749C15}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerYay.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="995335852"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_PlayerYay" ID="{39B443DA-5441-4615-82CD-F86316749C15}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-VO_NPCCat" ID="{DCC464CB-76C9-42B5-897D-A43A73040972}" ShortID="297076438">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_NPCCat" ID="{BDF804E2-AB93-4A9F-B5DC-CAFDDF87F905}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_NPCCat.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="51755562"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_NPCCat" ID="{BDF804E2-AB93-4A9F-B5DC-CAFDDF87F905}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-VO_PlayerBarks" ID="{426737FA-D819-4AA2-B3A8-388D01A7F18A}" ShortID="164963282">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_PlayerBarks" ID="{D6204BD0-8FFC-4D68-B060-E81A59738471}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_PlayerBarks.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="364952126"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_PlayerBarks" ID="{D6204BD0-8FFC-4D68-B060-E81A59738471}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
-					<ActiveSourceList>
-						<ActiveSource Name="Collectable" ID="{8BECA2AC-0753-406A-B4B4-3D84E7CF30CD}" Platform="Linked"/>
-					</ActiveSourceList>
-				</Sound>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

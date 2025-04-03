@@ -1,0 +1,49 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "3753760176",
+    "Type": "Event",
+    "GUID": "{7D546FC9-40E6-4E12-BE8B-EEED0B34ACED}",
+    "Language": "SFX",
+    "Hash": "{EE829453-3DCC-E861-FA31-582E2628EEEE}",
+    "ObjectPath": "SFX_FS_NPC",
+    "ShortName": "SFX_FS_NPC",
+    "Path": "Event/SFX_FS_NPC.bnk",
+    "Media": [
+     {
+      "Id": "766424980",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "PH-SFX_FS_NPC.wav",
+      "Path": "Media/766424980.wem",
+      "CachePath": "36/{36D907DE-6DE7-F3C6-6586-A83CB8710141}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3753760176",
+      "Name": "SFX_FS_NPC",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\NPC\\SFX_FS_NPC",
+      "GUID": "{7D546FC9-40E6-4E12-BE8B-EEED0B34ACED}",
+      "Color": "24",
+      "DurationType": "OneShot",
+      "DurationMin": "1.6823334",
+      "DurationMax": "1.6823334",
+      "MediaRefs": [
+       {
+        "Id": "766424980"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{B382ED86-0F8D-F899-D6EE-CC324434D65D}"
+ }
+}

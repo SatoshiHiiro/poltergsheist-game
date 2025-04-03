@@ -1,0 +1,49 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "3660578466",
+    "Type": "Event",
+    "GUID": "{FDC346FC-0B64-49E1-89D0-52B23909C023}",
+    "Language": "SFX",
+    "Hash": "{BFA2A787-538A-848F-2AAF-4DC56A67887A}",
+    "ObjectPath": "VO_NPC_Surprised",
+    "ShortName": "VO_NPC_Surprised",
+    "Path": "Event/VO_NPC_Surprised.bnk",
+    "Media": [
+     {
+      "Id": "858673148",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "PH-VO_NPC_Surprised.wav",
+      "Path": "Media/858673148.wem",
+      "CachePath": "BD/{BD00FAE8-24F3-16CF-F9B6-361491ED0B01}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3660578466",
+      "Name": "VO_NPC_Surprised",
+      "ObjectPath": "\\Events\\Default Work Unit\\VO\\VO_NPC_Surprised",
+      "GUID": "{FDC346FC-0B64-49E1-89D0-52B23909C023}",
+      "Color": "9",
+      "DurationType": "OneShot",
+      "DurationMin": "1.9448333",
+      "DurationMax": "1.9448333",
+      "MediaRefs": [
+       {
+        "Id": "858673148"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{6BBAE108-2A03-82A5-A1FC-22BECF481336}"
+ }
+}
