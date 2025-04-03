@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2095578761486272137}
   - component: {fileID: 8759962360366764905}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Sprite
   m_TagString: Possess
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.066619, y: 0.066619, z: 0.066619}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6535272397994358127}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e23b0d42476bdd438a9701eb19036d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,9 +99,7 @@ GameObject:
   - component: {fileID: 6386038457309052590}
   - component: {fileID: 59496671337756375}
   - component: {fileID: 4367256952221065982}
-  - component: {fileID: 3075968619948208118}
-  - component: {fileID: 4536471216668545166}
-  m_Layer: 7
+  m_Layer: 17
   m_Name: KeyObject
   m_TagString: Possess
   m_Icon: {fileID: 0}
@@ -140,7 +138,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -204,120 +202,8 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8311802149728687269}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6a3e67a7e45cbd47b481e03e4eccfe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3075968619948208118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8311802149728687269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8b36426c4a10a74ea74ff50611fe105, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalSprite: {fileID: 0}
-  possessedSprite: {fileID: 0}
-  lerpSpeed: 6
-  possessionDistance: 0
---- !u!114 &4536471216668545166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8311802149728687269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e78eab71881724468a56e32211f79bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpParam: jump
-  landParam: land
-  bonkLeftParam: bonkL
-  bonkRightParam: bonkR
-  speed: 0.5
-  maxSpeed: 1
-  stopSpeed: 2
-  jumpSpeed: 6
-  horizontalDirection: 0
-  halfSizeOfObject: 0.5
-  lastVelocityX: 0
-  lastPosY: 0
-  canMove: 0
-  canWalk: 0
-  canJump: 0
-  isInContact: 0
-  isJumping: 0
-  move:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 2ff79128-3364-4076-b13d-e093b9033b6a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: ca2486c7-5f83-4c5f-8b36-8621e4e11858
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 4
-    - m_Name: up
-      m_Id: c9a211c3-2304-4107-b3e5-b30c94a93010
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: down
-      m_Id: 9682641b-7925-4f25-9320-a0cb4033a00b
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: left
-      m_Id: 493715f3-41d5-49d0-886d-c67c662e2fde
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: right
-      m_Id: fec36ff6-e755-4364-a109-a44b07261a36
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    m_Flags: 0
-  jump:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 5ab2dd64-d0a6-48f0-9b17-142af6e8d89c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 55431b30-98e4-4558-95e7-a6a16432dec0
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Jump
-      m_Flags: 0
-    m_Flags: 0
-  targetToUnlock: {fileID: 0}

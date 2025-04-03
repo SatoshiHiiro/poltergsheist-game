@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class JukeBox : SoundDetection, IPossessable, IResetObject
+public class JukeBox : SoundDetection, IPossessable, IResetObject, IResetInitialState
 {
     private PossessionManager possessionManager;
     private bool isPlaying;
@@ -43,6 +43,12 @@ public class JukeBox : SoundDetection, IPossessable, IResetObject
     {
         audioSource.Stop();
         isPlaying = false;
+        jukeboxAnim.SetBool("isPlaying", false);
+    }
+
+    public void ResetInitialState()
+    {
+        ResetObject();
     }
 
     //public void StopSound()

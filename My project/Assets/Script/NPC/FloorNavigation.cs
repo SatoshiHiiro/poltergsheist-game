@@ -25,6 +25,7 @@ public class FloorNavigation : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        //listAllStairs();
     }
     private void Start()
     {
@@ -40,7 +41,7 @@ public class FloorNavigation : MonoBehaviour
         foreach (StairController stair in allStairs)
         {
             float floorLevel = stair.FloorLevel;
-            
+
             if (!stairsByFloorLevel.ContainsKey(floorLevel))
             {
                 stairsByFloorLevel[floorLevel] = new List<StairController>();
@@ -65,7 +66,7 @@ public class FloorNavigation : MonoBehaviour
 
         if (!stairsByFloorLevel.ContainsKey(currentFloor))
         {
-            
+            print("GROSSE ERREUR");
             // No stairs found on current floor level
             return null;
         }
@@ -119,15 +120,23 @@ public class FloorNavigation : MonoBehaviour
     // Find all the stairs the NPC must used to go to the targeted floor
     public List<StairController> FindPathToFloor(FloorNavigationRequest floorRequest)
     {
+        int safetyCounter = 100;
         List<StairController> path = new List<StairController>();   // List of all the stairs the NPC must used
         float currentFloor = floorRequest.CurrentFloorLevel;    // Floor level where the NPC is
         float targetFloor = floorRequest.TargetFloorLevel;
         
         // As long as the NPC is not on the desired floor
-        while(currentFloor != targetFloor)
+        while(currentFloor != targetFloor && safetyCounter > 0)
         {
+            safetyCounter--;
+            if (safetyCounter == 0)
+            {
+                Debug.LogError("Boucle infinie détectée dans FindPathToFloor !");
+                return null;
+            }
             // Determine if we need to go up or down
             StairDirection direction = (targetFloor > currentFloor) ? StairDirection.Upward : StairDirection.Downward;
+
             // Find the nearest stair to used to go to the targeted floor
             StairController nextStair = FindNearestStairToFloor(floorRequest, direction, null);
 

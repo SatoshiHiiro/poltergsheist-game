@@ -25,8 +25,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     protected bool isInvestigating = false; // Is the NPC investigating a suspect sound
     public AudioSource audioSource;  // Source of the surprised sound
 
-    protected Vector2 initialPosition;  // Initial position of the NPC
-    private bool initialFacingRight; // He's he facing right or left
 
     protected Queue<IEnumerator> investigationQueue = new Queue<IEnumerator>();
     private bool isAtInitialPosition = false;
@@ -49,9 +47,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         base.Start();
         player = GameObject.FindWithTag("Player");
         audioSource = GetComponent<AudioSource>();        
-        initialPosition = transform.position;
-        initialFacingRight = !npcSpriteRenderer.flipX;
-        initialFloorLevel = currentFloorLevel;
         isAtInitialPosition = true;
         canSee = true;
 
@@ -66,7 +61,12 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
        // DetectMovingObjects();
         CheckMirrorReflection();
 
-        if(investigationQueue.Count > 0 && !isInvestigating)
+        if (npcSpriteRenderer == null)
+        {
+            print("WTF");
+        }
+
+        if (investigationQueue.Count > 0 && !isInvestigating)
         {
             if (returnToInitialPositionCoroutine != null)
             {
@@ -195,6 +195,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 continue;
             }
 
+            if(Vector2.Distance(point, transform.position) > detectionRadius)
+            {
+                continue;
+            }
+
             SpriteRenderer objectSprite = objectCollider.GetComponent<SpriteRenderer>();
             // Check if there is light toutching the object
             if (!IsObjectLit(objectCollider))
@@ -232,6 +237,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             // Check if the player reflection is in the mirror
             if (mirror.IsReflectedInMirror(player.GetComponent<Collider2D>()))
             {
+                //print("player in reflection");
                 Collider2D playerCollider = player.GetComponent<Collider2D>();
                 Vector2[] reflectionPoints = mirror.GetReflectionPoints(playerCollider);
                 //print(reflectionPoints[0]);
@@ -244,6 +250,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                     if (!mirror.IsMirrorReflectionBlocked(reflectionPoints, playerCollider) && !seePolterg)
                     {
                         print("see");
+                        playerCollider.gameObject.GetComponent<MovementController>().canMove = false;
                         NPCSeePolterg();
                     }
                 } 
@@ -382,14 +389,29 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         yield return StartCoroutine(npcMovementController.ReachTarget(initialPosition, currentFloorLevel, initialFloorLevel));//ReachTarget(initialPosition, initialFloorLevel));
 
-
         // Restore initial facing direction
         if(npcSpriteRenderer.flipX == initialFacingRight)
         {
             npcSpriteRenderer.flipX = !initialFacingRight;
+            facingRight = false;
             FlipFieldOfView();
         }
         
+    }
+
+    public override void ResetInitialState()
+    {
+        base.ResetInitialState();
+        isAtInitialPosition = true;
+        canSee = true;
+        seePolterg = false;
+        isInvestigating = false;
+        investigationQueue.Clear(); // Clear all the investigations he should be doing
+    }
+
+    public void ResetSeePolterg()
+    {
+        seePolterg = false;
     }
 
     private void OnDrawGizmos()
