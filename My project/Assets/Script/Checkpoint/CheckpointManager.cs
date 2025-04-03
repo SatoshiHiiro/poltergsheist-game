@@ -38,7 +38,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if(currentCheckpoint != null)
         {
-
+            print("I HAVE A CHECKPOINT");
             StartCoroutine(WaitBeforeReset());
         }
     }
@@ -57,13 +57,15 @@ public class CheckpointManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         foreach (IResetInitialState resetGameObject in currentCheckpoint.ResetGameObjects)
         {
+
             MonoBehaviour component = resetGameObject as MonoBehaviour; // Cast en MonoBehaviour
             if (component != null && component.gameObject.activeInHierarchy)
             {
+                print(component.gameObject.name);
                 resetGameObject.ResetInitialState();
                 
             }
-            //print(component.gameObject.name);
+            
             //else
             //{
             //    print(component.gameObject.name);
