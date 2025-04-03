@@ -830,9 +830,16 @@
 										<MediaID ID="696681815"/>
 									</MediaIDList>
 								</AudioFileSource>
+								<AudioFileSource Name="1932 Leo Reisman - Alone Together (Frank Luther, vocal)" ID="{FEDC5550-28A4-4CFF-90FD-04913D8C8F5F}">
+									<Language>SFX</Language>
+									<AudioFile>1932 Leo Reisman - Alone Together (Frank Luther, vocal).wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="360965362"/>
+									</MediaIDList>
+								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="PH-MUS_Win" ID="{CCAE1ADE-3991-463B-9D31-1F7C142CEE4C}" Platform="Linked"/>
+								<ActiveSource Name="1932 Leo Reisman - Alone Together (Frank Luther, vocal)" ID="{FEDC5550-28A4-4CFF-90FD-04913D8C8F5F}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="PH-SFX_ArcheologyRack" ID="{E38E8437-C22E-418F-A0E4-C0535F87B2F3}" ShortID="311208970">
@@ -1707,6 +1714,108 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="PH-VO_PlayerBarks" ID="{D6204BD0-8FFC-4D68-B060-E81A59738471}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="New Virtual Folder" ID="{932D37C4-B414-4CEB-8696-033AB9ED9606}" ShortID="522633475">
+					<ChildrenList>
+						<Sound Name="PH-MUS_House" ID="{BE5ECC1F-6216-411E-BECA-D33159CE019B}" ShortID="816134537">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="1932 Leo Reisman - Alone Together (Frank Luther, vocal)" ID="{556293D0-0F40-49D4-B139-3DFB31781BE0}">
+									<Language>SFX</Language>
+									<AudioFile>1932 Leo Reisman - Alone Together (Frank Luther, vocal).wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="360965362"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="Cuphead OST - Elder Kettle [Music]" ID="{04649846-F96E-426A-AE91-868DB2639628}">
+									<Language>SFX</Language>
+									<AudioFile>Cuphead OST - Elder Kettle [Music].wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="703655619"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Cuphead OST - Elder Kettle [Music]" ID="{04649846-F96E-426A-AE91-868DB2639628}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-Mus_Museum" ID="{6BC36CD0-ECC3-4909-8319-7DAEAEBEF0C9}" ShortID="209734079">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Cuphead OST - Elder Kettle [Music]" ID="{ADAFDF0B-30A2-4478-838B-D3D0C28E2145}">
+									<Language>SFX</Language>
+									<AudioFile>Cuphead OST - Elder Kettle [Music].wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="361291788"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Cuphead OST - Elder Kettle [Music]" ID="{ADAFDF0B-30A2-4478-838B-D3D0C28E2145}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-MUS_Menu" ID="{88C6259D-DF50-4DAD-A891-B09A8228A891}" ShortID="693283741">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="H_ P_ Lovecraft Jazz [1920's Ambience] Cthulhu Mythos and the Old Ones" ID="{E61098DC-E4D1-4913-B9A2-FDDAC91BCC13}">
+									<Language>SFX</Language>
+									<AudioFile>H. P. Lovecraft Jazz [1920's Ambience] Cthulhu Mythos and the Old Ones.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="425142668"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="H_ P_ Lovecraft Jazz [1920's Ambience] Cthulhu Mythos and the Old Ones" ID="{E61098DC-E4D1-4913-B9A2-FDDAC91BCC13}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-MUS_Win" ID="{D72FEFEF-1E9F-4700-9E83-220C724328B3}" ShortID="766995198">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="2025-04-04-023546_186354" ID="{DE57C220-9A2D-4FD0-809E-9F72A72C0F33}">
+									<Language>SFX</Language>
+									<AudioFile>2025-04-04-023546_186354.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="42739357"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="2025-04-04-023546_186354" ID="{DE57C220-9A2D-4FD0-809E-9F72A72C0F33}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
