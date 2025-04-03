@@ -17,6 +17,9 @@ public interface IPossessable
 /// État: Adéquat(temp)
 public class PossessionController : MovementController, IPossessable
 {
+    public event Callback onDepossess;
+    public event Callback onPossess;
+
     private bool isMoving;
     private Vector2 lastPosition;
     private bool canObjectJump = false;
@@ -25,7 +28,9 @@ public class PossessionController : MovementController, IPossessable
     // Movement variables
     public Vector2 LastKnownPosition { get; private set; }          // Last known position of the object by an NPC
     public Quaternion LastKnownRotation { get; private set; }       // Last known rotation of the object by an NPC
-   
+    //public objecType objecType;
+    public objecType weightOfAnimation;
+
     protected override void Awake()
     {
         base.Awake();
@@ -64,6 +69,7 @@ public class PossessionController : MovementController, IPossessable
 
     public void OnPossessed()
     {
+        if (onPossess != null) { onPossess(possessParam); };
         canMove = true;
         canJump = canObjectJump;
         isJumping = false;
@@ -71,6 +77,7 @@ public class PossessionController : MovementController, IPossessable
 
     public void OnDepossessed()
     {
+        if (onDepossess != null) { onDepossess(depossessParam); };
         canMove = false;
     }
 
