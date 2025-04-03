@@ -15,7 +15,7 @@ public interface IPossessable
 /// Requiert Externe: tag "Wall"
 /// Input: A = droite, D = gauche, SPACE = saut
 /// État: Adéquat(temp)
-public class PossessionController : MovementController, IPossessable, IResetInitialState
+public class PossessionController : MovementController, IPossessable
 {
     public event Callback onDepossess;
     public event Callback onPossess;
@@ -28,10 +28,6 @@ public class PossessionController : MovementController, IPossessable, IResetInit
     // Movement variables
     public Vector2 LastKnownPosition { get; private set; }          // Last known position of the object by an NPC
     public Quaternion LastKnownRotation { get; private set; }       // Last known rotation of the object by an NPC
-
-    private Vector2 initialPosition;
-    private Quaternion initialRotation;
-   
     //public objecType objecType;
     public objecType weightOfAnimation;
 
@@ -49,9 +45,6 @@ public class PossessionController : MovementController, IPossessable, IResetInit
         canMove = false;
         canObjectJump = canJump;
         canJump = false;
-
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
     }
 
     //Pour les inputs
@@ -95,12 +88,5 @@ public class PossessionController : MovementController, IPossessable, IResetInit
             return rigid2D.linearVelocity.normalized;
         }
         return IsMoving ? ((Vector2)transform.position - lastPosition).normalized : Vector2.zero;
-    }
-
-    public void ResetInitialState()
-    {
-        transform.position = initialPosition;
-        transform.rotation = initialRotation;
-        OnDepossessed();
     }
 }

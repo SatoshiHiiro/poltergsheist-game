@@ -6,7 +6,7 @@ using System.Collections;
 /// Requiert Externe: PlayerController(1)
 /// Input: Click Gauche = possession/d�possession
 /// �tat: Ad�quat(temp)
-public class PossessionManager : InteractibleManager, IResetInitialState
+public class PossessionManager : InteractibleManager
 {
     //Variables
     [Header("Variables")]
@@ -17,7 +17,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
 
     //Conditions
     bool isPossessed;                               //Pour savoir si l'objet possessible est poss�d�
-    bool isAnimationFinished;                       //Pour savoir si l'animation de possession est fini
+    bool isAnimationFinished;                       //Pour savoir si l'animaation de possession est fini
     bool hasEnoughSpace;
     bool hasPosControl;
 
@@ -182,16 +182,5 @@ public class PossessionManager : InteractibleManager, IResetInitialState
             hasEnoughSpace = true;
             Debug.Log("Entered Trigger");
         }
-    }
-
-    public void ResetInitialState()
-    {
-        if (isPossessed)
-        {
-            StopPossession();
-        }
-        isPossessed = false;
-        isAnimationFinished = true;
-        hasEnoughSpace = true;
     }
 }

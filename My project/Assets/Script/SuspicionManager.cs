@@ -35,11 +35,8 @@ public class SuspicionManager : MonoBehaviour
 
     [SerializeField] protected float suspicionDecrease;
 
-    GameObject player;
-
     public event Action<float> OnSuspicionChanged;  // Event called when the suspicious changed
 
-    bool hasRespawn = false;
     private void Awake()
     {
         if (Instance == null)
@@ -58,45 +55,25 @@ public class SuspicionManager : MonoBehaviour
         currentSuspicion = 0f;
         maxSuspicion = 100f;
         timeSinceSuspicionIncrease = Time.time;
-        player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
     {
-        //print(currentSuspicion);
         //UpdateSuspicion();
-        if (currentSuspicion >= maxSuspicion && !hasRespawn)
+        if (currentSuspicion >= maxSuspicion)
         {
-            // We don't want the player to be able to move anymore
-            PlayerController playerController = player.GetComponent<PlayerController>();
-            playerController.canMove = false;
-            // If the player is possessing an object we don't want him to be able to move anymore
-            if (playerController.isPossessing)
-            {
-                if(playerController.lastPossession.GetComponent<PossessionController>() != null)
-                {
-                    playerController.lastPossession.GetComponent<PossessionController>().canMove = false;
-                }                
-            }
-            hasRespawn = true;
-            StartCoroutine(WaitDying());
+            PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("GameOver");
         }
 
-        if (Time.time - timeSinceSuspicionIncrease >= timeUntilSuspicionDecrease && !hasRespawn)
+        if (Time.time - timeSinceSuspicionIncrease >= timeUntilSuspicionDecrease)
         {
             currentSuspicion -= suspicionDecrease;
             if (currentSuspicion < 0f)
                 currentSuspicion = 0f;
             OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
         }
-    }
-
-    public void ResetSuspicion()
-    {
-        print("RESET SUSPICION");
-        currentSuspicion = 0f;
-        OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
-        hasRespawn = false;
     }
 
     // Record how many NPCs witness a moving object
@@ -112,30 +89,17 @@ public class SuspicionManager : MonoBehaviour
         paranormalObserverCount = Mathf.Max(0, paranormalObserverCount);
     }
 
-    // When the NPC see Polterg from a mirror or from being a exorcist he dies instantly
+    // When the NPC see Polterg from a mirror or from bein a exorcist he dies instantly
     public void UpdateSeeingPoltergSuspicion()
     {
-        print("100%");
-        currentSuspicion = 100;
-        OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
+        OnSuspicionChanged?.Invoke(100 / maxSuspicion);
+        StartCoroutine(WaitDying());
     }
 
     private IEnumerator WaitDying()
     {
-        yield return new WaitForSeconds(2f);
-        PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
-        PlayerPrefs.Save();
-        ScoreManager.Instance.AddDeath();
-        if(CheckpointManager.Instance.CurrentCheckpoint != null)
-        {
-            CheckpointManager.Instance.Respawn();
-        }
-        else
-        {
-            SceneManager.LoadScene("GameOver");
-        }
-        
-        //
+        yield return new WaitForSeconds(1f);
+        currentSuspicion = 100;
     }
 
     // Update suspicion when an NPC notices an objet moving in front of them

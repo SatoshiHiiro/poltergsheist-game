@@ -120,20 +120,4 @@ public class Mirror : MonoBehaviour
         //    return false;
         //}
     }
-
-    private void OnBecameVisible()
-    {
-        if (mirrorCamera != null)
-        {
-            mirrorCamera.gameObject.SetActive(true);
-        }
-    }
-
-    private void OnBecameInvisible()
-    {
-        if (mirrorCamera != null)
-        {
-            mirrorCamera.gameObject.SetActive(false);
-        }
-    }
 }

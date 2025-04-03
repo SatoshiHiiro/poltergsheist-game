@@ -58,8 +58,8 @@ public class TrapDoor : MonoBehaviour
         {
             float objectWidth = collider.bounds.size.x;
             float objectHeight = collider.bounds.size.y;
-            //print("Object width " + objectWidth);
-            //print("object height " + objectHeight);
+            print("Object width " + objectWidth);
+            print("object height " + objectHeight);
             if(objectWidth >= minimumBlockWidth || objectHeight >= minimumBlockHeight)
             {
                 return true;

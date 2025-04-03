@@ -15,7 +15,6 @@ public class SuspicionUI : MonoBehaviour
 
     private void UpdateUI(float suspiciousAmount)
     {
-        //print("UI CHANGE");
         suspicionSlider.value = suspiciousAmount;
     }
 

@@ -10,10 +10,7 @@ public class Victory : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {  
             UnlockNewLevel();
-            ScoreManager.Instance.CalculateScore();
-            Time.timeScale = 0f;
-            
-            //SceneManager.LoadScene("Victoire");
+            SceneManager.LoadScene("Victoire");
           
         } 
     }

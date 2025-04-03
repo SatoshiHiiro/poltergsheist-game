@@ -8,7 +8,7 @@ public enum ObjectState
 }
 
 
-public class FallingObject : SoundDetection, IPossessable, IResetObject, IResetInitialState
+public class FallingObject : SoundDetection, IPossessable, IResetObject
 {
     // Behaviour of the falling object when he's possessed
 
@@ -70,8 +70,7 @@ public class FallingObject : SoundDetection, IPossessable, IResetObject, IResetI
         transform.rotation = Quaternion.identity;
     }
 
-    public void ResetInitialState()
-    {
-        ResetObject();
-    }
+
+
+
 }

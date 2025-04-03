@@ -20,7 +20,6 @@ public abstract class SoundDetection : MonoBehaviour
 
     // Getters
     public SoundEmittingObject ObjectType => objectType;
-    public float FloorLevel => floorLevel;
 
     protected virtual void Start()
     {
@@ -84,7 +83,6 @@ public abstract class SoundDetection : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, soundRadius);
     }
-
 }
 
 public enum SoundEmittingObject

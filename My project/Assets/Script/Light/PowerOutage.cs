@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
+public class PowerOutage : MonoBehaviour, IPossessable
 {
     [Header("Lights variables")]
     [SerializeField] private bool closeAllLightsInBuilding;  // Do we close all the lights inside the house
@@ -153,23 +153,5 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
             //}
         }
         affectedNPCs.Clear();
-    }
-
-    public void ResetInitialState()
-    {
-        StopAllCoroutines();
-        lightsToClose = closeAllLightsInBuilding ? allBuildingLights : closedLights;
-        CloseOpenLights(lightsToClose, true);
-        lightsToClose = null;
-        isRepairing = false;
-
-        if(affectedNPCs.Count > 0)
-        {
-            foreach(HumanNPCBehaviour npc in affectedNPCs)
-            {
-                npc.NpcMovementController.ResetMovementSpeed();
-            }
-            affectedNPCs.Clear();
-        }
     }
 }

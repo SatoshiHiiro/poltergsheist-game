@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6854295430295253868}
   - component: {fileID: 7818845128291476759}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,9 +98,7 @@ GameObject:
   - component: {fileID: 6862643657868575749}
   - component: {fileID: 477083557348318394}
   - component: {fileID: 934290941605839134}
-  - component: {fileID: 4577982767617669942}
-  - component: {fileID: 5347937680042742442}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: StealableObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,56 +180,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyGain: 1
-  soundEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5eaff725df7c6e241ac7c67bc152f066, type: 2}
---- !u!114 &4577982767617669942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6222536157735932460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 798848abb125f8e4ebd6df8fa66cb522, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_listeners:
-    initialListenerList: []
-    useDefaultListeners: 1
-  isEnvironmentAware: 1
-  isStaticObject: 0
-  usePositionOffsetData: 0
-  m_positionOffsetData:
-    KeepMe: 0
-    positionOffset: {x: 0, y: 0, z: 0}
-  scalingFactor: 1
-  m_posOffsetData: {fileID: 0}
-  listenerMask: 1
---- !u!114 &5347937680042742442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6222536157735932460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0138c544e030b274e89e9fa0584f96b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: f520ac32311560145ada1000b012436b, type: 2}
-  decodeBank: 0
-  overrideLoadSetting: 0
-  loadAsynchronous: 0
-  saveDecodedBank: 0
-  unloadTriggerList: 958ca0ea
-  bankNameInternal: 
-  valueGuidInternal: 

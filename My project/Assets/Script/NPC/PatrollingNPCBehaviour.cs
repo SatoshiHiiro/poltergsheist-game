@@ -8,7 +8,7 @@ public interface IPatrol
     IEnumerator Patrol();
     void MoveToNextAvailablePatrolPoint();
 }
-public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialState
+public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol
 {
     // Enemy patrol variables
     [Header("Patrol variables")]
@@ -20,7 +20,6 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
     protected bool isInRoom;    // Is the NPC in a room
     PatrolPointData currentPoint;   // Point where the NPC is located
     PatrolPointData nextPatrolPoint; // Next NPC patrol point
-    private PatrolPointData initialPatrolPoint;
     //private bool rightFloor;    // Does the NPC on the right floor to do is patrol
     //private bool isWalkingBack;    // Does the NPC go up the stairs
     private bool isPatrolling;
@@ -47,16 +46,11 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         if(patrolPoints.Length > 0)
         {
             nextPatrolPoint = patrolPoints[indexPatrolPoints];
-            initialPatrolPoint = nextPatrolPoint;
         }
         
     }
     protected override void Update()
     {
-        if(npcSpriteRenderer == null)
-        {
-            print("WTF");
-        }
         DetectMovingObjects();
         CheckMirrorReflection();
 
@@ -77,11 +71,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
             isInvestigating = true;
             //StopCoroutine("HandleWaiting");
             //StopCoroutine("Patrol");
-            if(patrolling != null)
-            {
-                StopCoroutine(patrolling);
-            }
-            
+            StopCoroutine(patrolling);
             isPatrolling = false;
             IEnumerator investigationCoroutine = investigationQueue.Dequeue();
             StartCoroutine(RunInvestigation(investigationCoroutine));
@@ -279,27 +269,5 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         // After getting unstuck, move to the next patrol point
         //isGettingUnstuck = false;
         MoveToNextAvailablePatrolPoint();
-    }
-
-    public override void ResetInitialState()
-    {
-        base.ResetInitialState();
-        animator.Rebind();      
-        fovLight.enabled = true;
-        isWaiting = false;
-        isInRoom = false;
-        isPatrolling = false;
-        isBlocked = false;
-        canSee = true;
-        currentPoint = null;
-        returnToFloor = null;
-        patrolling = null;
-        indexPatrolPoints = 0;
-
-        if (initialPatrolPoint != null)
-        {
-            nextPatrolPoint = initialPatrolPoint;
-        }
-        //cageAnimator.Play("Idle", -1, 0f);
     }
 }

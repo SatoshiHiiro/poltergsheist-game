@@ -36,11 +36,6 @@ public class NPCMovementController : MonoBehaviour
         }
     }
 
-    public void ResetMovementSpeed()
-    {
-        movementSpeed = normalSpeed;
-    }
-
 
     // Updates sprite direction based on movement direction
     public void UpdateSpriteDirection(Vector2 destination)
