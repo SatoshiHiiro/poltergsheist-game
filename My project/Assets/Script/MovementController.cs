@@ -112,6 +112,11 @@ public abstract class MovementController : MonoBehaviour
 
             lastInput = moveInput;
         }
+        // Keep it from moving
+        else
+        {
+            rigid2D.linearVelocityX = 0;
+        }
     }
 
     //Pour les inputs
@@ -259,7 +264,17 @@ public abstract class MovementController : MonoBehaviour
             moveInput.x = 0f;
             rigid2D.linearVelocityX = 0f;
             canClimbAgain = false;
-            StairDirection direction = moveInput.y > 0 ? StairDirection.Upward : StairDirection.Downward;
+            //StairDirection direction = moveInput.y > 0 ? StairDirection.Upward : StairDirection.Downward;
+            StairDirection direction;
+            if (stair.UpperFloor != null)
+            {
+                direction = StairDirection.Upward;
+            }
+            else
+            {
+                direction = StairDirection.Downward;
+            }
+            //StairDirection direction = StairDirection.Upward;
             StairController nextStair = direction == StairDirection.Upward ? stair.UpperFloor : stair.BottomFloor;
             if (nextStair != null)
             {

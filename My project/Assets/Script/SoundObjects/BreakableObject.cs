@@ -1,22 +1,35 @@
 using UnityEngine;
 
-public class BreakableObject : SoundDetection
+public class BreakableObject : SoundDetection, IResetInitialState
 {
-    [SerializeField] private GameObject brokenObject;
+    [SerializeField] private GameObject prefabBrokenObject;
+    private GameObject brokenObject;
     private GameObject hiddenGameObject;
     private SpriteRenderer spriteRenderer;
     private Collider2D objCollider;
     private Rigidbody2D rb;
     private LayerMask floorLayer;
+
+    private Vector2 initialPosition;
+    private Sprite initialSprite;
+    protected void Awake()
+    {
+
+    }
     protected override void Start()
     {
         base.Start();
-        hiddenGameObject = gameObject.transform.GetChild(0).gameObject;
         objectType = SoundEmittingObject.BreakableObject;
         floorLayer = LayerMask.NameToLayer("Floor");
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         objCollider = gameObject.GetComponent<Collider2D>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        initialPosition = transform.position;
+        initialSprite = spriteRenderer.sprite;
+
+        hiddenGameObject = gameObject.transform.GetChild(0).gameObject;
+        hiddenGameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,13 +50,33 @@ public class BreakableObject : SoundDetection
             hiddenGameObject.transform.rotation = Quaternion.identity;
         }
         // Instantiate the broken object
-        if (brokenObject != null)
+        if (prefabBrokenObject != null)
         {
-            Instantiate(brokenObject, transform.position, Quaternion.identity);            
+            brokenObject = Instantiate(prefabBrokenObject, transform.position, Quaternion.identity);            
         }
         spriteRenderer.sprite = null;
         objCollider.isTrigger = true;
         rb.bodyType = RigidbodyType2D.Static;
         NotifyNearbyEnemies(this);
+    }
+
+    public void ResetInitialState()
+    {
+        Destroy(brokenObject);
+        transform.position = initialPosition;
+        transform.rotation = Quaternion.identity;
+        spriteRenderer.sprite = initialSprite;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        objCollider.isTrigger = false;
+        if(hiddenGameObject != null)
+        {
+            hiddenGameObject.transform.SetParent(this.transform);
+            hiddenGameObject.transform.localPosition = new Vector3(0, 0, 0);
+            //hiddenGameObject.GetComponent<PickupItemBehavior>().ResetInitialState();
+            hiddenGameObject.GetComponent<IResetInitialState>().ResetInitialState();
+            hiddenGameObject.SetActive(false);
+        }
+        
+
     }
 }
