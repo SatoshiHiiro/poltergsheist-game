@@ -7,6 +7,7 @@ using UnityEngine;
 public class ScoreUI : MonoBehaviour
 {
     // This class manage the UI for the Score
+    [SerializeField] Canvas canvasScore;
     [SerializeField] GameObject scorePanel;
     [SerializeField] GameObject timerGroup;
     [SerializeField] GameObject deathsGroup;
@@ -27,7 +28,8 @@ public class ScoreUI : MonoBehaviour
     // Display Score Panel
     public void ShowScorePanel()
     {
-        scorePanel.SetActive(true);
+        canvasScore.enabled = true;
+        ///scorePanel.SetActive(true);
     }
 
     // Display ScoreBoard
