@@ -28,7 +28,18 @@ public class PossessionController : MovementController, IPossessable, IResetInit
 
     private Vector2 initialPosition;
     private Quaternion initialRotation;
-   
+    
+    public enum objectType
+    {
+        Lightest = 6,
+        Light = 5,
+        Normal = 4,
+        Heavy = 3,
+        Heaviest = 2,
+    }
+
+    public objectType weightOfAnimation;
+
     protected override void Awake()
     {
         base.Awake();

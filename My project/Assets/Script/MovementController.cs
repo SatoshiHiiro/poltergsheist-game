@@ -16,27 +16,31 @@ public abstract class MovementController : MonoBehaviour
     [HideInInspector] public string landParam = "land";
     [HideInInspector] public string bonkLeftParam = "bonkL";
     [HideInInspector] public string bonkRightParam = "bonkR";
+    [HideInInspector] public string cantWalkLeftParam = "shakeL";
+    [HideInInspector] public string cantWalkRightParam = "shakeR";
 
     //Events
     public event Callback onJump;
     public event Callback onLand;
     public event Callback onBonkL;
     public event Callback onBonkR;
+    public event Callback onShakeL;
+    public event Callback onShakeR;
 
     //Mouvement
     [Header("Mouvement variables")]
-    [SerializeField] public float speed;                                //Vitesse du mouvement
-    [SerializeField] public float maxSpeed;                             //Vitesse maximale pouvant �tre atteinte
-    [SerializeField] public float stopSpeed;                            //Vitesse de ralentissage
-    [SerializeField] public float jumpSpeed;                            //Vitesse de saut
-    [SerializeField][HideInInspector] public int horizontalDirection;   //Direction du mouvement
+    [SerializeField] public float speed;                                //Mouvement speed
+    [SerializeField] public float maxSpeed;                             
+    [SerializeField] public float stopSpeed;                            
+    [SerializeField] public float jumpSpeed;                            //Jump impulsion force
+    [SerializeField][HideInInspector] public int horizontalDirection;
     private bool playerInputEnable;
     protected Vector2 moveInput;
     Vector2 lastInput;
     
     //Contacts
     [Header("GameObjets in contact")]
-    public List<Collision2D> curObject = new List<Collision2D>();       //Pour stocker tous les GameObjets en contact avec l'objet
+    public List<Collision2D> curObject = new List<Collision2D>();       //To stock object with which it is currently in collision
     [HideInInspector] public float halfSizeOfObject;
     protected virtual float velocityXForSquash { get; set; }
     protected virtual float posDiffForSquash { get; set; }
@@ -45,16 +49,15 @@ public abstract class MovementController : MonoBehaviour
 
     //Conditions
     [Header("Mouvement conditions")]
-    public bool canMove;                                                //Pour permettre l'arr�t total des lignes de physiques
-    public bool canWalk;                                                //Pour permettre l'arr�t du mouvement physique en X
-    public bool canJump;                                                //Pour permettre l'arr�t du mouvement physique en Y
-    public bool isInContact;                                            //Utiliser pour savoir si l'objet est en contact avec quelque chose lui permettant de sauter
-    [HideInInspector] public bool isJumping;                            //Utilis� pour que le Player ne puisse pas sauter s'iel saute
+    public bool canMove;                                                //Can stop all lines that use physics
+    public bool canWalk;                                                //Can stop the physics using the x axis
+    public bool canJump;                                                //Can stop the physics using the y axis
+    public bool isInContact;                                            //To know if the object is in contact with another at the bottom
+    [HideInInspector] public bool isJumping;                            //To stop multijump.
     private bool canClimbAgain;
 
     //Shortcuts
     protected Rigidbody2D rigid2D;
-    Collider2D col2D;
 
     //Input action section, has to be public or can be private with a SerializeField statement
     [Header("Input Section")]
@@ -76,10 +79,9 @@ public abstract class MovementController : MonoBehaviour
     protected virtual void Start()
     {
         rigid2D = gameObject.transform.GetComponent<Rigidbody2D>();
-        col2D = gameObject.GetComponent<Collider2D>();
     }
 
-    //Pour la physique
+    //Physics
     protected virtual void FixedUpdate()
     {
         if (canMove)
@@ -89,13 +91,14 @@ public abstract class MovementController : MonoBehaviour
                 rigid2D.linearVelocityX = 0;
             }
 
-            //Effectue le mouvement horizontal
-            rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
+            //Mouvement on the x axis
+            if (canWalk)
+                rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
 
-            ////Limite la vitesse horizontale en fonction du maxSpeed
+            //Caps the speed according to maxspeed
             rigid2D.linearVelocityX = Mathf.Clamp(rigid2D.linearVelocityX, -maxSpeed, maxSpeed);
             
-            //Effectue le ralentissement quand aucun input
+            //Slows the x mouvement if no x input.
             if (moveInput.x == 0)
                 rigid2D.linearVelocityX = rigid2D.linearVelocityX / stopSpeed;
 
@@ -125,21 +128,42 @@ public abstract class MovementController : MonoBehaviour
             {
                 canClimbAgain = true;
             }
-            if (canMove && move.IsPressed())
+
+            if (move.IsPressed())
             {
                 moveInput = move.ReadValue<Vector2>();
-                moveInput.x = Mathf.Round(moveInput.x);
-                moveInput.y = Mathf.Round(moveInput.y);
 
+                if (canWalk)
+                {
+                    moveInput.x = Mathf.Round(moveInput.x);
+                    moveInput.y = Mathf.Round(moveInput.y);
+                }
+                else if (canMove && move.WasPressedThisFrame())
+                {
+                    if (moveInput.x > 0)
+                    {
+                        if (onShakeR != null) { onShakeL(cantWalkRightParam); }
+                    }
+                    else if (moveInput.x < 0)
+                    {
+                        if (onShakeL != null) { onShakeR(cantWalkLeftParam); }
+                    }
+                }
             }
             else
             {
                 moveInput = Vector2.zero;
             }
-            if (canJump && !isJumping && jump.WasPressedThisFrame())
+
+            if (!isJumping && jump.WasPressedThisFrame())
             {
-                isJumping = true;
-                StartCoroutine(InputReset());
+                if (canJump)
+                {
+                    isJumping = true;
+                    StartCoroutine(InputReset());
+                }
+                else if (canMove)
+                    if (onJump != null) { onJump(jumpParam); };
             }
         }
 
