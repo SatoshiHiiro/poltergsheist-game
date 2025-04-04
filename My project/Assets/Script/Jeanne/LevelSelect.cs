@@ -7,6 +7,8 @@ public class LevelSelect : BaseSceneManager
     public Button[] boutons;
     public GameObject levelButtons;
 
+    private bool isLoading = false; 
+
     private void Awake()
     {
         ButtonsToArray();
@@ -26,8 +28,13 @@ public class LevelSelect : BaseSceneManager
     //Load le niveau quon clique
     public void OuvreNiveaux(int niveauId)
     {
+        //Empeche plus dun clic
+        if (isLoading) return;
+        isLoading = true;
+
         string nomNiveau = "Niveau" + niveauId;
         SceneManager.LoadScene(nomNiveau);
+        Time.timeScale = 1f;
     }
 
     void ButtonsToArray()
