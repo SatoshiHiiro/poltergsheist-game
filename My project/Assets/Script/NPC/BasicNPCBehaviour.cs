@@ -78,7 +78,12 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                 if (hit.collider != null && hit.collider == obj)
                 {
                     // Get object size
-                    Renderer objRenderer = obj.GetComponent<Renderer>();
+                    //Renderer objRenderer = obj.GetComponent<Renderer>();
+                    Renderer objRenderer;
+                    if (obj.transform.GetChild(0).GetChild(0).TryGetComponent<Renderer>(out objRenderer)) { }
+                    else if (obj.transform.GetChild(0).TryGetComponent<Renderer>(out objRenderer)) { }
+                    else if (obj.TryGetComponent<Renderer>(out objRenderer)) { }
+                    
                     objectSize = Mathf.Max(objRenderer.bounds.size.x, objRenderer.bounds.size.y);
 
                     // Check if the object is moving
