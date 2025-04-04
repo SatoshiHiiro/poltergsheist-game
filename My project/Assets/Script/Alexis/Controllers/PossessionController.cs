@@ -63,7 +63,16 @@ public class PossessionController : MovementController, IPossessable, IResetInit
     protected override void Update()
     {
         base.Update();
-        IsMoving = (moveInput.x != 0 || isJumping) ? true : false;
+        if ((canMove && moveInput.x != 0) || isJumping)
+        {
+            IsMoving = true;
+            //IsMoving = (moveInput.x != 0 || isJumping) ? true : false;
+        }
+        else
+        {
+            IsMoving = false;
+        }
+            
         lastPosition = transform.position;
     }
 
