@@ -32,6 +32,7 @@ public class PlayerManager : RotationManager
     protected override void Update()
     {
         base.Update();
+        baseHeight.SetBool("inContact", player.isInContact);
     }
 
     public void EventParameter(string param)
