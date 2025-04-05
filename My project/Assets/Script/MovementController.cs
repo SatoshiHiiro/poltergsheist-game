@@ -191,7 +191,7 @@ public abstract class MovementController : MonoBehaviour
                 if (onLand != null) { onLand(landParam); };
                 break;
             }
-            if (lastVelocityX >= velocityXForSquash)
+            if (canMove && lastVelocityX >= velocityXForSquash)
             {
                 if (collision.GetContact(i).normal.x <= -.9f)
                 {
