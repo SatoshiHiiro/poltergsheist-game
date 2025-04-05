@@ -41,7 +41,7 @@ public class PossessableAnimationManager : SpriteManager
     {
         base.Update();
         animPos.SetBool("canJump", posCon.canJump);
-        animPos.SetBool("canMove", posCon.canWalk);
+        animPos.SetBool("canWalk", posCon.canWalk);
         animPos.SetFloat("animSpeed", (int)posCon.weightOfAnimation / 2f);
     }
 

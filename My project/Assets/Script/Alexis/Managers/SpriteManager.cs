@@ -73,7 +73,6 @@ public abstract class SpriteManager : MonoBehaviour
         }
         else if (param == controller.jumpParam)
         {
-            anim.SetFloat("jumpSpeed", controller.jumpSpeed);
             anim.SetTrigger("stretch");
         }
         else if (param == controller.bonkRightParam)

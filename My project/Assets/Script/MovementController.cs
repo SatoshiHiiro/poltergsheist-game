@@ -42,8 +42,6 @@ public abstract class MovementController : MonoBehaviour
     [Header("GameObjets in contact")]
     public List<Collision2D> curObject = new List<Collision2D>();       //To stock object with which it is currently in collision
     [HideInInspector] public float halfSizeOfObject;
-    protected virtual float velocityXForSquash { get; set; }
-    protected virtual float posDiffForSquash { get; set; }
     [HideInInspector] public float lastVelocityX;
     [HideInInspector] public float lastPosY;
 
@@ -186,12 +184,12 @@ public abstract class MovementController : MonoBehaviour
         curObject.Add(collision);
         for (int i = 0; i < collision.contactCount; i++)
         {
-            if (collision.GetContact(i).normal.y >= .9f && !isInContact && (lastPosY - this.transform.position.y) > posDiffForSquash)
+            if (collision.GetContact(i).normal.y >= .9f && !isInContact && (lastPosY - this.transform.position.y) > .2f)
             {
                 if (onLand != null) { onLand(landParam); };
                 break;
             }
-            if (canMove && lastVelocityX >= velocityXForSquash)
+            if (canMove && lastVelocityX > 0)
             {
                 if (collision.GetContact(i).normal.x <= -.9f)
                 {
