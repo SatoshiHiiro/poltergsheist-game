@@ -10,6 +10,11 @@ public class TrapDoor : MonoBehaviour
     [SerializeField] private LayerMask possessedObjectLayer;
     [SerializeField] private float minimumBlockHeight;
     [SerializeField] private float minimumBlockWidth;
+
+    private Canvas uiPromptCanvas;  // Canvas with prompt image
+    private Animator animator;  // Animator of the canvas for the prompt image
+    private bool isPlayerTouchingTrap = false;
+    private bool isDoorOpen = false;
     private void Awake()
     {
         hingeJoint2D = GetComponent<HingeJoint2D>();
@@ -18,15 +23,30 @@ public class TrapDoor : MonoBehaviour
         trapCollider = GetComponent<BoxCollider2D>();
         CloseDoor();
     }
+
+    private void Start()
+    {
+        uiPromptCanvas = GetComponentInChildren<Canvas>();
+        animator = GetComponentInChildren<Animator>(true);
+        //uiPromptCanvas = this.gameObject.transform.parent.GetComponentInChildren<Canvas>();//GetComponentInChildren<Canvas>();
+        //animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>();
+    }
     public void OpenDoor()
     {
         hingeJoint2D.limits = openDoorLimits;
+        isDoorOpen = true;
+        HidePrompt();
         StartCoroutine(WaitBeforeClosing());
     }
 
     private void CloseDoor()
     {
         hingeJoint2D.limits = closeDoorLimits;
+        isDoorOpen = false;
+        if (isPlayerTouchingTrap)
+        {
+            ShowPrompt();
+        }
     }
 
     private IEnumerator WaitBeforeClosing()
@@ -67,5 +87,38 @@ public class TrapDoor : MonoBehaviour
         }
         return false;
        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((collision.gameObject.CompareTag("Player") || collision.gameObject.GetComponent<PossessionController>()) && !IsTrapDoorBlocked())
+        {
+            isPlayerTouchingTrap = true;
+            if (!isDoorOpen)
+            {
+                ShowPrompt();
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if ((collision.gameObject.CompareTag("Player") || collision.gameObject.GetComponent<PossessionController>()))
+        {
+            isPlayerTouchingTrap = false;
+            HidePrompt();
+        }
+    }
+
+    private void ShowPrompt()
+    {
+        uiPromptCanvas.enabled = true;
+        animator.SetBool("PromptAppear", true);
+    }
+
+    private void HidePrompt()
+    {
+        uiPromptCanvas.enabled = false;
+        animator.SetBool("PromptAppear", false);
     }
 }

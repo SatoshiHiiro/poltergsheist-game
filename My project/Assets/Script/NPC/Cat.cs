@@ -82,7 +82,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 if (hit.collider != null && hit.collider == obj)
                 {
                     // Get object size
-                    Renderer objRenderer = obj.GetComponent<Renderer>();
+                    Renderer objRenderer = obj.GetComponentInChildren<Renderer>();
 
                     //objectSize = Mathf.Max(objRenderer.bounds.size.x, objRenderer.bounds.size.y);
                     objectWidth = objRenderer.bounds.size.x;
