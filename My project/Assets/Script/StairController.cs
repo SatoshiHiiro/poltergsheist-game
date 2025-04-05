@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Drawing;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public enum StairDirection
@@ -13,6 +14,7 @@ public class StairController : MonoBehaviour
 
     [Header("Stairs")]
     [SerializeField] private bool canPoltergUseDoor = true;
+    [SerializeField] private bool canObjectUseDoor = false;
     [SerializeField] private float floorLevel;
     [SerializeField] public float FloorLevel => floorLevel;
     [SerializeField] private Transform startPoint;  // Center of the door on floor level
@@ -42,9 +44,14 @@ public class StairController : MonoBehaviour
     private bool canCharacterJump;
     private bool canCharacterMove;
 
+    private Canvas uiPromptCanvas;  // Canvas with prompt image
+    private Animator animator;  // Animator of the canvas for the prompt image
+
     private void Start()
     {
         stairCollider = GetComponent<Collider2D>();
+        uiPromptCanvas = GetComponentInChildren<Canvas>();
+        animator = GetComponentInChildren<Animator>();
     }
     public void ClimbStair(GameObject character, StairDirection direction)
     {
@@ -52,6 +59,11 @@ public class StairController : MonoBehaviour
         if(playerController != null && !canPoltergUseDoor)
         {
             return; // Polterg can't use the door
+        }
+        PossessionController possessionController = character.GetComponent<PossessionController>();
+        if(possessionController != null && !canObjectUseDoor)
+        {
+            return; // Possessed Object can't use the door
         }
         Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
         //character.transform.GetChild(0).GetComponent<Renderer>();
@@ -162,5 +174,45 @@ public class StairController : MonoBehaviour
         // Calculate what percentage of the entrance is blocked
         float blockPercentage = blockedWidth / stairWidth;
         return blockPercentage >= blockingThreshold;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Make Climb Stairs prompt appear if Polterg is in front of a stair
+        if (collision.CompareTag("Player") && !IsStairBlocked() && canPoltergUseDoor)
+        {
+            uiPromptCanvas.enabled = true;
+            animator.SetBool("PromptAppear", true);
+        }
+        // Make Climb Stairs prompt appear if Polterg is in front of a stair in a possessedObject
+        else if (collision.gameObject.GetComponent<PossessionController>())
+        {
+            PossessionManager possessionObject = collision.gameObject.GetComponent<PossessionManager>();
+            if (possessionObject != null && !IsStairBlocked() && possessionObject.IsPossessing && canObjectUseDoor)
+            {
+                uiPromptCanvas.enabled = true;
+                animator.SetBool("PromptAppear", true);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Make Climb Stairs prompt disappear if Polterg is in front of a stair
+        if (collision.CompareTag("Player"))
+        {
+            uiPromptCanvas.enabled = false;
+            animator.SetBool("PromptAppear", false);
+        }
+        // Make Climb Stairs prompt disappear if Polterg is in front of a stair in a possessedObject
+        else if (collision.gameObject.GetComponent<PossessionController>())
+        {
+            PossessionManager possessionObject = collision.gameObject.GetComponent<PossessionManager>();
+            if (possessionObject != null && possessionObject.IsPossessing)
+            {
+                uiPromptCanvas.enabled = false;
+                animator.SetBool("PromptAppear", false);
+            }
+        }
     }
 }
