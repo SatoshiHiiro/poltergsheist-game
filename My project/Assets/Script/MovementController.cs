@@ -37,10 +37,10 @@ public abstract class MovementController : MonoBehaviour
     private bool playerInputEnable;
     protected Vector2 moveInput;
     Vector2 lastInput;
-    
+
     //Contacts
     [Header("GameObjets in contact")]
-    public List<Collision2D> curObject = new List<Collision2D>();       //To stock object with which it is currently in collision
+    [HideInInspector] public List<GameObject> curObject = new List<GameObject>();
     [HideInInspector] public float halfSizeOfObject;
     [HideInInspector] public float lastVelocityX;
     [HideInInspector] public float lastPosY;
@@ -202,7 +202,7 @@ public abstract class MovementController : MonoBehaviour
             }
         }
 
-        curObject.Add(collision);
+        curObject.Add(collision.gameObject);
         for (int i = 0; i < collision.contactCount; i++)
         {
             if (canMove && lastVelocityX > 0)
@@ -224,7 +224,7 @@ public abstract class MovementController : MonoBehaviour
     //Enl�ve les GameObjets en contact avec l'objet
     void OnCollisionExit2D(Collision2D collision)
     {
-        curObject.Remove(collision);
+        curObject.Remove(collision.gameObject);
         isInContact = false;
     }
 
@@ -233,7 +233,7 @@ public abstract class MovementController : MonoBehaviour
     {
         for (int i = 0; i < curObject.Count; i++)
         {
-            if (collision.gameObject == curObject[i].gameObject)
+            if (collision.gameObject == curObject[i])
             {
                 for (int ii = 0; ii < collision.contactCount; ii++)
                 {
