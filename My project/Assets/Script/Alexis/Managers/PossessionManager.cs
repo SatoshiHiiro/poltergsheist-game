@@ -20,6 +20,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     bool isAnimationFinished;                       //Pour savoir si l'animation de possession est fini
     bool hasEnoughSpace;
     bool hasPosControl;
+    bool isPossessionLocked;
 
     //Shortcuts
     PlayerController player;
@@ -48,6 +49,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         isPossessed = false;
         isAnimationFinished = true;
         hasEnoughSpace = true;
+        isPossessionLocked = false;
     }
 
     //Pour l'animation de possession
@@ -97,6 +99,10 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     //Input de possession
     private void OnMouseDown()
     {
+        if (isPossessionLocked)
+        {
+            return; // Can't possessed an object if the possession on this object is locked
+        }
         if(Vector2.Distance(this.transform.position, player.transform.position) <= possessionDistance)
         {
             if (isAnimationFinished)
@@ -132,6 +138,11 @@ public class PossessionManager : InteractibleManager, IResetInitialState
                 }
             }
         }
+    }
+
+    public void LockPossession(bool locked)
+    {
+        isPossessionLocked = locked;
     }
 
     //Pour arr�ter la possession
@@ -191,5 +202,6 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         isPossessed = false;
         isAnimationFinished = true;
         hasEnoughSpace = true;
+        isPossessionLocked = false;
     }
 }

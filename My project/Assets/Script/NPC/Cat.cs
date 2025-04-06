@@ -240,12 +240,15 @@ public class Cat : BasicNPCBehaviour, IPatrol
             isAttacking = false;
             yield break;
         }
-        targetObjectManager.StopPossession();
 
-        yield return new WaitForSeconds(attackTime);
-
+        targetObjectManager.LockPossession(true);   // The player can't possessed this object as long as the cat attack it
         // After the attack the object is no longer a target
         targetPossessedObject = null;
+        targetObjectManager.StopPossession();
+
+        yield return new WaitForSeconds(attackTime);      
+        
+        targetObjectManager.LockPossession(false);
         isAttacking = false;
     }
 
