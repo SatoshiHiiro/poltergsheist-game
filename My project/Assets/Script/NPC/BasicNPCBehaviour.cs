@@ -28,6 +28,13 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     protected Quaternion initialRotation;
     protected bool initialFacingRight;  // He's he facing right or left
 
+    [Header("NPC sound variables")]
+    [SerializeField] protected AK.Wwise.Event soundEvent;
+    [SerializeField] protected float soundCooldown = 1.5f;  // Cooldown between sound of surprise
+    protected float lastSoundTime;
+    protected GameObject lastMovingObject;
+    protected bool soundHasPlayed;
+
     // Getters
     public float FloorLevel { get { return currentFloorLevel; } }
 
@@ -51,6 +58,11 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         initialRotation = transform.rotation;
         initialFacingRight = !npcSpriteRenderer.flipX;
         initialFloorLevel = currentFloorLevel;
+
+        // Initialize sound tracking variables
+        lastMovingObject = null;
+        soundHasPlayed = false;
+        lastSoundTime = -soundCooldown;
     }
     protected virtual void Update()
     {
@@ -62,6 +74,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     {
         isObjectMoving = false;
         float objectSize = 0f;
+        bool foundMovingObject = false;
+        GameObject currentMovingObject = null;
 
         // Find all the possible possessed object in the room
         Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, detectionRadius, detectObjectLayer);
@@ -95,6 +109,11 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                         if (possessedObject.IsMoving)
                         {
                             isObjectMoving = true;
+                            foundMovingObject = true;
+                            currentMovingObject = possessedObject.gameObject;
+
+                            HandleSoundEvent(currentMovingObject);
+                            //soundEvent.Post(gameObject);
                         }
 
                         HandleChangedPositionSuspicion(possessedObject, objectSize);
@@ -104,6 +123,12 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                 }
             }
         }
+        if(!foundMovingObject && lastMovingObject != null)
+        {
+            //lastMovingObject = null;
+            soundHasPlayed = false;
+        }
+
         HandleMovementSuspicion(objectSize);
     }
     protected virtual void HandleChangedPositionSuspicion(PossessionController possessedObject, float objectSize)
@@ -140,6 +165,35 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         //rotationDegrees.z = -rotationDegrees.z;
         fieldOfView.transform.localRotation = Quaternion.Euler(0,0,newZ);
     }
+
+    // Manage the sound made by the NPC when he sees an object moving
+    protected virtual void HandleSoundEvent(GameObject currentMovingObject)
+    {
+        // Check if we are past the cooldown
+        bool cooldownElapsed = (Time.time - lastSoundTime) >= soundCooldown;
+        print(cooldownElapsed);
+        // Case 1: Different object than before - play sound if cooldown has elapsed
+        bool isDifferentObject = lastMovingObject != currentMovingObject;
+
+        // If it's a different object than the last one we tracked, play the sound
+        if (lastMovingObject != currentMovingObject)
+        {
+            soundEvent.Post(gameObject);
+            lastMovingObject = currentMovingObject;
+            soundHasPlayed = true;
+            lastSoundTime = Time.time;
+        }
+        // If it's the same object but it had stopped and started again, play the sound
+        else if(lastMovingObject == currentMovingObject && !soundHasPlayed && cooldownElapsed)
+        {
+            soundEvent.Post(gameObject);
+            soundHasPlayed = true;
+            lastSoundTime = Time.time;
+        }
+        // Otherwise, it's the same object still moving, so don't play the sound again
+    }
+
+
     // Debug method only
     private void OnDrawGizmos()
     {
@@ -158,6 +212,10 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
         rotationDegrees.z = facingRight ? -90f : 90f;
         fieldOfView.transform.eulerAngles = rotationDegrees;
+
+        lastMovingObject = null;
+        soundHasPlayed = false;
+
         StopAllCoroutines();
     }
 }
