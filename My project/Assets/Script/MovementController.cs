@@ -159,13 +159,16 @@ public abstract class MovementController : MonoBehaviour
             {
                 if (!isJumping)
                 {
-                    if (canJump)
+                    if (canMove)
                     {
-                        isJumping = true;
-                        StartCoroutine(InputReset());
+                        if (canJump)
+                        {
+                            isJumping = true;
+                            StartCoroutine(InputReset());
+                        }
+                        else
+                            if (onJump != null) { onJump(jumpParam); };
                     }
-                    else if (canMove)
-                        if (onJump != null) { onJump(jumpParam); };
                 }
             }
         }
