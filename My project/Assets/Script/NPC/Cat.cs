@@ -26,7 +26,9 @@ public class Cat : BasicNPCBehaviour, IPatrol
     Coroutine patrolCoroutine;
 
     GameObject cage;    // Cage the cat is trapped in
-   protected override void Start()
+
+    public AK.Wwise.Event soundEvent;
+    protected override void Start()
    {
         base.Start();
         indexPatrolPoints = 0;
@@ -137,6 +139,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
     {
         isAttacking = true;
         audioSource.Play();
+        soundEvent.Post(gameObject);
 
         // Continue hunting until the cat catches the object or loses track of it
         while (isHunting && targetPossessedObject != null)
@@ -229,6 +232,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
     {
         isAttacking = true;
         audioSource.Play();
+        soundEvent.Post(gameObject);
         PossessionManager targetObjectManager = targetPossessedObject.GetComponent<PossessionManager>();
         if (targetObjectManager == null)
         {
@@ -252,7 +256,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
         {
             if(collision.bounds.Contains(catCollider.bounds.min) && collision.bounds.Contains(catCollider.bounds.max))
             {
-                audioSource.Play();
+                //audioSource.Play();
+                soundEvent.Post(gameObject);
                 canMove = false;
                 fovLight.enabled = false;
                 collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);

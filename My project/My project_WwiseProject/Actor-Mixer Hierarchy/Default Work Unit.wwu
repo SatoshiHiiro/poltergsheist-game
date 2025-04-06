@@ -1716,6 +1716,50 @@
 								<ActiveSource Name="PH-VO_PlayerBarks" ID="{D6204BD0-8FFC-4D68-B060-E81A59738471}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
+						<Sound Name="PH-VO_CatMeow" ID="{760721BE-B336-41A3-937A-970F6628A738}" ShortID="806459426">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_CatMeow" ID="{4C93FA21-A68B-493C-8B74-9BAA80E35C07}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_CatMeow.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="535289571"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_CatMeow" ID="{4C93FA21-A68B-493C-8B74-9BAA80E35C07}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-VO_Hmm" ID="{45689B94-B5E4-4290-ACF4-6DC03C1FD41A}" ShortID="882009351">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-VO_Hmm" ID="{86B0A7D1-EE15-4B2B-9387-2DD2D7EB1A57}">
+									<Language>SFX</Language>
+									<AudioFile>PH-VO_Hmm.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="878708054"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-VO_Hmm" ID="{86B0A7D1-EE15-4B2B-9387-2DD2D7EB1A57}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="New Virtual Folder" ID="{932D37C4-B414-4CEB-8696-033AB9ED9606}" ShortID="522633475">
