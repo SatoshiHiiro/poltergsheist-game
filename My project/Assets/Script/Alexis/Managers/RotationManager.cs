@@ -12,10 +12,13 @@ public class RotationManager : SpriteManager
         base.Update();
 
         //To change target rotation depending on the last position
-        if (goesLeft)
-            direction = new Quaternion(0, 1, 0, 0);     //Look left
-        else if (goesRight)
-            direction = new Quaternion(0, 0, 0, 1);     //Look right
+        if (player.canMove)
+        {
+            if (goesLeft)
+                direction = new Quaternion(0, 1, 0, 0);     //Look left
+            else if (goesRight)
+                direction = new Quaternion(0, 0, 0, 1);     //Look right
+        }
 
         RotateSprite(direction);
     }
