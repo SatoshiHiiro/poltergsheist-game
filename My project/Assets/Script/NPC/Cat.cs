@@ -27,7 +27,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
 
     GameObject cage;    // Cage the cat is trapped in
 
-    public AK.Wwise.Event soundEvent;
+    //public AK.Wwise.Event soundEvent;
     protected override void Start()
    {
         base.Start();

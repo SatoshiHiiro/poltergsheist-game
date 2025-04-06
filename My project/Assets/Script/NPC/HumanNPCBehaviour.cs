@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HumanNPCBehaviour : BasicNPCBehaviour
 {
-    
+    [Header("Suspicion variables")]
     // Variable manage suspicion of the NPC
     [SerializeField] protected float minSuspiciousRotation; // Minimum rotation change in degrees to trigger suspicion
     [SerializeField] protected float minSuspiciousPosition; // Minimum position change to trigger suspicion
@@ -42,6 +42,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     protected bool seePolterg = false;
 
+    
     protected override void Start()
     {
         base.Start();
@@ -264,6 +265,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         seePolterg = true;
         audioSource.Play();
+        soundEvent.Post(gameObject);
 
         SuspicionManager.Instance.UpdateSeeingPoltergSuspicion();
     }
@@ -289,6 +291,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     public void EnqueueInvestigation(IEnumerator investigation)
     {
+        soundEvent.Post(gameObject);
         investigationQueue.Enqueue(investigation);
     }
 
