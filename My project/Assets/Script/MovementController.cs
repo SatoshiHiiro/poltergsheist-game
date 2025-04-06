@@ -107,6 +107,8 @@ public abstract class MovementController : MonoBehaviour
                 isJumping = false;
             }
 
+            rigid2D.linearVelocityY = Mathf.Clamp(rigid2D.linearVelocityY, -8f, 8f);
+
             lastInput = moveInput;
         }
         // Keep it from moving
@@ -153,15 +155,18 @@ public abstract class MovementController : MonoBehaviour
                 moveInput = Vector2.zero;
             }
 
-            if (!isJumping && jump.WasPressedThisFrame())
+            if (jump.WasPressedThisFrame())
             {
-                if (canJump)
+                if (!isJumping)
                 {
-                    isJumping = true;
-                    StartCoroutine(InputReset());
+                    if (canJump)
+                    {
+                        isJumping = true;
+                        StartCoroutine(InputReset());
+                    }
+                    else if (canMove)
+                        if (onJump != null) { onJump(jumpParam); };
                 }
-                else if (canMove)
-                    if (onJump != null) { onJump(jumpParam); };
             }
         }
 
@@ -174,13 +179,22 @@ public abstract class MovementController : MonoBehaviour
     //Pour enlever de la m�moire le input de saut jusqu'� ce que l'avatar touche le sol
     IEnumerator InputReset()
     {
-        yield return new WaitForSecondsRealtime(.2f);
+        yield return new WaitForSecondsRealtime(.3f);
         isJumping = false;
     }
 
     //Stock les GameObjets en contact avec l'objet
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            if (collision.GetContact(i).normal.y >= .9f)
+            {
+                isInContact = true;
+                break;
+            }
+        }
+
         curObject.Add(collision);
         for (int i = 0; i < collision.contactCount; i++)
         {
