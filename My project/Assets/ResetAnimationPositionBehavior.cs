@@ -17,7 +17,10 @@ public class ResetAnimationPositionBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.rootPosition = animator.GetComponent<HeightAndSpriteResizeSystem>().heightPos + animator.transform.parent.position;
+        Vector3 animVect = animator.GetComponent<HeightAndSpriteResizeSystem>().heightPos;
+        animVect.x = animVect.x * animator.transform.parent.localScale.x;
+        animVect.y = animVect.y * animator.transform.parent.localScale.y;
+        animator.rootPosition = animVect + animator.transform.parent.position;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

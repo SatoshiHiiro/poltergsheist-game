@@ -107,6 +107,8 @@ public abstract class MovementController : MonoBehaviour
                 isJumping = false;
             }
 
+            rigid2D.linearVelocityY = Mathf.Clamp(rigid2D.linearVelocityY, -8.5f, 8.5f);
+
             lastInput = moveInput;
         }
         // Keep it from moving
@@ -153,15 +155,21 @@ public abstract class MovementController : MonoBehaviour
                 moveInput = Vector2.zero;
             }
 
-            if (!isJumping && jump.WasPressedThisFrame())
+            if (jump.WasPressedThisFrame())
             {
-                if (canJump)
+                if (!isJumping)
                 {
-                    isJumping = true;
-                    StartCoroutine(InputReset());
+                    if (canMove)
+                    {
+                        if (canJump)
+                        {
+                            isJumping = true;
+                            StartCoroutine(InputReset());
+                        }
+                        else
+                            if (onJump != null) { onJump(jumpParam); };
+                    }
                 }
-                else if (canMove)
-                    if (onJump != null) { onJump(jumpParam); };
             }
         }
 
@@ -174,21 +182,29 @@ public abstract class MovementController : MonoBehaviour
     //Pour enlever de la m�moire le input de saut jusqu'� ce que l'avatar touche le sol
     IEnumerator InputReset()
     {
-        yield return new WaitForSecondsRealtime(.2f);
+        yield return new WaitForSecondsRealtime(.3f);
         isJumping = false;
     }
 
     //Stock les GameObjets en contact avec l'objet
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            if (collision.GetContact(i).normal.y >= .9f)
+            {
+                isInContact = true;
+                if (lastPosY - this.transform.position.y > .2f)
+                {
+                    if (onLand != null) { onLand(landParam); };
+                }
+                break;
+            }
+        }
+
         curObject.Add(collision);
         for (int i = 0; i < collision.contactCount; i++)
         {
-            if (collision.GetContact(i).normal.y >= .9f && !isInContact && (lastPosY - this.transform.position.y) > .2f)
-            {
-                if (onLand != null) { onLand(landParam); };
-                break;
-            }
             if (canMove && lastVelocityX > 0)
             {
                 if (collision.GetContact(i).normal.x <= -.9f)
