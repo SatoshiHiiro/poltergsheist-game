@@ -62,7 +62,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
         initialPosition = transform.position;
         initialRotation = transform.rotation;
-        initialFacingRight = !npcSpriteRenderer.flipX;
+        initialFacingRight = facingRight;//!npcSpriteRenderer.flipX;
         initialFloorLevel = currentFloorLevel;
         directionX = 0;
 
@@ -100,6 +100,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                 {
                     // Get object size
                     //Renderer objRenderer = obj.GetComponent<Renderer>();
+                    //print("NOM DE L'OBJET " + obj.gameObject.name);
                     Renderer objRenderer;
                     if (obj.transform.GetChild(0).GetChild(0).TryGetComponent<Renderer>(out objRenderer)) { }
                     else if (obj.transform.GetChild(0).TryGetComponent<Renderer>(out objRenderer)) { }
@@ -188,7 +189,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     {
         // Check if we are past the cooldown
         bool cooldownElapsed = (Time.time - lastSoundTime) >= soundCooldown;
-        print(cooldownElapsed);
+        //print(cooldownElapsed);
         // Case 1: Different object than before - play sound if cooldown has elapsed
         bool isDifferentObject = lastMovingObject != currentMovingObject;
 
@@ -223,7 +224,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         this.transform.position = initialPosition;
         this.transform.rotation = initialRotation;
         facingRight = initialFacingRight;
-        npcSpriteRenderer.flipX = !facingRight;
+        //npcSpriteRenderer.flipX = !facingRight;
         currentFloorLevel = initialFloorLevel;
         
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
