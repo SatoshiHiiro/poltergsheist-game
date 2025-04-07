@@ -10,17 +10,27 @@ public class NPCMovementController : MonoBehaviour
     private float normalSpeed;
     private SpriteRenderer npcSpriteRenderer;
     private bool canFindPath = true;
+    
 
     BasicNPCBehaviour basicNPCBehaviour;
 
     // Getters
     public bool CanFindPath => canFindPath;
     public float MovementSpeed => movementSpeed;
+
     private void Start()
     {
-        npcSpriteRenderer = GetComponent<SpriteRenderer>();
+        //npcSpriteRenderer = GetComponent<SpriteRenderer>();
         basicNPCBehaviour = GetComponent<BasicNPCBehaviour>();
+        StartCoroutine(StartRelated());
         normalSpeed = movementSpeed;
+    }
+
+    IEnumerator StartRelated()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        npcSpriteRenderer = basicNPCBehaviour.SpriteRenderer;
     }
 
     // Changes the movement speed (normal/blind)
@@ -54,7 +64,12 @@ public class NPCMovementController : MonoBehaviour
         if (faceRight != npc.FacingRight)
         {
             // Sprite face the right direction
-            npcSpriteRenderer.flipX = !faceRight;
+            if (GetComponentInChildren<NPCSpriteManager>() == null)
+            {
+                npcSpriteRenderer.flipX = !faceRight;
+            }
+
+            //npcSpriteRenderer.flipX = !faceRight;
             npc.FacingRight = faceRight;
             npc.FlipFieldOfView();
         }
