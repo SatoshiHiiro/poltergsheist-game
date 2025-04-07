@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{65E86D28-8BA1-49D3-8B67-98495A6B0D5F}",
     "Language": "SFX",
-    "Hash": "{A20BF25D-0E58-1630-EE63-728990D585B5}",
+    "Hash": "{57FA7745-11A3-B816-5C5F-C3B5C4CF9D7C}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\main",
     "ShortName": "main",
     "Path": "main.bnk",
@@ -24,12 +24,12 @@
       "CachePath": "BF/{BF8CC178-B9E3-B22E-9108-75EB7165050A}.wem"
      },
      {
-      "Id": "42739357",
+      "Id": "44584673",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "2025-04-04-023546_186354.wav",
-      "CachePath": "FA/{FA913167-4D8F-9369-2620-ACFE4BF0E234}.wem"
+      "ShortName": "MUS_Menu_145bpm_Intro_Bass_2M_T1M.wav",
+      "CachePath": "BA/{BA89997C-4BAA-6C4C-FBCE-BE4EC7EA18B8}.wem"
      },
      {
       "Id": "51755562",
@@ -62,6 +62,14 @@
       "Location": "Memory",
       "ShortName": "PH-SFX_ToolsDisplay.wav",
       "CachePath": "DC/{DC8ACB9B-FD2D-D156-3C01-1C4D1E02327F}.wem"
+     },
+     {
+      "Id": "136111853",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MUS_Menu_145bpm_Sg2_14M_T1M.wav",
+      "CachePath": "B8/{B8284403-5A81-75EF-BC1D-C4A311C913ED}.wem"
      },
      {
       "Id": "151756865",
@@ -102,6 +110,14 @@
       "Location": "Memory",
       "ShortName": "PH-UI_FowRemoved.wav",
       "CachePath": "6E/{6E113D0D-7B32-FE9A-9E79-9FBA8DEC38B2}.wem"
+     },
+     {
+      "Id": "263118918",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MUS_Menu_145bpm_Intro_Melody_2M_T1M.wav",
+      "CachePath": "71/{71AB0E31-572F-69EE-0229-D24326DAA015}.wem"
      },
      {
       "Id": "271680117",
@@ -152,14 +168,6 @@
       "CachePath": "18/{189B172B-A240-1235-14E9-D001321F03B7}.wem"
      },
      {
-      "Id": "361291788",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Cuphead OST - Elder Kettle [Music].wav",
-      "CachePath": "48/{484A1A3E-9A12-7244-057A-B220B4F62C2E}.wem"
-     },
-     {
       "Id": "364952126",
       "Language": "SFX",
       "Streaming": "false",
@@ -198,6 +206,14 @@
       "Location": "Memory",
       "ShortName": "PH-SFX_PossessedOn.wav",
       "CachePath": "2B/{2B55677F-F2BE-63C7-4C3C-5849C0AFFFD5}.wem"
+     },
+     {
+      "Id": "499168946",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MUS_Alchemy.wav",
+      "CachePath": "AC/{ACFD78E6-D7BF-0C31-1EA2-F54BD35EC123}.wem"
      },
      {
       "Id": "520423933",
@@ -272,20 +288,20 @@
       "CachePath": "ED/{ED566E0C-3396-3B78-A934-A6F9A646DDC2}.wem"
      },
      {
+      "Id": "677573533",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MUS_Menu_145bpm_Sg1_17M_P2M.wav",
+      "CachePath": "46/{46EAAB85-AFB9-ED34-E559-8EA22C2ADB67}.wem"
+     },
+     {
       "Id": "690962228",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "PH-SFX_Box.wav",
       "CachePath": "33/{33BECF97-832F-A2E1-0F2C-F9EC4377527E}.wem"
-     },
-     {
-      "Id": "703655619",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Cuphead OST - Elder Kettle [Music].wav",
-      "CachePath": "C7/{C7BC7374-3090-1C5F-CA1B-F6008903EC6C}.wem"
      },
      {
       "Id": "710994095",
@@ -408,6 +424,14 @@
       "CachePath": "8F/{8F258745-6E6D-AA40-D4C9-AF3D6D10D507}.wem"
      },
      {
+      "Id": "885703973",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "竹马1.1.wav",
+      "CachePath": "87/{87170D7A-E884-A79E-DEA8-64B4A5AE0267}.wem"
+     },
+     {
       "Id": "914413484",
       "Language": "SFX",
       "Streaming": "false",
@@ -487,10 +511,17 @@
       "ObjectPath": "\\Events\\Default Work Unit\\MUS\\MUS_House",
       "GUID": "{E093FBB3-B00E-4CBF-80C0-8939AD0DCFA2}",
       "Color": "7",
-      "DurationType": "Infinite",
-      "MediaRefs": [
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionSetState": [
        {
-        "Id": "703655619"
+        "GroupId": "3991942870",
+        "Id": "748137791",
+        "Name": "MUS_House",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_House",
+        "GUID": "{E156AD50-2A7B-47B7-A3B8-21E361FABB8F}"
        }
       ]
      },
@@ -500,10 +531,17 @@
       "ObjectPath": "\\Events\\Default Work Unit\\MUS\\MUS_Menu",
       "GUID": "{F4D35B9C-635A-4269-B6BC-72F7A3755A6A}",
       "Color": "7",
-      "DurationType": "Infinite",
-      "MediaRefs": [
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionSetState": [
        {
-        "Id": "703655619"
+        "GroupId": "3991942870",
+        "Id": "3149643052",
+        "Name": "MUS_Menu",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_Menu",
+        "GUID": "{99B39622-7DD2-4D89-AEE8-86D4B188B102}"
        }
       ]
      },
@@ -513,12 +551,84 @@
       "ObjectPath": "\\Events\\Default Work Unit\\MUS\\MUS_Museum",
       "GUID": "{C524E1C5-73B2-48CD-A59B-137BFD755772}",
       "Color": "7",
+      "MaxAttenuation": "0",
       "DurationType": "OneShot",
-      "DurationMin": "310.84555",
-      "DurationMax": "310.84555",
-      "MediaRefs": [
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionSetState": [
        {
-        "Id": "361291788"
+        "GroupId": "3991942870",
+        "Id": "1081012053",
+        "Name": "MUS_Museum",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_Museum",
+        "GUID": "{89D79411-A79D-4689-AF55-09F7279B8236}"
+       }
+      ]
+     },
+     {
+      "Id": "1973954843",
+      "Name": "MUS_Start",
+      "ObjectPath": "\\Events\\Default Work Unit\\MUS\\MUS_Start",
+      "GUID": "{DA11A7B0-C779-47E3-A9A5-83EDA8D9E7D0}",
+      "Color": "7",
+      "DurationType": "Infinite",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "3991942870",
+         "Id": "3149643052",
+         "GUID": "{99B39622-7DD2-4D89-AEE8-86D4B188B102}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "44584673"
+         },
+         {
+          "Id": "136111853"
+         },
+         {
+          "Id": "263118918"
+         },
+         {
+          "Id": "677573533"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "3991942870",
+         "Id": "748137791",
+         "GUID": "{E156AD50-2A7B-47B7-A3B8-21E361FABB8F}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "885703973"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "3991942870",
+         "Id": "1081012053",
+         "GUID": "{89D79411-A79D-4689-AF55-09F7279B8236}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "499168946"
+         }
+        ]
+       }
+      ],
+      "ActionSetState": [
+       {
+        "GroupId": "3991942870",
+        "Id": "3149643052",
+        "Name": "MUS_Menu",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_Menu",
+        "GUID": "{99B39622-7DD2-4D89-AEE8-86D4B188B102}"
        }
       ]
      },
@@ -528,14 +638,10 @@
       "ObjectPath": "\\Events\\Default Work Unit\\MUS\\MUS_Win",
       "GUID": "{BCEA476A-ABA8-4C4A-9144-A1ADA4B3ECC0}",
       "Color": "7",
+      "MaxAttenuation": "0",
       "DurationType": "OneShot",
-      "DurationMin": "1.728",
-      "DurationMax": "1.728",
-      "MediaRefs": [
-       {
-        "Id": "42739357"
-       }
-      ]
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "1595454055",
@@ -1452,9 +1558,43 @@
        }
       ]
      }
+    ],
+    "StateGroups": [
+     {
+      "Id": "3991942870",
+      "Name": "Music",
+      "ObjectPath": "\\States\\Default Work Unit\\Music",
+      "GUID": "{7BF359AB-0FEA-4BEA-BAE3-157F03DF8DBC}",
+      "States": [
+       {
+        "Id": "748137791",
+        "Name": "MUS_House",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_House",
+        "GUID": "{E156AD50-2A7B-47B7-A3B8-21E361FABB8F}"
+       },
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\None",
+        "GUID": "{351044FD-7A84-4CB7-81DE-F70664AB2218}"
+       },
+       {
+        "Id": "1081012053",
+        "Name": "MUS_Museum",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_Museum",
+        "GUID": "{89D79411-A79D-4689-AF55-09F7279B8236}"
+       },
+       {
+        "Id": "3149643052",
+        "Name": "MUS_Menu",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_Menu",
+        "GUID": "{99B39622-7DD2-4D89-AEE8-86D4B188B102}"
+       }
+      ]
+     }
     ]
    }
   ],
-  "FileHash": "{0FFBFC58-02C0-9313-333E-25A9678B8C28}"
+  "FileHash": "{BA82AD0F-0D8A-5957-243B-B9F15AF5279F}"
  }
 }

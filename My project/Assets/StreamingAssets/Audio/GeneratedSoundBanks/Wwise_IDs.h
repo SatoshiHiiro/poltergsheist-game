@@ -16,6 +16,7 @@ namespace AK
         static const AkUniqueID MUS_HOUSE = 748137791U;
         static const AkUniqueID MUS_MENU = 3149643052U;
         static const AkUniqueID MUS_MUSEUM = 1081012053U;
+        static const AkUniqueID MUS_START = 1973954843U;
         static const AkUniqueID MUS_WIN = 804414033U;
         static const AkUniqueID PLY_HOVERING = 1595454055U;
         static const AkUniqueID PLY_JUMP = 4285040421U;
@@ -79,6 +80,23 @@ namespace AK
         static const AkUniqueID VO_PLAYER_BARKS = 2054537116U;
         static const AkUniqueID VO_PLAYER_YAY = 2458294146U;
     } // namespace EVENTS
+
+    namespace STATES
+    {
+        namespace MUSIC
+        {
+            static const AkUniqueID GROUP = 3991942870U;
+
+            namespace STATE
+            {
+                static const AkUniqueID MUS_HOUSE = 748137791U;
+                static const AkUniqueID MUS_MENU = 3149643052U;
+                static const AkUniqueID MUS_MUSEUM = 1081012053U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace MUSIC
+
+    } // namespace STATES
 
     namespace BANKS
     {
