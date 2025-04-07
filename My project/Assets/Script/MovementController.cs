@@ -35,6 +35,9 @@ public abstract class MovementController : MonoBehaviour
     [SerializeField] public float jumpSpeed;                            //Jump impulsion force
     [SerializeField][HideInInspector] public int horizontalDirection;
     private bool playerInputEnable;
+    Coroutine jumpReset;
+    Coroutine jumpBuff;
+    public float inputBuffer;
     protected Vector2 moveInput;
     Vector2 lastInput;
 
@@ -68,6 +71,7 @@ public abstract class MovementController : MonoBehaviour
         moveInput = Vector2.zero;
         lastInput = Vector2.zero;
         canClimbAgain = true;
+        inputBuffer = .3f;
         halfSizeOfObject = (transform.lossyScale.y * gameObject.GetComponent<Collider2D>().bounds.size.y) / 2;
 
         move.Enable();
@@ -105,6 +109,7 @@ public abstract class MovementController : MonoBehaviour
                 if (onJump != null) { onJump(jumpParam); };
                 rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
                 isJumping = false;
+                isInContact = false;
             }
 
             rigid2D.linearVelocityY = Mathf.Clamp(rigid2D.linearVelocityY, -8.5f, 8.5f);
@@ -164,7 +169,8 @@ public abstract class MovementController : MonoBehaviour
                         if (canJump)
                         {
                             isJumping = true;
-                            StartCoroutine(InputReset());
+                            if (jumpReset != null) { StopCoroutine(jumpReset); }
+                            jumpReset = StartCoroutine(InputReset());
                         }
                         else
                             if (onJump != null) { onJump(jumpParam); };
@@ -221,11 +227,18 @@ public abstract class MovementController : MonoBehaviour
         }
     }
 
+    IEnumerator JumpBuffer()
+    {
+        yield return new WaitForSecondsRealtime(.2f);
+        isInContact = false;
+    }
+
     //Enl�ve les GameObjets en contact avec l'objet
     void OnCollisionExit2D(Collision2D collision)
     {
         curObject.Remove(collision.gameObject);
-        isInContact = false;
+        if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
+        jumpBuff = StartCoroutine(JumpBuffer());
     }
 
     //Checks if the GameObjects in contact are below the controller
@@ -240,6 +253,7 @@ public abstract class MovementController : MonoBehaviour
                     if (collision.GetContact(ii).normal.y >= .9f)
                     {
                         isInContact = true;
+                        if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
                         break;
                     }
                 }
