@@ -35,11 +35,15 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     protected GameObject lastMovingObject;
     protected bool soundHasPlayed;
 
+    //Animation variables
+    [HideInInspector] public float directionX { get; set; }
+
     // Getters
     public float FloorLevel { get { return currentFloorLevel; } }
 
     public SpriteRenderer SpriteRenderer { get { return npcSpriteRenderer; } }
     public NPCMovementController NpcMovementController { get { return npcMovementController; } }
+    public GameObject FieldOfView { get { return fieldOfView; } }
 
     //Getters and Setters
     public bool FacingRight {  get { return facingRight; } set { facingRight = value; } }
@@ -49,7 +53,9 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         fieldOfViewAngle = 180f;
         isCurrentlyObserving = false;
         isObjectMoving = false;
-        npcSpriteRenderer = GetComponent<SpriteRenderer>();
+
+        npcSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        //npcSpriteRenderer = GetComponent<SpriteRenderer>();
         npcMovementController = GetComponent<NPCMovementController>();
         fieldOfView = transform.GetChild(0).gameObject;
         fovLight = GetComponentInChildren<Light2D>();
@@ -58,6 +64,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         initialRotation = transform.rotation;
         initialFacingRight = !npcSpriteRenderer.flipX;
         initialFloorLevel = currentFloorLevel;
+        directionX = 0;
 
         // Initialize sound tracking variables
         lastMovingObject = null;
@@ -158,12 +165,22 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
     public void FlipFieldOfView()
     {
-        Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
-        float newZ = facingRight ? -90f : 90f;
+        //directionX = facingRight ? -1f : 1f;
+
+        if (GetComponentInChildren<NPCSpriteManager>() == null)
+        {
+            Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
+            float newZ = facingRight ? -90f : 90f;
+            fieldOfView.transform.localRotation = Quaternion.Euler(0, 0, newZ);
+        }
+
+        //Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
+        //float newZ = facingRight ? -90f : 90f;
+        //fieldOfView.transform.localRotation = Quaternion.Euler(0, 0, newZ);
+
         //float currentZ = Mathf.Round(rotationDegrees.z);
         //float newZ = currentZ == 90 ? -90 : 90;
         //rotationDegrees.z = -rotationDegrees.z;
-        fieldOfView.transform.localRotation = Quaternion.Euler(0,0,newZ);
     }
 
     // Manage the sound made by the NPC when he sees an object moving
@@ -208,7 +225,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         facingRight = initialFacingRight;
         npcSpriteRenderer.flipX = !facingRight;
         currentFloorLevel = initialFloorLevel;
-
+        
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
         rotationDegrees.z = facingRight ? -90f : 90f;
         fieldOfView.transform.eulerAngles = rotationDegrees;
