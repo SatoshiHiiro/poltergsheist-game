@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class RotationManager : SpriteManager
 {
-    [Header("Rotation Animation")]
-    [SerializeField] public float rotationSpeed;        //Multiplier for the number of degrees to turn each frame
+    //[Header("Rotation Animation")]
+    float rotationSpeed = 1000f;        //Multiplier for the number of degrees to turn each frame
     Quaternion direction = new Quaternion(0, 0, 0, 1);
 
     // Update is called once per frame

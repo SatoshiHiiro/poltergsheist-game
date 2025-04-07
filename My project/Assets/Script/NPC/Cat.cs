@@ -180,7 +180,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                     {
                         if(faceRight != FacingRight)
                         {
-                            npcSpriteRenderer.flipX = !faceRight;
+                            //npcSpriteRenderer.flipX = !faceRight;
                             FacingRight = faceRight;
                             FlipFieldOfView();
                         }
@@ -199,7 +199,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 // Flip sprite based on direction
                 if (faceRight != FacingRight)
                 {
-                    npcSpriteRenderer.flipX = !faceRight;
+                    //npcSpriteRenderer.flipX = !faceRight;
                     FacingRight = faceRight;
                     FlipFieldOfView();
                 }

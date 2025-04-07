@@ -393,13 +393,20 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         yield return StartCoroutine(npcMovementController.ReachTarget(initialPosition, currentFloorLevel, initialFloorLevel));//ReachTarget(initialPosition, initialFloorLevel));
 
         // Restore initial facing direction
-        if(npcSpriteRenderer.flipX == initialFacingRight)
+        //if(npcSpriteRenderer.flipX == initialFacingRight)
+        //{
+        //    npcSpriteRenderer.flipX = !initialFacingRight;
+        //    facingRight = false;
+        //    FlipFieldOfView();
+        //}
+        print("IM I FACING RIGHT? " + facingRight);
+        print("INITIAL FACING RIGHT" + initialFacingRight);
+        if (facingRight != initialFacingRight)
         {
-            npcSpriteRenderer.flipX = !initialFacingRight;
-            facingRight = false;
+            facingRight = initialFacingRight;
             FlipFieldOfView();
         }
-        
+
     }
 
     public override void ResetInitialState()

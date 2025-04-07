@@ -36,7 +36,11 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
     {
         base.Start();
         indexPatrolPoints = 0;
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
+        //if(animator != null)
+        //{
+        //    print("Nom de l'animator" + animator.gameObject.name);
+        //}
         isBlocked = false;
         isWaiting = false;
         isInRoom = false;
