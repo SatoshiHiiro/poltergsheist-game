@@ -181,8 +181,12 @@ public class StairController : MonoBehaviour
         // Make Climb Stairs prompt appear if Polterg is in front of a stair
         if (collision.CompareTag("Player") && !IsStairBlocked() && canPoltergUseDoor)
         {
-            uiPromptCanvas.enabled = true;
-            animator.SetBool("PromptAppear", true);
+            if(uiPromptCanvas != null)
+            {
+                uiPromptCanvas.enabled = true;
+                animator.SetBool("PromptAppear", true);
+            }            
+            
         }
         // Make Climb Stairs prompt appear if Polterg is in front of a stair in a possessedObject
         else if (collision.gameObject.GetComponent<PossessionController>())
@@ -190,8 +194,12 @@ public class StairController : MonoBehaviour
             PossessionManager possessionObject = collision.gameObject.GetComponent<PossessionManager>();
             if (possessionObject != null && !IsStairBlocked() && possessionObject.IsPossessing && canObjectUseDoor)
             {
-                uiPromptCanvas.enabled = true;
-                animator.SetBool("PromptAppear", true);
+                if(uiPromptCanvas != null)
+                {
+                    uiPromptCanvas.enabled = true;
+                    animator.SetBool("PromptAppear", true);
+                }                
+                
             }
         }
     }
@@ -201,8 +209,12 @@ public class StairController : MonoBehaviour
         // Make Climb Stairs prompt disappear if Polterg is in front of a stair
         if (collision.CompareTag("Player"))
         {
-            uiPromptCanvas.enabled = false;
-            animator.SetBool("PromptAppear", false);
+            if (uiPromptCanvas != null)
+            {
+                uiPromptCanvas.enabled = false;
+                animator.SetBool("PromptAppear", false);
+            }
+           
         }
         // Make Climb Stairs prompt disappear if Polterg is in front of a stair in a possessedObject
         else if (collision.gameObject.GetComponent<PossessionController>())
@@ -210,8 +222,12 @@ public class StairController : MonoBehaviour
             PossessionManager possessionObject = collision.gameObject.GetComponent<PossessionManager>();
             if (possessionObject != null && possessionObject.IsPossessing)
             {
-                uiPromptCanvas.enabled = false;
-                animator.SetBool("PromptAppear", false);
+                if(uiPromptCanvas != null)
+                {
+                    uiPromptCanvas.enabled = false;
+                    animator.SetBool("PromptAppear", false);
+                }
+                
             }
         }
     }
