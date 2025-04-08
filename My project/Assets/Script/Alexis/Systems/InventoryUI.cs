@@ -12,7 +12,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject stealableBar;
 
     List<StealableBehavior> stealableItemList = new List<StealableBehavior>();  // List of every stealable items in the scene
-    Dictionary<StealableBehavior, GameObject> stealableUI = new Dictionary<StealableBehavior, GameObject>();
+    Dictionary<Sprite, GameObject> stealableUI = new Dictionary<Sprite, GameObject>();  // Each treasure has it's own sprite
     Dictionary<KeyItemBehavior, GameObject> keyUI = new Dictionary<KeyItemBehavior, GameObject>();
 
     private void Awake()
@@ -42,26 +42,35 @@ public class InventoryUI : MonoBehaviour
         }
         foreach(StealableBehavior stealableItem in stealableItemList)
         {
-            // Add to the inventory the shadow of the picture to find
-            GameObject obj = new GameObject("StealableObj");
-            obj.AddComponent<Image>();
-            Image objectImage= obj.GetComponent<Image>();
-            objectImage.sprite = stealableItem.ItemSpriteRenderer.sprite;
-            objectImage.color = Color.black;
-            objectImage.preserveAspect = true;
-            obj.transform.SetParent(stealableBar.transform);
+            Sprite sprite = stealableItem.ItemSpriteRenderer.sprite;
 
-            stealableUI[stealableItem] = obj;
+            if (!stealableUI.ContainsKey(sprite))
+            {
+                // Add to the inventory the shadow of the picture to find
+                GameObject obj = new GameObject("StealableObj");
+                obj.AddComponent<Image>();
+                Image objectImage = obj.GetComponent<Image>();
+                objectImage.sprite = stealableItem.ItemSpriteRenderer.sprite;
+                objectImage.color = Color.black;
+                objectImage.preserveAspect = true;
+                obj.transform.SetParent(stealableBar.transform);
+
+                stealableUI[sprite] = obj;
+            }
+            
+
+            //stealableUI[stealableItem] = obj;
         }
     }
 
     // Update the stealable bar UI when an item is stolen or when we reset
     public void UpdateStealableBarUI(StealableBehavior itemStolen, bool isPickedUp)
     {
-        if(stealableUI[itemStolen] != null)
+        Sprite sprite = itemStolen.ItemSpriteRenderer.sprite;
+        if (stealableUI.ContainsKey(sprite))
         {
             Color colorItem = isPickedUp == true ? Color.white : Color.black;
-            stealableUI[itemStolen].GetComponent<Image>().color = colorItem;
+            stealableUI[sprite].GetComponent<Image>().color = colorItem;
         }
     }
 

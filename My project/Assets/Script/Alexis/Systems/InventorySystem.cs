@@ -13,17 +13,6 @@ public class InventorySystem : MonoBehaviour
 
     // Getters
     public List<StealableBehavior> StolenItemList => stolenItemList;
-
-    //List<KeyItemBehavior> items = new List<KeyItemBehavior>();
-    //private Dictionary<KeyItemBehavior, ItemData> inventoryItems = new Dictionary<KeyItemBehavior, ItemData>();
-
-
-    //List<ItemData> itemsDataList = new List<ItemData>();
-
-    //[SerializeField] KeyItemBehavior[] keyItems;
-    //[SerializeField] bool[] isConditionsMet;
-    //private Dictionary<KeyItemBehavior, GameObject> itemUI = new Dictionary<KeyItemBehavior, GameObject>();
-    //private Dictionary<KeyItemBehavior, bool> inventoryItems = new Dictionary<KeyItemBehavior, bool>();
     public event Action<KeyItemBehavior> OnResetKey;
 
     EnergySystem energy;
@@ -116,105 +105,5 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    // Add object UI in inventory
-    //public void SetUpInventory()
-    //{
-    //    foreach(KeyItemBehavior item in items)
-    //    {
-    //        // Add to the inventory the shadow of the picture to find
-    //        GameObject obj = new GameObject("InventoryObj");
-    //        obj.AddComponent<Image>();
-    //        Image objectImage= obj.GetComponent<Image>();
-    //        objectImage.sprite = item.ItemSpriteRenderer.sprite;
-    //        objectImage.color = Color.black;
-    //        objectImage.preserveAspect = true;
-    //        obj.transform.SetParent(gameObject.transform);
-
-    //        ItemData itemData = new ItemData(obj, false);
-
-    //        inventoryItems.Add(item, itemData);
-    //        // Stock reference of image and key
-    //        //itemUI[item] = obj;
-    //    }
-
-    //}
-
-    //// The player collected one item
-    //public void UpdateInventory(KeyItemBehavior pickedUpItem)
-    //{
-    //    // Make sure the item is recorded in the inventory
-    //    if (inventoryItems.ContainsKey(pickedUpItem))
-    //    {
-    //        inventoryItems[pickedUpItem].isPickedUp = true;
-    //        inventoryItems[pickedUpItem].itemGameObject.GetComponent<Image>().color = Color.white;
-    //    }
-    //    //foreach(ItemData item in itemsDataList)
-    //    //{
-    //    //    if(item.pickedUpItem == pickedUpItem)
-    //    //    {
-    //    //        item.isPickedUp = true;
-    //    //        item.itemGameObject.GetComponent<Image>().color = Color.white;
-    //    //    }
-    //    //}
-    //    //for (int i = 0; i < keyItems.Length; i++)
-    //    //{
-    //    //    if (keyItems[i] == item)
-    //    //    {
-    //    //        isConditionsMet[i] = true;
-    //    //        // When the player pick up the object the object replace the shadow
-    //    //        itemUI[item].GetComponent<Image>().color = Color.white;
-    //    //    }
-
-    //    //}
-    //}
-
-    //// Is the item collected by the player
-    //public bool IsItemPickedUp(KeyItemBehavior keyItem)
-    //{
-    //    if (inventoryItems.ContainsKey(keyItem))
-    //    {
-    //        if (inventoryItems[keyItem].isPickedUp)
-    //        {
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
-
-    //// Remove an object from the inventory and UI
-    //public void RemoveObject(PickupItemBehavior item)
-    //{
-    //    //if (inventoryItems.ContainsKey(item))
-    //    //{
-    //    //    inventoryItems[item].isPickedUp = false;
-    //    //    inventoryItems[item].itemGameObject.GetComponent<Image>().color = Color.black;
-    //    //    OnResetKey?.Invoke(item);
-    //    //}
-
-
-
-    //    //for(int i = 0; i < keyItems.Length; i++)
-    //    //{
-    //    //    if(keyItems[i] == keyItem)
-    //    //    {
-    //    //        isConditionsMet[i] = false;
-    //    //        GameObject keyImage = itemUI[keyItem];
-    //    //        Destroy(keyImage);
-    //    //        OnResetKey?.Invoke(keyItem);
-    //    //    }
-    //    //}
-    //}
+    
 }
-
-//[System.Serializable]
-//public class ItemData
-//{
-//    public GameObject itemGameObject;
-//    public bool isPickedUp;
-
-//    public ItemData(GameObject itemImage, bool pickedUp)
-//    {
-//        this.itemGameObject = itemImage;
-//        this.isPickedUp = pickedUp;
-//    }
-//}
