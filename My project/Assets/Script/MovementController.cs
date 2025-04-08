@@ -38,7 +38,7 @@ public abstract class MovementController : MonoBehaviour
     Coroutine jumpReset;
     Coroutine jumpBuff;
     public float inputBuffer;
-    private float jumpVelocityAdjustment;
+    protected float jumpVelocityAdjustment;
     protected Vector2 moveInput;
     Vector2 lastInput;
 
@@ -48,7 +48,7 @@ public abstract class MovementController : MonoBehaviour
     [HideInInspector] public float halfSizeOfObject;
     private Vector2 lastVelocity;
     Coroutine MatReset;
-    PhysicsMaterial2D iniMat;
+    protected PhysicsMaterial2D iniMat;
     PhysicsMaterial2D zeroMat;
     //[HideInInspector] public float lastVelocityX;
     [HideInInspector] public float lastPosY;
@@ -60,7 +60,7 @@ public abstract class MovementController : MonoBehaviour
     public bool canJump;                                                //Can stop the physics using the y axis
     public bool isInContact;                                            //To know if the object is in contact with another at the bottom
     [HideInInspector] public bool isJumping;                            //To stop multijump.
-    private bool wantsToJump;
+    protected bool wantsToJump;
     private bool canClimbAgain;
 
     //Shortcuts
