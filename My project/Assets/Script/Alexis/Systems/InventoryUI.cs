@@ -26,7 +26,7 @@ public class InventoryUI : MonoBehaviour
             Destroy(Instance);
         }
 
-        stealableItemList = FindObjectsByType<StealableBehavior>(FindObjectsSortMode.InstanceID).ToList<StealableBehavior>();
+        stealableItemList = FindObjectsByType<StealableBehavior>(FindObjectsSortMode.InstanceID).OrderBy(obj => obj.name).ToList<StealableBehavior>();
     }
 
     private void Start()
