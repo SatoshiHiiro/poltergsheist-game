@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1082197049009247973, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.29327068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303378743756169241, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
+      propertyPath: heightPos.y
+      value: -0.29327068
+      objectReference: {fileID: 0}
     - target: {fileID: 2198073466405603801, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_Size.x
       value: 10.48
@@ -50,11 +58,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647050220124678125, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_Name
-      value: PossessedObject (1) Variant
+      value: Bed
       objectReference: {fileID: 0}
     - target: {fileID: 3647050220124678125, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478137558808853838, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.29327068
       objectReference: {fileID: 0}
     - target: {fileID: 5521295774332285124, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_Size.x
@@ -67,7 +79,7 @@ PrefabInstance:
     - target: {fileID: 5521295774332285124, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 6200000, guid: 0f825e544379ff94a858d80e57f950ed, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5521295774332285124, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_Offset.x
       value: 0
@@ -100,6 +112,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 5.9159117
       objectReference: {fileID: 0}
+    - target: {fileID: 7486977683571180589, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 0f825e544379ff94a858d80e57f950ed, type: 2}
     - target: {fileID: 7486977683571180589, guid: f5cc71ba8807a0b498624ff8dbd6bc67, type: 3}
       propertyPath: m_Constraints
       value: 0

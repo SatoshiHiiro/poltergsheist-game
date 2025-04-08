@@ -59,7 +59,7 @@ public abstract class SpriteManager : MonoBehaviour
 
     IEnumerator ResetBoolAnimation(Animator anim, string param)
     {
-        yield return new WaitForSecondsRealtime(.05f);
+        yield return new WaitForSecondsRealtime(.01f);
         anim.SetBool(param, false);
     }
 
