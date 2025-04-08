@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{3ABD7CAF-F891-45FA-B460-8609763CDABC}" SchemaVersion="123">
 	<States>
-		<WorkUnit Name="Default Work Unit" ID="{3ABD7CAF-F891-45FA-B460-8609763CDABC}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{3ABD7CAF-F891-45FA-B460-8609763CDABC}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="Music" ID="{7BF359AB-0FEA-4BEA-BAE3-157F03DF8DBC}">
+					<ChildrenList>
+						<State Name="None" ID="{351044FD-7A84-4CB7-81DE-F70664AB2218}"/>
+						<State Name="MUS_Menu" ID="{99B39622-7DD2-4D89-AEE8-86D4B188B102}"/>
+						<State Name="MUS_House" ID="{E156AD50-2A7B-47B7-A3B8-21E361FABB8F}"/>
+						<State Name="MUS_Museum" ID="{89D79411-A79D-4689-AF55-09F7279B8236}"/>
+					</ChildrenList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
 	</States>
 </WwiseDocument>

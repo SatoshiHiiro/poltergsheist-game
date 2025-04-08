@@ -654,10 +654,13 @@
 					<ChildrenList>
 						<Event Name="MUS_House" ID="{E093FBB3-B00E-4CBF-80C0-8939AD0DCFA2}">
 							<ChildrenList>
-								<Action Name="" ID="{56CC627D-0D77-41AD-9140-274859B3E334}" ShortID="169885613">
+								<Action Name="" ID="{051F7911-42A6-4670-810B-6F35E55E2745}" ShortID="987765885">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-MUS_House" ID="{BE5ECC1F-6216-411E-BECA-D33159CE019B}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="MUS_House" ID="{E156AD50-2A7B-47B7-A3B8-21E361FABB8F}" WorkUnitID="{3ABD7CAF-F891-45FA-B460-8609763CDABC}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -665,10 +668,13 @@
 						</Event>
 						<Event Name="MUS_Museum" ID="{C524E1C5-73B2-48CD-A59B-137BFD755772}">
 							<ChildrenList>
-								<Action Name="" ID="{6E86FC05-3451-4E50-B4BC-D700084EF68E}" ShortID="286018434">
+								<Action Name="" ID="{20ECDC11-8086-45EC-9ABC-2120BDDF749C}" ShortID="100209359">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-Mus_Museum" ID="{6BC36CD0-ECC3-4909-8319-7DAEAEBEF0C9}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="MUS_Museum" ID="{89D79411-A79D-4689-AF55-09F7279B8236}" WorkUnitID="{3ABD7CAF-F891-45FA-B460-8609763CDABC}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -676,21 +682,35 @@
 						</Event>
 						<Event Name="MUS_Menu" ID="{F4D35B9C-635A-4269-B6BC-72F7A3755A6A}">
 							<ChildrenList>
-								<Action Name="" ID="{3F4784E3-F41A-4ED0-A64D-9C4F57D3B9B6}" ShortID="1018650334">
+								<Action Name="" ID="{2E91928F-D429-4AB6-AFAB-E3ECF9A95E22}" ShortID="437947877">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-MUS_House" ID="{BE5ECC1F-6216-411E-BECA-D33159CE019B}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="MUS_Menu" ID="{99B39622-7DD2-4D89-AEE8-86D4B188B102}" WorkUnitID="{3ABD7CAF-F891-45FA-B460-8609763CDABC}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="MUS_Win" ID="{BCEA476A-ABA8-4C4A-9144-A1ADA4B3ECC0}">
+						<Event Name="MUS_Win" ID="{BCEA476A-ABA8-4C4A-9144-A1ADA4B3ECC0}"/>
+						<Event Name="MUS_Start" ID="{DA11A7B0-C779-47E3-A9A5-83EDA8D9E7D0}">
 							<ChildrenList>
-								<Action Name="" ID="{D8A44997-2467-43C6-BC85-54F7B044A063}" ShortID="655903673">
+								<Action Name="" ID="{88985BC8-B421-471C-BC99-A058E9C7129E}" ShortID="587838752">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-MUS_Win" ID="{D72FEFEF-1E9F-4700-9E83-220C724328B3}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="Music" ID="{3E06EF00-42D8-4366-B185-B53A683EC61A}" WorkUnitID="{3EE76551-D3E9-405C-B0DA-9A53801BA5FB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{03A4B82E-C49F-41C5-A57E-4C6A26ECE96E}" ShortID="871324500">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="MUS_Menu" ID="{99B39622-7DD2-4D89-AEE8-86D4B188B102}" WorkUnitID="{3ABD7CAF-F891-45FA-B460-8609763CDABC}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
