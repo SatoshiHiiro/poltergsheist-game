@@ -7,7 +7,7 @@ public class FogOfWar : MonoBehaviour
 
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
     }
 
