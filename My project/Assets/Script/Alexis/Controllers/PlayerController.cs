@@ -16,6 +16,7 @@ public class PlayerController : MovementController
     // Conditions
     [HideInInspector] public bool isPossessing; //Utilisé par PossessionBehavior pour vérifier si le Player possède un objet
     [HideInInspector] public Vector2 sizeofPlayer;
+    [HideInInspector] public bool isPossessionInProgress = false;
 
     protected override void Start()
     {
