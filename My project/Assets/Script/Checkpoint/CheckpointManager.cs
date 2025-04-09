@@ -55,6 +55,19 @@ public class CheckpointManager : MonoBehaviour
     {
         //print("RESET");
         yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(ResetInitialStateGameObjects());
+        
+        if (player != null)
+        {
+            player.transform.position = currentCheckpoint.transform.position;
+            player.GetComponent<PlayerController>().canMove = true;
+        }
+        ResetEnemies();
+        SuspicionManager.Instance.ResetSuspicion();
+    }
+
+    private IEnumerator ResetInitialStateGameObjects()
+    {
         foreach (IResetInitialState resetGameObject in currentCheckpoint.ResetGameObjects)
         {
 
@@ -63,22 +76,16 @@ public class CheckpointManager : MonoBehaviour
             {
                 print(component.gameObject.name);
                 resetGameObject.ResetInitialState();
-                
+
             }
-            
+
             //else
             //{
             //    print(component.gameObject.name);
             //}
 
         }
-        if (player != null)
-        {
-            player.transform.position = currentCheckpoint.transform.position;
-            player.GetComponent<PlayerController>().canMove = true;
-        }
-        ResetEnemies();
-        SuspicionManager.Instance.ResetSuspicion();
+        yield return null;
     }
 
 
