@@ -24,6 +24,8 @@ public class Checkpoint : MonoBehaviour
     {
         checkpointCollider = GetComponent<Collider2D>();
         checkpointLight = transform.GetChild(0).gameObject;
+        Vector3 initialPosition = new Vector3(transform.position.x, transform.position.y, 0);
+        transform.position = initialPosition;
         FindAllResetObjects();
     }
 
