@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FogOfWar : MonoBehaviour
 {
-    BoxCollider2D boxCollider;
+    Collider2D boxCollider;
     Animator animator;
 
     private void Start()
