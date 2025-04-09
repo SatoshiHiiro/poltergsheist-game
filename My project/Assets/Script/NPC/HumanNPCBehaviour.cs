@@ -172,7 +172,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             if(LightUtility.IsPointHitByLight(lightCollider, objCollider, wallFloorLayer))
             {
-                
                 return true;
             }
         }
@@ -201,7 +200,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 continue;
             }
 
-            SpriteRenderer objectSprite = objectCollider.GetComponent<SpriteRenderer>();
+            SpriteRenderer objectSprite = objectCollider.GetComponentInChildren<SpriteRenderer>();
             // Check if there is light toutching the object
             if (!IsObjectLit(objectCollider))
             {
