@@ -51,6 +51,8 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
+    // Reset every game object associated with the checkpoint
+    // Reset the player and the enemies suspicion
     private IEnumerator WaitBeforeReset()
     {
         //print("RESET");
@@ -66,6 +68,7 @@ public class CheckpointManager : MonoBehaviour
         SuspicionManager.Instance.ResetSuspicion();
     }
 
+    // Reset every game object associated with the checkpoint
     private IEnumerator ResetInitialStateGameObjects()
     {
         foreach (IResetInitialState resetGameObject in currentCheckpoint.ResetGameObjects)
@@ -75,7 +78,7 @@ public class CheckpointManager : MonoBehaviour
             if (component != null && component.gameObject.activeInHierarchy)
             {
                 print(component.gameObject.name);
-                resetGameObject.ResetInitialState();
+                resetGameObject.ResetInitialState();    // Reset the game object to it's initial state
 
             }
 
