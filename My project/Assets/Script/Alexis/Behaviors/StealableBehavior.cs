@@ -22,7 +22,8 @@ public class StealableBehavior : PickupItemBehavior
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        if (collision.GetComponent<PlayerController>() != null || collision.GetComponent<PossessionController>() != null)
+        PossessionManager possessionManager = collision.GetComponent<PossessionManager>();
+        if (collision.GetComponent<PlayerController>() != null || (possessionManager != null && possessionManager.IsPossessing))
         {
             InventorySystem.Instance.AddStolenItemToInventory(this);
             //Debug.Log("Collision détectée avec : " + other.gameObject.name);

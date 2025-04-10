@@ -32,7 +32,7 @@ public class Checkpoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PossessionManager possessionManager = collision.GetComponent<PossessionManager>();
-        if (collision.gameObject.GetComponent<PlayerController>() || possessionManager.IsPossessing)
+        if (collision.gameObject.GetComponent<PlayerController>() || (possessionManager != null && possessionManager.IsPossessing))
         {
             checkpointCollider.enabled = false; // The player can't reactivate the same checkpoint
             CheckpointManager.Instance.SetCheckPoint(this);

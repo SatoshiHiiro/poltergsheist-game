@@ -57,13 +57,33 @@ public class CheckpointManager : MonoBehaviour
     {
         //print("RESET");
         yield return new WaitForSeconds(0.1f);
-        yield return StartCoroutine(ResetInitialStateGameObjects());
-        
+        //yield return StartCoroutine(ResetInitialStateGameObjects());
+
+        foreach (IResetInitialState resetGameObject in currentCheckpoint.ResetGameObjects)
+        {
+
+            MonoBehaviour component = resetGameObject as MonoBehaviour; // Cast en MonoBehaviour
+            if (component != null && component.gameObject.activeInHierarchy)
+            {
+                print(component.gameObject.name);
+                resetGameObject.ResetInitialState();    // Reset the game object to it's initial state
+
+            }
+
+            //else
+            //{
+            //    print(component.gameObject.name);
+            //}
+
+        }
+        //yield return null;
         if (player != null)
         {
             player.transform.position = currentCheckpoint.transform.position;
             player.GetComponent<PlayerController>().canMove = true;
         }
+
+
         ResetEnemies();
         SuspicionManager.Instance.ResetSuspicion();
     }
