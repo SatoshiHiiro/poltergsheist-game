@@ -9,7 +9,8 @@ public class KeyItemBehavior : PickupItemBehavior
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        if (collision.GetComponent<PlayerController>() != null || collision.GetComponent<PossessionController>() != null)
+        PossessionManager possessionManager = collision.GetComponent<PossessionManager>();
+        if (collision.GetComponent<PlayerController>() != null || (possessionManager != null && possessionManager.IsPossessing))
         {
             InventorySystem.Instance.AddKeyToInventory(this);
         }

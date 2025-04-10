@@ -20,7 +20,8 @@ public abstract class PickupItemBehavior : MonoBehaviour, IResetInitialState
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         // We hide the item sprite when the player collect it
-        if (collision.GetComponent<PlayerController>() != null || (collision.GetComponent<PossessionController>() != null && collision.GetComponent<KeyController>() == null))
+        PossessionManager possessionManager = collision.GetComponent<PossessionManager>();
+        if (collision.GetComponent<PlayerController>() != null || (possessionManager != null && possessionManager.IsPossessing))//(collision.GetComponent<PossessionController>() != null && collision.GetComponent<KeyController>() == null))
         {
             HideItem();
 
