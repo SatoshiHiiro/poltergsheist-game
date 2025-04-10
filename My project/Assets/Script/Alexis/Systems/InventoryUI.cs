@@ -9,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     public static InventoryUI Instance {  get; private set; }
 
     [SerializeField] private GameObject collectedItemBar;
+    [SerializeField] private GameObject keyUIPrefab;
     [SerializeField] private GameObject stealableBar;
 
     List<StealableBehavior> stealableItemList = new List<StealableBehavior>();  // List of every stealable items in the scene
@@ -32,6 +33,7 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         SetupStealableBarUI();
+        collectedItemBar.SetActive(collectedItemBar.transform.childCount > 0);
     }
 
     private void SetupStealableBarUI()
@@ -78,20 +80,36 @@ public class InventoryUI : MonoBehaviour
     {
         if (isPickedUp)
         {
-            GameObject obj = new GameObject("StealableObj");
-            obj.AddComponent<Image>();
-            Image objectImage = obj.GetComponent<Image>();
-            objectImage.sprite = keyitem.ItemSpriteRenderer.sprite;
-            objectImage.preserveAspect = true;
-            obj.transform.SetParent(collectedItemBar.transform);
+            //GameObject obj = new GameObject("StealableObj");
+            //obj.AddComponent<Image>();
+            //Image objectImage = obj.GetComponent<Image>();
+            //objectImage.sprite = keyitem.ItemSpriteRenderer.sprite;
+            //objectImage.preserveAspect = true;
+            //obj.transform.SetParent(collectedItemBar.transform);
+            GameObject newKeyImage = Instantiate(keyUIPrefab, collectedItemBar.transform);
 
-            keyUI[keyitem] = obj;
+            keyUI[keyitem] = newKeyImage;
         }
         else
         {
-            Destroy(keyUI[keyitem]);
+            if (keyUI.ContainsKey(keyitem))
+            {
+                print("REMOVE!!!");
+                DestroyImmediate(keyUI[keyitem]);
+                keyUI.Remove(keyitem);
+            }           
         }
+        if(collectedItemBar.transform.childCount > 0)
+        {
+            print("YES I HAVE IT");
+            foreach (Transform test in collectedItemBar.transform)
+            {
+                print("HERE NAME: " + test.gameObject.name);
+            }
+        }
+
+        // Verify is the collected item bar still has some image
+        collectedItemBar.SetActive(collectedItemBar.transform.childCount > 0);
        
     }
-
 }
