@@ -257,11 +257,14 @@ public class Cat : BasicNPCBehaviour, IPatrol
     {
         if (canMove && collision.gameObject.CompareTag("Cage"))
         {
+            
             if(collision.bounds.Contains(catCollider.bounds.min) && collision.bounds.Contains(catCollider.bounds.max))
             {
                 //audioSource.Play();
+                
                 soundEvent.Post(gameObject);
                 canMove = false;
+                StopAllCoroutines();
                 fovLight.enabled = false;
                 collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);
                 cage = collision.gameObject;

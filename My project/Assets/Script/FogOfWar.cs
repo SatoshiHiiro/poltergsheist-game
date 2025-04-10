@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class FogOfWar : MonoBehaviour
 {
-    BoxCollider2D boxCollider;
+    Collider2D boxCollider;
     Animator animator;
 
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
     }
 
