@@ -2877,9 +2877,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf684c7f8e9af943942d02d99fabfd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeUntilSuspicionDecrease: 5
-  suspicionRate: 50
-  sizeFactor: 2
+  timeUntilSuspicionDecrease: 3
+  suspicionRate: 150
+  sizeFactor: 0.5
   npcFactor: 2
   displacementFactor: 1
   maxPositionChange: 10
@@ -2890,7 +2890,7 @@ MonoBehaviour:
   maxRotationFactor: 4
   minRotationChange: 5
   minRotationFactor: 1.5
-  suspicionDecrease: 1
+  suspicionDecrease: 0.2
 --- !u!114 &4655788986197172491
 MonoBehaviour:
   m_ObjectHideFlags: 0
