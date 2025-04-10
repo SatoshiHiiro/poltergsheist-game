@@ -206,6 +206,15 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("SizeTrigger"))
+        {
+            hasEnoughSpace = false;
+            Debug.Log("Entered Trigger");
+        }
+    }
+
     public void ResetInitialState()
     {
         if (isPossessed)
