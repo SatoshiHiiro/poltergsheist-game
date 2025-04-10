@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -78,38 +79,35 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateCollectedItemBarUI(KeyItemBehavior keyitem, bool isPickedUp)
     {
+        // Add key to inventory
         if (isPickedUp)
         {
-            //GameObject obj = new GameObject("StealableObj");
-            //obj.AddComponent<Image>();
-            //Image objectImage = obj.GetComponent<Image>();
-            //objectImage.sprite = keyitem.ItemSpriteRenderer.sprite;
-            //objectImage.preserveAspect = true;
-            //obj.transform.SetParent(collectedItemBar.transform);
             GameObject newKeyImage = Instantiate(keyUIPrefab, collectedItemBar.transform);
+            Image collectedItemImage = newKeyImage.GetComponent<Image>();
+            collectedItemImage.sprite = keyitem.ItemSpriteRenderer.sprite;
+            collectedItemImage.color = keyitem.ItemSpriteRenderer.color;
 
             keyUI[keyitem] = newKeyImage;
         }
         else
         {
+            // Remove key from inventory
             if (keyUI.ContainsKey(keyitem))
             {
-                print("REMOVE!!!");
-                DestroyImmediate(keyUI[keyitem]);
+                Destroy(keyUI[keyitem]);
                 keyUI.Remove(keyitem);
             }           
         }
-        if(collectedItemBar.transform.childCount > 0)
-        {
-            print("YES I HAVE IT");
-            foreach (Transform test in collectedItemBar.transform)
-            {
-                print("HERE NAME: " + test.gameObject.name);
-            }
-        }
+        StartCoroutine(CheckCollectedItemBarEmpty());
+        
+       
+    }
 
+    // Check if the collected bar tiem is empty, if yes we desactivate it
+    private IEnumerator CheckCollectedItemBarEmpty()
+    {
+        yield return null;  // Wait for one frame
         // Verify is the collected item bar still has some image
         collectedItemBar.SetActive(collectedItemBar.transform.childCount > 0);
-       
     }
 }
