@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 272.51404, y: -161.9902}
+  m_AnchoredPosition: {x: 388.9, y: -212.8}
   m_SizeDelta: {x: 160, y: 55.3606}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &545477295
@@ -180,8 +180,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.90588236, g: 0.7490196, b: 0.4745098, a: 1}
+    m_PressedColor: {r: 0.33333334, g: 0.2627451, b: 0.13725491, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6149222, g: 0.6528301, b: 0.5013243, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Retour
+  m_text: Return
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e021058adbbee44d91c052d30989279, type: 2}
   m_sharedMaterial: {fileID: 6455729173596376325, guid: 0e021058adbbee44d91c052d30989279, type: 2}
@@ -318,8 +318,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4716981, g: 0.3860631, b: 0.23762904, a: 0.8117647}
+  m_Color: {r: 0.77254903, g: 0.5372549, b: 0.3764706, a: 0.8117647}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -673,7 +673,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1439774274}
   - component: {fileID: 1439774273}
-  - component: {fileID: 1439774272}
+  - component: {fileID: 1439774276}
+  - component: {fileID: 1439774275}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -681,14 +682,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1439774272
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439774271}
-  m_Enabled: 1
 --- !u!20 &1439774273
 Camera:
   m_ObjectHideFlags: 0
@@ -755,6 +748,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1439774275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439774271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa8edfaa27d3cc4e8d146952734684b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
+--- !u!114 &1439774276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439774271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798848abb125f8e4ebd6df8fa66cb522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1444698192
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,7 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6150943, g: 0.5653906, b: 0.49091488, a: 0.9607843}
+  m_Color: {r: 0.6886792, g: 0.4792888, b: 0.34109113, a: 0.9607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -980,6 +1013,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848286330}
   m_CullTransparentMesh: 1
+--- !u!1 &1885906115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1885906117}
+  - component: {fileID: 1885906116}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1885906116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885906115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd26a5d5a19b6dc4a82a9cd2986acde2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 11400000, guid: 0eef3a9174d115040896643f6ef4f592, type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
+--- !u!4 &1885906117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885906115}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2032921458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 17}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2032921460
@@ -1037,22 +1127,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Polterg Hoffman nait en 1871 dans la r\xE9gion du Lichtenberg, en Allemagne.
-    Depuis son plus jeune \xE2ge, pour aider sa famille, il vole des commerces et
-    des personnes qu'il croise dans la rue. D\xE8s ses 25 ans, il rejoint une organisation
-    criminelle et participe \xE0 de nombreux cambriolages de haut niveau. Selon les
-    experts, c'est plus de 2 millions d'euros en argent d'aujourd'hui qui a \xE9t\xE9
-    vol\xE9 lors de cette p\xE9riode. Polterg excelle tellement dans l'art du vol
-    qu'il se b\xE2tit peu \xE0 peu une r\xE9putation de roi du cambriolage. De 1896
-    \xE0 1912, de nombreuses chasses aux sorci\xE8res ont \xE9t\xE9 organis\xE9es
-    afin de le retrouver et de le mettre derri\xE8re les barreaux, mais sans succ\xE8s.
-    Cependant, en 1912, le nouveau capitaine de la police Arnold Meyer r\xE9ussit
-    \xE0 mettre la main sur des indices et \xE0 arr\xEAter Polterg. Les habitants
-    de la r\xE9gion pensaient enfin avoir mis un terme au chaos qui r\xE9gnait, mais
-    leur joie ne fut que de courte dur\xE9e. Quelques mois apr\xE8s le d\xE9c\xE8s
-    myst\xE9rieux de Polterg Hoffman en prison, les vols recommenc\xE8rent. La lg\xE9gende
-    raconte que ce serait l'oeuvre du fant\xF4me de Polterg qui continuerait son
-    h\xE9ritage de l'au-del\xE0."
+  m_text: "\r\nPolterg Hoffman was born in 1871 in the Lichtenberg region of Germany.
+    From a young age, to help his family, he robbed businesses and people he encountered
+    on the street. At the age of 25, he joined a criminal organization and participated
+    in numerous high-profile burglaries. According to experts, more than \u20AC2
+    million in today's money was stolen during this period. Polterg excelled in the
+    art of thievery so much that he gradually built a reputation as the King of Burglary.
+    From 1896 to 1912, numerous witch hunts were organized to find him and put him
+    behind bars, but without success. However, in 1912, the new police captain, Arnold
+    Meyer, managed to uncover clues and arrest Polterg. The locals thought they had
+    finally put an end to the chaos, but their joy was short-lived. A few months
+    after Polterg Hoffman's mysterious death in prison, the robberies began again.
+    Legend has it that this was the work of Polterg's ghost, who would continue his
+    legacy from the afterlife."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e021058adbbee44d91c052d30989279, type: 2}
   m_sharedMaterial: {fileID: 6455729173596376325, guid: 0e021058adbbee44d91c052d30989279, type: 2}
@@ -1061,8 +1148,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1079,8 +1166,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 38
+  m_fontSizeBase: 38
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1117,7 +1204,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -216.75989, y: -115.74516, z: -212.91138, w: -108.258606}
+  m_margin: {x: -381.48932, y: -226.51161, z: -387.58154, w: -199.14386}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1139,3 +1226,4 @@ SceneRoots:
   - {fileID: 1210392077}
   - {fileID: 1444698196}
   - {fileID: 1290115046}
+  - {fileID: 1885906117}
