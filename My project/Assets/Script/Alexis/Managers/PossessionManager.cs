@@ -62,6 +62,9 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         player.GetComponent<Collider2D>().enabled = false;
         player.canMove = false;
         isAnimationFinished = false;
+
+        player.isPossessionInProgress = true;
+
         yield return new WaitForSecondsRealtime(.5f);
         manager.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSecondsRealtime(.5f);
@@ -194,6 +197,12 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         {
             hasEnoughSpace = true;
             Debug.Log("Entered Trigger");
+
+            if (isPossessed && hasEnoughSpace)
+            {
+                // If the player leave a restricted small zone we can now allow him to depossessed the object
+                player.isPossessionInProgress = false;
+            }
         }
     }
 

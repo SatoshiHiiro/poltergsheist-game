@@ -21,6 +21,7 @@ public class ObjectAccessManager : InteractibleManager
         {
             // Animation lock open up
             objCollider.isTrigger = true;
+            InventorySystem.Instance.RemoveObject(keyItemForActivation);    // Remove the key from inventory
         }
     }
 

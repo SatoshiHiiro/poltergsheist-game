@@ -101,8 +101,14 @@ public class InventorySystem : MonoBehaviour
             KeyItemBehavior keyItem = (KeyItemBehavior)pickupItem;
             keyItemsList.Remove(keyItem);
             InventoryUI.Instance.UpdateCollectedItemBarUI(keyItem, false);
-            OnResetKey?.Invoke(keyItem);
+            //OnResetKey?.Invoke(keyItem);
         }
+    }
+
+    // Reset locked door associated with the key
+    public void NotifyKeyReset(KeyItemBehavior keyItem)
+    {
+        OnResetKey?.Invoke(keyItem);
     }
 
     

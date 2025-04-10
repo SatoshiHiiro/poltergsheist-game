@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class InventoryUI : MonoBehaviour
 {
     public static InventoryUI Instance {  get; private set; }
 
     [SerializeField] private GameObject collectedItemBar;
+    [SerializeField] private GameObject keyUIPrefab;
     [SerializeField] private GameObject stealableBar;
 
     List<StealableBehavior> stealableItemList = new List<StealableBehavior>();  // List of every stealable items in the scene
@@ -32,6 +34,7 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         SetupStealableBarUI();
+        collectedItemBar.SetActive(collectedItemBar.transform.childCount > 0);
     }
 
     private void SetupStealableBarUI()
@@ -76,22 +79,35 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateCollectedItemBarUI(KeyItemBehavior keyitem, bool isPickedUp)
     {
+        // Add key to inventory
         if (isPickedUp)
         {
-            GameObject obj = new GameObject("StealableObj");
-            obj.AddComponent<Image>();
-            Image objectImage = obj.GetComponent<Image>();
-            objectImage.sprite = keyitem.ItemSpriteRenderer.sprite;
-            objectImage.preserveAspect = true;
-            obj.transform.SetParent(collectedItemBar.transform);
+            GameObject newKeyImage = Instantiate(keyUIPrefab, collectedItemBar.transform);
+            Image collectedItemImage = newKeyImage.GetComponent<Image>();
+            collectedItemImage.sprite = keyitem.ItemSpriteRenderer.sprite;
+            collectedItemImage.color = keyitem.ItemSpriteRenderer.color;
 
-            keyUI[keyitem] = obj;
+            keyUI[keyitem] = newKeyImage;
         }
         else
         {
-            Destroy(keyUI[keyitem]);
+            // Remove key from inventory
+            if (keyUI.ContainsKey(keyitem))
+            {
+                Destroy(keyUI[keyitem]);
+                keyUI.Remove(keyitem);
+            }           
         }
+        StartCoroutine(CheckCollectedItemBarEmpty());
+        
        
     }
 
+    // Check if the collected bar tiem is empty, if yes we desactivate it
+    private IEnumerator CheckCollectedItemBarEmpty()
+    {
+        yield return null;  // Wait for one frame
+        // Verify is the collected item bar still has some image
+        collectedItemBar.SetActive(collectedItemBar.transform.childCount > 0);
+    }
 }

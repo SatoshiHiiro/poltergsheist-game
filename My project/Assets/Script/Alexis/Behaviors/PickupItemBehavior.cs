@@ -52,7 +52,7 @@ public abstract class PickupItemBehavior : MonoBehaviour, IResetInitialState
         }
     }
 
-    public void ResetInitialState()
+    public virtual void ResetInitialState()
     {
         InventorySystem.Instance.RemoveObject(this);
         itemSpriteRenderer.enabled = true;
