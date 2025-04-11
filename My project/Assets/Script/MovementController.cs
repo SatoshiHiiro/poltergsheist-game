@@ -54,7 +54,7 @@ public abstract class MovementController : MonoBehaviour
     public bool canWalk;                                                //Can stop the physics using the x axis
     public bool canJump;                                                //Can stop the physics using the y axis
     public bool isInContact;                                            //To know if the object is in contact with another at the bottom
-    [HideInInspector] public bool isJumping;                            //To stop multijump.
+    public bool isJumping;                            //To stop multijump.
     private bool isPerformingJump = false;
     private bool canClimbAgain;
 
@@ -110,7 +110,7 @@ public abstract class MovementController : MonoBehaviour
                 isPerformingJump = true;
                 if (onJump != null) { onJump(jumpParam); };
                 rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
-                isJumping = false;
+                //isJumping = false;
                 StartCoroutine(InputReset());
                 //isInContact = false;
             }
@@ -262,6 +262,7 @@ public abstract class MovementController : MonoBehaviour
                     if (collision.GetContact(ii).normal.y >= .9f)
                     {
                         isInContact = true;
+                        isJumping = false;
                         if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
                         break;
                     }
