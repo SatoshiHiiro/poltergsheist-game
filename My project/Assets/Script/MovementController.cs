@@ -55,6 +55,7 @@ public abstract class MovementController : MonoBehaviour
     public bool canJump;                                                //Can stop the physics using the y axis
     public bool isInContact;                                            //To know if the object is in contact with another at the bottom
     [HideInInspector] public bool isJumping;                            //To stop multijump.
+    private bool isPerformingJump = false;
     private bool canClimbAgain;
 
     //Shortcuts
@@ -104,12 +105,14 @@ public abstract class MovementController : MonoBehaviour
             if (moveInput.x == 0)
                 rigid2D.linearVelocityX = rigid2D.linearVelocityX / stopSpeed;
 
-            if (isJumping && isInContact)
+            if (isJumping && isInContact && !isPerformingJump)
             {
+                isPerformingJump = true;
                 if (onJump != null) { onJump(jumpParam); };
                 rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
                 isJumping = false;
-                isInContact = false;
+                StartCoroutine(InputReset());
+                //isInContact = false;
             }
 
             rigid2D.linearVelocityY = Mathf.Clamp(rigid2D.linearVelocityY, -8.5f, 8.5f);
@@ -169,8 +172,8 @@ public abstract class MovementController : MonoBehaviour
                         if (canJump)
                         {
                             isJumping = true;
-                            if (jumpReset != null) { StopCoroutine(jumpReset); }
-                            jumpReset = StartCoroutine(InputReset());
+                            //if (jumpReset != null) { StopCoroutine(jumpReset); }
+                            //jumpReset = StartCoroutine(InputReset());
                         }
                         else
                             if (onJump != null) { onJump(jumpParam); };
@@ -188,8 +191,13 @@ public abstract class MovementController : MonoBehaviour
     //Pour enlever de la m�moire le input de saut jusqu'� ce que l'avatar touche le sol
     IEnumerator InputReset()
     {
-        yield return new WaitForSecondsRealtime(.3f);
-        isJumping = false;
+        // Wait a few physics frames to ensure the jump force has been applied
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+        isInContact = false;
+        isPerformingJump = false;
+        //yield return new WaitForSecondsRealtime(.3f);
+        //isJumping = false;
     }
 
     //Stock les GameObjets en contact avec l'objet
@@ -200,6 +208,7 @@ public abstract class MovementController : MonoBehaviour
             if (collision.GetContact(i).normal.y >= .9f)
             {
                 isInContact = true;
+                isJumping = false;
                 if (lastPosY - this.transform.position.y > .2f)
                 {
                     if (onLand != null) { onLand(landParam); };
