@@ -34,6 +34,28 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
 
     void OnEnable()
     {
+        if (this.transform.TryGetComponent<Animator>(out Animator anim))
+        {
+            height = this.transform;
+            col2D = height.parent.GetComponent<Collider2D>();
+            sprite = height.GetChild(0).transform;
+            parentObject = height.parent;
+            iniRotation = parentObject.rotation;
+            controller = parentObject.GetComponent<MovementController>();
+            isPossessable = parentObject.TryGetComponent<PossessionController>(out PossessionController possession);
+        }
+        else
+        {
+            pivot = this.transform;
+            col2D = this.transform.parent.GetComponent<Collider2D>();
+            height = pivot.GetComponentInChildren<Animator>().transform;
+            sprite = pivot.GetComponentInChildren<SpriteRenderer>().transform;
+            parentObject = col2D.transform;
+            iniRotation = parentObject.rotation;
+            controller = parentObject.GetComponent<MovementController>();
+            isPossessable = parentObject.TryGetComponent<PossessionController>(out PossessionController possession);
+        }
+
         if (Application.isPlaying)
         {
             StartCoroutine(OnEnableRelated());
@@ -67,27 +89,7 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (this.transform.TryGetComponent<Animator>(out Animator anim))
-        {
-            height = this.transform;
-            col2D = height.parent.GetComponent<Collider2D>();
-            sprite = height.GetChild(0).transform;
-            parentObject = height.parent;
-            iniRotation = parentObject.rotation;
-            controller = parentObject.GetComponent<MovementController>();
-            isPossessable = parentObject.TryGetComponent<PossessionController>(out PossessionController possession);
-        }
-        else
-        {
-            pivot = this.transform;
-            col2D = this.transform.parent.GetComponent<Collider2D>();
-            height = pivot.GetComponentInChildren<Animator>().transform;
-            sprite = pivot.GetComponentInChildren<SpriteRenderer>().transform;
-            parentObject = col2D.transform;
-            iniRotation = parentObject.rotation;
-            controller = parentObject.GetComponent<MovementController>();
-            isPossessable = parentObject.TryGetComponent<PossessionController>(out PossessionController possession);
-        }
+        
     }
 
     // Update is called once per frame
