@@ -38,9 +38,10 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         base.Start();
         player = FindFirstObjectByType<PlayerController>();
         manager = FindFirstObjectByType<PlayerManager>();
-        if (this.TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
-        else if (this.transform.GetChild(0).TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
-        else if (this.transform.GetChild(0).GetChild(0).TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
+        spriteRenderer = this.GetComponentInChildren<SpriteRenderer>();
+        //if (this.TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
+        //else if (this.transform.GetChild(0).TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
+        //else if (this.transform.GetChild(0).GetChild(0).TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
         col2D = this.GetComponent<Collider2D>();
         hasPosControl = false;
         if (this.gameObject.TryGetComponent<PossessionController>(out posControl)) { hasPosControl = true; }

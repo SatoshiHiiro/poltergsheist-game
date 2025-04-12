@@ -11,10 +11,10 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
     Transform sprite;
     Transform parentObject;
 
+    [SerializeField] public Vector3 positionAdjuster;
     [HideInInspector] public Vector3 pivotPos;
     Quaternion iniRotation;
     bool isPossessable;
-    bool canControllerJump;
 
     public Transform Parent { get { return parentObject; } }
     public Transform Sprite { get { return sprite; } }
@@ -87,7 +87,6 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
             iniRotation = parentObject.rotation;
             controller = parentObject.GetComponent<MovementController>();
             isPossessable = parentObject.TryGetComponent<PossessionController>(out PossessionController possession);
-            canControllerJump = controller.canJump;
         }
     }
 
@@ -138,14 +137,14 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
         if (Application.isEditor && !Application.isPlaying)
         {
             height.position = pivotPos;
-            sprite.position = col2D.bounds.center;
+            sprite.position = col2D.bounds.center + positionAdjuster;
         }
 
         if (Application.isPlaying)
         {
             if (!this.transform.TryGetComponent<Animator>(out Animator animat))
             {
-                if (isPossessable)
+                if (isPossessable && !parentObject.GetComponent<Rigidbody2D>().freezeRotation)
                 {
                     sprite.rotation = parentObject.rotation;
                 }
@@ -203,7 +202,7 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
                 spritePos.y = colCenter.y;
                 break;
         }
-        sprite.position = spritePos;
+        sprite.position = spritePos + positionAdjuster;
     }
 
     void EventParameter(string param)

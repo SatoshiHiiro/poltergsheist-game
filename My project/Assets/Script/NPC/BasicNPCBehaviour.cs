@@ -102,9 +102,10 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                     //Renderer objRenderer = obj.GetComponent<Renderer>();
                     //print("NOM DE L'OBJET " + obj.gameObject.name);
                     Renderer objRenderer;
-                    if (obj.transform.GetChild(0).GetChild(0).TryGetComponent<Renderer>(out objRenderer)) { }
+                    objRenderer = obj.GetComponentInChildren<Renderer>();
+                    /*if (obj.transform.GetChild(0).GetChild(0).TryGetComponent<Renderer>(out objRenderer)) { }
                     else if (obj.transform.GetChild(0).TryGetComponent<Renderer>(out objRenderer)) { }
-                    else if (obj.TryGetComponent<Renderer>(out objRenderer)) { }
+                    else if (obj.TryGetComponent<Renderer>(out objRenderer)) { }*/
                     
                     objectSize = Mathf.Max(objRenderer.bounds.size.x, objRenderer.bounds.size.y);
 

@@ -12,9 +12,11 @@ public class BallAnimationManager : MonoBehaviour
     private void OnEnable()
     {
         //tempContacts = new ContactPoint2D[10];
-        if (this.transform.parent.TryGetComponent<PossessionController>(out posCon)) { }
+
+        posCon = this.GetComponentInParent<PossessionController>();
+        /*if (this.transform.parent.TryGetComponent<PossessionController>(out posCon)) { }
         else if (this.transform.parent.parent.TryGetComponent<PossessionController>(out posCon)) { }
-        else { Debug.Log("No PossessionController for the ball"); }
+        else { Debug.Log("No PossessionController for the ball"); }*/
 
         if (posCon.TryGetComponent<Rigidbody2D>(out rBody)) { }
         else { Debug.Log("No Rigidbody2D on the gameObject with the PossessionController for the ball"); }
@@ -26,9 +28,9 @@ public class BallAnimationManager : MonoBehaviour
         {
             float velocityX = rBody.linearVelocityX;
             bool hasLateralContact = false;
-            for (int i = 0; i < posCon.contactList.Count; i++)
+            for (int i = 0; i < posCon.curContact.Count; i++)
             {
-                if (posCon.contactList[i].normal.x > .9f || posCon.contactList[i].normal.x < -.9f)
+                if (posCon.curContact[i].normal.x > .9f || posCon.curContact[i].normal.x < -.9f)
                 {
                     hasLateralContact = true;
                     break;

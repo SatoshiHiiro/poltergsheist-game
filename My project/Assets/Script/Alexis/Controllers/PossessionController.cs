@@ -114,9 +114,9 @@ public class PossessionController : MovementController, IPossessable, IResetInit
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         OnDepossessed();
-        jumpVelocityAdjustment = 0;
-        wantsToJump = false;
-        rigid2D.sharedMaterial = iniMat;
+        //jumpVelocityAdjustment = 0;
+        //wantsToJump = false;
+        //rigid2D.sharedMaterial = iniMat;
         StopAllCoroutines();
 
     }

@@ -44,9 +44,11 @@ public abstract class MovementController : MonoBehaviour
     //Contacts
     [Header("GameObjets in contact")]
     [HideInInspector] public List<GameObject> curObject = new List<GameObject>();
+    [HideInInspector] public List<ContactPoint2D> curContact = new List<ContactPoint2D>();
     [HideInInspector] public float halfSizeOfObject;
     [HideInInspector] public float lastVelocityX;
     [HideInInspector] public float lastPosY;
+    ContactFilter2D filter = new ContactFilter2D();
 
     //Conditions
     [Header("Mouvement conditions")]
@@ -60,6 +62,7 @@ public abstract class MovementController : MonoBehaviour
 
     //Shortcuts
     protected Rigidbody2D rigid2D;
+    Collider2D col2D;
 
     //Input action section, has to be public or can be private with a SerializeField statement
     [Header("Input Section")]
@@ -82,6 +85,7 @@ public abstract class MovementController : MonoBehaviour
     protected virtual void Start()
     {
         rigid2D = gameObject.transform.GetComponent<Rigidbody2D>();
+        col2D = this.GetComponent<Collider2D>();
     }
 
     //Physics
@@ -203,7 +207,37 @@ public abstract class MovementController : MonoBehaviour
     //Stock les GameObjets en contact avec l'objet
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        for (int i = 0; i < collision.contactCount; i++)
+        curContact.Clear();
+        Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), curContact);
+
+        for (int i = 0; i < curContact.Count; i++)
+        {
+            if (curContact[i].normal.y <= -.9f)
+            {
+                isInContact = true;
+                isJumping = false;
+                if (lastPosY - this.transform.position.y > .2f)
+                {
+                    if (onLand != null) { onLand(landParam); };
+                }
+                break;
+            }
+            if (canMove && lastVelocityX >= maxSpeed - .1f)
+            {
+                if (collision.GetContact(i).normal.x <= -.9f)
+                {
+                    if (onBonkR != null) { onBonkR(bonkRightParam); }
+                    break;
+                }
+                else if (collision.GetContact(i).normal.x >= .9f)
+                {
+                    if (onBonkL != null) { onBonkL(bonkLeftParam); }
+                    break;
+                }
+            }
+        }
+
+        /*for (int i = 0; i < collision.contactCount; i++)
         {
             if (collision.GetContact(i).normal.y >= .9f)
             {
@@ -233,7 +267,7 @@ public abstract class MovementController : MonoBehaviour
                     break;
                 }
             }
-        }
+        }*/
     }
 
     IEnumerator JumpBuffer()
@@ -245,7 +279,7 @@ public abstract class MovementController : MonoBehaviour
     //Enl�ve les GameObjets en contact avec l'objet
     void OnCollisionExit2D(Collision2D collision)
     {
-        curObject.Remove(collision.gameObject);
+        //curObject.Remove(collision.gameObject);
         if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
         jumpBuff = StartCoroutine(JumpBuffer());
     }
@@ -253,7 +287,21 @@ public abstract class MovementController : MonoBehaviour
     //Checks if the GameObjects in contact are below the controller
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
-        for (int i = 0; i < curObject.Count; i++)
+        curContact.Clear();
+        Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), curContact);
+
+        for (int i = 0; i < curContact.Count; i++)
+        {
+            if (curContact[i].normal.y <= -.9f)
+            {
+                isInContact = true;
+                isJumping = false;
+                if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
+                break;
+            }
+        }
+
+        /*for (int i = 0; i < curObject.Count; i++)
         {
             if (collision.gameObject == curObject[i])
             {
@@ -270,7 +318,7 @@ public abstract class MovementController : MonoBehaviour
                 if (isInContact)
                     break;
             }
-        }
+        }*/
 
         if (collision.gameObject.CompareTag("TrapDoor"))
         {
