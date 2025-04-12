@@ -11,11 +11,12 @@ public abstract class InteractibleManager : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        if (this.TryGetComponent<SpriteRenderer>(out sRender)) { }
+        sRender = this.GetComponentInChildren<SpriteRenderer>();
+        /*if (this.TryGetComponent<SpriteRenderer>(out sRender)) { }
         else if (this.transform.GetChild(0).TryGetComponent<SpriteRenderer>(out sRender)) { }
         else if (this.transform.GetChild(0).GetChild(0).TryGetComponent<SpriteRenderer>(out sRender)) { }
         else if (this.transform.GetChild(0).GetChild(0).GetChild(0).TryGetComponent<SpriteRenderer>(out sRender)) { }
-        else { Debug.Log("No SpriteRenderer for: " + this.transform.name); }
+        else { Debug.Log("No SpriteRenderer for: " + this.transform.name); }*/
 
         baseColor = sRender.color;
         hoverColor = new Vector4(.8f, .8f, .8f, 1);
