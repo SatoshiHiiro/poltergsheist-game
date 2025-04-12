@@ -101,25 +101,25 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
 
         if (rotationZ <= 361 && rotationZ >= 359 || rotationZ <= 1 && rotationZ >= -1)
         {
-            pivotPos = parentObject.position + new Vector3(col2D.offset.x, -col2D.bounds.extents.y + col2D.offset.y, 0);
+            pivotPos = parentObject.position + new Vector3(col2D.offset.x * parentObject.localScale.x, -col2D.bounds.extents.y + (col2D.offset.y * parentObject.localScale.y), 0);
             sideDown = Side.Bottom;
         }
         else if (rotationZ <= 181 && rotationZ >= 179)
         {
             if (parentObject.name == "Test") { Debug.Log("Top down"); }
-            pivotPos = parentObject.position - new Vector3(col2D.offset.x, col2D.bounds.extents.y + col2D.offset.y, 0);
+            pivotPos = parentObject.position - new Vector3(col2D.offset.x * parentObject.localScale.x, col2D.bounds.extents.y + (col2D.offset.y * parentObject.localScale.y), 0);
             sideDown = Side.Top;
         }
         else if (rotationZ <= 91 && rotationZ >= 89)
         {
             if (parentObject.name == "Test") { Debug.Log("Left down"); }
-            pivotPos = parentObject.position + new Vector3(-col2D.offset.y, -col2D.bounds.extents.y + col2D.offset.x, 0);
+            pivotPos = parentObject.position + new Vector3(-col2D.offset.y * parentObject.localScale.y, -col2D.bounds.extents.y + (col2D.offset.x * parentObject.localScale.x), 0);
             sideDown = Side.Left;
         }
         else if (rotationZ <= 271 && rotationZ >= 269)
         {
             if (parentObject.name == "Test") { Debug.Log("Right down"); }
-            pivotPos = parentObject.position - new Vector3(-col2D.offset.y, col2D.bounds.extents.y + col2D.offset.x, 0);
+            pivotPos = parentObject.position - new Vector3(-col2D.offset.y * parentObject.localScale.y, col2D.bounds.extents.y + (col2D.offset.x * parentObject.localScale.x), 0);
             sideDown = Side.Right;
         }
         else
