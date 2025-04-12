@@ -295,7 +295,7 @@ public abstract class MovementController : MonoBehaviour
             if (curContact[i].normal.y <= -.9f)
             {
                 isInContact = true;
-                isJumping = false;
+                //isJumping = false;
                 if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
                 break;
             }
