@@ -38,21 +38,14 @@ public abstract class MovementController : MonoBehaviour
     Coroutine jumpReset;
     Coroutine jumpBuff;
     public float inputBuffer;
-    protected float jumpVelocityAdjustment;
     protected Vector2 moveInput;
     Vector2 lastInput;
 
     //Contacts
     [Header("GameObjets in contact")]
-    //[HideInInspector] public List<GameObject> curObject = new List<GameObject>();
-    public List<ContactPoint2D> contactList = new List<ContactPoint2D>();
-    ContactFilter2D filter = new ContactFilter2D();
+    [HideInInspector] public List<GameObject> curObject = new List<GameObject>();
     [HideInInspector] public float halfSizeOfObject;
-    private Vector2 lastVelocity;
-    Coroutine MatReset;
-    protected PhysicsMaterial2D iniMat;
-    PhysicsMaterial2D zeroMat;
-    //[HideInInspector] public float lastVelocityX;
+    [HideInInspector] public float lastVelocityX;
     [HideInInspector] public float lastPosY;
 
     //Conditions
@@ -61,56 +54,34 @@ public abstract class MovementController : MonoBehaviour
     public bool canWalk;                                                //Can stop the physics using the x axis
     public bool canJump;                                                //Can stop the physics using the y axis
     public bool isInContact;                                            //To know if the object is in contact with another at the bottom
-    [HideInInspector] public bool isJumping;                            //To stop multijump.
-    protected bool wantsToJump;
+    public bool isJumping;                            //To stop multijump.
+    private bool isPerformingJump = false;
     private bool canClimbAgain;
 
     //Shortcuts
     protected Rigidbody2D rigid2D;
-    protected Collider2D col2D;
 
     //Input action section, has to be public or can be private with a SerializeField statement
     [Header("Input Section")]
     public InputAction move;
     public InputAction jump;
 
-    //Getter
-    float lastVelocityX { get { return lastVelocity.x; } }
-    float lastVelocityY { get { return lastVelocity.y; } }
-
     protected virtual void Awake()
     {
-        wantsToJump = false;
         playerInputEnable = true;
         moveInput = Vector2.zero;
         lastInput = Vector2.zero;
         canClimbAgain = true;
         inputBuffer = .3f;
-        jumpVelocityAdjustment = 0;
         halfSizeOfObject = (transform.lossyScale.y * gameObject.GetComponent<Collider2D>().bounds.size.y) / 2;
 
-        StartCoroutine(AwakeRelated());
-        
         move.Enable();
         jump.Enable();
     }
 
-    IEnumerator AwakeRelated()
-    {
-        yield return new WaitForEndOfFrame();
-        if (rigid2D.sharedMaterial != null)
-        {
-            iniMat = rigid2D.sharedMaterial;
-            zeroMat = new PhysicsMaterial2D();
-            zeroMat.friction = iniMat.friction;
-            zeroMat.bounciness = 0;
-        }
-    }
-
     protected virtual void Start()
     {
-        rigid2D = this.GetComponent<Rigidbody2D>();
-        col2D = this.GetComponent<Collider2D>();
+        rigid2D = gameObject.transform.GetComponent<Rigidbody2D>();
     }
 
     //Physics
@@ -134,13 +105,13 @@ public abstract class MovementController : MonoBehaviour
             if (moveInput.x == 0)
                 rigid2D.linearVelocityX = rigid2D.linearVelocityX / stopSpeed;
 
-            if (!isJumping && isInContact && wantsToJump)
+            if (isJumping && isInContact && !isPerformingJump)
             {
+                isPerformingJump = true;
                 if (onJump != null) { onJump(jumpParam); };
-                rigid2D.linearVelocityY = jumpSpeed + (Mathf.Abs(lastVelocityY) * jumpVelocityAdjustment);
-                //rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
-                isJumping = true;
-                wantsToJump = false;
+                rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
+                //isJumping = false;
+                StartCoroutine(InputReset());
                 //isInContact = false;
             }
 
@@ -194,16 +165,19 @@ public abstract class MovementController : MonoBehaviour
 
             if (jump.WasPressedThisFrame())
             {
-                if (canMove)
+                if (!isJumping)
                 {
-                    if (canJump)
+                    if (canMove)
                     {
-                        wantsToJump = true;
-                        if (jumpReset != null) { StopCoroutine(jumpReset); }
-                        jumpReset = StartCoroutine(InputReset());
+                        if (canJump)
+                        {
+                            isJumping = true;
+                            //if (jumpReset != null) { StopCoroutine(jumpReset); }
+                            //jumpReset = StartCoroutine(InputReset());
+                        }
+                        else
+                            if (onJump != null) { onJump(jumpParam); };
                     }
-                    else
-                        if (onJump != null) { onJump(jumpParam); };
                 }
             }
         }
@@ -211,76 +185,55 @@ public abstract class MovementController : MonoBehaviour
         if (rigid2D.linearVelocityY <= .1f && rigid2D.linearVelocityY >= -.1f)
             lastPosY = this.transform.position.y;
 
-        lastVelocity = rigid2D.linearVelocity; //Mathf.Abs(rigid2D.linearVelocityX);
+        lastVelocityX = Mathf.Abs(rigid2D.linearVelocityX);
     }
 
     //Pour enlever de la m�moire le input de saut jusqu'� ce que l'avatar touche le sol
     IEnumerator InputReset()
     {
-        yield return new WaitForSecondsRealtime(.3f);
-        wantsToJump = false;
+        // Wait a few physics frames to ensure the jump force has been applied
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+        isInContact = false;
+        isPerformingJump = false;
+        //yield return new WaitForSecondsRealtime(.3f);
+        //isJumping = false;
     }
 
     //Stock les GameObjets en contact avec l'objet
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        contactList.Clear();
-        Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), contactList);
-
-        for (int i = 0; i < contactList.Count; i++)
+        for (int i = 0; i < collision.contactCount; i++)
         {
-            //Vector2 localNormal = transform.InverseTransformDirection(contactList[i].normal);
-            //Vector2 localContactVector = GetPerpendicularVector(contactList[i].normal);
-
-            if (contactList[i].normal.y <= -.9f)
+            if (collision.GetContact(i).normal.y >= .9f)
             {
                 isInContact = true;
                 isJumping = false;
-                JumpVelocityAdjustment(collision);
                 if (lastPosY - this.transform.position.y > .2f)
                 {
                     if (onLand != null) { onLand(landParam); };
                 }
                 break;
             }
-            if (canMove && Mathf.Abs(lastVelocityX) >= maxSpeed - .1f)
+        }
+
+        curObject.Add(collision.gameObject);
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            if (canMove && lastVelocityX > 0)
             {
-                if (contactList[i].normal.x >= .9f)
+                if (collision.GetContact(i).normal.x <= -.9f)
                 {
-                    if (rigid2D.sharedMaterial != null)
-                    {
-                        SideBonkForBouncyObjects(true);
-                    }
-                    else
-                    {
-                        if (onBonkR != null) { onBonkR(bonkRightParam); }
-                    }
+                    if (onBonkR != null) { onBonkR(bonkRightParam); }
                     break;
                 }
-                else if (contactList[i].normal.x <= -.9f)
+                else if (collision.GetContact(i).normal.x >= .9f)
                 {
-                    if (rigid2D.sharedMaterial != null)
-                    {
-                        SideBonkForBouncyObjects(false);
-                    }
-                    else
-                    {
-                        if (onBonkL != null) { onBonkL(bonkLeftParam); }
-                    }
+                    if (onBonkL != null) { onBonkL(bonkLeftParam); }
                     break;
                 }
             }
         }
-        //curObject.Add(collision.gameObject);
-    }
-
-    IEnumerator BouncinessDelay()
-    {
-        rigid2D.sharedMaterial = zeroMat;
-        rigid2D.linearVelocityX = 0;
-        yield return new WaitForSecondsRealtime(.1f);
-        rigid2D.sharedMaterial = iniMat;
-        rigid2D.linearVelocityX = 0;
     }
 
     IEnumerator JumpBuffer()
@@ -292,8 +245,7 @@ public abstract class MovementController : MonoBehaviour
     //Enl�ve les GameObjets en contact avec l'objet
     void OnCollisionExit2D(Collision2D collision)
     {
-        isInContact = false;
-        //curObject.Remove(collision.gameObject);
+        curObject.Remove(collision.gameObject);
         if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
         jumpBuff = StartCoroutine(JumpBuffer());
     }
@@ -301,33 +253,23 @@ public abstract class MovementController : MonoBehaviour
     //Checks if the GameObjects in contact are below the controller
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
-        contactList.Clear();
-        Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), contactList);
-
-        //collision.
-
-        for (int i = 0; i < contactList.Count; i++)
+        for (int i = 0; i < curObject.Count; i++)
         {
-            if (contactList[i].normal.y <= -.9f)
-            {
-                isInContact = true;
-                JumpVelocityAdjustment(collision);
-                if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
-                break;
-            }
-
-            /*if (collision.gameObject == curObject[i])
+            if (collision.gameObject == curObject[i])
             {
                 for (int ii = 0; ii < collision.contactCount; ii++)
                 {
                     if (collision.GetContact(ii).normal.y >= .9f)
                     {
-                        
+                        isInContact = true;
+                        isJumping = false;
+                        if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
+                        break;
                     }
                 }
                 if (isInContact)
                     break;
-            }*/
+            }
         }
 
         if (collision.gameObject.CompareTag("TrapDoor"))
@@ -382,47 +324,4 @@ public abstract class MovementController : MonoBehaviour
                       
         }
     }
-
-    private void JumpVelocityAdjustment(Collision2D collision)
-    {
-        Rigidbody2D rigidbody;
-        if (collision.gameObject.TryGetComponent<Rigidbody2D>(out rigidbody))
-        {
-            if (rigidbody.sharedMaterial != null)
-            {
-                jumpVelocityAdjustment = collision.rigidbody.sharedMaterial.bounciness;
-            }
-        }
-        else
-            jumpVelocityAdjustment = 0;
-    }
-
-    private void SideBonkForBouncyObjects(bool isRight)
-    {
-        if (rigid2D.sharedMaterial == iniMat)
-        {
-            if (onBonkR != null && isRight) { onBonkR(bonkRightParam); }
-            else if (onBonkL != null) { onBonkL(bonkLeftParam); }
-        }
-        if (MatReset != null) { StopCoroutine(MatReset); }
-        MatReset = StartCoroutine(BouncinessDelay());
-    }
-
-    /*private Vector2 GetPerpendicularVector(Vector2 contactPoint)
-    {
-        Vector2 localPoint = transform.InverseTransformPoint(contactPoint);
-        Vector2 extents = col2D.bounds.extents;
-
-        float distanceR = extents.x - localPoint.x;
-        float distanceL = extents.x + localPoint.x;
-        float distanceU = extents.y - localPoint.y;
-        float distanceD = extents.y + localPoint.y;
-
-        float minDistance = Mathf.Min(distanceR, distanceL, distanceU, distanceD);
-
-        if (minDistance == distanceR)
-        {
-
-        }
-    }*/
 }

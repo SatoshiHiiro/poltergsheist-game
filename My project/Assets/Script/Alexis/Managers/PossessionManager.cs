@@ -62,6 +62,9 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         player.GetComponent<Collider2D>().enabled = false;
         player.canMove = false;
         isAnimationFinished = false;
+
+        player.isPossessionInProgress = true;
+
         yield return new WaitForSecondsRealtime(.5f);
         manager.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSecondsRealtime(.5f);
@@ -72,6 +75,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         isAnimationFinished = true;
         possession.OnPossessed();
         //possession.enabled = true;
+        player.isPossessionInProgress = false;
     }
 
     void FixedUpdate()
@@ -99,7 +103,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     //Input de possession
     private void OnMouseDown()
     {
-        if (isPossessionLocked)
+        if (isPossessionLocked || player.isPossessionInProgress)
         {
             return; // Can't possessed an object if the possession on this object is locked
         }
@@ -109,6 +113,8 @@ public class PossessionManager : InteractibleManager, IResetInitialState
             {
 
                 player.GetComponent<Rigidbody2D>().linearVelocityX = 0;
+
+                player.isPossessionInProgress = true;
 
                 //Si le joueur veut poss�der l'objet en poss�dant d�j� un autre
                 if (player.isPossessing && !isPossessed)
@@ -173,6 +179,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         manager.GetComponent<PlayerManager>().VariablesToDefaultValues();
         manager.GetComponent<SpriteRenderer>().enabled = true;
         player.canMove = true;
+        player.isPossessionInProgress = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -189,6 +196,21 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         if (collision.CompareTag("SizeTrigger"))
         {
             hasEnoughSpace = true;
+            Debug.Log("Entered Trigger");
+
+            if (isPossessed && hasEnoughSpace)
+            {
+                // If the player leave a restricted small zone we can now allow him to depossessed the object
+                player.isPossessionInProgress = false;
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("SizeTrigger"))
+        {
+            hasEnoughSpace = false;
             Debug.Log("Entered Trigger");
         }
     }

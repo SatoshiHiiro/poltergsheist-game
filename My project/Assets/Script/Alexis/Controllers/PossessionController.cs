@@ -26,7 +26,7 @@ public class PossessionController : MovementController, IPossessable, IResetInit
     public Vector2 LastKnownPosition { get; private set; }          // Last known position of the object by an NPC
     public Quaternion LastKnownRotation { get; private set; }       // Last known rotation of the object by an NPC
 
-    private Vector2 initialPosition;
+    private Vector3 initialPosition;
     private Quaternion initialRotation;
     
     public enum objectType

@@ -146,7 +146,7 @@ public class SuspicionManager : MonoBehaviour
         {
             // Double the increase of suspicion when multiple NPC see the object moves
             npcFactor = paranormalObserverCount > 1 ? npcFactor : 1f;
-            currentSuspicion += suspicionRate * npcFactor * (sizeFactor * objectSize) * Time.deltaTime;
+            currentSuspicion += suspicionRate * npcFactor * Time.deltaTime + (sizeFactor * objectSize) * Time.deltaTime;
             currentSuspicion = Mathf.Clamp(currentSuspicion, 0f, maxSuspicion);
             OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion); // Change the UI
             timeSinceSuspicionIncrease = Time.time;
