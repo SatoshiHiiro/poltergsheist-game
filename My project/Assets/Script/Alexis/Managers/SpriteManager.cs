@@ -23,8 +23,10 @@ public abstract class SpriteManager : MonoBehaviour
         hasPosCon = false;
         if (this.transform.parent.TryGetComponent<PlayerController>(out player)) { hasPlayerCon = true; }
         else if (this.transform.parent.parent.TryGetComponent<PlayerController>(out player)) { hasPlayerCon = true; }
+        else if (this.transform.parent.parent.parent.TryGetComponent<PlayerController>(out player)) { hasPlayerCon = true; }
         else if (this.transform.parent.TryGetComponent<PossessionController>(out posCon)) { hasPosCon = true; }
         else if (this.transform.parent.parent.TryGetComponent<PossessionController>(out posCon)) { hasPosCon = true; }
+        else if (this.transform.parent.parent.parent.TryGetComponent<PossessionController>(out posCon)) { hasPosCon = true; }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

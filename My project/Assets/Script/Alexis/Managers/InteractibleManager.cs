@@ -14,6 +14,7 @@ public abstract class InteractibleManager : MonoBehaviour
         if (this.TryGetComponent<SpriteRenderer>(out sRender)) { }
         else if (this.transform.GetChild(0).TryGetComponent<SpriteRenderer>(out sRender)) { }
         else if (this.transform.GetChild(0).GetChild(0).TryGetComponent<SpriteRenderer>(out sRender)) { }
+        else if (this.transform.GetChild(0).GetChild(0).GetChild(0).TryGetComponent<SpriteRenderer>(out sRender)) { }
         else { Debug.Log("No SpriteRenderer for: " + this.transform.name); }
 
         baseColor = sRender.color;

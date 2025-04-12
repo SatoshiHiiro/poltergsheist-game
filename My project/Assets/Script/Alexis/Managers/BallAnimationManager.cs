@@ -3,7 +3,7 @@ using UnityEngine;
 public class BallAnimationManager : MonoBehaviour
 {
     public float rotationSpeed;
-    ContactPoint2D[] tempContacts;
+    //ContactPoint2D[] tempContacts;
 
     //Associated gameObjects
     PossessionController posCon;
@@ -11,7 +11,7 @@ public class BallAnimationManager : MonoBehaviour
 
     private void OnEnable()
     {
-        tempContacts = new ContactPoint2D[10];
+        //tempContacts = new ContactPoint2D[10];
         if (this.transform.parent.TryGetComponent<PossessionController>(out posCon)) { }
         else if (this.transform.parent.parent.TryGetComponent<PossessionController>(out posCon)) { }
         else { Debug.Log("No PossessionController for the ball"); }
@@ -26,9 +26,15 @@ public class BallAnimationManager : MonoBehaviour
         {
             float velocityX = rBody.linearVelocityX;
             bool hasLateralContact = false;
-            for (int i = 0; i < posCon.curObject.Count; i++)
+            for (int i = 0; i < posCon.contactList.Count; i++)
             {
-                for (int ii = 0; ii < posCon.curObject[i].GetComponent<Collider2D>().GetContacts(tempContacts); ii++)
+                if (posCon.contactList[i].normal.x > .9f || posCon.contactList[i].normal.x < -.9f)
+                {
+                    hasLateralContact = true;
+                    break;
+                }
+
+                /*for (int ii = 0; ii < posCon.curObject[i].GetComponent<Collider2D>().GetContacts(tempContacts); ii++)
                 {
                     if (tempContacts[ii].normal.x > .9f || tempContacts[ii].normal.x < -.9f)
                     {
@@ -37,7 +43,7 @@ public class BallAnimationManager : MonoBehaviour
                     }
                 }
                 if (hasLateralContact)
-                    break;
+                    break;*/
             }
             
             if (!hasLateralContact)

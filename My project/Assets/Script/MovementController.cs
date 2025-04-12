@@ -44,7 +44,9 @@ public abstract class MovementController : MonoBehaviour
 
     //Contacts
     [Header("GameObjets in contact")]
-    [HideInInspector] public List<GameObject> curObject = new List<GameObject>();
+    //[HideInInspector] public List<GameObject> curObject = new List<GameObject>();
+    public List<ContactPoint2D> contactList = new List<ContactPoint2D>();
+    ContactFilter2D filter = new ContactFilter2D();
     [HideInInspector] public float halfSizeOfObject;
     private Vector2 lastVelocity;
     Coroutine MatReset;
@@ -65,6 +67,7 @@ public abstract class MovementController : MonoBehaviour
 
     //Shortcuts
     protected Rigidbody2D rigid2D;
+    protected Collider2D col2D;
 
     //Input action section, has to be public or can be private with a SerializeField statement
     [Header("Input Section")]
@@ -107,6 +110,7 @@ public abstract class MovementController : MonoBehaviour
     protected virtual void Start()
     {
         rigid2D = this.GetComponent<Rigidbody2D>();
+        col2D = this.GetComponent<Collider2D>();
     }
 
     //Physics
@@ -220,9 +224,15 @@ public abstract class MovementController : MonoBehaviour
     //Stock les GameObjets en contact avec l'objet
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        for (int i = 0; i < collision.contactCount; i++)
+        contactList.Clear();
+        Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), contactList);
+
+        for (int i = 0; i < contactList.Count; i++)
         {
-            if (collision.GetContact(i).normal.y >= .9f)
+            //Vector2 localNormal = transform.InverseTransformDirection(contactList[i].normal);
+            //Vector2 localContactVector = GetPerpendicularVector(contactList[i].normal);
+
+            if (contactList[i].normal.y <= -.9f)
             {
                 isInContact = true;
                 isJumping = false;
@@ -233,13 +243,9 @@ public abstract class MovementController : MonoBehaviour
                 }
                 break;
             }
-        }
-
-        for (int i = 0; i < collision.contactCount; i++)
-        {
-            if (canMove && Mathf.Abs(lastVelocityX) > 0)
+            if (canMove && Mathf.Abs(lastVelocityX) >= maxSpeed - .1f)
             {
-                if (collision.GetContact(i).normal.x <= -.9f)
+                if (contactList[i].normal.x >= .9f)
                 {
                     if (rigid2D.sharedMaterial != null)
                     {
@@ -251,7 +257,7 @@ public abstract class MovementController : MonoBehaviour
                     }
                     break;
                 }
-                else if (collision.GetContact(i).normal.x >= .9f)
+                else if (contactList[i].normal.x <= -.9f)
                 {
                     if (rigid2D.sharedMaterial != null)
                     {
@@ -265,8 +271,7 @@ public abstract class MovementController : MonoBehaviour
                 }
             }
         }
-
-        curObject.Add(collision.gameObject);
+        //curObject.Add(collision.gameObject);
     }
 
     IEnumerator BouncinessDelay()
@@ -287,7 +292,8 @@ public abstract class MovementController : MonoBehaviour
     //Enl�ve les GameObjets en contact avec l'objet
     void OnCollisionExit2D(Collision2D collision)
     {
-        curObject.Remove(collision.gameObject);
+        isInContact = false;
+        //curObject.Remove(collision.gameObject);
         if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
         jumpBuff = StartCoroutine(JumpBuffer());
     }
@@ -295,23 +301,33 @@ public abstract class MovementController : MonoBehaviour
     //Checks if the GameObjects in contact are below the controller
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
-        for (int i = 0; i < curObject.Count; i++)
+        contactList.Clear();
+        Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), contactList);
+
+        //collision.
+
+        for (int i = 0; i < contactList.Count; i++)
         {
-            if (collision.gameObject == curObject[i])
+            if (contactList[i].normal.y <= -.9f)
+            {
+                isInContact = true;
+                JumpVelocityAdjustment(collision);
+                if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
+                break;
+            }
+
+            /*if (collision.gameObject == curObject[i])
             {
                 for (int ii = 0; ii < collision.contactCount; ii++)
                 {
                     if (collision.GetContact(ii).normal.y >= .9f)
                     {
-                        isInContact = true;
-                        JumpVelocityAdjustment(collision);
-                        if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
-                        break;
+                        
                     }
                 }
                 if (isInContact)
                     break;
-            }
+            }*/
         }
 
         if (collision.gameObject.CompareTag("TrapDoor"))
@@ -391,4 +407,22 @@ public abstract class MovementController : MonoBehaviour
         if (MatReset != null) { StopCoroutine(MatReset); }
         MatReset = StartCoroutine(BouncinessDelay());
     }
+
+    /*private Vector2 GetPerpendicularVector(Vector2 contactPoint)
+    {
+        Vector2 localPoint = transform.InverseTransformPoint(contactPoint);
+        Vector2 extents = col2D.bounds.extents;
+
+        float distanceR = extents.x - localPoint.x;
+        float distanceL = extents.x + localPoint.x;
+        float distanceU = extents.y - localPoint.y;
+        float distanceD = extents.y + localPoint.y;
+
+        float minDistance = Mathf.Min(distanceR, distanceL, distanceU, distanceD);
+
+        if (minDistance == distanceR)
+        {
+
+        }
+    }*/
 }
