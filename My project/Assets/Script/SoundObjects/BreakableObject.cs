@@ -12,6 +12,8 @@ public class BreakableObject : SoundDetection, IResetInitialState
 
     private Vector2 initialPosition;
     private Sprite initialSprite;
+
+    [SerializeField] protected AK.Wwise.Event breakingSound;
     protected void Awake()
     {
 
@@ -42,6 +44,7 @@ public class BreakableObject : SoundDetection, IResetInitialState
     private void BreakObject()
     {
         audioSource.Play();
+        breakingSound.Post(gameObject);
         // If there is an hidden object show it
         if (hiddenGameObject != null)
         {

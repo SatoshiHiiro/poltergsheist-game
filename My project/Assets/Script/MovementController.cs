@@ -82,6 +82,11 @@ public abstract class MovementController : MonoBehaviour
         jump.Enable();
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     protected virtual void Start()
     {
         rigid2D = gameObject.transform.GetComponent<Rigidbody2D>();
@@ -100,7 +105,7 @@ public abstract class MovementController : MonoBehaviour
 
             //Mouvement on the x axis
             if (canWalk)
-                rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
+                rigid2D.linearVelocityX = rigid2D.linearVelocityX + moveInput.x * speed;//rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
 
             //Caps the speed according to maxspeed
             rigid2D.linearVelocityX = Mathf.Clamp(rigid2D.linearVelocityX, -maxSpeed, maxSpeed);
@@ -281,7 +286,7 @@ public abstract class MovementController : MonoBehaviour
     {
         //curObject.Remove(collision.gameObject);
         if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
-        jumpBuff = StartCoroutine(JumpBuffer());
+        if (this.gameObject.activeInHierarchy) { jumpBuff = StartCoroutine(JumpBuffer()); }
     }
 
     //Checks if the GameObjects in contact are below the controller
