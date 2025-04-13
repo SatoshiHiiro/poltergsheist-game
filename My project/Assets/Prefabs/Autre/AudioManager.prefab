@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6700394811249563223}
   - component: {fileID: 5440614153151942385}
+  - component: {fileID: 4005921617531946466}
   - component: {fileID: 2197175535006516788}
+  - component: {fileID: 5524111901720067093}
+  - component: {fileID: 3203118668064042087}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -45,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0138c544e030b274e89e9fa0584f96b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: f7e1664c
+  triggerList: ae8d9d44
   useOtherObject: 0
   data:
     idInternal: 0
@@ -58,6 +61,30 @@ MonoBehaviour:
   unloadTriggerList: 958ca0ea
   bankNameInternal: 
   valueGuidInternal: 
+--- !u!114 &4005921617531946466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323334550686895664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798848abb125f8e4ebd6df8fa66cb522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!114 &2197175535006516788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,3 +97,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a83348032c145d4282daa733caadf57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5524111901720067093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323334550686895664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c53ebc7314b713b439cd11e28794684d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMusic:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: b92cfa185b180154488937e621e408f6, type: 2}
+--- !u!114 &3203118668064042087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323334550686895664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d85fa5c029609a48a971f99d833c9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a065690a7f0c33746aedc2791abccfe5, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 

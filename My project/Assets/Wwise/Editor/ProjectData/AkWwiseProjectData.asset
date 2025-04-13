@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AkWwiseProjectData
   m_EditorClassIdentifier: 
   AcousticTextureWwu:
-  - PhysicalPath: Virtual Acoustics/Default Work Unit.wwu
+  - PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
     PathAndIcons:
     - ElementName: Virtual Acoustics
       ObjectType: 5
@@ -21,13 +21,13 @@ MonoBehaviour:
     - ElementName: Default Work Unit
       ObjectType: 12
       guid: 9d5010a5cee3264eb10f11faafa0bb06
-    ParentPath: Virtual Acoustics/Default Work Unit
+    ParentPath: Virtual Acoustics\Default Work Unit
     guid: 9d5010a5cee3264eb10f11faafa0bb06
     GuidInternal: 
-    m_lastTime: -8584581780932815574
+    m_lastTime: -8584578913928867842
     List: []
   AuxBusWwu:
-  - PhysicalPath: Master-Mixer Hierarchy/Default Work Unit.wwu
+  - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     PathAndIcons:
     - ElementName: Master-Mixer Hierarchy
       ObjectType: 5
@@ -35,10 +35,10 @@ MonoBehaviour:
     - ElementName: Default Work Unit
       ObjectType: 12
       guid: c23e1d7182510c47ac9c86c3ec1dd706
-    ParentPath: Master-Mixer Hierarchy/Default Work Unit
+    ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: c23e1d7182510c47ac9c86c3ec1dd706
     GuidInternal: 
-    m_lastTime: -8584581780932857939
+    m_lastTime: -8584578913933761772
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -53,9 +53,9 @@ MonoBehaviour:
       - ElementName: Master Audio Bus
         ObjectType: 2
         guid: d8a41415a61d2a41a17e75ca0c2149f3
-      Path: Master-Mixer Hierarchy/Default Work Unit/Master Audio Bus
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus
   BankWwu:
-  - PhysicalPath: SoundBanks/Default Work Unit.wwu
+  - PhysicalPath: SoundBanks\Default Work Unit.wwu
     PathAndIcons:
     - ElementName: SoundBanks
       ObjectType: 5
@@ -63,10 +63,10 @@ MonoBehaviour:
     - ElementName: Default Work Unit
       ObjectType: 12
       guid: 3592dfa2d40267489fbbbc121975ef5c
-    ParentPath: SoundBanks/Default Work Unit
+    ParentPath: SoundBanks\Default Work Unit
     guid: 3592dfa2d40267489fbbbc121975ef5c
     GuidInternal: 
-    m_lastTime: -8584578852938553301
+    m_lastTime: -8584578851375401150
     List:
     - name: main
       guid: 286de865a18bd3498b6798495a6b0d5f
@@ -81,9 +81,9 @@ MonoBehaviour:
       - ElementName: main
         ObjectType: 7
         guid: 286de865a18bd3498b6798495a6b0d5f
-      Path: SoundBanks/Default Work Unit/main
+      Path: SoundBanks\Default Work Unit\main
   EventWwu:
-  - PhysicalPath: Events/Default Work Unit.wwu
+  - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
     - ElementName: Events
       ObjectType: 5
@@ -91,10 +91,10 @@ MonoBehaviour:
     - ElementName: Default Work Unit
       ObjectType: 12
       guid: eaf8ae6ee9c7f44b9005b089581ca3bb
-    ParentPath: Events/Default Work Unit
+    ParentPath: Events\Default Work Unit
     guid: eaf8ae6ee9c7f44b9005b089581ca3bb
     GuidInternal: 
-    m_lastTime: -8584574485129078691
+    m_lastTime: -8584571847681756579
     List:
     - name: Doors
       guid: efcee1e45e52cd4da44768755966ea9f
@@ -112,7 +112,7 @@ MonoBehaviour:
       - ElementName: Doors
         ObjectType: 4
         guid: efcee1e45e52cd4da44768755966ea9f
-      Path: Events/Default Work Unit/SFX/Doors
+      Path: Events\Default Work Unit\SFX\Doors
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -132,7 +132,7 @@ MonoBehaviour:
       - ElementName: House
         ObjectType: 4
         guid: 32a605c3e0314c44a7219cab030f3eed
-      Path: Events/Default Work Unit/SFX/House
+      Path: Events\Default Work Unit\SFX\House
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -149,7 +149,7 @@ MonoBehaviour:
       - ElementName: MUS
         ObjectType: 4
         guid: 0528f5ee4795d041afd0b93f9e764f74
-      Path: Events/Default Work Unit/MUS
+      Path: Events\Default Work Unit\MUS
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -169,7 +169,7 @@ MonoBehaviour:
       - ElementName: MUS_House
         ObjectType: 3
         guid: b3fb93e00eb0bf4c80c08939ad0dcfa2
-      Path: Events/Default Work Unit/MUS/MUS_House
+      Path: Events\Default Work Unit\MUS\MUS_House
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
       - ElementName: MUS_Menu
         ObjectType: 3
         guid: 9c5bd3f45a636942b6bc72f7a3755a6a
-      Path: Events/Default Work Unit/MUS/MUS_Menu
+      Path: Events\Default Work Unit\MUS\MUS_Menu
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -209,10 +209,10 @@ MonoBehaviour:
       - ElementName: MUS_Museum
         ObjectType: 3
         guid: c5e124c5b273cd48a59b137bfd755772
-      Path: Events/Default Work Unit/MUS/MUS_Museum
+      Path: Events\Default Work Unit\MUS\MUS_Museum
       maxAttenuation: 0
-      maxDuration: 310.84555
-      minDuration: 310.84555
+      maxDuration: 0
+      minDuration: 0
     - name: MUS_Start
       guid: b0a711da79c7e347a9a583eda8d9e7d0
       id: 1973954843
@@ -229,10 +229,10 @@ MonoBehaviour:
       - ElementName: MUS_Start
         ObjectType: 3
         guid: b0a711da79c7e347a9a583eda8d9e7d0
-      Path: Events/Default Work Unit/MUS/MUS_Start
+      Path: Events\Default Work Unit\MUS\MUS_Start
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: MUS_Win
       guid: 6a47eabca8ab4a4c9144a1ada4b3ecc0
       id: 804414033
@@ -249,10 +249,10 @@ MonoBehaviour:
       - ElementName: MUS_Win
         ObjectType: 3
         guid: 6a47eabca8ab4a4c9144a1ada4b3ecc0
-      Path: Events/Default Work Unit/MUS/MUS_Win
+      Path: Events\Default Work Unit\MUS\MUS_Win
       maxAttenuation: 0
-      maxDuration: 1.728
-      minDuration: 1.728
+      maxDuration: 0
+      minDuration: 0
     - name: Museum
       guid: b5d85200d09065479372803669e9596b
       id: 1362148849
@@ -269,7 +269,7 @@ MonoBehaviour:
       - ElementName: Museum
         ObjectType: 4
         guid: b5d85200d09065479372803669e9596b
-      Path: Events/Default Work Unit/SFX/Museum
+      Path: Events\Default Work Unit\SFX\Museum
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -289,7 +289,7 @@ MonoBehaviour:
       - ElementName: NPC
         ObjectType: 4
         guid: 6720fa8d6e1a2947842390ac27dbaeea
-      Path: Events/Default Work Unit/SFX/NPC
+      Path: Events\Default Work Unit\SFX\NPC
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -306,7 +306,7 @@ MonoBehaviour:
       - ElementName: PLY
         ObjectType: 4
         guid: 95c6f39edd661b48acee4b4d28a15596
-      Path: Events/Default Work Unit/PLY
+      Path: Events\Default Work Unit\PLY
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -326,7 +326,7 @@ MonoBehaviour:
       - ElementName: PLY_Hovering
         ObjectType: 3
         guid: 3079c6745d533a449406f16ff2d2bac4
-      Path: Events/Default Work Unit/PLY/PLY_Hovering
+      Path: Events\Default Work Unit\PLY\PLY_Hovering
       maxAttenuation: 0
       maxDuration: 1.4573333
       minDuration: 1.4573333
@@ -346,7 +346,7 @@ MonoBehaviour:
       - ElementName: PLY_Jump
         ObjectType: 3
         guid: 92431f07efbf7d41893879851b8b6750
-      Path: Events/Default Work Unit/PLY/PLY_Jump
+      Path: Events\Default Work Unit\PLY\PLY_Jump
       maxAttenuation: 0
       maxDuration: 1.2823334
       minDuration: 1.2823334
@@ -366,7 +366,7 @@ MonoBehaviour:
       - ElementName: PLY_JumpBounce
         ObjectType: 3
         guid: e3188b884fe9df42bea026476adacb9b
-      Path: Events/Default Work Unit/PLY/PLY_JumpBounce
+      Path: Events\Default Work Unit\PLY\PLY_JumpBounce
       maxAttenuation: 0
       maxDuration: 1.7198334
       minDuration: 1.7198334
@@ -383,7 +383,7 @@ MonoBehaviour:
       - ElementName: SFX
         ObjectType: 4
         guid: db137fb99900914cbbe003c24a05fc00
-      Path: Events/Default Work Unit/SFX
+      Path: Events\Default Work Unit\SFX
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -406,7 +406,7 @@ MonoBehaviour:
       - ElementName: SFX_ArcheologyRack
         ObjectType: 3
         guid: dc3052182e9e0a448f73340b2061966e
-      Path: Events/Default Work Unit/SFX/Museum/SFX_ArcheologyRack
+      Path: Events\Default Work Unit\SFX\Museum\SFX_ArcheologyRack
       maxAttenuation: 0
       maxDuration: 1.6448333
       minDuration: 1.6448333
@@ -429,7 +429,7 @@ MonoBehaviour:
       - ElementName: SFX_ArmorDisplay
         ObjectType: 3
         guid: 8fea853385f07b48bbdd02fd3462255a
-      Path: Events/Default Work Unit/SFX/Museum/SFX_ArmorDisplay
+      Path: Events\Default Work Unit\SFX\Museum\SFX_ArmorDisplay
       maxAttenuation: 0
       maxDuration: 1.4448333
       minDuration: 1.4448333
@@ -452,7 +452,7 @@ MonoBehaviour:
       - ElementName: SFX_Ball
         ObjectType: 3
         guid: 171ffc4c0de90b47b174fa55af8880ff
-      Path: Events/Default Work Unit/SFX/House/SFX_Ball
+      Path: Events\Default Work Unit\SFX\House\SFX_Ball
       maxAttenuation: 0
       maxDuration: 1.5198333
       minDuration: 1.5198333
@@ -475,7 +475,7 @@ MonoBehaviour:
       - ElementName: SFX_BallFall
         ObjectType: 3
         guid: c107132e22037e4291287e6fb42dc093
-      Path: Events/Default Work Unit/SFX/House/SFX_BallFall
+      Path: Events\Default Work Unit\SFX\House\SFX_BallFall
       maxAttenuation: 0
       maxDuration: 1.1823334
       minDuration: 1.1823334
@@ -498,7 +498,7 @@ MonoBehaviour:
       - ElementName: SFX_BallJump
         ObjectType: 3
         guid: eefe89447ec9284880058ced639bb69e
-      Path: Events/Default Work Unit/SFX/House/SFX_BallJump
+      Path: Events\Default Work Unit\SFX\House\SFX_BallJump
       maxAttenuation: 0
       maxDuration: 1.8323333
       minDuration: 1.8323333
@@ -521,7 +521,7 @@ MonoBehaviour:
       - ElementName: SFX_Bed
         ObjectType: 3
         guid: 1084bba13bb344439762227d79b2d481
-      Path: Events/Default Work Unit/SFX/House/SFX_Bed
+      Path: Events\Default Work Unit\SFX\House\SFX_Bed
       maxAttenuation: 0
       maxDuration: 1.5198333
       minDuration: 1.5198333
@@ -544,7 +544,7 @@ MonoBehaviour:
       - ElementName: SFX_BoneDisplay
         ObjectType: 3
         guid: 89811a6f91b3e54ba7e17bfc4c03ae44
-      Path: Events/Default Work Unit/SFX/Museum/SFX_BoneDisplay
+      Path: Events\Default Work Unit\SFX\Museum\SFX_BoneDisplay
       maxAttenuation: 0
       maxDuration: 1.3198333
       minDuration: 1.3198333
@@ -567,7 +567,7 @@ MonoBehaviour:
       - ElementName: SFX_Bookshelf
         ObjectType: 3
         guid: 3bc5b09cd6c1cb43bc0e7f5b997f3f26
-      Path: Events/Default Work Unit/SFX/House/SFX_Bookshelf
+      Path: Events\Default Work Unit\SFX\House\SFX_Bookshelf
       maxAttenuation: 0
       maxDuration: 1.8573333
       minDuration: 1.8573333
@@ -590,7 +590,7 @@ MonoBehaviour:
       - ElementName: SFX_BookshelfFall
         ObjectType: 3
         guid: a2c34730183d8a4589eb3a63fb5a9961
-      Path: Events/Default Work Unit/SFX/House/SFX_BookshelfFall
+      Path: Events\Default Work Unit\SFX\House\SFX_BookshelfFall
       maxAttenuation: 0
       maxDuration: 2.0698333
       minDuration: 2.0698333
@@ -613,7 +613,7 @@ MonoBehaviour:
       - ElementName: SFX_Box
         ObjectType: 3
         guid: 246055db2879ab4e8d0324fd8f33712e
-      Path: Events/Default Work Unit/SFX/House/SFX_Box
+      Path: Events\Default Work Unit\SFX\House\SFX_Box
       maxAttenuation: 0
       maxDuration: 1.6573334
       minDuration: 1.6573334
@@ -633,7 +633,7 @@ MonoBehaviour:
       - ElementName: SFX_CageClosed
         ObjectType: 3
         guid: 7545c24b0a9139449cf7f247cbe22506
-      Path: Events/Default Work Unit/SFX/SFX_CageClosed
+      Path: Events\Default Work Unit\SFX\SFX_CageClosed
       maxAttenuation: 0
       maxDuration: 1.4823333
       minDuration: 1.4823333
@@ -653,7 +653,7 @@ MonoBehaviour:
       - ElementName: SFX_CatSlap
         ObjectType: 3
         guid: c57885b84d0e4540a9ffdd6661b28b1c
-      Path: Events/Default Work Unit/SFX/SFX_CatSlap
+      Path: Events\Default Work Unit\SFX\SFX_CatSlap
       maxAttenuation: 0
       maxDuration: 1.9948334
       minDuration: 1.9948334
@@ -676,7 +676,7 @@ MonoBehaviour:
       - ElementName: SFX_CookieJar
         ObjectType: 3
         guid: e632c4b59a505649a42e925c6b307139
-      Path: Events/Default Work Unit/SFX/House/SFX_CookieJar
+      Path: Events\Default Work Unit\SFX\House\SFX_CookieJar
       maxAttenuation: 0
       maxDuration: 1.8448334
       minDuration: 1.8448334
@@ -699,7 +699,7 @@ MonoBehaviour:
       - ElementName: SFX_CookieJarFall
         ObjectType: 3
         guid: 632b7ea51ffd074f8f34dc0daae89c6b
-      Path: Events/Default Work Unit/SFX/House/SFX_CookieJarFall
+      Path: Events\Default Work Unit\SFX\House\SFX_CookieJarFall
       maxAttenuation: 0
       maxDuration: 2.1323333
       minDuration: 2.1323333
@@ -722,7 +722,7 @@ MonoBehaviour:
       - ElementName: SFX_Couch
         ObjectType: 3
         guid: 35e72b3d8d71c542a1c50771f88e8b38
-      Path: Events/Default Work Unit/SFX/House/SFX_Couch
+      Path: Events\Default Work Unit\SFX\House\SFX_Couch
       maxAttenuation: 0
       maxDuration: 1.7073333
       minDuration: 1.7073333
@@ -745,7 +745,7 @@ MonoBehaviour:
       - ElementName: SFX_CouchFall
         ObjectType: 3
         guid: 97daf88a9b390247a033291c80716faa
-      Path: Events/Default Work Unit/SFX/House/SFX_CouchFall
+      Path: Events\Default Work Unit\SFX\House\SFX_CouchFall
       maxAttenuation: 0
       maxDuration: 1.8323333
       minDuration: 1.8323333
@@ -768,7 +768,7 @@ MonoBehaviour:
       - ElementName: SFX_DinosaurDisplay
         ObjectType: 3
         guid: d586ae06bd959d40bfc9c4c0c30b2d7c
-      Path: Events/Default Work Unit/SFX/Museum/SFX_DinosaurDisplay
+      Path: Events\Default Work Unit\SFX\Museum\SFX_DinosaurDisplay
       maxAttenuation: 0
       maxDuration: 1.6198334
       minDuration: 1.6198334
@@ -791,7 +791,7 @@ MonoBehaviour:
       - ElementName: SFX_Doll
         ObjectType: 3
         guid: 76d6be4ead2da54486a8eb1a61a0868f
-      Path: Events/Default Work Unit/SFX/House/SFX_Doll
+      Path: Events\Default Work Unit\SFX\House\SFX_Doll
       maxAttenuation: 0
       maxDuration: 1.5573334
       minDuration: 1.5573334
@@ -814,7 +814,7 @@ MonoBehaviour:
       - ElementName: SFX_DollFall
         ObjectType: 3
         guid: b23fbcbbcb632c4a8ed6a097d1a1220f
-      Path: Events/Default Work Unit/SFX/House/SFX_DollFall
+      Path: Events\Default Work Unit\SFX\House\SFX_DollFall
       maxAttenuation: 0
       maxDuration: 1.8448334
       minDuration: 1.8448334
@@ -837,7 +837,7 @@ MonoBehaviour:
       - ElementName: SFX_DoorClose
         ObjectType: 3
         guid: ed9dfbebac03c948b41f60cebd1e8e27
-      Path: Events/Default Work Unit/SFX/Doors/SFX_DoorClose
+      Path: Events\Default Work Unit\SFX\Doors\SFX_DoorClose
       maxAttenuation: 0
       maxDuration: 1.8573333
       minDuration: 1.8573333
@@ -860,7 +860,7 @@ MonoBehaviour:
       - ElementName: SFX_DoorEnd
         ObjectType: 3
         guid: 07045f344f253d46b86e67495fbb634a
-      Path: Events/Default Work Unit/SFX/Doors/SFX_DoorEnd
+      Path: Events\Default Work Unit\SFX\Doors\SFX_DoorEnd
       maxAttenuation: 0
       maxDuration: 1.7698333
       minDuration: 1.7698333
@@ -883,7 +883,7 @@ MonoBehaviour:
       - ElementName: SFX_DoorLocked
         ObjectType: 3
         guid: 4cd9d3c4c7853d4181f345e01a713215
-      Path: Events/Default Work Unit/SFX/Doors/SFX_DoorLocked
+      Path: Events\Default Work Unit\SFX\Doors\SFX_DoorLocked
       maxAttenuation: 0
       maxDuration: 1.8573333
       minDuration: 1.8573333
@@ -906,7 +906,7 @@ MonoBehaviour:
       - ElementName: SFX_DoorOpen
         ObjectType: 3
         guid: 5aa5e6768556aa46b4b74b080e6c0aaf
-      Path: Events/Default Work Unit/SFX/Doors/SFX_DoorOpen
+      Path: Events\Default Work Unit\SFX\Doors\SFX_DoorOpen
       maxAttenuation: 0
       maxDuration: 1.8073334
       minDuration: 1.8073334
@@ -929,7 +929,7 @@ MonoBehaviour:
       - ElementName: SFX_DoorUnlocked
         ObjectType: 3
         guid: c8b2701e0fce704c8e8ba2c42c115b2a
-      Path: Events/Default Work Unit/SFX/Doors/SFX_DoorUnlocked
+      Path: Events\Default Work Unit\SFX\Doors\SFX_DoorUnlocked
       maxAttenuation: 0
       maxDuration: 2.1073334
       minDuration: 2.1073334
@@ -952,7 +952,7 @@ MonoBehaviour:
       - ElementName: SFX_FlowerPotFall
         ObjectType: 3
         guid: f3e115e6bfb9294eb89998af8e818c7b
-      Path: Events/Default Work Unit/SFX/Museum/SFX_FlowerPotFall
+      Path: Events\Default Work Unit\SFX\Museum\SFX_FlowerPotFall
       maxAttenuation: 0
       maxDuration: 1.5448333
       minDuration: 1.5448333
@@ -975,7 +975,7 @@ MonoBehaviour:
       - ElementName: SFX_FS_NPC
         ObjectType: 3
         guid: c96f547de640124ebe8beeed0b34aced
-      Path: Events/Default Work Unit/SFX/NPC/SFX_FS_NPC
+      Path: Events\Default Work Unit\SFX\NPC\SFX_FS_NPC
       maxAttenuation: 0
       maxDuration: 1.6823334
       minDuration: 1.6823334
@@ -998,7 +998,7 @@ MonoBehaviour:
       - ElementName: SFX_MouseDoorClose
         ObjectType: 3
         guid: 3a50a7038b46864a9f67c003db1e7d72
-      Path: Events/Default Work Unit/SFX/Doors/SFX_MouseDoorClose
+      Path: Events\Default Work Unit\SFX\Doors\SFX_MouseDoorClose
       maxAttenuation: 0
       maxDuration: 2.1948333
       minDuration: 2.1948333
@@ -1021,7 +1021,7 @@ MonoBehaviour:
       - ElementName: SFX_MouseDoorOpen
         ObjectType: 3
         guid: 26687671842fdc4d8cd98e4a30b0e345
-      Path: Events/Default Work Unit/SFX/Doors/SFX_MouseDoorOpen
+      Path: Events\Default Work Unit\SFX\Doors\SFX_MouseDoorOpen
       maxAttenuation: 0
       maxDuration: 2.1823332
       minDuration: 2.1823332
@@ -1044,7 +1044,7 @@ MonoBehaviour:
       - ElementName: SFX_MusicPlay
         ObjectType: 3
         guid: 7fd002d4aa03304f9f2f4af2db44423a
-      Path: Events/Default Work Unit/SFX/Museum/SFX_MusicPlay
+      Path: Events\Default Work Unit\SFX\Museum\SFX_MusicPlay
       maxAttenuation: 0
       maxDuration: 1.1823334
       minDuration: 1.1823334
@@ -1067,7 +1067,7 @@ MonoBehaviour:
       - ElementName: SFX_NPC_CatSlap
         ObjectType: 3
         guid: a2678be97983f5428e7b6987466255ac
-      Path: Events/Default Work Unit/SFX/NPC/SFX_NPC_CatSlap
+      Path: Events\Default Work Unit\SFX\NPC\SFX_NPC_CatSlap
       maxAttenuation: 0
       maxDuration: 1.9948334
       minDuration: 1.9948334
@@ -1090,7 +1090,7 @@ MonoBehaviour:
       - ElementName: SFX_Pillow
         ObjectType: 3
         guid: b0b301d434d4ad4a89d6f105074baee6
-      Path: Events/Default Work Unit/SFX/House/SFX_Pillow
+      Path: Events\Default Work Unit\SFX\House\SFX_Pillow
       maxAttenuation: 0
       maxDuration: 1.5698333
       minDuration: 1.5698333
@@ -1113,7 +1113,7 @@ MonoBehaviour:
       - ElementName: SFX_PillowFall
         ObjectType: 3
         guid: 34a6e467560bc34cbc0b90b2d9f8ea8b
-      Path: Events/Default Work Unit/SFX/House/SFX_PillowFall
+      Path: Events\Default Work Unit\SFX\House\SFX_PillowFall
       maxAttenuation: 0
       maxDuration: 1.7698333
       minDuration: 1.7698333
@@ -1136,7 +1136,7 @@ MonoBehaviour:
       - ElementName: SFX_PillowJump
         ObjectType: 3
         guid: 6545b6ada5ccde4494aad55d669b36dc
-      Path: Events/Default Work Unit/SFX/House/SFX_PillowJump
+      Path: Events\Default Work Unit\SFX\House\SFX_PillowJump
       maxAttenuation: 0
       maxDuration: 1.1823334
       minDuration: 1.1823334
@@ -1156,7 +1156,7 @@ MonoBehaviour:
       - ElementName: SFX_PossessedOff
         ObjectType: 3
         guid: 96e768d0da029548bba0df94fa568eb8
-      Path: Events/Default Work Unit/SFX/SFX_PossessedOff
+      Path: Events\Default Work Unit\SFX\SFX_PossessedOff
       maxAttenuation: 0
       maxDuration: 1.4323334
       minDuration: 1.4323334
@@ -1176,7 +1176,7 @@ MonoBehaviour:
       - ElementName: SFX_PossessedOn
         ObjectType: 3
         guid: ce91400b4871824ab7e90d4d43a2d7fa
-      Path: Events/Default Work Unit/SFX/SFX_PossessedOn
+      Path: Events\Default Work Unit\SFX\SFX_PossessedOn
       maxAttenuation: 0
       maxDuration: 1.2948333
       minDuration: 1.2948333
@@ -1199,7 +1199,7 @@ MonoBehaviour:
       - ElementName: SFX_ToolsDisplay
         ObjectType: 3
         guid: ce3550e2a9df644fb8afcf3870e157b6
-      Path: Events/Default Work Unit/SFX/Museum/SFX_ToolsDisplay
+      Path: Events\Default Work Unit\SFX\Museum\SFX_ToolsDisplay
       maxAttenuation: 0
       maxDuration: 1.3823333
       minDuration: 1.3823333
@@ -1222,7 +1222,7 @@ MonoBehaviour:
       - ElementName: SFX_TrapDoorClose
         ObjectType: 3
         guid: f2715e8469e9544e8b81ec7ebccd37ad
-      Path: Events/Default Work Unit/SFX/Doors/SFX_TrapDoorClose
+      Path: Events\Default Work Unit\SFX\Doors\SFX_TrapDoorClose
       maxAttenuation: 0
       maxDuration: 2.2073333
       minDuration: 2.2073333
@@ -1245,7 +1245,7 @@ MonoBehaviour:
       - ElementName: SFX_TrapDoorOpen
         ObjectType: 3
         guid: e6af0c45882d3b4292a1bd1354500e33
-      Path: Events/Default Work Unit/SFX/Doors/SFX_TrapDoorOpen
+      Path: Events\Default Work Unit\SFX\Doors\SFX_TrapDoorOpen
       maxAttenuation: 0
       maxDuration: 2.0698333
       minDuration: 2.0698333
@@ -1268,7 +1268,7 @@ MonoBehaviour:
       - ElementName: SFX_WoodBox
         ObjectType: 3
         guid: 6b3ea96c8699f44b94f3bc2105d32bf4
-      Path: Events/Default Work Unit/SFX/Museum/SFX_WoodBox
+      Path: Events\Default Work Unit\SFX\Museum\SFX_WoodBox
       maxAttenuation: 0
       maxDuration: 1.2573333
       minDuration: 1.2573333
@@ -1285,7 +1285,7 @@ MonoBehaviour:
       - ElementName: UI
         ObjectType: 4
         guid: bb8a03633d51fc43a32aab33d68d7eb9
-      Path: Events/Default Work Unit/UI
+      Path: Events\Default Work Unit\UI
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -1305,7 +1305,7 @@ MonoBehaviour:
       - ElementName: UI_Defeat
         ObjectType: 3
         guid: bf2ccc5937f7884499861300aa7bc9f6
-      Path: Events/Default Work Unit/UI/UI_Defeat
+      Path: Events\Default Work Unit\UI\UI_Defeat
       maxAttenuation: 0
       maxDuration: 1.0573334
       minDuration: 1.0573334
@@ -1325,7 +1325,7 @@ MonoBehaviour:
       - ElementName: UI_FowRemoved
         ObjectType: 3
         guid: 03c1e2f7d62b87498bd8ea2f45637cf8
-      Path: Events/Default Work Unit/UI/UI_FowRemoved
+      Path: Events\Default Work Unit\UI\UI_FowRemoved
       maxAttenuation: 0
       maxDuration: 1.4573333
       minDuration: 1.4573333
@@ -1345,7 +1345,7 @@ MonoBehaviour:
       - ElementName: UI_KeyPickup
         ObjectType: 3
         guid: 2f29774b12d4094282d719e4bace66cb
-      Path: Events/Default Work Unit/UI/UI_KeyPickup
+      Path: Events\Default Work Unit\UI\UI_KeyPickup
       maxAttenuation: 0
       maxDuration: 1.2698333
       minDuration: 1.2698333
@@ -1365,7 +1365,7 @@ MonoBehaviour:
       - ElementName: UI_MouseOver
         ObjectType: 3
         guid: d0e30623e41e23498fcaf83f22873432
-      Path: Events/Default Work Unit/UI/UI_MouseOver
+      Path: Events\Default Work Unit\UI\UI_MouseOver
       maxAttenuation: 0
       maxDuration: 1.2573333
       minDuration: 1.2573333
@@ -1385,7 +1385,7 @@ MonoBehaviour:
       - ElementName: UI_ObjectPickup
         ObjectType: 3
         guid: 9e0dbb263343af418a3bd5c5f1326554
-      Path: Events/Default Work Unit/UI/UI_ObjectPickup
+      Path: Events\Default Work Unit\UI\UI_ObjectPickup
       maxAttenuation: 0
       maxDuration: 1.1823334
       minDuration: 1.1823334
@@ -1405,7 +1405,7 @@ MonoBehaviour:
       - ElementName: UI_OnClick
         ObjectType: 3
         guid: 26d541703d95fc4583e93618e9d63756
-      Path: Events/Default Work Unit/UI/UI_OnClick
+      Path: Events\Default Work Unit\UI\UI_OnClick
       maxAttenuation: 0
       maxDuration: 1.1698333
       minDuration: 1.1698333
@@ -1425,7 +1425,7 @@ MonoBehaviour:
       - ElementName: UI_Stars1
         ObjectType: 3
         guid: 7ff6a61014c3f640a1050bd59f9813a3
-      Path: Events/Default Work Unit/UI/UI_Stars1
+      Path: Events\Default Work Unit\UI\UI_Stars1
       maxAttenuation: 0
       maxDuration: 1.3698334
       minDuration: 1.3698334
@@ -1445,7 +1445,7 @@ MonoBehaviour:
       - ElementName: UI_Stars2
         ObjectType: 3
         guid: 347e2a88d9b9954291f2f217daa2c7f6
-      Path: Events/Default Work Unit/UI/UI_Stars2
+      Path: Events\Default Work Unit\UI\UI_Stars2
       maxAttenuation: 0
       maxDuration: 1.3448334
       minDuration: 1.3448334
@@ -1465,7 +1465,7 @@ MonoBehaviour:
       - ElementName: UI_Stars3
         ObjectType: 3
         guid: 798b42d89b828f498b7f7abb2161766c
-      Path: Events/Default Work Unit/UI/UI_Stars3
+      Path: Events\Default Work Unit\UI\UI_Stars3
       maxAttenuation: 0
       maxDuration: 1.2948333
       minDuration: 1.2948333
@@ -1485,7 +1485,7 @@ MonoBehaviour:
       - ElementName: UI_Stats
         ObjectType: 3
         guid: fe33ea76495f524094e724c7de3ae358
-      Path: Events/Default Work Unit/UI/UI_Stats
+      Path: Events\Default Work Unit\UI\UI_Stats
       maxAttenuation: 0
       maxDuration: 1.1948333
       minDuration: 1.1948333
@@ -1505,7 +1505,7 @@ MonoBehaviour:
       - ElementName: UI_Victory
         ObjectType: 3
         guid: ee75486d22a09e4197669f4c0394351f
-      Path: Events/Default Work Unit/UI/UI_Victory
+      Path: Events\Default Work Unit\UI\UI_Victory
       maxAttenuation: 0
       maxDuration: 1.0698333
       minDuration: 1.0698333
@@ -1522,7 +1522,7 @@ MonoBehaviour:
       - ElementName: VO
         ObjectType: 4
         guid: 9e59704f38d06e409b8abd8325c6ce19
-      Path: Events/Default Work Unit/VO
+      Path: Events\Default Work Unit\VO
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -1542,7 +1542,7 @@ MonoBehaviour:
       - ElementName: VO_NPC_Cat
         ObjectType: 3
         guid: 4ed357cd75c54c4e93f3707735a72b87
-      Path: Events/Default Work Unit/VO/VO_NPC_Cat
+      Path: Events\Default Work Unit\VO\VO_NPC_Cat
       maxAttenuation: 0
       maxDuration: 0.87369615
       minDuration: 0.87369615
@@ -1562,7 +1562,7 @@ MonoBehaviour:
       - ElementName: VO_NPC_CatChase
         ObjectType: 3
         guid: 119ec17b79d2934ba439629c745c74de
-      Path: Events/Default Work Unit/VO/VO_NPC_CatChase
+      Path: Events\Default Work Unit\VO\VO_NPC_CatChase
       maxAttenuation: 0
       maxDuration: 1.9698334
       minDuration: 1.9698334
@@ -1582,7 +1582,7 @@ MonoBehaviour:
       - ElementName: VO_NPC_Curious
         ObjectType: 3
         guid: 2ab4ebc19a7d6540a88139c8c4ce36da
-      Path: Events/Default Work Unit/VO/VO_NPC_Curious
+      Path: Events\Default Work Unit\VO\VO_NPC_Curious
       maxAttenuation: 0
       maxDuration: 1.2670295
       minDuration: 1.2670295
@@ -1602,7 +1602,7 @@ MonoBehaviour:
       - ElementName: VO_NPC_Locked
         ObjectType: 3
         guid: 596a1d5d85e05f4584bdaeded7222ffa
-      Path: Events/Default Work Unit/VO/VO_NPC_Locked
+      Path: Events\Default Work Unit\VO\VO_NPC_Locked
       maxAttenuation: 0
       maxDuration: 1.6448333
       minDuration: 1.6448333
@@ -1622,7 +1622,7 @@ MonoBehaviour:
       - ElementName: VO_NPC_Surprised
         ObjectType: 3
         guid: fc46c3fd640be14989d052b23909c023
-      Path: Events/Default Work Unit/VO/VO_NPC_Surprised
+      Path: Events\Default Work Unit\VO\VO_NPC_Surprised
       maxAttenuation: 0
       maxDuration: 1.9448333
       minDuration: 1.9448333
@@ -1642,7 +1642,7 @@ MonoBehaviour:
       - ElementName: VO_NPC_Whatever
         ObjectType: 3
         guid: 52eeab4b04035a45930a3319bc98aa4f
-      Path: Events/Default Work Unit/VO/VO_NPC_Whatever
+      Path: Events\Default Work Unit\VO\VO_NPC_Whatever
       maxAttenuation: 0
       maxDuration: 1.7073333
       minDuration: 1.7073333
@@ -1662,7 +1662,7 @@ MonoBehaviour:
       - ElementName: VO_Player_Barks
         ObjectType: 3
         guid: d5cca68b5d9ae34eb9171cde9fcb3d5e
-      Path: Events/Default Work Unit/VO/VO_Player_Barks
+      Path: Events\Default Work Unit\VO\VO_Player_Barks
       maxAttenuation: 0
       maxDuration: 1.3948333
       minDuration: 1.3948333
@@ -1682,12 +1682,12 @@ MonoBehaviour:
       - ElementName: VO_Player_Yay
         ObjectType: 3
         guid: ee2e19c5bea37d4094e95b5812dd16f4
-      Path: Events/Default Work Unit/VO/VO_Player_Yay
+      Path: Events\Default Work Unit\VO\VO_Player_Yay
       maxAttenuation: 0
       maxDuration: 1.1823334
       minDuration: 1.1823334
   RtpcWwu:
-  - PhysicalPath: Game Parameters/Default Work Unit.wwu
+  - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
     - ElementName: Game Parameters
       ObjectType: 5
@@ -1695,13 +1695,13 @@ MonoBehaviour:
     - ElementName: Default Work Unit
       ObjectType: 12
       guid: 183607395b7abe48a4667fda80dcb427
-    ParentPath: Game Parameters/Default Work Unit
+    ParentPath: Game Parameters\Default Work Unit
     guid: 183607395b7abe48a4667fda80dcb427
     GuidInternal: 
-    m_lastTime: -8584581780932895292
+    m_lastTime: -8584578913933823337
     List: []
   StateWwu:
-  - PhysicalPath: States/Default Work Unit.wwu
+  - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
     - ElementName: States
       ObjectType: 5
@@ -1709,10 +1709,10 @@ MonoBehaviour:
     - ElementName: Default Work Unit
       ObjectType: 12
       guid: af7cbd3a91f8fa45b4608609763cdabc
-    ParentPath: States/Default Work Unit
+    ParentPath: States\Default Work Unit
     guid: af7cbd3a91f8fa45b4608609763cdabc
     GuidInternal: 
-    m_lastTime: -8584574485120626674
+    m_lastTime: -8584574541358496694
     List:
     - name: Music
       guid: ab59f37bea0fea4bbae3157f03df8dbc
@@ -1727,7 +1727,7 @@ MonoBehaviour:
       - ElementName: Music
         ObjectType: 9
         guid: ab59f37bea0fea4bbae3157f03df8dbc
-      Path: States/Default Work Unit/Music
+      Path: States\Default Work Unit\Music
       values:
       - name: MUS_House
         guid: 50ad56e17b2ab747a3b821e361fabb8f
@@ -1797,7 +1797,7 @@ MonoBehaviour:
       ValueIcons: []
       valuesInternal: []
   SwitchWwu:
-  - PhysicalPath: Switches/Default Work Unit.wwu
+  - PhysicalPath: Switches\Default Work Unit.wwu
     PathAndIcons:
     - ElementName: Switches
       ObjectType: 5
@@ -1805,10 +1805,10 @@ MonoBehaviour:
     - ElementName: Default Work Unit
       ObjectType: 12
       guid: 3bd6a9a5898ac445b699c94c0ef17091
-    ParentPath: Switches/Default Work Unit
+    ParentPath: Switches\Default Work Unit
     guid: 3bd6a9a5898ac445b699c94c0ef17091
     GuidInternal: 
-    m_lastTime: -8584574485120616018
+    m_lastTime: -8584574541358486644
     List:
     - name: Material
       guid: e3d291f643829b4cbd2cc7810fdd08d2
@@ -1823,7 +1823,7 @@ MonoBehaviour:
       - ElementName: Material
         ObjectType: 11
         guid: e3d291f643829b4cbd2cc7810fdd08d2
-      Path: Switches/Default Work Unit/Material
+      Path: Switches\Default Work Unit\Material
       values:
       - name: Marble
         guid: 730d30c26107464ebd9da9d676cd0001
@@ -1861,7 +1861,7 @@ MonoBehaviour:
       ValueIcons: []
       valuesInternal: []
   TriggerWwu:
-  - PhysicalPath: Triggers/Default Work Unit.wwu
+  - PhysicalPath: Triggers\Default Work Unit.wwu
     PathAndIcons:
     - ElementName: Triggers
       ObjectType: 5
@@ -1869,13 +1869,13 @@ MonoBehaviour:
     - ElementName: Default Work Unit
       ObjectType: 12
       guid: e57c667935e38a43bc482598b93d66b4
-    ParentPath: Triggers/Default Work Unit
+    ParentPath: Triggers\Default Work Unit
     guid: e57c667935e38a43bc482598b93d66b4
     GuidInternal: 
-    m_lastTime: -8584581780932817641
+    m_lastTime: -8584578913928872863
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 05000000060000000b0000000c0000000e0000000f000000190000001a000000
+  ExpandedWaapiItemIds: 050000000600000007000000090000000a0000000b0000000c0000000d0000000e0000000f000000120000001300000014000000190000001a000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0
