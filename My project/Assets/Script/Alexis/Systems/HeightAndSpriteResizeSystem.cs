@@ -13,7 +13,9 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
 
     [SerializeField] public Vector3 positionAdjuster;
     [HideInInspector] public Vector3 pivotPos;
+    Vector2 spriteSize;
     Quaternion iniRotation;
+    bool isColSmaller;
     bool isPossessable;
 
     public Transform Parent { get { return parentObject; } }
@@ -54,6 +56,9 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
             iniRotation = parentObject.rotation;
             controller = parentObject.GetComponent<MovementController>();
             isPossessable = parentObject.TryGetComponent<PossessionController>(out PossessionController possession);
+            spriteSize = sprite.GetComponent<Renderer>().bounds.size;
+            if ( positionAdjuster != Vector3.zero ) { isColSmaller = true; }
+            else { isColSmaller = false; }
         }
 
         if (Application.isPlaying)
@@ -181,28 +186,57 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
 
         Vector3 spritePos = sprite.position;
 
-        switch (curEvent)
+        if (isColSmaller)
         {
-            case Side.Bottom:   //Works
-                spritePos.x = colCenter.x;
-                spritePos.y = colCenter.y - (colSize.y - colSize.y * heightScale.y) / 2;
-                break;
-            case Side.Top:      //Works
-                spritePos.x = colCenter.x;
-                spritePos.y = colCenter.y - (colSize.y - colSize.y * heightScale.y) / 2;
-                break;
-            case Side.Left:     //Works
-                spritePos.x = colCenter.x - (colSize.x - colSize.x * heightScale.x) / 2;
-                spritePos.y = colCenter.y - (colSize.y - colSize.y * heightScale.y) / 2;
-                break;
-            case Side.Right:    //Works
-                spritePos.x = colCenter.x + (colSize.x - colSize.x * heightScale.x) / 2;
-                spritePos.y = colCenter.y - (colSize.y - colSize.y * heightScale.y) / 2;
-                break;
-            default:
-                spritePos.x = colCenter.x;
-                spritePos.y = colCenter.y;
-                break;
+            switch (curEvent)
+            {
+                case Side.Bottom:   //Works
+                    spritePos.x = colCenter.x;
+                    spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
+                    break;
+                case Side.Top:      //Works
+                    spritePos.x = colCenter.x;
+                    spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
+                    break;
+                case Side.Left:     //Works
+                    spritePos.x = colCenter.x - (spriteSize.x - spriteSize.x * heightScale.x) / 2;
+                    spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
+                    break;
+                case Side.Right:    //Works
+                    spritePos.x = colCenter.x + (spriteSize.x - spriteSize.x * heightScale.x) / 2;
+                    spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
+                    break;
+                default:
+                    spritePos.x = colCenter.x;
+                    spritePos.y = colCenter.y;
+                    break;
+            }
+        }
+        else
+        {
+            switch (curEvent)
+            {
+                    case Side.Bottom:   //Works
+                        spritePos.x = colCenter.x;
+                        spritePos.y = colCenter.y - (colSize.y - colSize.y * heightScale.y) / 2;
+                        break;
+                    case Side.Top:      //Works
+                        spritePos.x = colCenter.x;
+                        spritePos.y = colCenter.y - (colSize.y - colSize.y * heightScale.y) / 2;
+                        break;
+                    case Side.Left:     //Works
+                        spritePos.x = colCenter.x - (colSize.x - colSize.x * heightScale.x) / 2;
+                        spritePos.y = colCenter.y - (colSize.y - colSize.y * heightScale.y) / 2;
+                        break;
+                    case Side.Right:    //Works
+                        spritePos.x = colCenter.x + (colSize.x - colSize.x * heightScale.x) / 2;
+                        spritePos.y = colCenter.y - (colSize.y - colSize.y * heightScale.y) / 2;
+                        break;
+                    default:
+                        spritePos.x = colCenter.x;
+                        spritePos.y = colCenter.y;
+                        break;
+            }
         }
         sprite.position = spritePos + positionAdjuster;
     }

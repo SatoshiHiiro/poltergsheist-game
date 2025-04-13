@@ -105,7 +105,7 @@ public abstract class MovementController : MonoBehaviour
 
             //Mouvement on the x axis
             if (canWalk)
-                rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
+                rigid2D.linearVelocityX = rigid2D.linearVelocityX + moveInput.x * speed;//rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
 
             //Caps the speed according to maxspeed
             rigid2D.linearVelocityX = Mathf.Clamp(rigid2D.linearVelocityX, -maxSpeed, maxSpeed);
