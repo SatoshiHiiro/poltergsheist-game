@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ObjectAccessManager : InteractibleManager
@@ -6,12 +7,15 @@ public class ObjectAccessManager : InteractibleManager
     [SerializeField] KeyItemBehavior keyItemForActivation;
     Collider2D objCollider;
 
+    private Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         base.Start();
         inventory = FindFirstObjectByType<InventorySystem>().GetComponent<InventorySystem>();
         objCollider = GetComponent<Collider2D>();
+        animator = GetComponentInChildren<Animator>();
         InventorySystem.Instance.OnResetKey += ResetObjectCollider;
     }
 
@@ -20,8 +24,9 @@ public class ObjectAccessManager : InteractibleManager
         if (InventorySystem.Instance.IsKeyPickedUp(keyItemForActivation))
         {
             // Animation lock open up
-            objCollider.isTrigger = true;
-            InventorySystem.Instance.RemoveObject(keyItemForActivation);    // Remove the key from inventory
+            StartCoroutine(UnlockDoorAnimation());
+            //objCollider.isTrigger = true;
+            //InventorySystem.Instance.RemoveObject(keyItemForActivation);    // Remove the key from inventory
         }
     }
 
@@ -30,11 +35,20 @@ public class ObjectAccessManager : InteractibleManager
         if(key == keyItemForActivation)
         {
             objCollider.isTrigger = false;
+            animator.SetBool("IsUnlock", false);
         }
     }
 
     private void OnDisable()
     {
         InventorySystem.Instance.OnResetKey -= ResetObjectCollider;
+    }
+
+    private IEnumerator UnlockDoorAnimation()
+    {
+        animator.SetBool("IsUnlock", true);
+        yield return new WaitForSeconds(0.5f);
+        objCollider.isTrigger = true;
+        InventorySystem.Instance.RemoveObject(keyItemForActivation);    // Remove the key from inventory
     }
 }
