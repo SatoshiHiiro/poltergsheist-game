@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{4DB3C8FF-9D14-1BCD-B605-7472845AB33E}",
+    "Hash": "{4EA2C757-11B1-0C60-6F6E-EFFAC17F3397}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -41,9 +41,65 @@
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
      }
+    ],
+    "StateGroups": [
+     {
+      "Id": "3991942870",
+      "Name": "Music",
+      "ObjectPath": "\\States\\Default Work Unit\\Music",
+      "GUID": "{7BF359AB-0FEA-4BEA-BAE3-157F03DF8DBC}",
+      "States": [
+       {
+        "Id": "748137791",
+        "Name": "MUS_House",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_House",
+        "GUID": "{E156AD50-2A7B-47B7-A3B8-21E361FABB8F}"
+       },
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\None",
+        "GUID": "{351044FD-7A84-4CB7-81DE-F70664AB2218}"
+       },
+       {
+        "Id": "1081012053",
+        "Name": "MUS_Museum",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_Museum",
+        "GUID": "{89D79411-A79D-4689-AF55-09F7279B8236}"
+       },
+       {
+        "Id": "3149643052",
+        "Name": "MUS_Menu",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_Menu",
+        "GUID": "{99B39622-7DD2-4D89-AEE8-86D4B188B102}"
+       }
+      ]
+     }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "3865314626",
+      "Name": "Material",
+      "ObjectPath": "\\Switches\\Default Work Unit\\Material",
+      "GUID": "{F691D2E3-8243-4C9B-BD2C-C7810FDD08D2}",
+      "Switches": [
+       {
+        "Id": "1127618254",
+        "Name": "Marble",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\Marble",
+        "GUID": "{C2300D73-0761-4E46-BD9D-A9D676CD0001}"
+       },
+       {
+        "Id": "2058049674",
+        "Name": "Wood",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\Wood",
+        "GUID": "{F390F764-40D4-4E2D-99E3-078806F56792}"
+       }
+      ]
+     }
     ]
    }
   ],
-  "FileHash": "{519FBA63-C0C8-4525-BE29-B0FA569CA864}"
+  "FileHash": "{121853AC-4ECA-7866-53F4-B0734DF9A8BC}"
  }
 }
