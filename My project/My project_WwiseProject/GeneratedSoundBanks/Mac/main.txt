@@ -31,6 +31,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1756072638	SFX_Doll			\Default Work Unit\SFX\House\SFX_Doll	
 	1772650125	SFX_PillowFall			\Default Work Unit\SFX\House\SFX_PillowFall	
 	1831529430	SFX_Pillow			\Default Work Unit\SFX\House\SFX_Pillow	
+	1973954843	MUS_Start			\Default Work Unit\MUS\MUS_Start	
 	2030598959	UI_ObjectPickup			\Default Work Unit\UI\UI_ObjectPickup	
 	2054537116	VO_Player_Barks			\Default Work Unit\VO\VO_Player_Barks	
 	2127579795	VO_NPC_Curious			\Default Work Unit\VO\VO_NPC_Curious	
@@ -65,28 +66,39 @@ Event	ID	Name			Wwise Object Path	Notes
 	4240001378	SFX_Bed			\Default Work Unit\SFX\House\SFX_Bed	
 	4285040421	PLY_Jump			\Default Work Unit\PLY\PLY_Jump	
 
+State Group	ID	Name			Wwise Object Path	Notes
+	3991942870	Music			\Default Work Unit\Music	
+
+State	ID	Name	State Group			Notes
+	748137791	MUS_House	Music			
+	748895195	None	Music			
+	1081012053	MUS_Museum	Music			
+	3149643052	MUS_Menu	Music			
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	39442585	PH-Player_JumpBounce	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\BF\{BF8CC178-B9E3-B22E-9108-75EB7165050A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-Player_JumpBounce		165200
-	42739357	PH-MUS_Win	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\FA\{FA913167-4D8F-9369-2620-ACFE4BF0E234}.wem		\Actor-Mixer Hierarchy\Default Work Unit\New Virtual Folder\PH-MUS_Win		83040
+	44584673	MUS_Menu_145bpm_Intro_Bass_2M	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\BA\{BA89997C-4BAA-6C4C-FBCE-BE4EC7EA18B8}.wem		\Interactive Music Hierarchy\Default Work Unit\Music\MUS_Menu\MUS_Menu_Intro\MUS_Menu_145bpm_Intro_Bass_2M		584040
 	82008392	PH-UI_MouseOver	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\CC\{CC0E30D0-FDE5-1656-1FC3-4F125B101ECC}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-UI_MouseOver		120800
 	82748322	PH-SFX_DollFall	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\16\{160568B7-A7E3-FB1B-0A01-2291E535DAC6}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_DollFall		177200
 	130928180	PH-SFX_ToolsDisplay	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\DC\{DC8ACB9B-FD2D-D156-3C01-1C4D1E02327F}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_ToolsDisplay		132800
+	136111853	MUS_Menu_145bpm_Sg2_14M_T1M	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\B8\{B8284403-5A81-75EF-BC1D-C4A311C913ED}.wem		\Interactive Music Hierarchy\Default Work Unit\Music\MUS_Menu\MUS_Menu_Segment2\MUS_Menu_145bpm_Sg2_14M_T1M		4379684
 	151756865	PH-SFX_FlowerPotFall	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\71\{71A36CBB-EB4E-530F-FA54-74939BFD29CB}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_FlowerPotFall		148400
 	155691392	PH-SFX_CouchFall	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\87\{878C9F83-6C8D-5F59-E755-935C5F5F4ADD}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_CouchFall		176000
 	163706350	PH-UI_Defeat	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\8F\{8F5909B8-654E-78E4-25C0-29EC8B36C90D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-UI_Defeat		101600
 	192613656	PH-SFX_DoorLocked	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\5E\{5ECAD662-4BB5-DEEC-7DA3-0D5BBBF87DD3}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_DoorLocked		178400
 	225569433	PH-UI_FowRemoved	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\6E\{6E113D0D-7B32-FE9A-9E79-9FBA8DEC38B2}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-UI_FowRemoved		140000
+	263118918	MUS_Menu_145bpm_Intro_Melody_2M	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\71\{71AB0E31-572F-69EE-0229-D24326DAA015}.wem		\Interactive Music Hierarchy\Default Work Unit\Music\MUS_Menu\MUS_Menu_Intro\MUS_Menu_145bpm_Intro_Melody_2M		584040
 	271680117	PH-SFX_TrapDoorClose	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\29\{299C2863-A898-6EFC-F321-241CAD68C062}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_TrapDoorClose		212000
 	298575687	PH-SFX_CookieJar	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\F3\{F3DE9454-41F9-7A3C-3588-EF8ADDB17A0C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_CookieJar		177200
 	317779275	PH-SFX_PossessedOff	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\51\{5126E291-ED24-9066-9C59-5A0E0760FA34}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_PossessedOff		137600
 	341287136	PH-SFX_PillowFall	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\9F\{9FFEDCC6-2BA8-90BA-3870-97D7DD238710}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_PillowFall		170000
 	347273864	PH-SFX_DoorUnlocked	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\D3\{D38508EE-9399-8315-8166-DE62A8FA47DB}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_DoorUnlocked		202400
 	351505150	PH-SFX_Bookshelf	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\18\{189B172B-A240-1235-14E9-D001321F03B7}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_Bookshelf		178400
-	361291788	PH-Mus_Museum	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\48\{484A1A3E-9A12-7244-057A-B220B4F62C2E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\New Virtual Folder\PH-Mus_Museum		59682440
 	364952126	PH-VO_PlayerBarks	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\43\{43A44361-DC7A-6D2E-1E12-6070BA522015}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-VO_PlayerBarks		134000
 	373353187	PH-SFX_DoorClose	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\7E\{7ED4FA56-9EC9-2BDF-F4F1-CB0E6A256FD1}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_DoorClose		178400
 	394594397	PH-SFX_Bookshelffall	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\01\{01CA07F1-6F50-71E9-30B9-61343D164AC1}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_Bookshelffall		198800
 	435817650	PH-SFX_PossessedOn	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\2B\{2B55677F-F2BE-63C7-4C3C-5849C0AFFFD5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_PossessedOn		124400
+	499168946	MUS_Alchemy	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\AC\{ACFD78E6-D7BF-0C31-1EA2-F54BD35EC123}.wem		\Interactive Music Hierarchy\Default Work Unit\Music\MUS_Museum\MUS_Alchemy\MUS_Alchemy		11818896
 	520423933	PH-UI_Star2	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\1F\{1F2C691E-BCE5-8E66-B4CA-F28565269575}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-UI_Star2		129200
 	535289571	PH-VO_CatMeow	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\CE\{CE5BC1B8-1816-DAD1-29B7-C8D751529CF3}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-VO_CatMeow		154216
 	581281525	PH-SFX_BallJump	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\79\{79AD3262-E9B5-20FA-D2D2-52F51E2EECF8}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_BallJump		176000
@@ -97,8 +109,8 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	623901723	PH-SFX_MouseDoorOpen	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\FF\{FFD06140-FD42-2CB1-2BE1-4F73392CCAA8}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_MouseDoorOpen		209600
 	636353517	PH-SFX_Doll	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\37\{3731221E-3F65-17B8-35CE-2542FEBAC60A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_Doll		149600
 	663541840	PH-SFX_MouseDoorClose	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\ED\{ED566E0C-3396-3B78-A934-A6F9A646DDC2}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_MouseDoorClose		210800
+	677573533	MUS_Menu_145bpm_Sg1_17M_P1M	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\46\{46EAAB85-AFB9-ED34-E559-8EA22C2ADB67}.wem		\Interactive Music Hierarchy\Default Work Unit\Music\MUS_Menu\MUS_Menu_Segment1\MUS_Menu_145bpm_Sg1_17M_P1M		5255600
 	690962228	PH-SFX_Box	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\33\{33BECF97-832F-A2E1-0F2C-F9EC4377527E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_Box		159200
-	703655619	PH-MUS_House	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\C7\{C7BC7374-3090-1C5F-CA1B-F6008903EC6C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\New Virtual Folder\PH-MUS_House		59682440
 	710994095	PH-UI_KeyPickup	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\EA\{EA22A412-FB42-D47F-A86D-990483FFCA95}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-UI_KeyPickup		122000
 	732307201	PH-SFX_ArmorDisplay	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\3E\{3E7CCE37-0D19-EF15-F338-AFBF7296586D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_ArmorDisplay		138800
 	734267828	PH-SFX_TrapDoorOpen	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\52\{5262D2E2-766C-4434-64E1-33A62BE61903}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_TrapDoorOpen		198800
@@ -115,6 +127,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	858673148	PH-VO_NPC_Surprised	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\BD\{BD00FAE8-24F3-16CF-F9B6-361491ED0B01}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-VO_NPC_Surprised		186800
 	874622660	PH-Player_Hovering	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\8F\{8F258745-6E6D-AA40-D4C9-AF3D6D10D507}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-Player_Hovering		140000
 	878708054	PH-VO_Hmm	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\C8\{C8CF3480-B9D4-DE43-C475-5902AE260E8A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-VO_Hmm		223600
+	885703973	PlaceHolder1_1	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\87\{87170D7A-E884-A79E-DEA8-64B4A5AE0267}.wem		\Interactive Music Hierarchy\Default Work Unit\Music\MUS_House\MUS_House\PlaceHolder1_1		13570588
 	914413484	PH-UI_Victory	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\E6\{E6693C1E-3851-5665-9FAB-2C90CDB113C9}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-UI_Victory		102800
 	920456870	PH-UI_Stats	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\FE\{FEDFADBB-B9F2-9634-CC6F-A354687FF461}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-UI_Stats		114800
 	960210754	PH-SFX_DoorOpen	C:\Users\lilou\OneDrive\Documents\Unity Projects\poltergsheist-game\My project\My project_WwiseProject\.cache\7D\{7DD98AF0-5DD4-45A9-3185-B252B65203A1}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Placeholders\PH-SFX_DoorOpen		173600
