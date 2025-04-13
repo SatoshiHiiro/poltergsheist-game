@@ -8,7 +8,7 @@ public class AudioManagerMenu : MonoBehaviour
     public static AudioManagerMenu Instance;
 
     [SerializeField] private AK.Wwise.Event menuMusic;
-    private List<string> menuScenes = new List<string> { "UI_Accueil", "Histoire", "LevelSelect", "Controls", "Lilou" };
+    private List<string> menuScenes = new List<string> { "UI_Accueil", "Histoire", "LevelSelect", "Controls" };
     private bool isMusicPlaying = false;
     
 
