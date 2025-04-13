@@ -7,6 +7,8 @@ public class KeyItemBehavior : PickupItemBehavior, IResetInitialState
 {
     // This class manage the behavior of the key that can be collected by the player
 
+    [SerializeField] private AK.Wwise.Event keyPickUpSound;
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
@@ -14,6 +16,7 @@ public class KeyItemBehavior : PickupItemBehavior, IResetInitialState
         if (collision.GetComponent<PlayerController>() != null || (possessionManager != null && possessionManager.IsPossessing))
         {
             InventorySystem.Instance.AddKeyToInventory(this);
+            keyPickUpSound.Post(gameObject);
         }
     }
 
