@@ -60,15 +60,32 @@ public class CameraBehavior : MonoBehaviour
     //Pour le mouvement de la caméra
     void FixedUpdate()
     {
-        //Gestion des limites et du mouvement de la caméra sur x
-        halfSizeX = cam.orthographicSize * cam.aspect;
-        posSelf.x = Mathf.Lerp(transform.position.x, focus.position.x, camSpeed * Time.deltaTime);
-        posSelf.x = Mathf.Clamp(posSelf.x, minX + halfSizeX, maxX - halfSizeX);
+        Vector3 currentPos = transform.position;
+        Vector3 focusPos = focus.position;
+        float yMinAdjust = minY + halfSizeY;
+        float yMaxAdjust = maxY - halfSizeY;
+        float xMinAdjust = minX + halfSizeX;
+        float xMaxAdjust = maxX - halfSizeX;
 
         //Gestion des limites et du mouvement de la caméra sur y
         halfSizeY = cam.orthographicSize;
-        posSelf.y = Mathf.Lerp(transform.position.y, focus.position.y, camSpeed * Time.deltaTime);
-        posSelf.y = Mathf.Clamp(posSelf.y, minY + halfSizeY, maxY - halfSizeY);
+        posSelf.y = Mathf.Lerp(currentPos.y, focusPos.y, camSpeed * Time.deltaTime);
+        posSelf.y = Mathf.Clamp(posSelf.y, yMinAdjust, yMaxAdjust);
+
+        if (halfSizeY * 2 > maxY - minY && (focusPos.y > yMinAdjust || focusPos.y < yMaxAdjust))
+        {
+            posSelf.y = yMinAdjust;
+        }
+
+        //Gestion des limites et du mouvement de la caméra sur x
+        halfSizeX = halfSizeY * cam.aspect;
+        posSelf.x = Mathf.Lerp(currentPos.x, focusPos.x, camSpeed * Time.deltaTime);
+        posSelf.x = Mathf.Clamp(posSelf.x, minX + halfSizeX, maxX - halfSizeX);
+
+        if (halfSizeX * 2 > maxX - minX && (focusPos.x > xMinAdjust || focusPos.y < xMaxAdjust))
+        {
+            posSelf.x = xMinAdjust;
+        }
 
         transform.position = posSelf;
     }

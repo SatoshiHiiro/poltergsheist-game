@@ -9,6 +9,7 @@ public class NPCMovementController : MonoBehaviour
     [SerializeField] private float blindSpeed = 3f;
     private float normalSpeed;
     private SpriteRenderer npcSpriteRenderer;
+    private Animator npcAnim;
     private bool canFindPath = true;
     
 
@@ -22,6 +23,7 @@ public class NPCMovementController : MonoBehaviour
     {
         //npcSpriteRenderer = GetComponent<SpriteRenderer>();
         basicNPCBehaviour = GetComponent<BasicNPCBehaviour>();
+        npcAnim = GetComponentInChildren<Animator>();
         StartCoroutine(StartRelated());
         normalSpeed = movementSpeed;
     }
@@ -88,9 +90,11 @@ public class NPCMovementController : MonoBehaviour
         while (Mathf.Abs(transform.position.x - destination.x) > 0.1f)
         {
             // NPC walk towards the destination
+            npcAnim.SetBool("InMovement", true);
             transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
             yield return null;
         }
+        npcAnim.SetBool("InMovement", false);
     }
     // Pathfinding of the NPC to reach a target
     public IEnumerator ReachTarget(Vector2 target, float currentFloor, float targetFloor)
