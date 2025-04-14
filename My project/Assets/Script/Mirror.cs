@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Mirror : MonoBehaviour
 {
@@ -8,12 +9,25 @@ public class Mirror : MonoBehaviour
     private float reflectionDistance;   // Distance between the mirror and it's reflection
     private Plane[] planes;
     [SerializeField] private LayerMask ignoreLayer;
-
+    private MeshRenderer m_Renderer;
     private void Start()
     {
         planes = GeometryUtility.CalculateFrustumPlanes(mirrorCamera);
         reflectionDistance = mirrorCamera.orthographicSize;
+        m_Renderer = GetComponent<MeshRenderer>();
         //print("CAMERA!" + mirrorCamera.orthographicSize);
+    }
+
+    private void Update()
+    {
+        if (m_Renderer.isVisible)
+        {
+            mirrorCamera.gameObject.SetActive(true);
+        }
+        else
+        {
+            mirrorCamera.gameObject.SetActive(false);
+        }
     }
 
     // Check if the object is reflected in the mirror
@@ -121,19 +135,19 @@ public class Mirror : MonoBehaviour
         //}
     }
 
-    private void OnBecameVisible()
-    {
-        if (mirrorCamera != null)
-        {
-            mirrorCamera.gameObject.SetActive(true);
-        }
-    }
+    //private void OnBecameVisible()
+    //{
+    //    if (mirrorCamera != null)
+    //    {
+    //        mirrorCamera.gameObject.SetActive(true);
+    //    }
+    //}
 
-    private void OnBecameInvisible()
-    {
-        if (mirrorCamera != null)
-        {
-            mirrorCamera.gameObject.SetActive(false);
-        }
-    }
+    //private void OnBecameInvisible()
+    //{
+    //    if (mirrorCamera != null)
+    //    {
+    //        mirrorCamera.gameObject.SetActive(false);
+    //    }
+    //}
 }
