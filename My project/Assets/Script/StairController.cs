@@ -179,7 +179,7 @@ public class StairController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Make Climb Stairs prompt appear if Polterg is in front of a stair
-        if (collision.CompareTag("Player") && !IsStairBlocked() && canPoltergUseDoor)
+        if (collision.CompareTag("Player") && !IsStairBlocked() && canPoltergUseDoor && (BottomFloor != null || UpperFloor != null))
         {
             if(uiPromptCanvas != null)
             {
@@ -192,9 +192,9 @@ public class StairController : MonoBehaviour
         else if (collision.gameObject.GetComponent<PossessionController>())
         {
             PossessionManager possessionObject = collision.gameObject.GetComponent<PossessionManager>();
-            if (possessionObject != null && !IsStairBlocked() && possessionObject.IsPossessing && canObjectUseDoor)
+            if (possessionObject != null && !IsStairBlocked() && possessionObject.IsPossessing && canObjectUseDoor && (BottomFloor != null || UpperFloor != null))
             {
-                if(uiPromptCanvas != null)
+                if(uiPromptCanvas != null && (collision.bounds.size.y < minimumBlockHeight))
                 {
                     uiPromptCanvas.enabled = true;
                     animator.SetBool("PromptAppear", true);
