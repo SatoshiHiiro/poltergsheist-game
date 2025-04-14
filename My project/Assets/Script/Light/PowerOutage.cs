@@ -14,6 +14,7 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
     [SerializeField] private float repairingTime;   // Time used by the npc to repair the lights
     private GameObject[] allBuildingLights;   // Every lights inside the building
     private GameObject[] lightsToClose;
+    private Animator animator;
 
     private List<HumanNPCBehaviour> affectedNPCs = new List<HumanNPCBehaviour>();
     private bool isRepairing = false;
@@ -21,6 +22,7 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
     void Start()
     {
         allBuildingLights = GameObject.FindGameObjectsWithTag("BuildingLight");
+        animator = GetComponent<Animator>();
     }
 
     public void OnDepossessed()
@@ -32,6 +34,7 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
     {
         lightsToClose = closeAllLightsInBuilding ?  allBuildingLights : closedLights;
         CloseOpenLights(lightsToClose, false );
+        animator.SetBool("isElectricityClosed", true);
     }
 
     // Close or open all lights in the array
@@ -127,10 +130,12 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
             yield break;
         }
 
-        // Time for the NPC to repair the problem        
+        // Time for the NPC to repair the problem 
         yield return new WaitForSeconds(repairingTime);
+        animator.SetBool("isElectricityClosed", false);
         isRepairing = false;
         RestoreLights();
+        
     }
     // Restore the closed lights
     private void RestoreLights()
@@ -138,7 +143,7 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
         // Open the lights back on
         CloseOpenLights(lightsToClose, true);
         lightsToClose = null;
-
+        
         // NPCs have their normal behavior again
         foreach (HumanNPCBehaviour npc in affectedNPCs)
         {
@@ -162,8 +167,8 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
         CloseOpenLights(lightsToClose, true);
         lightsToClose = null;
         isRepairing = false;
-
-        if(affectedNPCs.Count > 0)
+        animator.SetBool("isElectricityClosed", false);
+        if (affectedNPCs.Count > 0)
         {
             foreach(HumanNPCBehaviour npc in affectedNPCs)
             {
