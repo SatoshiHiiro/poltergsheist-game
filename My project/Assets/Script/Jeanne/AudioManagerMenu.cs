@@ -11,6 +11,7 @@ public class AudioManagerMenu : MonoBehaviour
     //[SerializeField] public AK.Wwise.Event houseMusic;
     private List<string> menuScenes = new List<string> { "UI_Accueil", "Histoire", "LevelSelect", "Controls" };
     private List<string> houseScenes = new List<string> { "Niveau1", "Niveau2", "Niveau3" };
+    private List<string> museumScenes = new List<string> { "Niveau4", "Niveau5", "Niveau6" };
     //public AK.Wwise.State state;
     private bool isMusicPlaying = false;
     
@@ -69,7 +70,19 @@ public class AudioManagerMenu : MonoBehaviour
             //eventMusic.Post(gameObject);
             //houseMusic.Post(gameObject);
         }
-        else if(!IsMenuScene(scene.name) && !IsHouseScene(scene.name))
+        else if (IsMuseumScene(scene.name))
+        {
+            if (isMusicPlaying)
+            {
+
+                isMusicPlaying = false;
+            }
+            StopMenuMusic();
+            print("Museum MUSIC!");
+            eventMusic.Post(gameObject);
+            AkUnitySoundEngine.SetState("Music", "MUS_Museum");
+        }
+        else if(!IsMenuScene(scene.name) && !IsHouseScene(scene.name) && !IsMuseumScene(scene.name))
         {
             StopMenuMusic();
         }
@@ -88,6 +101,14 @@ public class AudioManagerMenu : MonoBehaviour
     private bool IsHouseScene(string sceneName)
     {
         if (houseScenes.Contains(sceneName))
+        {
+            return true;
+        }
+        return false;
+    }
+    private bool IsMuseumScene(string sceneName)
+    {
+        if (museumScenes.Contains(sceneName))
         {
             return true;
         }
