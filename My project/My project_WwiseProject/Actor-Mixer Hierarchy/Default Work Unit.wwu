@@ -1019,6 +1019,9 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="PH-SFX_MusicPlay" ID="{8C616DD0-8876-4A9C-9EB3-24DACC90A148}" ShortID="729107355">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -1758,6 +1761,31 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="PH-VO_Hmm" ID="{86B0A7D1-EE15-4B2B-9387-2DD2D7EB1A57}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PH-SFX_MusicPlay2" ID="{AF230CA7-0EB3-41DA-AD43-6B7531399B16}" ShortID="839106304">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PH-SFX_MusicPlay2" ID="{FA799018-A033-465B-A976-D97CC4291600}">
+									<Language>SFX</Language>
+									<AudioFile>PH-SFX_MusicPlay2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="181169064"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PH-SFX_MusicPlay2" ID="{FA799018-A033-465B-A976-D97CC4291600}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>

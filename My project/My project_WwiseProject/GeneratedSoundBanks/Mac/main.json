@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{65E86D28-8BA1-49D3-8B67-98495A6B0D5F}",
     "Language": "SFX",
-    "Hash": "{3751317C-282C-8CD8-B912-31DF7B96AB90}",
+    "Hash": "{83C7959B-A3C5-AF22-99F1-EC01C4F27F8D}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\main",
     "ShortName": "main",
     "Path": "main.bnk",
@@ -94,6 +94,14 @@
       "Location": "Memory",
       "ShortName": "PH-UI_Defeat.wav",
       "CachePath": "8F/{8F5909B8-654E-78E4-25C0-29EC8B36C90D}.wem"
+     },
+     {
+      "Id": "181169064",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PH-SFX_MusicPlay2.wav",
+      "CachePath": "63/{63BA0E4B-9BCC-D4A7-2B4B-EEB6CF115432}.wem"
      },
      {
       "Id": "192613656",
@@ -1202,12 +1210,10 @@
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Museum\\SFX_MusicPlay",
       "GUID": "{D402D07F-03AA-4F30-9F2F-4AF2DB44423A}",
       "Color": "24",
-      "DurationType": "OneShot",
-      "DurationMin": "1.1823334",
-      "DurationMax": "1.1823334",
+      "DurationType": "Infinite",
       "MediaRefs": [
        {
-        "Id": "995335852"
+        "Id": "181169064"
        }
       ]
      },
@@ -1683,6 +1689,6 @@
     ]
    }
   ],
-  "FileHash": "{9729B9FF-5499-AF1F-CD74-D17026FCE230}"
+  "FileHash": "{6E9E9E40-692A-EC76-4FCA-3E87E3302EDB}"
  }
 }

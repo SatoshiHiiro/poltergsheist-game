@@ -10,7 +10,7 @@ public class AudioManagerMenu : MonoBehaviour
     [SerializeField] public AK.Wwise.Event eventMusic;
     //[SerializeField] public AK.Wwise.Event houseMusic;
     private List<string> menuScenes = new List<string> { "UI_Accueil", "Histoire", "LevelSelect", "Controls" };
-    private List<string> houseScenes = new List<string> { "Niveau1", "Niveau2", "Niveau3" };
+    private List<string> houseScenes = new List<string> { "Niveau1", "Niveau2", "Niveau3", "Lilou" };
     private List<string> museumScenes = new List<string> { "Niveau4", "Niveau5", "Niveau6" };
     //public AK.Wwise.State state;
     private bool isMusicPlaying = false;

@@ -5,6 +5,7 @@ public class JukeBox : SoundDetection, IPossessable, IResetObject, IResetInitial
 {
     private PossessionManager possessionManager;
     private bool isPlaying;
+    [SerializeField] public AK.Wwise.Event musicLooping;
 
     Animator jukeboxAnim;
 
@@ -21,6 +22,7 @@ public class JukeBox : SoundDetection, IPossessable, IResetObject, IResetInitial
     {
         audioSource.Play();
         audioSource.loop = true;
+        musicLooping.Post(gameObject);
         isPlaying = true;
     }
     public void OnDepossessed()
@@ -42,6 +44,7 @@ public class JukeBox : SoundDetection, IPossessable, IResetObject, IResetInitial
     public void ResetObject()
     {
         audioSource.Stop();
+        musicLooping.Stop(gameObject);
         isPlaying = false;
         jukeboxAnim.SetBool("isPlaying", false);
     }
