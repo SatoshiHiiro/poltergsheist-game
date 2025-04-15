@@ -37,7 +37,7 @@ public class LevelSelect : BaseSceneManager
         if(AudioManagerMenu.Instance != null)
         {
             print("AUDIOMANAGERMENU NON NULL");
-            AudioManagerMenu.Instance.StopMenuMusic();
+            //AudioManagerMenu.Instance.StopMenuMusic(AudioManagerMenu.Instance.eventMusic);
         }
         SceneManager.LoadScene(nomNiveau);
         Time.timeScale = 1f;

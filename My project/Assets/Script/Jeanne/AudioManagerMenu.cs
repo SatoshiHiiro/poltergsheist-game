@@ -7,8 +7,11 @@ public class AudioManagerMenu : MonoBehaviour
 {
     public static AudioManagerMenu Instance;
 
-    [SerializeField] private AK.Wwise.Event menuMusic;
+    [SerializeField] public AK.Wwise.Event eventMusic;
+    //[SerializeField] public AK.Wwise.Event houseMusic;
     private List<string> menuScenes = new List<string> { "UI_Accueil", "Histoire", "LevelSelect", "Controls" };
+    private List<string> houseScenes = new List<string> { "Niveau1", "Niveau2", "Niveau3" };
+    //public AK.Wwise.State state;
     private bool isMusicPlaying = false;
     
 
@@ -23,7 +26,7 @@ public class AudioManagerMenu : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        //state = GetComponent<AK.Wwise.State>();
     }
 
     private void OnEnable()
@@ -40,12 +43,37 @@ public class AudioManagerMenu : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode _)
     {
+        print("YEAH!");
         if(IsMenuScene(scene.name) && !isMusicPlaying)
         {
+            //AkUnitySoundEngine.SetState("MUS_Start", "MUS_Menu");
             print("MUSIC PLAYING!");
-            menuMusic.Post(gameObject);
+            eventMusic.Post(gameObject);
+            AkUnitySoundEngine.SetState("Music", "MUS_Menu");
             isMusicPlaying = true;
         }
+        else if (IsHouseScene(scene.name))
+        {
+            if (isMusicPlaying)
+            {
+                
+                isMusicPlaying = false;
+            }
+            StopMenuMusic();
+            print("HOUSE MUSIC!");
+            eventMusic.Post(gameObject);
+            AkUnitySoundEngine.SetState("Music", "MUS_House");
+            //state.SetValue("MUS_House");
+            //AkUnitySoundEngine.SetState("Music / ", "MUS_House");
+            //AkUnitySoundEngine.SetSwitch("MUS_Start", "MUS_House", gameObject);
+            //eventMusic.Post(gameObject);
+            //houseMusic.Post(gameObject);
+        }
+        else if(!IsMenuScene(scene.name) && !IsHouseScene(scene.name))
+        {
+            StopMenuMusic();
+        }
+        
     }
 
     private bool IsMenuScene(string sceneName)
@@ -57,9 +85,18 @@ public class AudioManagerMenu : MonoBehaviour
         return false;
     }
 
+    private bool IsHouseScene(string sceneName)
+    {
+        if (houseScenes.Contains(sceneName))
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void StopMenuMusic()
     {
-        menuMusic.Stop(gameObject);
+        eventMusic.Stop(gameObject);
         isMusicPlaying = false;
     }
 }
