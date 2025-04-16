@@ -46,9 +46,14 @@ public abstract class MovementController : MonoBehaviour
     [HideInInspector] public List<GameObject> curObject = new List<GameObject>();
     [HideInInspector] public List<ContactPoint2D> curContact = new List<ContactPoint2D>();
     [HideInInspector] public float halfSizeOfObject;
-    [HideInInspector] public float lastVelocityX;
+    Vector2 lastVelocity;
+    float lastVelocityX { get { return lastVelocity.x; } }
+    float lastVelocityY { get { return lastVelocity.y; } }
+    PhysicsMaterial2D objMat;
+    //[HideInInspector] public float lastVelocityX;
     [HideInInspector] public float lastPosY;
     ContactFilter2D filter = new ContactFilter2D();
+    float objBounciness;
 
     //Conditions
     [Header("Mouvement conditions")]
@@ -56,7 +61,8 @@ public abstract class MovementController : MonoBehaviour
     public bool canWalk;                                                //Can stop the physics using the x axis
     public bool canJump;                                                //Can stop the physics using the y axis
     public bool isInContact;                                            //To know if the object is in contact with another at the bottom
-    public bool isJumping;                            //To stop multijump.
+    public bool isJumping;                                              //To stop multijump.
+    private bool isPreJumpBufferFinished = true;
     private bool isPerformingJump = false;
     private bool canClimbAgain;
 
@@ -68,6 +74,9 @@ public abstract class MovementController : MonoBehaviour
     [Header("Input Section")]
     public InputAction move;
     public InputAction jump;
+
+    //Debug related
+    [SerializeField] float highestY;
 
     protected virtual void Awake()
     {
@@ -91,6 +100,18 @@ public abstract class MovementController : MonoBehaviour
     {
         rigid2D = gameObject.transform.GetComponent<Rigidbody2D>();
         col2D = this.GetComponent<Collider2D>();
+        if (rigid2D.sharedMaterial != null) 
+        {
+            objMat = rigid2D.sharedMaterial;
+            objBounciness = objMat.bounciness; 
+        }
+        else if (col2D.sharedMaterial != null) 
+        {
+            objMat = col2D.sharedMaterial;
+            objBounciness = objMat.bounciness; 
+        }
+        else { objBounciness = 0; }
+        highestY = transform.position.y;
     }
 
     //Physics
@@ -98,30 +119,25 @@ public abstract class MovementController : MonoBehaviour
     {
         if (canMove)
         {
-            if (lastInput.x != moveInput.x && moveInput.x != 0)
-            {
-                rigid2D.linearVelocityX = 0;
-            }
+            if (lastInput.x != moveInput.x && moveInput.x != 0) { rigid2D.linearVelocityX = 0; }
 
             //Mouvement on the x axis
-            if (canWalk)
-                rigid2D.linearVelocityX = rigid2D.linearVelocityX + moveInput.x * speed;//rigid2D.AddForceX(moveInput.x * speed, ForceMode2D.Impulse);
+            if (canWalk) { rigid2D.linearVelocityX = rigid2D.linearVelocityX + moveInput.x * speed; }
 
             //Caps the speed according to maxspeed
             rigid2D.linearVelocityX = Mathf.Clamp(rigid2D.linearVelocityX, -maxSpeed, maxSpeed);
-            
+
             //Slows the x mouvement if no x input.
-            if (moveInput.x == 0)
-                rigid2D.linearVelocityX = rigid2D.linearVelocityX / stopSpeed;
+            if (moveInput.x == 0) { rigid2D.linearVelocityX = rigid2D.linearVelocityX / stopSpeed; }
 
             if (isJumping && isInContact && !isPerformingJump)
             {
                 isPerformingJump = true;
                 if (onJump != null) { onJump(jumpParam); };
-                rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
-                //isJumping = false;
+                float _jumpSpeed = jumpSpeed + Mathf.Abs(lastVelocityY * objBounciness);
+                rigid2D.linearVelocityY = _jumpSpeed;
+                //rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
                 StartCoroutine(InputReset());
-                //isInContact = false;
             }
 
             rigid2D.linearVelocityY = Mathf.Clamp(rigid2D.linearVelocityY, -8.5f, 8.5f);
@@ -129,13 +145,10 @@ public abstract class MovementController : MonoBehaviour
             lastInput = moveInput;
         }
         // Keep it from moving
-        else
-        {
-            rigid2D.linearVelocityX = 0;
-        }
+        else { rigid2D.linearVelocityX = 0; }
     }
 
-    //Pour les inputs
+    //To get the inputs
     protected virtual void Update()
     {
         if (playerInputEnable)
@@ -146,6 +159,7 @@ public abstract class MovementController : MonoBehaviour
                 canClimbAgain = true;
             }
 
+            // Move left or right using A or D key
             if (move.IsPressed())
             {
                 moveInput = move.ReadValue<Vector2>();
@@ -155,49 +169,57 @@ public abstract class MovementController : MonoBehaviour
                     moveInput.x = Mathf.Round(moveInput.x);
                     moveInput.y = Mathf.Round(moveInput.y);
                 }
+                // For walk fail animation
                 else if (canMove && move.WasPressedThisFrame())
                 {
-                    if (moveInput.x > 0)
-                    {
-                        if (onShakeR != null) { onShakeL(cantWalkRightParam); }
-                    }
-                    else if (moveInput.x < 0)
-                    {
-                        if (onShakeL != null) { onShakeR(cantWalkLeftParam); }
-                    }
+                    if (moveInput.x > 0 && onShakeR != null) { onShakeL(cantWalkRightParam); }
+                    else if (moveInput.x < 0 && onShakeL != null) { onShakeR(cantWalkLeftParam); }
                 }
             }
-            else
-            {
-                moveInput = Vector2.zero;
-            }
+            else { moveInput = Vector2.zero; }
 
-            if (jump.WasPressedThisFrame())
+            // Jump using the Spacebar key
+            if (jump.IsPressed())//.WasPressedThisFrame())
             {
-                if (!isJumping)
+                if (canMove)
+                {
+                    if (canJump)
+                    {
+                        //isJumping = true;
+                        if (jumpReset != null) { StopCoroutine(jumpReset); }
+                        jumpReset = StartCoroutine(PreJumpBuffer());
+                    }
+                    else if (!isJumping && onJump != null && jump.WasPressedThisFrame()) { onJump(jumpParam); };
+                }
+
+                /*if (!isJumping)
                 {
                     if (canMove)
                     {
                         if (canJump)
                         {
-                            isJumping = true;
-                            //if (jumpReset != null) { StopCoroutine(jumpReset); }
-                            //jumpReset = StartCoroutine(InputReset());
+                            //isJumping = true;
+                            if (jumpReset != null) { StopCoroutine(jumpReset); }
+                            jumpReset = StartCoroutine(PreJumpBuffer());
                         }
                         else
                             if (onJump != null) { onJump(jumpParam); };
                     }
-                }
+                }*/
             }
         }
 
-        if (rigid2D.linearVelocityY <= .1f && rigid2D.linearVelocityY >= -.1f)
-            lastPosY = this.transform.position.y;
+        if (rigid2D.linearVelocityY <= .1f && rigid2D.linearVelocityY >= -.1f) { lastPosY = this.transform.position.y; }
+        if (transform.position.y > highestY)
+        {
+            highestY = transform.position.y;
+        }
 
-        lastVelocityX = Mathf.Abs(rigid2D.linearVelocityX);
+        lastVelocity = rigid2D.linearVelocity;
+        //lastVelocityX = Mathf.Abs(rigid2D.linearVelocityX);
     }
 
-    //Pour enlever de la m�moire le input de saut jusqu'� ce que l'avatar touche le sol
+    //To wipe memory of a jump input after a certain time
     IEnumerator InputReset()
     {
         // Wait a few physics frames to ensure the jump force has been applied
@@ -205,8 +227,27 @@ public abstract class MovementController : MonoBehaviour
         yield return new WaitForFixedUpdate();
         isInContact = false;
         isPerformingJump = false;
-        //yield return new WaitForSecondsRealtime(.3f);
-        //isJumping = false;
+    }
+
+    //To permit frame contact jumps for bouncy objects
+    IEnumerator PostJumpBuffer()
+    {
+        yield return new WaitForSecondsRealtime(.1f);
+        isInContact = false;
+    }
+
+    //To permit frame contact jumps
+    IEnumerator PreJumpBuffer()
+    {
+        float targetTime = Time.time + .1f;
+        isPreJumpBufferFinished = false;
+
+        while (targetTime >  Time.time)
+        {
+            isJumping = true;
+            yield return null;
+        }
+        isPreJumpBufferFinished = true;
     }
 
     //Stock les GameObjets en contact avec l'objet
@@ -214,20 +255,42 @@ public abstract class MovementController : MonoBehaviour
     {
         curContact.Clear();
         Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), curContact);
-
+        if (canMove)
+        {
+            float bounce;
+            if (collision.collider.sharedMaterial != null)
+            {
+                if (objMat != null) { bounce = objMat.bounciness; }
+                else { bounce = 0; }
+                objBounciness = Mathf.Max(collision.collider.sharedMaterial.bounciness, bounce);
+            }
+            else if (collision.transform.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2d))
+            {
+                if (rb2d.sharedMaterial != null)
+                {
+                    if (objMat != null) { bounce = objMat.bounciness; }
+                    else { bounce = 0; }
+                    objBounciness = Mathf.Max(rb2d.sharedMaterial.bounciness, bounce);
+                }
+            }
+            else
+            {
+                if (objMat != null) { objBounciness = objMat.bounciness; }
+                else { objBounciness = 0; }
+            }
+        }
+        
         for (int i = 0; i < curContact.Count; i++)
         {
             if (curContact[i].normal.y <= -.9f)
             {
                 isInContact = true;
-                isJumping = false;
-                if (lastPosY - this.transform.position.y > .2f)
-                {
-                    if (onLand != null) { onLand(landParam); };
-                }
+                
+                if (isPreJumpBufferFinished) { isJumping = false; }
+                if (lastPosY - this.transform.position.y > .2f && onLand != null) { onLand(landParam); }
                 break;
             }
-            if (canMove && lastVelocityX >= maxSpeed - .1f)
+            if (canMove && Mathf.Abs(lastVelocityX) >= maxSpeed - .1f)
             {
                 if (collision.GetContact(i).normal.x <= -.9f)
                 {
@@ -241,52 +304,17 @@ public abstract class MovementController : MonoBehaviour
                 }
             }
         }
-
-        /*for (int i = 0; i < collision.contactCount; i++)
-        {
-            if (collision.GetContact(i).normal.y >= .9f)
-            {
-                isInContact = true;
-                isJumping = false;
-                if (lastPosY - this.transform.position.y > .2f)
-                {
-                    if (onLand != null) { onLand(landParam); };
-                }
-                break;
-            }
-        }
-
-        curObject.Add(collision.gameObject);
-        for (int i = 0; i < collision.contactCount; i++)
-        {
-            if (canMove && lastVelocityX > 0)
-            {
-                if (collision.GetContact(i).normal.x <= -.9f)
-                {
-                    if (onBonkR != null) { onBonkR(bonkRightParam); }
-                    break;
-                }
-                else if (collision.GetContact(i).normal.x >= .9f)
-                {
-                    if (onBonkL != null) { onBonkL(bonkLeftParam); }
-                    break;
-                }
-            }
-        }*/
     }
 
-    IEnumerator JumpBuffer()
-    {
-        yield return new WaitForSecondsRealtime(.2f);
-        isInContact = false;
-    }
+    
 
-    //Enl�ve les GameObjets en contact avec l'objet
+    //
     void OnCollisionExit2D(Collision2D collision)
     {
-        //curObject.Remove(collision.gameObject);
-        if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
-        if (this.gameObject.activeInHierarchy) { jumpBuff = StartCoroutine(JumpBuffer()); }
+        //curObject.Remove(collision.gameObject);//if (jumpBuff != null) { StopCoroutine(PostJumpBuffer()); }
+        //if (this.gameObject.activeInHierarchy && jumpBuff != null) { StopCoroutine(jumpBuff); }
+        //if (this.gameObject.activeInHierarchy && objBounciness > 0) { jumpBuff = StartCoroutine(PostJumpBuffer()); }
+        isInContact = false;
     }
 
     //Checks if the GameObjects in contact are below the controller
@@ -301,29 +329,10 @@ public abstract class MovementController : MonoBehaviour
             {
                 isInContact = true;
                 isJumping = false;
-                if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
+                //if (jumpBuff != null) { StopCoroutine(PostJumpBuffer()); }
                 break;
             }
         }
-
-        /*for (int i = 0; i < curObject.Count; i++)
-        {
-            if (collision.gameObject == curObject[i])
-            {
-                for (int ii = 0; ii < collision.contactCount; ii++)
-                {
-                    if (collision.GetContact(ii).normal.y >= .9f)
-                    {
-                        isInContact = true;
-                        isJumping = false;
-                        if (jumpBuff != null) { StopCoroutine(JumpBuffer()); }
-                        break;
-                    }
-                }
-                if (isInContact)
-                    break;
-            }
-        }*/
 
         if (collision.gameObject.CompareTag("TrapDoor"))
         {
