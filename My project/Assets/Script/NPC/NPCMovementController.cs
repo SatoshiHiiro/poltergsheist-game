@@ -26,6 +26,7 @@ public class NPCMovementController : MonoBehaviour
         npcAnim = GetComponentInChildren<Animator>();
         StartCoroutine(StartRelated());
         normalSpeed = movementSpeed;
+        npcAnim.SetFloat("Speed", normalSpeed / 3f);
     }
 
     IEnumerator StartRelated()
@@ -46,6 +47,7 @@ public class NPCMovementController : MonoBehaviour
         {
             movementSpeed = blindSpeed;
         }
+        npcAnim.SetFloat("Speed", movementSpeed / 3f);
     }
 
     public void ResetMovementSpeed()

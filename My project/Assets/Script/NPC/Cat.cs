@@ -27,6 +27,9 @@ public class Cat : BasicNPCBehaviour, IPatrol
 
     GameObject cage;    // Cage the cat is trapped in
 
+    //Animations
+    Animator catAnim;
+
     //public AK.Wwise.Event soundEvent;
     protected override void Start()
    {
@@ -41,7 +44,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
 
         audioSource = GetComponent<AudioSource>();
         catCollider = GetComponent<Collider2D>();
-        
+        catAnim = GetComponentInChildren<Animator>();
    }
 
     protected override void Update()
@@ -233,6 +236,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         isAttacking = true;
         audioSource.Play();
         soundEvent.Post(gameObject);
+        catAnim.SetBool("IsAttacking", true);
         PossessionManager targetObjectManager = targetPossessedObject.GetComponent<PossessionManager>();
         if (targetObjectManager == null)
         {
@@ -250,6 +254,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         
         targetObjectManager.LockPossession(false);
         isAttacking = false;
+        catAnim.SetBool("IsAttacking", false);
     }
 
     // If the cat enters the cage it remains trapped.
@@ -267,6 +272,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 StopAllCoroutines();
                 fovLight.enabled = false;
                 collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);
+                catAnim.SetBool("IsCaught", true);
                 cage = collision.gameObject;
             }            
         }
