@@ -257,9 +257,9 @@ public abstract class MovementController : MonoBehaviour
         Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), curContact);
         if (canMove)
         {
+            float bounce;
             if (collision.collider.sharedMaterial != null)
             {
-                float bounce;
                 if (objMat != null) { bounce = objMat.bounciness; }
                 else { bounce = 0; }
                 objBounciness = Mathf.Max(collision.collider.sharedMaterial.bounciness, bounce);
@@ -268,7 +268,9 @@ public abstract class MovementController : MonoBehaviour
             {
                 if (rb2d.sharedMaterial != null)
                 {
-                    objBounciness = Mathf.Max(rb2d.sharedMaterial.bounciness, objMat.bounciness);
+                    if (objMat != null) { bounce = objMat.bounciness; }
+                    else { bounce = 0; }
+                    objBounciness = Mathf.Max(rb2d.sharedMaterial.bounciness, bounce);
                 }
             }
             else
