@@ -255,23 +255,29 @@ public abstract class MovementController : MonoBehaviour
     {
         curContact.Clear();
         Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), curContact);
-        if (collision.collider.sharedMaterial != null)
+        if (canMove)
         {
-            objBounciness = Mathf.Max(collision.collider.sharedMaterial.bounciness, objMat.bounciness);
-        }
-        else if (collision.transform.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2d))
-        {
-            if (rb2d.sharedMaterial != null)
+            if (collision.collider.sharedMaterial != null)
             {
-                objBounciness = Mathf.Max(rb2d.sharedMaterial.bounciness, objMat.bounciness);
+                float bounce;
+                if (objMat != null) { bounce = objMat.bounciness; }
+                else { bounce = 0; }
+                objBounciness = Mathf.Max(collision.collider.sharedMaterial.bounciness, bounce);
+            }
+            else if (collision.transform.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2d))
+            {
+                if (rb2d.sharedMaterial != null)
+                {
+                    objBounciness = Mathf.Max(rb2d.sharedMaterial.bounciness, objMat.bounciness);
+                }
+            }
+            else
+            {
+                if (objMat != null) { objBounciness = objMat.bounciness; }
+                else { objBounciness = 0; }
             }
         }
-        else
-        {
-            if (objMat != null) { objBounciness = objMat.bounciness; }
-            else { objBounciness = 0; }
-        }
-
+        
         for (int i = 0; i < curContact.Count; i++)
         {
             if (curContact[i].normal.y <= -.9f)
