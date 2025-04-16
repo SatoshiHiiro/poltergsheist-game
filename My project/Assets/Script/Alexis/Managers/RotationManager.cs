@@ -5,6 +5,17 @@ public class RotationManager : SpriteManager
     //[Header("Rotation Animation")]
     float rotationSpeed = 1000f;        //Multiplier for the number of degrees to turn each frame
     Quaternion direction = new Quaternion(0, 0, 0, 1);
+    [HideInInspector] public bool inRotation;
+
+    private void OnEnable()
+    {
+        inRotation = false;
+    }
+
+    private void OnDisable()
+    {
+        inRotation = false;
+    }
 
     // Update is called once per frame
     protected override void Update()
@@ -19,12 +30,16 @@ public class RotationManager : SpriteManager
             else if (goesRight)
                 direction = new Quaternion(0, 0, 0, 1);     //Look right
         }
-
+        
         RotateSprite(direction);
+        if (direction != this.transform.rotation)
+            inRotation = true;
+        else
+            inRotation = false;
     }
 
     //The actual rotation on the y axis
-    protected void RotateSprite(Quaternion _direction)
+    public void RotateSprite(Quaternion _direction)
     {
         float step = rotationSpeed * Time.deltaTime;
         transform.rotation = Quaternion.RotateTowards(transform.localRotation, _direction, step);
