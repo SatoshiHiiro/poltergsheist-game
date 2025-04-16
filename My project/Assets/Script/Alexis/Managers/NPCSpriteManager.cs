@@ -19,9 +19,10 @@ public class NPCSpriteManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (this.transform.parent.TryGetComponent<BasicNPCBehaviour>(out npcBehav)) { }
-        else if (this.transform.parent.parent.TryGetComponent<BasicNPCBehaviour>(out npcBehav)) { }
-        else { Debug.Log("No BasicNPCBehaviour in parent or grandparent for a NPC sprite"); }
+        //if (this.transform.parent.TryGetComponent<BasicNPCBehaviour>(out npcBehav)) { }
+        //else if (this.transform.parent.parent.TryGetComponent<BasicNPCBehaviour>(out npcBehav)) { }
+        //else { Debug.Log("No BasicNPCBehaviour in parent or grandparent for a NPC sprite"); }
+        npcBehav = this.GetComponentInParent<BasicNPCBehaviour>();
         npcTrans = npcBehav.transform;
         isStartRelatedFinished = false;
         npcAnim = this.GetComponentInParent<Animator>();
