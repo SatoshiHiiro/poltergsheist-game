@@ -265,6 +265,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         seePolterg = true;
         audioSource.Play();
         soundEvent.Post(gameObject);
+        npcAnim.SetTrigger("IsSurprised");
 
         SuspicionManager.Instance.UpdateSeeingPoltergSuspicion();
     }
