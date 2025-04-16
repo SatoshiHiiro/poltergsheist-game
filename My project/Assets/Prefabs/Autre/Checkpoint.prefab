@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3407506867982874891}
   - component: {fileID: 7653062831901649899}
   - component: {fileID: 4136766571663221332}
+  - component: {fileID: 4482645736506194717}
   m_Layer: 13
   m_Name: Light 2D
   m_TagString: BuildingLight
@@ -49,7 +50,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.272
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.35296834, b: 0, a: 1}
   m_Intensity: 3.2
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
@@ -74,7 +75,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 0
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 2.16
+  m_PointLightOuterRadius: 1
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -131,6 +132,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4482645736506194717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276761515786522820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85f7906b4f98dc442a8e3f397baaaf05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light2D: {fileID: 7653062831901649899}
+  baseIntensity: 10
+  intensityVariation: 10
+  pulseSpeed: 0.5
 --- !u!1 &7508215305262369285
 GameObject:
   m_ObjectHideFlags: 0
