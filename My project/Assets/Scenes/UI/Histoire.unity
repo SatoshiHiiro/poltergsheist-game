@@ -147,7 +147,7 @@ RectTransform:
   m_GameObject: {fileID: 545477293}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -7.4434214}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 816029678}
@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 284.7, y: -184.9}
+  m_AnchoredPosition: {x: 679, y: -397}
   m_SizeDelta: {x: 160, y: 55.3606}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &545477295
@@ -732,6 +732,7 @@ GameObject:
   - component: {fileID: 1439774273}
   - component: {fileID: 1439774276}
   - component: {fileID: 1439774275}
+  - component: {fileID: 1439774277}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -845,6 +846,50 @@ MonoBehaviour:
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &1439774277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439774271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1444698192
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,11 +938,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1161,7 +1206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.000015259}
+  m_AnchoredPosition: {x: -22, y: 2}
   m_SizeDelta: {x: 670, y: 324.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2032921460
@@ -1184,19 +1229,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\r\nPolterg Hoffman was born in 1871 in the Lichtenberg region of Germany.
-    From a young age, to help his family, he robbed businesses and people he encountered
-    on the street. At the age of 25, he joined a criminal organization and participated
-    in numerous high-profile burglaries. According to experts, more than \u20AC2
-    million in today's money was stolen during this period. Polterg excelled in the
-    art of thievery so much that he gradually built a reputation as the King of Burglary.
-    From 1896 to 1912, numerous witch hunts were organized to find him and put him
-    behind bars, but without success. However, in 1912, the new police captain, Arnold
-    Meyer, managed to uncover clues and arrest Polterg. The locals thought they had
-    finally put an end to the chaos, but their joy was short-lived. A few months
-    after Polterg Hoffman's mysterious death in prison, the robberies began again.
-    Legend has it that this was the work of Polterg's ghost, who would continue his
-    legacy from the afterlife."
+  m_text: "\r\n<align=\"justified\">Polterg Hoffman was born in 1871 in the Lichtenberg
+    region of Germany. From a young age, to help his family, he robbed businesses
+    and people he encountered on the street. At the age of 25, he joined a criminal
+    organization and participated in numerous high-profile burglaries. According
+    to experts, more than \u20AC2 million in today's money was stolen during this
+    period. Polterg excelled in the art of thievery so much that he gradually built
+    a reputation as the King of Burglary. From 1896 to 1912, numerous witch hunts
+    were organized to find him and put him behind bars, but without success. However,
+    in 1912, the new police captain, Arnold Meyer, managed to uncover clues and arrest
+    Polterg. The locals thought they had finally put an end to the chaos, but their
+    joy was short-lived. A few months after Polterg Hoffman's mysterious death in
+    prison, the robberies began again. Legend has it that this was the work of Polterg's
+    ghost, who would continue his legacy from the afterlife."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e021058adbbee44d91c052d30989279, type: 2}
   m_sharedMaterial: {fileID: 6455729173596376325, guid: 0e021058adbbee44d91c052d30989279, type: 2}
@@ -1223,14 +1268,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 65
+  m_fontSizeBase: 65
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 10
   m_fontSizeMax: 22
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 16
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1261,7 +1306,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 5, y: 0, z: 5, w: 0}
+  m_margin: {x: -497.276, y: -311.51212, z: -537.9313, w: -230.23215}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
