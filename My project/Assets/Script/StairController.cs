@@ -209,15 +209,26 @@ public class StairController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        DisplayUIPrompt(collision);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        print("HELLO!");
+        DisplayUIPrompt(collision);
+    }
+
+    private void DisplayUIPrompt(Collider2D collision)
+    {
         // Make Climb Stairs prompt appear if Polterg is in front of a stair
         if (collision.CompareTag("Player") && !IsStairBlocked() && canPoltergUseDoor && (BottomFloor != null || UpperFloor != null))
         {
-            if(uiPromptCanvas != null)
+            if (uiPromptCanvas != null)
             {
                 uiPromptCanvas.enabled = true;
                 animator.SetBool("PromptAppear", true);
-            }            
-            
+            }
+
         }
         // Make Climb Stairs prompt appear if Polterg is in front of a stair in a possessedObject
         else if (collision.gameObject.GetComponent<PossessionController>())
@@ -225,17 +236,21 @@ public class StairController : MonoBehaviour
             PossessionManager possessionObject = collision.gameObject.GetComponent<PossessionManager>();
             if (possessionObject != null && !IsStairBlocked() && possessionObject.IsPossessing && canObjectUseDoor && (BottomFloor != null || UpperFloor != null))
             {
-                if(uiPromptCanvas != null && (collision.bounds.size.y < minimumBlockHeight))
+                if (uiPromptCanvas != null && (collision.bounds.size.y < minimumBlockHeight))
                 {
                     uiPromptCanvas.enabled = true;
                     animator.SetBool("PromptAppear", true);
-                }                
-                
+                }
+
             }
+        }
+        else
+        {
+            HideUIPrommpt(collision);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void HideUIPrommpt(Collider2D collision)
     {
         // Make Climb Stairs prompt disappear if Polterg is in front of a stair
         if (collision.CompareTag("Player"))
@@ -245,7 +260,7 @@ public class StairController : MonoBehaviour
                 uiPromptCanvas.enabled = false;
                 animator.SetBool("PromptAppear", false);
             }
-           
+
         }
         // Make Climb Stairs prompt disappear if Polterg is in front of a stair in a possessedObject
         else if (collision.gameObject.GetComponent<PossessionController>())
@@ -253,13 +268,17 @@ public class StairController : MonoBehaviour
             PossessionManager possessionObject = collision.gameObject.GetComponent<PossessionManager>();
             if (possessionObject != null && possessionObject.IsPossessing)
             {
-                if(uiPromptCanvas != null)
+                if (uiPromptCanvas != null)
                 {
                     uiPromptCanvas.enabled = false;
                     animator.SetBool("PromptAppear", false);
                 }
-                
+
             }
         }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        HideUIPrommpt(collision);
     }
 }
