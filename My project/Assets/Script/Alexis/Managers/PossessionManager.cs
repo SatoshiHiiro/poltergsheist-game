@@ -158,7 +158,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     {
         if (posControl != null && posControl.isClimbing)
         {
-            print("NOT DEPOSSESSING CAUSE BLIMBING");
+            print("NOT DEPOSSESSING CAUSE CLIMBING");
         }
         print("STOP POSSESSION!");
 
@@ -226,6 +226,10 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     {
         if (isPossessed)
         {
+            if(posControl != null)
+            {
+                posControl.isClimbing = false;
+            }
             StopPossession();
         }
         isPossessed = false;
