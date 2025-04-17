@@ -22,6 +22,8 @@ public class PossessionController : MovementController, IPossessable, IResetInit
     private bool canObjectJump = false;
     public bool IsMoving { get { return isMoving; } private set { isMoving = value; } } // Is the object moving?
 
+    public bool isClimbing;
+
     // Movement variables
     public Vector2 LastKnownPosition { get; private set; }          // Last known position of the object by an NPC
     public Quaternion LastKnownRotation { get; private set; }       // Last known rotation of the object by an NPC
@@ -113,6 +115,7 @@ public class PossessionController : MovementController, IPossessable, IResetInit
     {
         transform.position = initialPosition;
         transform.rotation = initialRotation;
+        isClimbing = false;
         OnDepossessed();
         //jumpVelocityAdjustment = 0;
         //wantsToJump = false;
