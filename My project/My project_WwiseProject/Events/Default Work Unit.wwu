@@ -14,7 +14,7 @@
 								<Action Name="" ID="{C3FCC30A-345D-4BC2-9A81-AF95D191761D}" ShortID="1006723555">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-Player_Jump" ID="{52A59224-78BB-4459-AD73-24AB8E223B76}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="Jump" ID="{8D631672-B0C6-4D75-B38F-95D6659816AD}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -25,7 +25,7 @@
 								<Action Name="" ID="{7312D2C9-52D2-4D55-98B4-000EBEEEACB8}" ShortID="595430301">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-Player_JumpBounce" ID="{9064B7DE-D6DB-469B-9755-E537ABD74096}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="JumpBounce" ID="{3559157A-56F6-4847-B48C-642F1291D77B}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -36,7 +36,7 @@
 								<Action Name="" ID="{B07C371C-DB8B-40AF-851F-9D3021FC5D6C}" ShortID="229572193">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-Player_Hovering" ID="{B881A4AA-08A5-48D5-A4A8-DB54887332E0}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="Hovering" ID="{4BBC034D-FBC8-46C0-B092-1A73FDE8EE8F}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -67,7 +67,7 @@
 										<Action Name="" ID="{DBC28BCC-2F0C-4F54-A6AC-5576A7E56C79}" ShortID="604113989">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_DoorClose" ID="{3A6C4123-747E-400E-B84E-3F650B422E01}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_DoorClose" ID="{8BF9FBB1-5D6B-46BC-AF6A-E4DEE10141F2}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -78,7 +78,7 @@
 										<Action Name="" ID="{8F6A8F46-3CF4-492C-932C-F9E5ED6E1CD6}" ShortID="55135388">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_DoorOpen" ID="{82040872-B48A-43B9-9283-C7E28314D846}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_DoorOpen" ID="{E9F41CDD-1827-4280-A059-CB2E85F043C8}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -89,7 +89,7 @@
 										<Action Name="" ID="{6C9AFD69-6B9F-43F0-BBFD-4D2E865FEE5F}" ShortID="1014742653">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_MouseDoorOpen" ID="{1DA82247-BADF-4DED-92B1-87034D7D1251}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_MouseDoorOpen" ID="{BF6B4952-24A0-4F0F-8AD1-94A16DBB9A4B}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -100,7 +100,7 @@
 										<Action Name="" ID="{B73DC5E0-5FB7-4D55-9453-9B9D4756E3C4}" ShortID="521826706">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_MouseDoorClose" ID="{6995A583-0A69-42EB-B7EA-37A5D1019E88}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_MouseDoorClose" ID="{7E1B273F-0E37-4AE4-B03E-E9E98460AE6D}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -111,7 +111,7 @@
 										<Action Name="" ID="{E6E4239F-7961-4F3B-8152-EA06CE235F59}" ShortID="540630701">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_DoorLocked" ID="{EA793B8A-7EA9-46A8-8F3E-969DF2D8FF48}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_DoorLocked" ID="{DFC4AD9D-6C2C-44B1-9AA7-1C71B813F9F2}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -122,7 +122,7 @@
 										<Action Name="" ID="{63681A02-0EBE-4054-BFBB-34A3B5DBFA4D}" ShortID="113185178">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_DoorUnlocked" ID="{C7EFFEC6-3171-4C2E-8D36-43200234AFD2}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_DoorUnlocked" ID="{CDE0B08D-336A-40DF-AE4E-37E662178826}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -133,7 +133,7 @@
 										<Action Name="" ID="{CF14DE11-F97C-4093-9277-C63529D60749}" ShortID="1060935411">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_DoorEnd" ID="{9086F410-9A75-4B4C-A8EC-FB4D1CFFB16C}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_DoorEnd" ID="{11BC89EC-CF06-44A4-B92B-745FAF8F1786}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -203,7 +203,7 @@
 										<Action Name="" ID="{60035687-0285-4ABF-9341-E9365066A088}" ShortID="609611641">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_CookieJarFall" ID="{0C2469F8-5B51-47C5-A4CA-C0106E8B84E4}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_CookieJarFall" ID="{3D37C0B9-1DA4-45EB-892A-AE122820D037}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -291,7 +291,7 @@
 										<Action Name="" ID="{9472E8EC-7E22-4F59-A8F1-08AF0AE66847}" ShortID="324596216">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_Bookshelffall" ID="{7043F0B5-6384-4B91-878C-FB82BE94EAC8}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_BookshelfFall" ID="{3AF79F63-4D7F-4221-99BA-CB5890B8E803}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -324,7 +324,7 @@
 										<Action Name="" ID="{CF767388-D632-44BC-B5DB-E9FB8604A036}" ShortID="328141919">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_BallFall" ID="{8D9269CF-90AC-45EA-AD81-4DE94D65FCD1}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="SFX_BallFall" ID="{21E5F7B0-1F70-485C-9625-9A2B74F61E07}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -416,7 +416,7 @@
 										<Action Name="" ID="{8F302090-D0AB-4AAE-9336-EE4A40EC6D77}" ShortID="354915654">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PH-SFX_FlowerPotFall" ID="{614098B2-5E31-462A-A354-A6209F2CA35A}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+													<ObjectRef Name="FlowerPot" ID="{309A737C-7BE4-43A4-8085-605353BB6B0C}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -461,7 +461,7 @@
 								<Action Name="" ID="{23469D91-F2FD-4BC8-A3AA-D30F3DC91C03}" ShortID="975862284">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-SFX_PossessedOn" ID="{150A1F1F-0231-45EE-9291-C14168594DCF}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="SFX_PossessedOn" ID="{003DE0DC-7DB8-4997-8108-BBD1D6923D55}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -472,7 +472,7 @@
 								<Action Name="" ID="{544278F8-7592-459D-BA2A-A1596A483C52}" ShortID="724427062">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-SFX_PossessedOff" ID="{80F9FB2C-AA5D-48DF-833B-D7DB79B824F0}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="SFX_PossessedOff" ID="{3DD6A1F8-32B3-4693-8E14-04445E49187C}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -509,7 +509,7 @@
 								<Action Name="" ID="{9238F444-477A-4909-AC7D-F716C62C4021}" ShortID="21310809">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-SFX_CatSlap" ID="{35F7600F-312C-49A4-BA1C-B187BC6B7F6A}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="SFX_CatSlap" ID="{5BA2F07F-3603-460E-8A52-D1C7CB4E5A04}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -528,7 +528,7 @@
 								<Action Name="" ID="{B5F4338B-1731-4BB1-A16D-E6076982A48B}" ShortID="839401773">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-UI_ObjectPickup" ID="{0CA77400-DD33-4F1D-947C-728A822920CC}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="UI_ObjectPickup" ID="{71961B6F-7187-4105-9B8C-98CED1BA8DBC}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -539,7 +539,7 @@
 								<Action Name="" ID="{BEFAE370-BDB6-4148-8686-8A677162E16B}" ShortID="374374651">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-UI_KeyPickup" ID="{39ED4BEE-9AF5-4DB5-B4FE-EDF60815111E}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="UI_KeyPickup" ID="{313B516D-D92A-48FE-B165-882C3988B79C}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -561,7 +561,7 @@
 								<Action Name="" ID="{FE8DE37B-8E94-4E57-99D4-827EF1813987}" ShortID="704776280">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-UI_MouseOver" ID="{2A6DC84F-8B68-49AB-BF63-BDAD7BA0D492}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="UI_MouseOver" ID="{FC127BE8-A28C-43ED-A345-07995806AF7C}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -572,7 +572,7 @@
 								<Action Name="" ID="{B8566F7B-98EA-455A-A6F3-59DF476F44DB}" ShortID="125753412">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-UI_OnClick" ID="{0F499673-0655-4A24-BCC8-524245B42516}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="UI_OnCLick" ID="{CCE51931-A453-416D-BC39-4C884D70F312}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -616,7 +616,7 @@
 								<Action Name="" ID="{674D2C5A-2158-4D0C-B7DC-6FFDBC240BD9}" ShortID="52702500">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-UI_Star1" ID="{8DB76ACC-A4AB-4098-A965-71B4D94E0B79}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="UI_Star1" ID="{2548F259-3857-4E6B-940F-42D4BB69EFD4}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -627,7 +627,7 @@
 								<Action Name="" ID="{BC205237-F6E0-42E9-888A-E86ED1F197C2}" ShortID="277524121">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-UI_Star2" ID="{6F256B47-1B7B-4B8A-B46C-9EA40549C32D}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="UI_Star2" ID="{6B130AF9-E592-4242-B7A8-8C19E730A890}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -638,7 +638,7 @@
 								<Action Name="" ID="{CE61CA58-F0BE-4798-B224-E2F448B39D1A}" ShortID="479072689">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-UI_Star3" ID="{AA618B6B-54AB-49F8-9C55-B02AA1982588}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="UI_Star3" ID="{0E38F27A-2FF2-441C-AADB-EC439CD6F3D8}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
