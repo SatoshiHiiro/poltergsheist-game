@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{65E86D28-8BA1-49D3-8B67-98495A6B0D5F}",
     "Language": "SFX",
-    "Hash": "{746D4B5C-061E-CFDF-81A0-A43EB752F3B6}",
+    "Hash": "{413E5982-6697-7A29-B6D2-85B6FAC054FE}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\main",
     "ShortName": "main",
     "Path": "main.bnk",
@@ -46,14 +46,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Door_Open_3.wav",
       "CachePath": "0C/{0C706B39-E54E-10E1-CBEA-BEF6B5321021}.wem"
-     },
-     {
-      "Id": "51755562",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "PH-VO_NPCCat.wav",
-      "CachePath": "2A/{2ABCCC9C-E62A-353B-3199-7652685408F2}.wem"
      },
      {
       "Id": "67699361",
@@ -174,6 +166,14 @@
       "Location": "Memory",
       "ShortName": "PH-UI_Defeat.wav",
       "CachePath": "8F/{8F5909B8-654E-78E4-25C0-29EC8B36C90D}.wem"
+     },
+     {
+      "Id": "181169064",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PH-SFX_MusicPlay2.wav",
+      "CachePath": "63/{63BA0E4B-9BCC-D4A7-2B4B-EEB6CF115432}.wem"
      },
      {
       "Id": "225569433",
@@ -336,14 +336,6 @@
       "CachePath": "43/{43A44361-DC7A-6D2E-1E12-6070BA522015}.wem"
      },
      {
-      "Id": "409932321",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "PH-VO_NPCCurious.wav",
-      "CachePath": "71/{71A7E37B-B9F6-E814-DF8D-0862402352E0}.wem"
-     },
-     {
       "Id": "414525644",
       "Language": "SFX",
       "Streaming": "false",
@@ -406,6 +398,14 @@
       "Location": "Memory",
       "ShortName": "MUS_Scene2_120bpm_Sg1_CC_T1M.wav",
       "CachePath": "1B/{1B51947B-D87C-6906-D3CC-9A3D69FCA748}.wem"
+     },
+     {
+      "Id": "535289571",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PH-VO_CatMeow.wav",
+      "CachePath": "CE/{CE5BC1B8-1816-DAD1-29B7-C8D751529CF3}.wem"
      },
      {
       "Id": "554795864",
@@ -686,6 +686,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Player_Hovering.wav",
       "CachePath": "F4/{F4E44215-0380-34D7-8A8E-C543FD318F26}.wem"
+     },
+     {
+      "Id": "878708054",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PH-VO_Hmm.wav",
+      "CachePath": "C8/{C8CF3480-B9D4-DE43-C475-5902AE260E8A}.wem"
      },
      {
       "Id": "882795064",
@@ -1630,12 +1638,10 @@
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Museum\\SFX_MusicPlay",
       "GUID": "{D402D07F-03AA-4F30-9F2F-4AF2DB44423A}",
       "Color": "24",
-      "DurationType": "OneShot",
-      "DurationMin": "1.1823334",
-      "DurationMax": "1.1823334",
+      "DurationType": "Infinite",
       "MediaRefs": [
        {
-        "Id": "995335852"
+        "Id": "181169064"
        }
       ]
      },
@@ -1973,11 +1979,11 @@
       "GUID": "{CD57D34E-C575-4E4C-93F3-707735A72B87}",
       "Color": "9",
       "DurationType": "OneShot",
-      "DurationMin": "1.3823333",
-      "DurationMax": "1.3823333",
+      "DurationMin": "0.87369615",
+      "DurationMax": "0.87369615",
       "MediaRefs": [
        {
-        "Id": "51755562"
+        "Id": "535289571"
        }
       ]
      },
@@ -2003,11 +2009,11 @@
       "GUID": "{C1EBB42A-7D9A-4065-A881-39C8C4CE36DA}",
       "Color": "9",
       "DurationType": "OneShot",
-      "DurationMin": "1.8323333",
-      "DurationMax": "1.8323333",
+      "DurationMin": "1.2670295",
+      "DurationMax": "1.2670295",
       "MediaRefs": [
        {
-        "Id": "409932321"
+        "Id": "878708054"
        }
       ]
      },
@@ -2123,6 +2129,6 @@
     ]
    }
   ],
-  "FileHash": "{77F4CCE4-62A2-4F35-5130-EBD2D3716837}"
+  "FileHash": "{7AF4CDF8-00BA-65E6-86D1-3F7CA3A5F7EF}"
  }
 }
