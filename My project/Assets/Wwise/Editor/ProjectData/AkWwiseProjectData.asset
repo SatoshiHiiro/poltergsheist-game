@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: 9d5010a5cee3264eb10f11faafa0bb06
     GuidInternal: 
-    m_lastTime: -8584578913928867842
+    m_lastTime: -8584579088102461774
     List: []
   AuxBusWwu:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
@@ -38,7 +38,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: c23e1d7182510c47ac9c86c3ec1dd706
     GuidInternal: 
-    m_lastTime: -8584578913933761772
+    m_lastTime: -8584579088102533058
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 3592dfa2d40267489fbbbc121975ef5c
     GuidInternal: 
-    m_lastTime: -8584578851375401150
+    m_lastTime: -8584578008153931026
     List:
     - name: main
       guid: 286de865a18bd3498b6798495a6b0d5f
@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: eaf8ae6ee9c7f44b9005b089581ca3bb
     GuidInternal: 
-    m_lastTime: -8584568816007661314
+    m_lastTime: -8584575362531269241
     List:
     - name: Doors
       guid: efcee1e45e52cd4da44768755966ea9f
@@ -1046,8 +1046,8 @@ MonoBehaviour:
         guid: 7fd002d4aa03304f9f2f4af2db44423a
       Path: Events\Default Work Unit\SFX\Museum\SFX_MusicPlay
       maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
+      maxDuration: 1.1823334
+      minDuration: 1.1823334
     - name: SFX_NPC_CatSlap
       guid: a2678be97983f5428e7b6987466255ac
       id: 1591108753
@@ -1544,8 +1544,8 @@ MonoBehaviour:
         guid: 4ed357cd75c54c4e93f3707735a72b87
       Path: Events\Default Work Unit\VO\VO_NPC_Cat
       maxAttenuation: 0
-      maxDuration: 0.87369615
-      minDuration: 0.87369615
+      maxDuration: 1.3823333
+      minDuration: 1.3823333
     - name: VO_NPC_CatChase
       guid: 119ec17b79d2934ba439629c745c74de
       id: 553568125
@@ -1584,8 +1584,8 @@ MonoBehaviour:
         guid: 2ab4ebc19a7d6540a88139c8c4ce36da
       Path: Events\Default Work Unit\VO\VO_NPC_Curious
       maxAttenuation: 0
-      maxDuration: 1.2670295
-      minDuration: 1.2670295
+      maxDuration: 1.8323333
+      minDuration: 1.8323333
     - name: VO_NPC_Locked
       guid: 596a1d5d85e05f4584bdaeded7222ffa
       id: 1529802069
@@ -1698,7 +1698,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 183607395b7abe48a4667fda80dcb427
     GuidInternal: 
-    m_lastTime: -8584578913933823337
+    m_lastTime: -8584579088102596255
     List: []
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
@@ -1712,7 +1712,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: af7cbd3a91f8fa45b4608609763cdabc
     GuidInternal: 
-    m_lastTime: -8584574541358496694
+    m_lastTime: -8584575403898139515
     List:
     - name: Music
       guid: ab59f37bea0fea4bbae3157f03df8dbc
@@ -1808,7 +1808,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 3bd6a9a5898ac445b699c94c0ef17091
     GuidInternal: 
-    m_lastTime: -8584574541358486644
+    m_lastTime: -8584575362531360122
     List:
     - name: Material
       guid: e3d291f643829b4cbd2cc7810fdd08d2
@@ -1872,10 +1872,10 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: e57c667935e38a43bc482598b93d66b4
     GuidInternal: 
-    m_lastTime: -8584578913928872863
+    m_lastTime: -8584579088102461774
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 050000000600000007000000090000000a0000000b0000000c0000000d0000000e0000000f000000120000001300000014000000190000001a0000003f000000
+  ExpandedWaapiItemIds: 05000000060000000a0000000b000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0
