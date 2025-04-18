@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 36501578}
   - component: {fileID: 36501577}
   - component: {fileID: 36501576}
+  - component: {fileID: 36501579}
   m_Layer: 5
   m_Name: Quitter
   m_TagString: Untagged
@@ -373,6 +374,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36501574}
   m_CullTransparentMesh: 1
+--- !u!114 &36501579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36501574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b08c794c493c540ba7bb299dd6a220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseHoverSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c06bb9e5e0cb644b59ebcbb26ab30b, type: 2}
+  onClickSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a91945acf6682dc4389772923108987a, type: 2}
 --- !u!1001 &161596874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -381,6 +402,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5524111901720067093, guid: 7c8b76fc6f052c244b7929b2450e08c8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6700394811249563223, guid: 7c8b76fc6f052c244b7929b2450e08c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 164.33684
@@ -1012,6 +1037,7 @@ GameObject:
   - component: {fileID: 770116604}
   - component: {fileID: 770116603}
   - component: {fileID: 770116602}
+  - component: {fileID: 770116605}
   m_Layer: 5
   m_Name: Jouer
   m_TagString: Untagged
@@ -1133,6 +1159,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770116600}
   m_CullTransparentMesh: 1
+--- !u!114 &770116605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770116600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b08c794c493c540ba7bb299dd6a220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseHoverSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c06bb9e5e0cb644b59ebcbb26ab30b, type: 2}
+  onClickSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a91945acf6682dc4389772923108987a, type: 2}
 --- !u!1 &1023823934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,6 +1629,7 @@ GameObject:
   - component: {fileID: 1511929327}
   - component: {fileID: 1511929326}
   - component: {fileID: 1511929325}
+  - component: {fileID: 1511929328}
   m_Layer: 5
   m_Name: Histoire
   m_TagString: Untagged
@@ -1704,6 +1751,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511929323}
   m_CullTransparentMesh: 1
+--- !u!114 &1511929328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511929323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b08c794c493c540ba7bb299dd6a220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseHoverSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c06bb9e5e0cb644b59ebcbb26ab30b, type: 2}
+  onClickSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a91945acf6682dc4389772923108987a, type: 2}
 --- !u!1 &1535374155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,6 +1840,7 @@ GameObject:
   - component: {fileID: 1793668638}
   - component: {fileID: 1793668637}
   - component: {fileID: 1793668636}
+  - component: {fileID: 1793668639}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -1894,6 +1962,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793668634}
   m_CullTransparentMesh: 1
+--- !u!114 &1793668639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793668634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b08c794c493c540ba7bb299dd6a220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseHoverSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c06bb9e5e0cb644b59ebcbb26ab30b, type: 2}
+  onClickSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a91945acf6682dc4389772923108987a, type: 2}
 --- !u!1 &2104893839
 GameObject:
   m_ObjectHideFlags: 0
