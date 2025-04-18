@@ -5,7 +5,8 @@ public class StealableBehavior : PickupItemBehavior
 {
     EnergySystem energy;
     [SerializeField] public float energyGain;
-    public AK.Wwise.Event soundEvent; // Drag & Drop l’event Wwise ici
+    public AK.Wwise.Event objectPickUpSoundEvent;
+    public AK.Wwise.Event playerYaySoundEvent;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,7 +28,8 @@ public class StealableBehavior : PickupItemBehavior
         {
             InventorySystem.Instance.AddStolenItemToInventory(this);
             //Debug.Log("Collision détectée avec : " + other.gameObject.name);
-            soundEvent.Post(gameObject); // Joue le son
+            playerYaySoundEvent.Post(gameObject);
+            objectPickUpSoundEvent.Post(gameObject); // Joue le son
         }
             //energy.ModifyEnergy(energyGain);
 
