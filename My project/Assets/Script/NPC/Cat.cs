@@ -25,6 +25,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
     GameObject targetPossessedObject; // Cat hunting target
 
     AudioSource audioSource;
+    Animator catAnim;
     Collider2D catCollider;
     Coroutine patrolCoroutine;
 
@@ -44,6 +45,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
 
         audioSource = GetComponent<AudioSource>();
         catCollider = GetComponent<Collider2D>();
+        catAnim = GetComponentInChildren<Animator>();
         
    }
 
@@ -237,6 +239,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
         audioSource.Play();
         //surpriseSoundEvent.Post(gameObject);
         catSlapEvent.Post(gameObject);
+        catAnim.SetBool("IsAttacking", true);
+
         PossessionManager targetObjectManager = targetPossessedObject.GetComponent<PossessionManager>();
         if (targetObjectManager == null)
         {
