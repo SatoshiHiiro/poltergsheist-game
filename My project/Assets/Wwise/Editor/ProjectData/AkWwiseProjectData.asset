@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: eaf8ae6ee9c7f44b9005b089581ca3bb
     GuidInternal: 
-    m_lastTime: -8584566037962923199
+    m_lastTime: -8584565931709431903
     List:
     - name: Doors
       guid: efcee1e45e52cd4da44768755966ea9f
@@ -1698,8 +1698,22 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 183607395b7abe48a4667fda80dcb427
     GuidInternal: 
-    m_lastTime: -8584578913933823337
-    List: []
+    m_lastTime: -8584565956241764335
+    List:
+    - name: NPC_Speed
+      guid: b8a1d5b47c093543b7df40722b45bcb7
+      id: 2586782490
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 183607395b7abe48a4667fda80dcb427
+      - ElementName: NPC_Speed
+        ObjectType: 13
+        guid: b8a1d5b47c093543b7df40722b45bcb7
+      Path: Game Parameters\Default Work Unit\NPC_Speed
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
@@ -1808,7 +1822,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 3bd6a9a5898ac445b699c94c0ef17091
     GuidInternal: 
-    m_lastTime: -8584568450037953494
+    m_lastTime: -8584565915575234867
     List:
     - name: Material
       guid: e3d291f643829b4cbd2cc7810fdd08d2
@@ -1857,6 +1871,72 @@ MonoBehaviour:
         - ElementName: Wood
           ObjectType: 10
           guid: 64f790f3d4402d4e99e3078806f56792
+      ValueGuids: []
+      ValueIcons: []
+      valuesInternal: []
+    - name: Speed
+      guid: ca154e0ea3920d4f9afad1295013b052
+      id: 640949982
+      PathAndIcons:
+      - ElementName: Switches
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 3bd6a9a5898ac445b699c94c0ef17091
+      - ElementName: Speed
+        ObjectType: 11
+        guid: ca154e0ea3920d4f9afad1295013b052
+      Path: Switches\Default Work Unit\Speed
+      values:
+      - name: Running
+        guid: d87506cb1185dc4e9022fc9cb9e942b3
+        id: 3863236874
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 3bd6a9a5898ac445b699c94c0ef17091
+        - ElementName: Speed
+          ObjectType: 11
+          guid: ca154e0ea3920d4f9afad1295013b052
+        - ElementName: Running
+          ObjectType: 10
+          guid: d87506cb1185dc4e9022fc9cb9e942b3
+      - name: Sprinting
+        guid: ecfd224ae72a8047b416f897036e9382
+        id: 3691594375
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 3bd6a9a5898ac445b699c94c0ef17091
+        - ElementName: Speed
+          ObjectType: 11
+          guid: ca154e0ea3920d4f9afad1295013b052
+        - ElementName: Sprinting
+          ObjectType: 10
+          guid: ecfd224ae72a8047b416f897036e9382
+      - name: Walking
+        guid: 3d4f764f913caa4aaf72d8764c2afd3f
+        id: 340271938
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 3bd6a9a5898ac445b699c94c0ef17091
+        - ElementName: Speed
+          ObjectType: 11
+          guid: ca154e0ea3920d4f9afad1295013b052
+        - ElementName: Walking
+          ObjectType: 10
+          guid: 3d4f764f913caa4aaf72d8764c2afd3f
       ValueGuids: []
       ValueIcons: []
       valuesInternal: []
