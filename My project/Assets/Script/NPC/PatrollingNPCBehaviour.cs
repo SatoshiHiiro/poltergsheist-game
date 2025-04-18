@@ -67,13 +67,15 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         // Priority 1: If the NPC is blocked but the room is no longer blocked, get unstuck
         if(isBlocked && currentPoint != null && !IsRoomBlocked(currentPoint))
         {
+            nonSuspiciousSoundEvent.Stop(gameObject);
             StartCoroutine(GetUnstuck());
             return;
         }
         // Priority 2: Handle investigation queue if we're not currently investigating or getting unstuck
         if(investigationQueue.Count > 0 && !isInvestigating && !isWaiting)
         {
-            if(returnToFloor != null)
+            nonSuspiciousSoundEvent.Stop(gameObject);
+            if (returnToFloor != null)
             {
                 StopCoroutine(returnToFloor);
                 returnToFloor = null;
@@ -99,6 +101,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         // Priority 4: Patrol if we're able to and should be
         else if(investigationQueue.Count == 0 && !isInvestigating && !isWaiting && !isBlocked && !isPatrolling)
         {
+            nonSuspiciousSoundEvent.Post(gameObject);
             patrolling = StartCoroutine(Patrol());
         }
 

@@ -31,10 +31,12 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
     [Header("NPC sound variables")]
     [SerializeField] protected AK.Wwise.Event surpriseSoundEvent;
+    [SerializeField] protected AK.Wwise.Event nonSuspiciousSoundEvent;
     [SerializeField] protected float soundCooldown = 1.5f;  // Cooldown between sound of surprise
     protected float lastSoundTime;
     protected GameObject lastMovingObject;
     protected bool soundHasPlayed;
+    protected bool isNonSuspiciousSoundPlayed = false;
 
     //Animation variables
     [HideInInspector] public float directionX { get; set; }
@@ -120,6 +122,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                         // Check if the object is moving in front of him
                         if (possessedObject.IsMoving)
                         {
+                            StartCoroutine(WaitBeforeNonSuspiciousSound());
                             isObjectMoving = true;
                             foundMovingObject = true;
                             currentMovingObject = possessedObject.gameObject;
@@ -215,6 +218,14 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
             lastSoundTime = Time.time;
         }
         // Otherwise, it's the same object still moving, so don't play the sound again
+    }
+
+    // Wait some time before NPC going to normal sound behaviour
+    protected virtual IEnumerator WaitBeforeNonSuspiciousSound()
+    {
+        nonSuspiciousSoundEvent.Stop(gameObject);
+        yield return new WaitForSeconds(3f);
+        isNonSuspiciousSoundPlayed = false;
     }
 
 

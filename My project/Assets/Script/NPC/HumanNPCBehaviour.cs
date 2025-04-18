@@ -8,9 +8,6 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 {
     // Sound variables
     [SerializeField] protected AK.Wwise.Event curiousNPCSoundEvent;
-    [SerializeField] protected AK.Wwise.Event nonSuspiciousSoundEvent;
-
-
 
     [Header("Suspicion variables")]
     // Variable manage suspicion of the NPC
@@ -90,8 +87,17 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         else if(investigationQueue.Count == 0 && !isInvestigating && !isAtInitialPosition)
         {
             isAtInitialPosition = true;
-            nonSuspiciousSoundEvent.Post(gameObject);
             returnToInitialPositionCoroutine = StartCoroutine(ReturnToInitialPosition());
+        }
+
+        if(investigationQueue.Count == 0 && !isInvestigating)
+        {
+            if (!isNonSuspiciousSoundPlayed)
+            {
+                print("ISNONSUSPICIOUS!");
+                isNonSuspiciousSoundPlayed = true;
+                nonSuspiciousSoundEvent.Post(gameObject);
+            }
         }
     }
 
@@ -257,6 +263,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                     // If nothing is blocking the sight of the NPC to the reflection of the player
                     if (!mirror.IsMirrorReflectionBlocked(reflectionPoints, playerCollider) && !seePolterg)
                     {
+                        StartCoroutine(WaitBeforeNonSuspiciousSound());
+                        //nonSuspiciousSoundEvent.Stop(gameObject);
                         print("see");
                         playerCollider.gameObject.GetComponent<MovementController>().canMove = false;
                         NPCSeePolterg();
@@ -415,7 +423,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             facingRight = initialFacingRight;
             FlipFieldOfView();
         }
-        nonSuspiciousSoundEvent.Stop(gameObject);
+        //nonSuspiciousSoundEvent.Stop(gameObject);
     }
 
     public override void ResetInitialState()

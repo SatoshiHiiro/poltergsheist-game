@@ -190,7 +190,6 @@ public abstract class MovementController : MonoBehaviour
         {
             if (movementXAxisSoundEvent != null)
             {
-                print("TESTING!!!!");
                 isMovementXAxisSoundOn = false;
                 movementXAxisSoundEvent.Stop(gameObject);
             }
