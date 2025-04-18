@@ -66,6 +66,13 @@ public abstract class MovementController : MonoBehaviour
     private bool isPerformingJump = false;
     private bool canClimbAgain;
 
+    [Header ("Sound variables")]
+    [SerializeField] public AK.Wwise.Event movementXAxisSoundEvent;
+    [SerializeField] public AK.Wwise.Event jumpSoundEvent;
+    [SerializeField] public AK.Wwise.Event fallSoundEvent;
+    protected bool isMovementXAxisSoundOn = false;
+    private float stopThresholdSound = 0.05f;
+
     //Shortcuts
     protected Rigidbody2D rigid2D;
     Collider2D col2D;
@@ -122,13 +129,25 @@ public abstract class MovementController : MonoBehaviour
             if (lastInput.x != moveInput.x && moveInput.x != 0) { rigid2D.linearVelocityX = 0; }
 
             //Mouvement on the x axis
-            if (canWalk) { rigid2D.linearVelocityX = rigid2D.linearVelocityX + moveInput.x * speed; }
+            if (canWalk)
+            {
+                rigid2D.linearVelocityX = rigid2D.linearVelocityX + moveInput.x * speed;
+                if(movementXAxisSoundEvent != null && isInContact && !isMovementXAxisSoundOn)
+                {
+                    isMovementXAxisSoundOn = true;
+                    movementXAxisSoundEvent.Post(gameObject);
+                }
+                
+            }
 
             //Caps the speed according to maxspeed
             rigid2D.linearVelocityX = Mathf.Clamp(rigid2D.linearVelocityX, -maxSpeed, maxSpeed);
 
             //Slows the x mouvement if no x input.
-            if (moveInput.x == 0) { rigid2D.linearVelocityX = rigid2D.linearVelocityX / stopSpeed; }
+            if (moveInput.x == 0)
+            { 
+                rigid2D.linearVelocityX = rigid2D.linearVelocityX / stopSpeed;
+            }
 
             if (isJumping && isInContact && !isPerformingJump)
             {
@@ -136,6 +155,12 @@ public abstract class MovementController : MonoBehaviour
                 if (onJump != null) { onJump(jumpParam); };
                 float _jumpSpeed = jumpSpeed + Mathf.Abs(lastVelocityY * objBounciness);
                 rigid2D.linearVelocityY = _jumpSpeed;
+                if (jumpSoundEvent != null)
+                {
+                    print("IS JUMPING " + isJumping);
+                    jumpSoundEvent.Post(gameObject);
+                }
+
                 //rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
                 StartCoroutine(InputReset());
             }
@@ -143,9 +168,22 @@ public abstract class MovementController : MonoBehaviour
             rigid2D.linearVelocityY = Mathf.Clamp(rigid2D.linearVelocityY, -8.5f, 8.5f);
 
             lastInput = moveInput;
+
+            if(Mathf.Abs(rigid2D.linearVelocityX) <= stopThresholdSound && isInContact)
+            {
+                if(movementXAxisSoundEvent != null)
+                {
+                    isMovementXAxisSoundOn = false;
+                    movementXAxisSoundEvent.Stop(gameObject);
+                }
+                
+            }
         }
         // Keep it from moving
-        else { rigid2D.linearVelocityX = 0; }
+        else
+        {
+            rigid2D.linearVelocityX = 0;
+        }
     }
 
     //To get the inputs
@@ -278,6 +316,12 @@ public abstract class MovementController : MonoBehaviour
                 if (objMat != null) { objBounciness = objMat.bounciness; }
                 else { objBounciness = 0; }
             }
+
+            if(fallSoundEvent != null)
+            {
+                fallSoundEvent.Post(gameObject);
+            }
+            
         }
         
         for (int i = 0; i < curContact.Count; i++)

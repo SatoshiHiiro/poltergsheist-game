@@ -72,6 +72,9 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="PH-SFX_Ball" ID="{435416E0-8C1F-4286-A508-1117CFD2D826}" ShortID="628602309">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -1042,63 +1045,63 @@
 									<Language>SFX</Language>
 									<AudioFile>PH-SFX_MusicStop.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="578823085"/>
+										<MediaID ID="377625904"/>
 									</MediaIDList>
 								</AudioFileSource>
 								<AudioFileSource Name="PH-SFX_PlayerNotMoving" ID="{877C98ED-3647-448F-949A-C10EE556F553}">
 									<Language>SFX</Language>
 									<AudioFile>PH-SFX_PlayerNotMoving.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="987789638"/>
+										<MediaID ID="230955768"/>
 									</MediaIDList>
 								</AudioFileSource>
 								<AudioFileSource Name="PH-VO_NPCCat" ID="{D96194D6-FD93-46AD-9B01-31A842F2AED3}">
 									<Language>SFX</Language>
 									<AudioFile>PH-VO_NPCCat.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="51755562"/>
+										<MediaID ID="417950812"/>
 									</MediaIDList>
 								</AudioFileSource>
 								<AudioFileSource Name="PH-VO_NPCCatChase" ID="{CA53AE62-CF80-4F53-A0D2-FF23DCC4B341}">
 									<Language>SFX</Language>
 									<AudioFile>PH-VO_NPCCatChase.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="967137326"/>
+										<MediaID ID="501145020"/>
 									</MediaIDList>
 								</AudioFileSource>
 								<AudioFileSource Name="PH-VO_NPCCurious" ID="{3F9E2206-ABAD-4216-98DE-D13E8343BE57}">
 									<Language>SFX</Language>
 									<AudioFile>PH-VO_NPCCurious.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="409932321"/>
+										<MediaID ID="516533479"/>
 									</MediaIDList>
 								</AudioFileSource>
 								<AudioFileSource Name="PH-VO_NPCLocked" ID="{4F8CB412-8E69-4371-8199-764D1E3760A6}">
 									<Language>SFX</Language>
 									<AudioFile>PH-VO_NPCLocked.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="608843293"/>
+										<MediaID ID="778961871"/>
 									</MediaIDList>
 								</AudioFileSource>
 								<AudioFileSource Name="PH-VO_NPCWhatever" ID="{9267E761-8EA3-4875-9FF3-3DA9CBBDDC65}">
 									<Language>SFX</Language>
 									<AudioFile>PH-VO_NPCWhatever.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="772057789"/>
+										<MediaID ID="264852627"/>
 									</MediaIDList>
 								</AudioFileSource>
 								<AudioFileSource Name="PH-VO_PlayerBarks" ID="{4F1D1ECE-E6D4-445F-8887-22C044F3899C}">
 									<Language>SFX</Language>
 									<AudioFile>PH-VO_PlayerBarks.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="364952126"/>
+										<MediaID ID="518536363"/>
 									</MediaIDList>
 								</AudioFileSource>
 								<AudioFileSource Name="PH-VO_PlayerYay" ID="{C516988E-1543-4F3C-B007-F37CBBBA297F}">
 									<Language>SFX</Language>
 									<AudioFile>PH-VO_PlayerYay.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="995335852"/>
+										<MediaID ID="197530883"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
