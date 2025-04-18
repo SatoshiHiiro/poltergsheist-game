@@ -321,7 +321,6 @@ public abstract class MovementController : MonoBehaviour
             {
                 fallSoundEvent.Post(gameObject);
             }
-            
         }
         
         for (int i = 0; i < curContact.Count; i++)

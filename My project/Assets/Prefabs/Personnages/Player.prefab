@@ -546,6 +546,18 @@ MonoBehaviour:
   canJump: 1
   isInContact: 0
   isJumping: 0
+  movementXAxisSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  jumpSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  fallSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   move:
     m_Name: Move
     m_Type: 0
@@ -627,7 +639,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 5e5517cd8fe8fec40a8282b32dd1c990, type: 2}
+  m_Material: {fileID: 6200000, guid: c2a79e38cf1fe214889e4fef5884a6a6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -969,7 +981,7 @@ Transform:
   m_GameObject: {fileID: 6328761558664252938}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04710388, y: -0.98817873, z: 0}
+  m_LocalPosition: {x: -0.047096252, y: -0.98817444, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1011,7 +1023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionAdjuster: {x: 0, y: 0, z: 0}
-  pivotPos: {x: 3.124929, y: 157.08691, z: -0.98110425}
+  pivotPos: {x: 122.0829, y: 251.12183, z: 0}
 --- !u!1 &6605465171680768661
 GameObject:
   m_ObjectHideFlags: 0
