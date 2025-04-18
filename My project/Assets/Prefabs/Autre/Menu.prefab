@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 5063619306845744324}
   - component: {fileID: 8182885445724912904}
   - component: {fileID: 3187881974696052491}
+  - component: {fileID: 5021038141652031573}
   m_Layer: 5
   m_Name: Recommencer
   m_TagString: Untagged
@@ -303,6 +304,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5021038141652031573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2626563986464126580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b08c794c493c540ba7bb299dd6a220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseHoverSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c06bb9e5e0cb644b59ebcbb26ab30b, type: 2}
+  onClickSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a91945acf6682dc4389772923108987a, type: 2}
 --- !u!1 &3900524555012497636
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +382,7 @@ GameObject:
   - component: {fileID: 1342143031713252322}
   - component: {fileID: 8747312202070519366}
   - component: {fileID: 3212968361289056272}
+  - component: {fileID: 5432698023318358140}
   m_Layer: 5
   m_Name: Accueil
   m_TagString: Untagged
@@ -482,6 +504,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5432698023318358140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323191524653692920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b08c794c493c540ba7bb299dd6a220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseHoverSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c06bb9e5e0cb644b59ebcbb26ab30b, type: 2}
+  onClickSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a91945acf6682dc4389772923108987a, type: 2}
 --- !u!1 &4954066302386655506
 GameObject:
   m_ObjectHideFlags: 0

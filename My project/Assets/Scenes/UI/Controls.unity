@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 545477297}
   - component: {fileID: 545477296}
   - component: {fileID: 545477295}
+  - component: {fileID: 545477298}
   m_Layer: 5
   m_Name: Retour
   m_TagString: Untagged
@@ -384,6 +385,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545477293}
   m_CullTransparentMesh: 1
+--- !u!114 &545477298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545477293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b08c794c493c540ba7bb299dd6a220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseHoverSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c06bb9e5e0cb644b59ebcbb26ab30b, type: 2}
+  onClickSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a91945acf6682dc4389772923108987a, type: 2}
 --- !u!1 &566354072
 GameObject:
   m_ObjectHideFlags: 0
