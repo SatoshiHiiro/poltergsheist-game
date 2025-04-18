@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionAdjuster: {x: 0, y: 0, z: 0}
-  pivotPos: {x: 15.997, y: -3.998, z: 0}
+  pivotPos: {x: 38.84, y: 278.02, z: 0}
 --- !u!1 &3647050220124678125
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 7486977683571180589}
   - component: {fileID: 2741608234204632316}
   - component: {fileID: 1009231874053363211}
+  - component: {fileID: 8622533916804431626}
   m_Layer: 7
   m_Name: PossessedObject
   m_TagString: Possess
@@ -212,6 +213,18 @@ MonoBehaviour:
   canJump: 0
   isInContact: 0
   isJumping: 0
+  movementXAxisSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  jumpSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  fallSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   move:
     m_Name: Move
     m_Type: 0
@@ -281,6 +294,20 @@ MonoBehaviour:
   highestY: 0
   isClimbing: 0
   weightOfAnimation: 6
+--- !u!114 &8622533916804431626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647050220124678125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5615745db618a6047a44921b29ee7bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: c4129cd86799ef046892f241316dd588, type: 2}
+  hoverMaterial: {fileID: 2100000, guid: 3fe82e8d59c86a54cb5d45ee3529e5f4, type: 2}
 --- !u!1 &5933518150755973002
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7628108575089086147}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
