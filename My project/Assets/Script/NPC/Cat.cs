@@ -257,6 +257,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         yield return new WaitForSeconds(attackTime);      
         
         targetObjectManager.LockPossession(false);
+        catAnim.SetBool("IsAttacking", false);
         isAttacking = false;
     }
 
