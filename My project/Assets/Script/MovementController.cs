@@ -346,7 +346,7 @@ public abstract class MovementController : MonoBehaviour
                 if (isPreJumpBufferFinished) { isJumping = false; }
                 if (lastPosY - this.transform.position.y > .2f && onLand != null) { onLand(landParam); }
 
-                if (objMat.name == "Ballss")
+                if (objMat != null && objMat.name == "Ballss")
                 {
                     rigid2D.linearVelocityY = -lastVelocityY * bounceForce;
                     objBounciness = bounceForce;
