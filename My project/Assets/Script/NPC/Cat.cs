@@ -139,7 +139,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
     {
         isAttacking = true;
         audioSource.Play();
-        soundEvent.Post(gameObject);
+        surpriseSoundEvent.Post(gameObject);
 
         // Continue hunting until the cat catches the object or loses track of it
         while (isHunting && targetPossessedObject != null)
@@ -232,7 +232,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
     {
         isAttacking = true;
         audioSource.Play();
-        soundEvent.Post(gameObject);
+        surpriseSoundEvent.Post(gameObject);
         PossessionManager targetObjectManager = targetPossessedObject.GetComponent<PossessionManager>();
         if (targetObjectManager == null)
         {
@@ -262,7 +262,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
             {
                 //audioSource.Play();
                 
-                soundEvent.Post(gameObject);
+                surpriseSoundEvent.Post(gameObject);
                 canMove = false;
                 StopAllCoroutines();
                 fovLight.enabled = false;
