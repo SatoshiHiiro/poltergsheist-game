@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Cat : BasicNPCBehaviour, IPatrol
 {
+    // Sound variables
+    [SerializeField] protected AK.Wwise.Event catSlapEvent;
+
     [Header("Patrolling Variables")]  
     [SerializeField] PatrolPointData[] patrolPoints;  // All cat patrol destinations
     PatrolPointData nextPatrolPoint;  // Next cat patrol destination
@@ -232,7 +235,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
     {
         isAttacking = true;
         audioSource.Play();
-        surpriseSoundEvent.Post(gameObject);
+        //surpriseSoundEvent.Post(gameObject);
+        catSlapEvent.Post(gameObject);
         PossessionManager targetObjectManager = targetPossessedObject.GetComponent<PossessionManager>();
         if (targetObjectManager == null)
         {
