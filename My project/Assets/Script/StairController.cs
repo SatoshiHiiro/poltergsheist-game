@@ -34,6 +34,11 @@ public class StairController : MonoBehaviour
 
     Collider2D stairCollider;
 
+    [Header ("Sound bariables")]
+    [SerializeField] public AK.Wwise.Event doorOpenSoundEvent;
+    [SerializeField] public AK.Wwise.Event doorCloseSoundEvent;
+    [SerializeField] public AK.Wwise.Event doorEndSoundEvent; // Sound event only for the ending door
+
     // Public properties to access from other scripts
     public Transform StartPoint { get { return startPoint; } }
     public StairController UpperFloor { get { return upperFloor; } }
@@ -128,6 +133,15 @@ public class StairController : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
 
+        if(doorOpenSoundEvent != null)
+        {
+            doorOpenSoundEvent.Post(gameObject);
+        }
+        else if(doorEndSoundEvent != null)
+        {
+            doorEndSoundEvent.Post(gameObject);
+        }
+        
         // Climbing stair animation
 
         BasicNPCBehaviour npcBehaviour = character.GetComponent<BasicNPCBehaviour>();
@@ -168,6 +182,12 @@ public class StairController : MonoBehaviour
         {
             print("NO POSSESSIONCONTROLLER");
         }
+
+        if(doorCloseSoundEvent != null)
+        {
+            doorCloseSoundEvent.Post(gameObject);
+        }
+        
     }
 
     // Check if there is a possessed object in front of the stair
