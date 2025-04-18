@@ -43,6 +43,7 @@ public abstract class MovementController : MonoBehaviour
 
     //Contacts
     [Header("GameObjets in contact")]
+    
     [HideInInspector] public List<GameObject> curObject = new List<GameObject>();
     [HideInInspector] public List<ContactPoint2D> curContact = new List<ContactPoint2D>();
     [HideInInspector] public float halfSizeOfObject;
@@ -72,6 +73,9 @@ public abstract class MovementController : MonoBehaviour
     [SerializeField] public AK.Wwise.Event fallSoundEvent;
     protected bool isMovementXAxisSoundOn = false;
     private float stopThresholdSound = 0.05f;
+
+    // Ball
+    private float bounceForce = 0.6f;
 
     //Shortcuts
     protected Rigidbody2D rigid2D;
@@ -119,6 +123,11 @@ public abstract class MovementController : MonoBehaviour
         }
         else { objBounciness = 0; }
         highestY = transform.position.y;
+
+        if (objMat.name == "Ballss")
+        {
+            objBounciness = bounceForce;
+        }
     }
 
     //Physics
@@ -169,20 +178,23 @@ public abstract class MovementController : MonoBehaviour
 
             lastInput = moveInput;
 
-            if(Mathf.Abs(rigid2D.linearVelocityX) <= stopThresholdSound && isInContact)
-            {
-                if(movementXAxisSoundEvent != null)
-                {
-                    isMovementXAxisSoundOn = false;
-                    movementXAxisSoundEvent.Stop(gameObject);
-                }
-                
-            }
+            
         }
         // Keep it from moving
         else
         {
             rigid2D.linearVelocityX = 0;
+        }
+
+        if (Mathf.Abs(rigid2D.linearVelocityX) <= stopThresholdSound && isInContact)
+        {
+            if (movementXAxisSoundEvent != null)
+            {
+                print("TESTING!!!!");
+                isMovementXAxisSoundOn = false;
+                movementXAxisSoundEvent.Stop(gameObject);
+            }
+
         }
     }
 
@@ -317,6 +329,8 @@ public abstract class MovementController : MonoBehaviour
                 else { objBounciness = 0; }
             }
 
+           
+
             if(fallSoundEvent != null)
             {
                 fallSoundEvent.Post(gameObject);
@@ -331,6 +345,13 @@ public abstract class MovementController : MonoBehaviour
                 
                 if (isPreJumpBufferFinished) { isJumping = false; }
                 if (lastPosY - this.transform.position.y > .2f && onLand != null) { onLand(landParam); }
+
+                if (objMat.name == "Ballss")
+                {
+                    rigid2D.linearVelocityY = -lastVelocityY * bounceForce;
+                    objBounciness = bounceForce;
+                }
+
                 break;
             }
             if (canMove && Mathf.Abs(lastVelocityX) >= maxSpeed - .1f)
@@ -345,6 +366,12 @@ public abstract class MovementController : MonoBehaviour
                     if (onBonkL != null) { onBonkL(bonkLeftParam); }
                     break;
                 }
+            }
+
+            if(curContact[i].normal.y >= 0.9f && objMat.name == "Ballss")
+            {
+                rigid2D.linearVelocityY = -lastVelocityY * bounceForce;
+                objBounciness = bounceForce;
             }
         }
     }
