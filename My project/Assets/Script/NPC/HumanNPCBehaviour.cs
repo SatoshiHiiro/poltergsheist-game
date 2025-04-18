@@ -8,6 +8,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 {
     // Sound variables
     [SerializeField] protected AK.Wwise.Event curiousNPCSoundEvent;
+    [SerializeField] protected AK.Wwise.Event nonSuspiciousSoundEvent;
 
 
 
@@ -74,6 +75,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
         if (investigationQueue.Count > 0 && !isInvestigating)
         {
+            nonSuspiciousSoundEvent.Stop(gameObject);
             if (returnToInitialPositionCoroutine != null)
             {
                 StopCoroutine(returnToInitialPositionCoroutine);
@@ -88,6 +90,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         else if(investigationQueue.Count == 0 && !isInvestigating && !isAtInitialPosition)
         {
             isAtInitialPosition = true;
+            nonSuspiciousSoundEvent.Post(gameObject);
             returnToInitialPositionCoroutine = StartCoroutine(ReturnToInitialPosition());
         }
     }
@@ -412,7 +415,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             facingRight = initialFacingRight;
             FlipFieldOfView();
         }
-
+        nonSuspiciousSoundEvent.Stop(gameObject);
     }
 
     public override void ResetInitialState()
@@ -423,6 +426,9 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         seePolterg = false;
         isInvestigating = false;
         investigationQueue.Clear(); // Clear all the investigations he should be doing
+
+        // Reset sounds
+        nonSuspiciousSoundEvent.Stop(gameObject);
     }
 
     public void ResetSeePolterg()
