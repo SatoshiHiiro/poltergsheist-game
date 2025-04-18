@@ -8,6 +8,10 @@ using System.Collections;
 /// �tat: Ad�quat(temp)
 public class PossessionManager : InteractibleManager, IResetInitialState
 {
+    [Header("Sound variables")]
+    [SerializeField] public AK.Wwise.Event onPossessionSoundEvent;
+    [SerializeField] public AK.Wwise.Event possessionOffSoundEvent;
+
     //Variables
     [Header("Variables")]
     [SerializeField] private Sprite normalSprite;
@@ -128,6 +132,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
 
                     isPossessed = true;
                     player.isPossessing = true;
+                    onPossessionSoundEvent.Post(gameObject);
                     StartCoroutine(AnimationTime());
 
                 }
@@ -136,6 +141,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
                 {
                     isPossessed = true;
                     player.isPossessing = true;
+                    onPossessionSoundEvent.Post(gameObject);
                     StartCoroutine(AnimationTime());
                 }
                 //Si le joueur veut sortir de l'objet
@@ -161,7 +167,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
             print("NOT DEPOSSESSING CAUSE CLIMBING");
         }
         print("STOP POSSESSION!");
-
+        possessionOffSoundEvent.Post(gameObject);
         isPossessed = false;
 
         if(normalSprite != null)
