@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2705920692277983442}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0000014305115, y: -0.5000031, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b452bfe5effa3a4b82585ef2e0571bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivotPos: {x: 41.168232, y: 249.00658, z: -1.6725092}
+  positionAdjuster: {x: 0, y: 0, z: 0}
+  pivotPos: {x: 15.997, y: -3.998, z: 0}
 --- !u!1 &3647050220124678125
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +168,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b36426c4a10a74ea74ff50611fe105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPossessionSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 56ad94decb5525f4bb73cdaa6c76c050, type: 2}
+  possessionOffSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: af963a8c3e7c1db47a885b102a84acb5, type: 2}
   normalSprite: {fileID: 0}
   possessedSprite: {fileID: 0}
   lerpSpeed: 6
@@ -197,7 +206,6 @@ MonoBehaviour:
   inputBuffer: 0
   curObject: []
   halfSizeOfObject: 0
-  lastVelocityX: 0
   lastPosY: 0
   canMove: 0
   canWalk: 0
@@ -270,6 +278,8 @@ MonoBehaviour:
       m_Action: Jump
       m_Flags: 0
     m_Flags: 0
+  highestY: 0
+  isClimbing: 0
   weightOfAnimation: 6
 --- !u!1 &5933518150755973002
 GameObject:
