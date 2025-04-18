@@ -61,7 +61,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     IEnumerator AnimationTime()
     {
         player.lastPossession = this;
-        manager.GetComponent<SpriteRenderer>().enabled = true;
+        manager.gameObject.SetActive(true);
         player.GetComponent<Rigidbody2D>().simulated = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         player.GetComponent<Collider2D>().enabled = false;
@@ -71,7 +71,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         player.isPossessionInProgress = true;
 
         yield return new WaitForSecondsRealtime(.5f);
-        manager.GetComponent<SpriteRenderer>().enabled = false;
+        manager.gameObject.SetActive(false);
         yield return new WaitForSecondsRealtime(.5f);
         if(possessedSprite != null)
         {
@@ -190,7 +190,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
             player.transform.position += new Vector3(0, player.GetComponent<Collider2D>().bounds.extents.y - col2D.bounds.extents.y + 0.1f, 0);
 
         manager.GetComponent<PlayerManager>().VariablesToDefaultValues();
-        manager.GetComponent<SpriteRenderer>().enabled = true;
+        manager.gameObject.SetActive(true);
         player.canMove = true;
         player.isPossessionInProgress = false;
     }
