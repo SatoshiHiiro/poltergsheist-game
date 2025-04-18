@@ -216,11 +216,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 146752
   currentFloorLevel: 0
-  soundEvent:
+  surpriseSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 560026148bb62064cbcaeeb11db3d8b1, type: 2}
+  soundCooldown: 1.5
+  curiousNPCSoundEvent:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 94cb05dd257f19b49a715c153ecf9705, type: 2}
-  soundCooldown: 1.5
   minSuspiciousRotation: 20
   minSuspiciousPosition: 1
   mirrorLayer:
