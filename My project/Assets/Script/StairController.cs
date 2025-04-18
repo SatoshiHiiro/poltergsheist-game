@@ -58,23 +58,38 @@ public class StairController : MonoBehaviour
         PlayerController playerController = character.GetComponent<PlayerController>();
         if(playerController != null && !canPoltergUseDoor)
         {
+            
             return; // Polterg can't use the door
         }
         PossessionController possessionController = character.GetComponent<PossessionController>();
         if(possessionController != null && !canObjectUseDoor)
         {
+            //possessionController.isClimbing = false;
             return; // Possessed Object can't use the door
         }
         Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
         //character.transform.GetChild(0).GetComponent<Renderer>();
-        print("Character size X: " + characterRenderer.bounds.size.x);
-        print("Character size Y: " + characterRenderer.bounds.size.y);
+        //print("Character size X: " + characterRenderer.bounds.size.x);
+        //print("Character size Y: " + characterRenderer.bounds.size.y);
         // If the character fit with the stair dimension, then he can climb
         if (characterRenderer.bounds.size.x < maximumWidth && characterRenderer.bounds.size.y < maximumHeight)
         {
+            if(possessionController != null )
+            {
+                PossessionManager possessionManager = character.GetComponent<PossessionManager>();
+                if (possessionManager != null)
+                {
+                    if (!possessionManager.IsPossessing)
+                    {
+                        return;
+                    }
+                    possessionController.isClimbing = true;
+                    print("IS CLIMBING!!");
+                }
+                
+            }
             StartCoroutine(HandleClimbingStair(character, direction));
         }
-
 
     }
 
@@ -82,9 +97,15 @@ public class StairController : MonoBehaviour
     {
         // Which floor does the character want to go to
         StairController targetStair = direction == StairDirection.Upward ? upperFloor : bottomFloor;
+        PossessionController possessionController = character.GetComponent<PossessionController>();
 
-        if(targetStair == null)
+        if (targetStair == null)
         {
+
+            if (possessionController != null)
+            {
+                possessionController.isClimbing = false;
+            }
             yield break;
         }
 
@@ -137,6 +158,16 @@ public class StairController : MonoBehaviour
             character.GetComponent<PlayerController>().canMove = canCharacterMove;
             character.GetComponent<PlayerController>().canJump = canCharacterJump;
         }
+
+        if (possessionController != null)
+        {
+            print("ISCLIMBINGFASLSE");
+            possessionController.isClimbing = false;
+        }
+        else
+        {
+            print("NO POSSESSIONCONTROLLER");
+        }
     }
 
     // Check if there is a possessed object in front of the stair
@@ -178,15 +209,25 @@ public class StairController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        DisplayUIPrompt(collision);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        DisplayUIPrompt(collision);
+    }
+
+    private void DisplayUIPrompt(Collider2D collision)
+    {
         // Make Climb Stairs prompt appear if Polterg is in front of a stair
         if (collision.CompareTag("Player") && !IsStairBlocked() && canPoltergUseDoor && (BottomFloor != null || UpperFloor != null))
         {
-            if(uiPromptCanvas != null)
+            if (uiPromptCanvas != null)
             {
                 uiPromptCanvas.enabled = true;
                 animator.SetBool("PromptAppear", true);
-            }            
-            
+            }
+
         }
         // Make Climb Stairs prompt appear if Polterg is in front of a stair in a possessedObject
         else if (collision.gameObject.GetComponent<PossessionController>())
@@ -194,17 +235,21 @@ public class StairController : MonoBehaviour
             PossessionManager possessionObject = collision.gameObject.GetComponent<PossessionManager>();
             if (possessionObject != null && !IsStairBlocked() && possessionObject.IsPossessing && canObjectUseDoor && (BottomFloor != null || UpperFloor != null))
             {
-                if(uiPromptCanvas != null && (collision.bounds.size.y < minimumBlockHeight))
+                if (uiPromptCanvas != null && (collision.bounds.size.y < minimumBlockHeight))
                 {
                     uiPromptCanvas.enabled = true;
                     animator.SetBool("PromptAppear", true);
-                }                
-                
+                }
+
             }
+        }
+        else
+        {
+            HideUIPrommpt(collision);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void HideUIPrommpt(Collider2D collision)
     {
         // Make Climb Stairs prompt disappear if Polterg is in front of a stair
         if (collision.CompareTag("Player"))
@@ -214,7 +259,7 @@ public class StairController : MonoBehaviour
                 uiPromptCanvas.enabled = false;
                 animator.SetBool("PromptAppear", false);
             }
-           
+
         }
         // Make Climb Stairs prompt disappear if Polterg is in front of a stair in a possessedObject
         else if (collision.gameObject.GetComponent<PossessionController>())
@@ -222,13 +267,17 @@ public class StairController : MonoBehaviour
             PossessionManager possessionObject = collision.gameObject.GetComponent<PossessionManager>();
             if (possessionObject != null && possessionObject.IsPossessing)
             {
-                if(uiPromptCanvas != null)
+                if (uiPromptCanvas != null)
                 {
                     uiPromptCanvas.enabled = false;
                     animator.SetBool("PromptAppear", false);
                 }
-                
+
             }
         }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        HideUIPrommpt(collision);
     }
 }

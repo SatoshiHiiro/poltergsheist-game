@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class HumanNPCBehaviour : BasicNPCBehaviour
 {
+    // Sound variables
+    [SerializeField] protected AK.Wwise.Event curiousNPCSoundEvent;
+
+
+
     [Header("Suspicion variables")]
     // Variable manage suspicion of the NPC
     [SerializeField] protected float minSuspiciousRotation; // Minimum rotation change in degrees to trigger suspicion
@@ -264,7 +269,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         seePolterg = true;
         audioSource.Play();
-        soundEvent.Post(gameObject);
+        surpriseSoundEvent.Post(gameObject);
         npcAnim.SetTrigger("IsSurprised");
 
         SuspicionManager.Instance.UpdateSeeingPoltergSuspicion();
@@ -273,6 +278,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     // Start the investigation of the sound
     public virtual void InvestigateSound(SoundDetection objectsound, bool replaceObject, float targetFloor)
     {
+        curiousNPCSoundEvent.Post(gameObject);
         investigationQueue.Enqueue(InvestigateSoundObject(objectsound, replaceObject, targetFloor));
         //switch (objectsound.ObjectType)
         //{
@@ -291,7 +297,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     public void EnqueueInvestigation(IEnumerator investigation)
     {
-        soundEvent.Post(gameObject);
+        curiousNPCSoundEvent.Post(gameObject);
         investigationQueue.Enqueue(investigation);
     }
 

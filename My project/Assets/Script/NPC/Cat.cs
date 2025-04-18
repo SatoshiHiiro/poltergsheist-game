@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Cat : BasicNPCBehaviour, IPatrol
 {
+    // Sound variables
+    [SerializeField] protected AK.Wwise.Event catSlapEvent;
+
     [Header("Patrolling Variables")]  
     [SerializeField] PatrolPointData[] patrolPoints;  // All cat patrol destinations
     PatrolPointData nextPatrolPoint;  // Next cat patrol destination
@@ -27,9 +30,6 @@ public class Cat : BasicNPCBehaviour, IPatrol
 
     GameObject cage;    // Cage the cat is trapped in
 
-    //Animations
-    Animator catAnim;
-
     //public AK.Wwise.Event soundEvent;
     protected override void Start()
    {
@@ -44,7 +44,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
 
         audioSource = GetComponent<AudioSource>();
         catCollider = GetComponent<Collider2D>();
-        catAnim = GetComponentInChildren<Animator>();
+        
    }
 
     protected override void Update()
@@ -142,7 +142,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
     {
         isAttacking = true;
         audioSource.Play();
-        soundEvent.Post(gameObject);
+        surpriseSoundEvent.Post(gameObject);
 
         // Continue hunting until the cat catches the object or loses track of it
         while (isHunting && targetPossessedObject != null)
@@ -235,8 +235,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
     {
         isAttacking = true;
         audioSource.Play();
-        soundEvent.Post(gameObject);
-        catAnim.SetBool("IsAttacking", true);
+        //surpriseSoundEvent.Post(gameObject);
+        catSlapEvent.Post(gameObject);
         PossessionManager targetObjectManager = targetPossessedObject.GetComponent<PossessionManager>();
         if (targetObjectManager == null)
         {
@@ -254,7 +254,6 @@ public class Cat : BasicNPCBehaviour, IPatrol
         
         targetObjectManager.LockPossession(false);
         isAttacking = false;
-        catAnim.SetBool("IsAttacking", false);
     }
 
     // If the cat enters the cage it remains trapped.
@@ -267,12 +266,11 @@ public class Cat : BasicNPCBehaviour, IPatrol
             {
                 //audioSource.Play();
                 
-                soundEvent.Post(gameObject);
+                surpriseSoundEvent.Post(gameObject);
                 canMove = false;
                 StopAllCoroutines();
                 fovLight.enabled = false;
                 collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);
-                catAnim.SetBool("IsCaught", true);
                 cage = collision.gameObject;
             }            
         }

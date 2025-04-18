@@ -30,7 +30,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     protected bool initialFacingRight;  // He's he facing right or left
 
     [Header("NPC sound variables")]
-    [SerializeField] protected AK.Wwise.Event soundEvent;
+    [SerializeField] protected AK.Wwise.Event surpriseSoundEvent;
     [SerializeField] protected float soundCooldown = 1.5f;  // Cooldown between sound of surprise
     protected float lastSoundTime;
     protected GameObject lastMovingObject;
@@ -200,7 +200,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         // If it's a different object than the last one we tracked, play the sound
         if (lastMovingObject != currentMovingObject)
         {
-            soundEvent.Post(gameObject);
+            surpriseSoundEvent.Post(gameObject);
             npcAnim.SetTrigger("IsSurprised");
             lastMovingObject = currentMovingObject;
             soundHasPlayed = true;
@@ -209,7 +209,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         // If it's the same object but it had stopped and started again, play the sound
         else if(lastMovingObject == currentMovingObject && !soundHasPlayed && cooldownElapsed)
         {
-            soundEvent.Post(gameObject);
+            surpriseSoundEvent.Post(gameObject);
             npcAnim.SetTrigger("IsSurprised");
             soundHasPlayed = true;
             lastSoundTime = Time.time;

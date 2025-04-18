@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class FogOfWar : MonoBehaviour
 {
+    [Header ("Sound variables")]
+    [SerializeField] protected AK.Wwise.Event fogRemoveSoundEvent;
+
     Collider2D boxCollider;
     Animator animator;
 
@@ -20,12 +23,14 @@ public class FogOfWar : MonoBehaviour
             {
                 animator.SetBool("ClearFog", true);
                 boxCollider.enabled = false;
+                fogRemoveSoundEvent.Post(gameObject);
             }
         }       
         else if(collision.gameObject.CompareTag("Player"))
         {
             animator.SetBool("ClearFog",true);
             boxCollider.enabled = false;
+            fogRemoveSoundEvent.Post(gameObject);
         }
     }
 }
