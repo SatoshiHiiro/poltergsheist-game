@@ -4790,7 +4790,14 @@
 							</ReferenceList>
 							<ChildrenList>
 								<BlendContainer Name="SFX_NPC_Footsteps" ID="{0419EAEC-650B-4877-A9E9-123212CFDA00}" ShortID="809139587">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Attenuation_NPC" ID="{549DA3BB-39C5-4B20-BF28-A71E0FB74FB3}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 										</Reference>
@@ -4819,6 +4826,9 @@
 											</ReferenceList>
 											<ChildrenList>
 												<SwitchContainer Name="NPC_Footsteps_Running" ID="{D0C71581-C5E8-4D91-855A-C4C735BCDD60}" ShortID="390096449">
+													<PropertyList>
+														<Property Name="SwitchBehavior" Type="int16" Value="1"/>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4911,6 +4921,9 @@
 													</GroupingInfo>
 												</SwitchContainer>
 												<SwitchContainer Name="NPC_Footsteps_Sprinting" ID="{88240340-7A42-4169-8F3A-719974714390}" ShortID="700064120">
+													<PropertyList>
+														<Property Name="SwitchBehavior" Type="int16" Value="1"/>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5003,6 +5016,9 @@
 													</GroupingInfo>
 												</SwitchContainer>
 												<SwitchContainer Name="NPC_Footsteps_Walking" ID="{6F92D6CD-1C8E-4242-A3D3-2207D6027AD8}" ShortID="929722943">
+													<PropertyList>
+														<Property Name="SwitchBehavior" Type="int16" Value="1"/>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5130,6 +5146,9 @@
 											</GroupingInfo>
 										</SwitchContainer>
 									</ChildrenList>
+									<PositioningInfo>
+										<Position Name="" ID="{ED04673D-41BE-4F51-BE31-0D2C2EF22FE3}"/>
+									</PositioningInfo>
 								</BlendContainer>
 								<BlendContainer Name="SFX_CatSlap" ID="{5BA2F07F-3603-460E-8A52-D1C7CB4E5A04}" ShortID="354650461">
 									<ReferenceList>
@@ -5238,7 +5257,14 @@
 							</ChildrenList>
 						</ActorMixer>
 						<ActorMixer Name="VO" ID="{43F3F830-90D2-4964-BF78-EBD77FC5E783}" ShortID="301566981">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
 							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="Attenuation_NPC" ID="{549DA3BB-39C5-4B20-BF28-A71E0FB74FB3}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
+								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 								</Reference>
@@ -5288,7 +5314,14 @@
 									</ReferenceList>
 								</BlendContainer>
 								<BlendContainer Name="VO_NPC_Cat" ID="{2CEE8119-12B2-46F0-A439-1C668C5F5BAC}" ShortID="454147458">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Attenuation_NPC" ID="{549DA3BB-39C5-4B20-BF28-A71E0FB74FB3}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 										</Reference>
