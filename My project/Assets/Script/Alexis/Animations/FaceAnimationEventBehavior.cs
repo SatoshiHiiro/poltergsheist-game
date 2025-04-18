@@ -27,6 +27,7 @@ public class FaceAnimationEventBehavior : MonoBehaviour
                 if (idleBlink != null)
                 {
                     StopCoroutine(idleBlink);
+                    idleBlink = null;
                 }
                 turnBlink = StartCoroutine(TurnBlink()); 
             }
@@ -36,6 +37,7 @@ public class FaceAnimationEventBehavior : MonoBehaviour
             if (turnBlink != null) 
             { 
                 StopCoroutine(turnBlink);
+                anim.SetBool("IsBlinking", false);
                 turnBlink = null;
             }
         }
@@ -48,7 +50,8 @@ public class FaceAnimationEventBehavior : MonoBehaviour
 
         if (Random.Range(1 + iteration, 10) > 5)
         {
-            time = Random.Range(.1f, .5f);
+            Debug.Log("Blink");
+            time = Random.Range(.1f, .3f);
             iteration = -3;
             anim.SetBool("IsBlinking", true);
             yield return new WaitForSecondsRealtime(time);
@@ -56,6 +59,7 @@ public class FaceAnimationEventBehavior : MonoBehaviour
         }
         else
         {
+            Debug.Log("Fail");
             iteration++;
         }
 
