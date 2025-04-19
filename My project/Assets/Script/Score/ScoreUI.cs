@@ -7,6 +7,7 @@ using UnityEngine;
 public class ScoreUI : MonoBehaviour
 {
     // This class manage the UI for the Score
+    [Header ("ScoreBoard UI Gameobjects")]
     [SerializeField] Canvas canvasScore;
     [SerializeField] GameObject scorePanel;
     [SerializeField] GameObject timerGroup;
@@ -19,7 +20,10 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] GameObject[] starsImageDeaths;
     [SerializeField] GameObject[] starsImageItemCollected;
 
-
+    [Header ("Sound Variables")]
+    [SerializeField] protected AK.Wwise.Event victorySoundEvent;
+    [SerializeField] protected AK.Wwise.Event statsSoundEvent;
+    [SerializeField] protected AK.Wwise.Event[] startSoundEvent;
     void Start()
     {
         ScoreManager.Instance.OnShowScoreBoard += ShowScoreBoard;
@@ -29,6 +33,9 @@ public class ScoreUI : MonoBehaviour
     public void ShowScorePanel()
     {
         canvasScore.enabled = true;
+        //AudioManager.Instance.StopMenuMusic();
+        AkUnitySoundEngine.StopAll();
+        victorySoundEvent.Post(gameObject);
         ///scorePanel.SetActive(true);
     }
 
@@ -69,6 +76,7 @@ public class ScoreUI : MonoBehaviour
         {
             //starsUI[i].gameObject.SetActive(true);
             starsUI[i].GetComponent<Animator>().SetBool("ShowStar", true);
+            startSoundEvent[i].Post(gameObject);
             yield return new WaitForSecondsRealtime(0.5f);
         }
     }
@@ -77,6 +85,7 @@ public class ScoreUI : MonoBehaviour
     private IEnumerator ShowText(GameObject text)
     {
         text.GetComponent<Animator>().SetBool("ShowText", true);
+        statsSoundEvent.Post(gameObject);
         yield return new WaitForSecondsRealtime(0.2f);
     }
 
