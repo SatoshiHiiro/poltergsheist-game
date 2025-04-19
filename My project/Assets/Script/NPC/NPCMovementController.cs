@@ -114,7 +114,7 @@ public class NPCMovementController : MonoBehaviour
             // NPC walk towards the destination
             npcAnim.SetBool("InMovement", true);
             transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
-            speedNPC.SetGlobalValue(movementSpeed);
+            speedNPC.SetValue(gameObject, movementSpeed);
             yield return null;
         }
         isWalking = false;
