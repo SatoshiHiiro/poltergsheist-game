@@ -37,7 +37,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     protected GameObject lastMovingObject;
     protected bool soundHasPlayed;
 
-    protected float nonSuspiciousSoundCooldown = 3f;  // Cooldown before restarting ambient sound
+    protected float nonSuspiciousSoundCooldown = 0f;//3f;  // Cooldown before restarting ambient sound
     protected float lastSuspiciousTime;  // Last time something suspicious happened
     protected bool isNonSuspiciousSoundPlaying = false;  // Is the ambient sound currently playing
     protected Coroutine nonSuspiciousSoundCoroutine = null;
@@ -155,14 +155,14 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
             soundHasPlayed = false;
         }
 
-        if(wasObjectMoving && !isObjectMoving)
-        {
-            StartNonSuspiciousSound();
-        }
-        else if(!wasObjectMoving && !isObjectMoving && !isNonSuspiciousSoundPlaying)
-        {
-            StartNonSuspiciousSound();
-        }
+        //if(wasObjectMoving && !isObjectMoving)
+        //{
+        //    StartNonSuspiciousSound();
+        //}
+        //else if(!wasObjectMoving && !isObjectMoving && !isNonSuspiciousSoundPlaying)
+        //{
+        //    StartNonSuspiciousSound();
+        //}
 
         HandleMovementSuspicion(objectSize);
     }

@@ -97,19 +97,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         }
         // REMOVE HERE!!!
         // If investigation ended and nothing else is happening, start ambient sound
-        else if (!isInvestigating && investigationQueue.Count == 0 && !seePolterg && !isNonSuspiciousSoundPlaying && nonSuspiciousSoundCoroutine == null)
-        {
-            StartNonSuspiciousSound();
-        }
-        //if(investigationQueue.Count == 0 && !isInvestigating)
+        //else if (!isInvestigating && investigationQueue.Count == 0 && !seePolterg && !isNonSuspiciousSoundPlaying && nonSuspiciousSoundCoroutine == null)
         //{
-        //    if (!isNonSuspiciousSoundPlayed)
-        //    {
-        //        print("ISNONSUSPICIOUS!");
-        //        isNonSuspiciousSoundPlayed = true;
-        //        nonSuspiciousSoundEvent.Post(gameObject);
-        //    }
+        //    StartNonSuspiciousSound();
         //}
+
     }
 
     protected override bool CanPlayNonSuspiciousSound()
@@ -351,7 +343,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         lastSuspiciousTime = Time.time;
 
         // Start ambient sound which will respect cooldown
-        if (CanPlayNonSuspiciousSound())
+        if (CanPlayNonSuspiciousSound() && !isNonSuspiciousSoundPlaying)
         {
             StartNonSuspiciousSound();
         }
@@ -386,65 +378,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         }
     }
 
-    //// NPC behaviour for the falling object investigation
-    //protected IEnumerator InvestigateFallingObject(FallingObject objectsound, bool replaceObject, float targetFloor)
-    //{
-
-    //    // Take a surprise pause before going on investigation
-    //    audioSource.Play();
-    //    yield return new WaitForSeconds(surpriseWaitTime);
-
-    //    yield return (npcMovementController.ReachTarget(objectsound.transform.position, currentFloorLevel ,targetFloor));
-
-    //    // We can't find a path
-    //    if (!npcMovementController.CanFindPath)
-    //    {
-    //        yield break;
-    //    }
-    //    //yield return StartCoroutine(ReachTarget(objectsound.transform.position, targetFloor));
-
-    //    // Wait a bit of time before going back to normal
-    //    yield return new WaitForSeconds(investigationWaitTime);
-
-    //    // One NPC must replace the object to it's initial position
-    //    FallingObject fallingObject = objectsound.GetComponent<FallingObject>();
-    //    if (fallingObject != null && replaceObject)
-    //    {
-    //        fallingObject.ReplaceObject();
-    //        // Animation ICI!
-    //        fallingObject.FinishReplacement();
-    //    }
-   
-    //}
-
-    //protected IEnumerator InvestigateSoundObject(JukeBox soundObject, bool replaceObject, float targetFloor)
-    //{
-    //    // Take a surprise pause before going on investigation
-    //    audioSource.Play();
-    //    yield return new WaitForSeconds(surpriseWaitTime);
-
-    //    yield return (npcMovementController.ReachTarget(soundObject.transform.position, currentFloorLevel, targetFloor));
-
-    //    // We can't find a path
-    //    if (!npcMovementController.CanFindPath)
-    //    {
-    //        yield break;
-    //    }
-
-    //    // Wait a bit of time before going back to normal
-    //    yield return new WaitForSeconds(investigationWaitTime);
-    //    if (replaceObject)
-    //    {
-    //        soundObject.StopSound();
-    //    }
-    //}
-
-
-
+    
     // Return the NPC to it's initial position and facing direction
     public  IEnumerator ReturnToInitialPosition()
     {
-        if (CanPlayNonSuspiciousSound())
+        if (CanPlayNonSuspiciousSound() && !isNonSuspiciousSoundPlaying)
         {
             StartNonSuspiciousSound();
         }
@@ -464,7 +402,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             facingRight = initialFacingRight;
             FlipFieldOfView();
         }
-        //nonSuspiciousSoundEvent.Stop(gameObject);
+        //StopNonSuspiciousSound();
     }
 
     public override void ResetInitialState()

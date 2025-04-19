@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{65E86D28-8BA1-49D3-8B67-98495A6B0D5F}",
     "Language": "SFX",
-    "Hash": "{D321BEA1-912A-E344-51A2-BC59F8D4CEEB}",
+    "Hash": "{3FE507CB-AF90-4F18-E202-13DE00DAD647}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\main",
     "ShortName": "main",
     "Path": "main.bnk",
@@ -605,7 +605,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "PH-VO_NPCWhatever.wav",
-      "CachePath": "57/{57946523-3D31-5A6B-7800-246B836631FD}.wem"
+      "CachePath": "2D/{2DBED270-B588-1069-21F2-30551C26E0D0}.wem"
      },
      {
       "Id": "780691968",
@@ -2173,7 +2173,9 @@
       "ObjectPath": "\\Events\\Default Work Unit\\VO\\VO_NPC_Whatever",
       "GUID": "{4BABEE52-0304-455A-930A-3319BC98AA4F}",
       "Color": "9",
-      "DurationType": "Infinite",
+      "DurationType": "OneShot",
+      "DurationMin": "1.7073333",
+      "DurationMax": "1.7073333",
       "MediaRefs": [
        {
         "Id": "772057789"
@@ -2306,6 +2308,6 @@
     ]
    }
   ],
-  "FileHash": "{88925A92-6FF0-17A9-60E8-03357B0C4F7C}"
+  "FileHash": "{CC95E7AB-E063-BFC6-BCAC-958F8DD37DDD}"
  }
 }

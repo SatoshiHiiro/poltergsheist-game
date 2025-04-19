@@ -108,7 +108,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
 
 
         // Handle ambient sound for patrolling NPCs
-        bool shouldPlayAmbientSound = CanPlayNonSuspiciousSound() && !isNonSuspiciousSoundPlaying && nonSuspiciousSoundCoroutine == null;
+        //bool shouldPlayAmbientSound = CanPlayNonSuspiciousSound() && !isNonSuspiciousSoundPlaying && nonSuspiciousSoundCoroutine == null;
         bool shouldStopAmbientSound = (!CanPlayNonSuspiciousSound() || isInvestigating || investigationQueue.Count > 0) && isNonSuspiciousSoundPlaying;
 
         // Stop the sound if conditions require it
@@ -117,10 +117,10 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
             StopNonSuspiciousSound();
         }
         // Start the sound if conditions allow it and we're not already playing/about to play
-        else if (shouldPlayAmbientSound)
-        {
-            StartNonSuspiciousSound();
-        }
+        //else if (shouldPlayAmbientSound)
+        //{
+        //    StartNonSuspiciousSound();
+        //}
 
     }
 
