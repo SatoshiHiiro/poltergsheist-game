@@ -384,7 +384,7 @@ public abstract class MovementController : MonoBehaviour
                 }
             }
 
-            if(curContact[i].normal.y >= 0.9f && objMat.name == "Ballss")
+            if(curContact[i].normal.y >= 0.9f && objMat!= null && objMat.name == "Ballss")
             {
                 rigid2D.linearVelocityY = -lastVelocityY * bounceForce;
                 objBounciness = bounceForce;
