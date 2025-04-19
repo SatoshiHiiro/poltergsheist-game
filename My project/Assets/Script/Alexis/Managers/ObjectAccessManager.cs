@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ObjectAccessManager : InteractibleManager
 {
+    [SerializeField] protected AK.Wwise.Event lockedDoorSoundEvent;
+    [SerializeField] protected AK.Wwise.Event doorUnlockSoundEvent;
     InventorySystem inventory;
     [SerializeField] KeyItemBehavior keyItemForActivation;
     Collider2D objCollider;
@@ -28,6 +30,10 @@ public class ObjectAccessManager : InteractibleManager
             //objCollider.isTrigger = true;
             //InventorySystem.Instance.RemoveObject(keyItemForActivation);    // Remove the key from inventory
         }
+        else
+        {
+            lockedDoorSoundEvent.Post(gameObject);
+        }
     }
 
     private void ResetObjectCollider(KeyItemBehavior key)
@@ -47,6 +53,7 @@ public class ObjectAccessManager : InteractibleManager
     private IEnumerator UnlockDoorAnimation()
     {
         animator.SetBool("IsUnlock", true);
+        doorUnlockSoundEvent.Post(gameObject);
         yield return new WaitForSeconds(0.5f);
         objCollider.isTrigger = true;
         InventorySystem.Instance.RemoveObject(keyItemForActivation);    // Remove the key from inventory
