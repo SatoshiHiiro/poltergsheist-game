@@ -6,6 +6,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
     // Sound variables
     [SerializeField] protected AK.Wwise.Event catSlapEvent;
     [SerializeField] protected AK.Wwise.Event catSoundsEvent;
+    [SerializeField] protected AK.Wwise.Event cageCloseSoundEvent;
     protected bool isNormalCat = true;
 
     [Header("Patrolling Variables")]  
@@ -284,12 +285,13 @@ public class Cat : BasicNPCBehaviour, IPatrol
             if(collision.bounds.Contains(catCollider.bounds.min) && collision.bounds.Contains(catCollider.bounds.max))
             {
                 //audioSource.Play();
-                
+
                 surpriseSoundEvent.Post(gameObject);
                 canMove = false;
                 StopAllCoroutines();
                 fovLight.enabled = false;
                 collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);
+                cageCloseSoundEvent.Post(gameObject);
                 catAnim.SetBool("IsAttacking", false);
                 catAnim.SetBool("IsCaught", true);
                 cage = collision.gameObject;

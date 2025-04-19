@@ -240,6 +240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a490d66042ca7499694648e9aa3e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  footstepsNPCSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  speedNPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  isMarble: 0
   movementSpeed: 6
   blindSpeed: 3
 --- !u!114 &3730382630439531477
@@ -280,6 +289,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 35d0684c5c266764eb19b0eb10259baa, type: 2}
+  cageCloseSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c1a0094d3c444a4478a3a105091550d9, type: 2}
   patrolPoints:
   - {fileID: 6860574517290841608}
   - {fileID: 518815475024151674}
