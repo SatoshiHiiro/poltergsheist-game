@@ -124,7 +124,7 @@ public abstract class MovementController : MonoBehaviour
         else { objBounciness = 0; }
         highestY = transform.position.y;
 
-        if (objMat.name == "Ballss")
+        if (objMat != null && objMat.name == "Ballss")
         {
             objBounciness = bounceForce;
         }
