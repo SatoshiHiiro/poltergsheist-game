@@ -20,6 +20,14 @@ public class InGameMenu : MonoBehaviour
 
             // met en pause le jeu quand le overlay est actif 
             Time.timeScale = optionsMenu.activeSelf ? 0f : 1f;
+            if (optionsMenu.activeSelf)
+            {
+                AkUnitySoundEngine.Suspend();
+            }
+            else
+            {
+                AkUnitySoundEngine.WakeupFromSuspend();
+            }
         }
     }
 }
