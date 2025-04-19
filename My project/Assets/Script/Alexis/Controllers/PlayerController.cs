@@ -10,6 +10,7 @@ public class PlayerController : MovementController
 {
     [Header ("Sound variables")]
     [SerializeField] protected AK.Wwise.Event hoveringSoundEvent;
+    [SerializeField] protected AK.Wwise.Event playerSoundsEvent;
     protected bool isHovering;
 
     //Possession
@@ -35,12 +36,14 @@ public class PlayerController : MovementController
         if (isPossessing)
         {
             hoveringSoundEvent.Stop(gameObject);
+            playerSoundsEvent.Stop(gameObject);
             isHovering = false;
         }
         else if(!isPossessing && !isHovering)
         {
             isHovering = true;
             hoveringSoundEvent.Post(gameObject);
+            playerSoundsEvent.Post(gameObject);
         }
     }
 }
