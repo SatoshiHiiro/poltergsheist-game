@@ -71,6 +71,7 @@ public abstract class MovementController : MonoBehaviour
     [SerializeField] public AK.Wwise.Event movementXAxisSoundEvent;
     [SerializeField] public AK.Wwise.Event jumpSoundEvent;
     [SerializeField] public AK.Wwise.Event fallSoundEvent;
+    [SerializeField] public AK.Wwise.Event jumpBounceSoundEvent;
     protected bool isMovementXAxisSoundOn = false;
     private float stopThresholdSound = 0.05f;
 
@@ -306,10 +307,19 @@ public abstract class MovementController : MonoBehaviour
         Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), curContact);
         if (canMove)
         {
+            print("TEST1");
             float bounce;
             if (collision.collider.sharedMaterial != null)
             {
-                if (objMat != null) { bounce = objMat.bounciness; }
+                if (objMat != null) 
+                { 
+                    bounce = objMat.bounciness;
+                    if (collision.collider.sharedMaterial.name == "Bounce" && jumpBounceSoundEvent != null)
+                    {
+                        jumpBounceSoundEvent.Post(gameObject);
+                    }
+                    
+                }
                 else { bounce = 0; }
                 objBounciness = Mathf.Max(collision.collider.sharedMaterial.bounciness, bounce);
             }
@@ -317,7 +327,14 @@ public abstract class MovementController : MonoBehaviour
             {
                 if (rb2d.sharedMaterial != null)
                 {
-                    if (objMat != null) { bounce = objMat.bounciness; }
+                    if (objMat != null)
+                    {
+                        bounce = objMat.bounciness;
+                        if (rb2d.sharedMaterial.name == "Bounce" && jumpBounceSoundEvent != null)
+                        {
+                            jumpBounceSoundEvent.Post(gameObject);
+                        }
+                    }
                     else { bounce = 0; }
                     objBounciness = Mathf.Max(rb2d.sharedMaterial.bounciness, bounce);
                 }
