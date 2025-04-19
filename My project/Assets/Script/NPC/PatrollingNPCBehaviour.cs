@@ -299,10 +299,10 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         isWaiting = false;
         isPatrolling = false;
 
-        if (CanPlayNonSuspiciousSound() && !isNonSuspiciousSoundPlaying)
-        {
-            StartNonSuspiciousSound();
-        }
+        //if (CanPlayNonSuspiciousSound() && !isNonSuspiciousSoundPlaying)
+        //{
+        //    StartNonSuspiciousSound();
+        //}
         MoveToNextAvailablePatrolPoint();
     }
 
@@ -326,7 +326,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         isInRoom = false;
         isPatrolling = false;
 
-        if (CanPlayNonSuspiciousSound() && !isNonSuspiciousSoundPlaying)
+        if (CanPlayNonSuspiciousSound()) //&& !isNonSuspiciousSoundPlaying)
         {
             StartNonSuspiciousSound();
         }
@@ -353,16 +353,16 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         // Reset the ambient sound after resetting other state
         StopNonSuspiciousSound();
         lastSuspiciousTime = -nonSuspiciousSoundCooldown;
-
+        isNonSuspiciousSoundPlaying = false;
         if (initialPatrolPoint != null)
         {
             nextPatrolPoint = initialPatrolPoint;
         }
 
-        if (CanPlayNonSuspiciousSound())
-        {
-            StartNonSuspiciousSound();
-        }
+        //if (CanPlayNonSuspiciousSound())
+        //{
+        //    StartNonSuspiciousSound();
+        //}
         //cageAnimator.Play("Idle", -1, 0f);
     }
 }

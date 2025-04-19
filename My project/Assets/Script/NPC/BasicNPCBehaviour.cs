@@ -327,8 +327,9 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
         StopNonSuspiciousSound();
         lastSuspiciousTime = -nonSuspiciousSoundCooldown;
+        isNonSuspiciousSoundPlaying = false;
 
         StopAllCoroutines();
-        StartNonSuspiciousSound();
+        //StartNonSuspiciousSound();
     }
 }
