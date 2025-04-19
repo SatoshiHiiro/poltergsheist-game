@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class NPCMovementController : MonoBehaviour
 {
-    [Header("NPC global movements variables")]
+    [Header ("Sound variables")]
     [SerializeField] protected AK.Wwise.Event footstepsNPCSoundEvent;
     [SerializeField] protected AK.Wwise.RTPC speedNPC;
     [SerializeField] protected bool isMarble;
     private bool isWalking = false;
+
+    [Header("NPC global movements variables")]
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float blindSpeed = 3f;
     private float normalSpeed;
