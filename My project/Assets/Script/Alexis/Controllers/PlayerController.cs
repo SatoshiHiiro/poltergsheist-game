@@ -8,6 +8,10 @@ using UnityEngine.InputSystem;
 /// État: Optimal(temp)
 public class PlayerController : MovementController
 {
+    [Header ("Sound variables")]
+    [SerializeField] protected AK.Wwise.Event hoveringSoundEvent;
+    protected bool isHovering;
+
     //Possession
     [Header("Object possession")]
     public PossessionManager lastPossession;
@@ -23,5 +27,20 @@ public class PlayerController : MovementController
         base.Start();
         canMove = true;
         sizeofPlayer = GetComponent<Collider2D>().bounds.size;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (isPossessing)
+        {
+            hoveringSoundEvent.Stop(gameObject);
+            isHovering = false;
+        }
+        else if(!isPossessing && !isHovering)
+        {
+            isHovering = true;
+            hoveringSoundEvent.Post(gameObject);
+        }
     }
 }
