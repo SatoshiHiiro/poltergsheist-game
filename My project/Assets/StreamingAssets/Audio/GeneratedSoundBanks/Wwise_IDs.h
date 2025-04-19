@@ -111,7 +111,24 @@ namespace AK
             } // namespace SWITCH
         } // namespace MATERIAL
 
+        namespace SPEED
+        {
+            static const AkUniqueID GROUP = 640949982U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID RUNNING = 3863236874U;
+                static const AkUniqueID SPRINTING = 3691594375U;
+                static const AkUniqueID WALKING = 340271938U;
+            } // namespace SWITCH
+        } // namespace SPEED
+
     } // namespace SWITCHES
+
+    namespace GAME_PARAMETERS
+    {
+        static const AkUniqueID NPC_SPEED = 2586782490U;
+    } // namespace GAME_PARAMETERS
 
     namespace BANKS
     {

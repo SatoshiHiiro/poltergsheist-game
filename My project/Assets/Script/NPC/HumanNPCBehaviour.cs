@@ -72,7 +72,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
         if (investigationQueue.Count > 0 && !isInvestigating)
         {
-            nonSuspiciousSoundEvent.Stop(gameObject);
+            //nonSuspiciousSoundEvent.Stop(gameObject);
             if (returnToInitialPositionCoroutine != null)
             {
                 StopCoroutine(returnToInitialPositionCoroutine);
@@ -90,15 +90,36 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             returnToInitialPositionCoroutine = StartCoroutine(ReturnToInitialPosition());
         }
 
-        if(investigationQueue.Count == 0 && !isInvestigating)
+        // If investigation started or we see the poltergeist, stop ambient sound
+        if ((isInvestigating || investigationQueue.Count > 0 || seePolterg) && isNonSuspiciousSoundPlaying)
         {
-            if (!isNonSuspiciousSoundPlayed)
-            {
-                print("ISNONSUSPICIOUS!");
-                isNonSuspiciousSoundPlayed = true;
-                nonSuspiciousSoundEvent.Post(gameObject);
-            }
+            StopNonSuspiciousSound();
         }
+        // If investigation ended and nothing else is happening, start ambient sound
+        else if (!isInvestigating && investigationQueue.Count == 0 && !seePolterg && !isNonSuspiciousSoundPlaying && nonSuspiciousSoundCoroutine == null)
+        {
+            StartNonSuspiciousSound();
+        }
+        //if(investigationQueue.Count == 0 && !isInvestigating)
+        //{
+        //    if (!isNonSuspiciousSoundPlayed)
+        //    {
+        //        print("ISNONSUSPICIOUS!");
+        //        isNonSuspiciousSoundPlayed = true;
+        //        nonSuspiciousSoundEvent.Post(gameObject);
+        //    }
+        //}
+    }
+
+    protected override bool CanPlayNonSuspiciousSound()
+    {
+        bool baseConditions =  base.CanPlayNonSuspiciousSound();
+
+        // Human-specific conditions
+        bool notInvestigating = !isInvestigating && investigationQueue.Count == 0;
+        bool notSeeingReflection = !seePolterg;
+
+        return baseConditions && notInvestigating && notSeeingReflection;
     }
 
     protected override void HandleChangedPositionSuspicion(PossessionController possessedObject, float objectSize)
@@ -263,7 +284,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                     // If nothing is blocking the sight of the NPC to the reflection of the player
                     if (!mirror.IsMirrorReflectionBlocked(reflectionPoints, playerCollider) && !seePolterg)
                     {
-                        StartCoroutine(WaitBeforeNonSuspiciousSound());
+                        if (isNonSuspiciousSoundPlaying)
+                        {
+                            StopNonSuspiciousSound();
+                        }
+                        //StartCoroutine(WaitBeforeNonSuspiciousSound());
                         //nonSuspiciousSoundEvent.Stop(gameObject);
                         print("see");
                         playerCollider.gameObject.GetComponent<MovementController>().canMove = false;
@@ -289,6 +314,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     // Start the investigation of the sound
     public virtual void InvestigateSound(SoundDetection objectsound, bool replaceObject, float targetFloor)
     {
+        // Stop ambient sound when starting investigation
+        StopNonSuspiciousSound();
         curiousNPCSoundEvent.Post(gameObject);
         investigationQueue.Enqueue(InvestigateSoundObject(objectsound, replaceObject, targetFloor));
         //switch (objectsound.ObjectType)
@@ -318,6 +345,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         yield return StartCoroutine(investigation);
         isInvestigating = false;
         currentInvestigation = null;
+
+        // Mark this moment as the end of a suspicious event
+        lastSuspiciousTime = Time.time;
+
+        // Start ambient sound which will respect cooldown
+        if (CanPlayNonSuspiciousSound())
+        {
+            StartNonSuspiciousSound();
+        }
     }
 
     // NPC behaviour for sound emitting object investigation
@@ -407,6 +443,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     // Return the NPC to it's initial position and facing direction
     public  IEnumerator ReturnToInitialPosition()
     {
+        if (CanPlayNonSuspiciousSound())
+        {
+            StartNonSuspiciousSound();
+        }
         yield return StartCoroutine(npcMovementController.ReachTarget(initialPosition, currentFloorLevel, initialFloorLevel));//ReachTarget(initialPosition, initialFloorLevel));
 
         // Restore initial facing direction
@@ -436,7 +476,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         investigationQueue.Clear(); // Clear all the investigations he should be doing
 
         // Reset sounds
-        nonSuspiciousSoundEvent.Stop(gameObject);
+        if(nonSuspiciousSoundEvent != null)
+        {
+            nonSuspiciousSoundEvent.Stop(gameObject);
+        }
+
     }
 
     public void ResetSeePolterg()
