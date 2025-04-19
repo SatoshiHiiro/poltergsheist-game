@@ -838,9 +838,9 @@ MonoBehaviour:
         ObjectType: 3
         guid: ed9dfbebac03c948b41f60cebd1e8e27
       Path: Events\Default Work Unit\SFX\Doors\SFX_DoorClose
-      maxAttenuation: 0
-      maxDuration: 0.92163485
-      minDuration: 0.48583674
+      maxAttenuation: 40
+      maxDuration: 0.8210833
+      minDuration: 0.5453333
     - name: SFX_DoorEnd
       guid: 07045f344f253d46b86e67495fbb634a
       id: 3048444812
@@ -907,9 +907,9 @@ MonoBehaviour:
         ObjectType: 3
         guid: 5aa5e6768556aa46b4b74b080e6c0aaf
       Path: Events\Default Work Unit\SFX\Doors\SFX_DoorOpen
-      maxAttenuation: 0
-      maxDuration: 1.6990424
-      minDuration: 0.753107
+      maxAttenuation: 40
+      maxDuration: 1.4705833
+      minDuration: 0.8701042
     - name: SFX_DoorUnlocked
       guid: c8b2701e0fce704c8e8ba2c42c115b2a
       id: 2575443418
@@ -976,7 +976,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: c96f547de640124ebe8beeed0b34aced
       Path: Events\Default Work Unit\SFX\NPC\SFX_FS_NPC
-      maxAttenuation: 100
+      maxAttenuation: 70
       maxDuration: 0
       minDuration: 0
     - name: SFX_MouseDoorClose

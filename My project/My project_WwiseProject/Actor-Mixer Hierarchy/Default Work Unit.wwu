@@ -1646,7 +1646,7 @@
 									<Language>SFX</Language>
 									<AudioFile>PH-VO_NPCLocked.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="608843293"/>
+										<MediaID ID="778961871"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
@@ -2275,6 +2275,13 @@
 							</ReferenceList>
 							<ChildrenList>
 								<BlendContainer Name="Hovering" ID="{4BBC034D-FBC8-46C0-B092-1A73FDE8EE8F}" ShortID="583445275">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2993,7 +3000,13 @@
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="Door" ID="{2EC09DAF-2898-4890-AE0E-18DB31F96C1A}" ShortID="748283182">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+							</PropertyList>
 							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="Attenuation_NPC" ID="{549DA3BB-39C5-4B20-BF28-A71E0FB74FB3}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
+								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 								</Reference>
@@ -3004,26 +3017,14 @@
 							<ChildrenList>
 								<RandomSequenceContainer Name="SFX_DoorOpen" ID="{E9F41CDD-1827-4280-A059-CB2E85F043C8}" ShortID="104125266">
 									<PropertyList>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{BE1C66BF-A136-43DE-B64A-8A4B41B3F8B2}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="250"/>
-															<Property Name="Min" Type="Real64" Value="-250"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-5</Value>
-											</ValueList>
-										</Property>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Attenuation_Door" ID="{2CA30D17-B9F3-4A81-B1FD-5DD1F11744DC}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 										</Reference>
@@ -3133,38 +3134,14 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="SFX_DoorClose" ID="{8BF9FBB1-5D6B-46BC-AF6A-E4DEE10141F2}" ShortID="395284534">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{D40AF88B-617E-485B-9359-8312AF6C68FA}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="200"/>
-															<Property Name="Min" Type="Real64" Value="-200"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{6D0E3801-69BF-4678-ACAF-2CAF995613A9}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="2"/>
-															<Property Name="Min" Type="Real64" Value="-2"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Attenuation_Door" ID="{2CA30D17-B9F3-4A81-B1FD-5DD1F11744DC}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 										</Reference>
@@ -5262,7 +5239,6 @@
 						<ActorMixer Name="VO" ID="{43F3F830-90D2-4964-BF78-EBD77FC5E783}" ShortID="301566981">
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="2"/>
-								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
@@ -5297,7 +5273,14 @@
 									</ReferenceList>
 								</BlendContainer>
 								<BlendContainer Name="VO_NPC_Locked" ID="{87EB5B04-2925-4663-8B2F-A484D7DA8574}" ShortID="568120146">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Attenuation_NPC" ID="{549DA3BB-39C5-4B20-BF28-A71E0FB74FB3}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 										</Reference>
@@ -5307,7 +5290,14 @@
 									</ReferenceList>
 								</BlendContainer>
 								<BlendContainer Name="VO_NPC_Whatever" ID="{62926FB4-9394-40C3-89DD-375D83F4AD95}" ShortID="1018964525">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Attenuation_NPC" ID="{549DA3BB-39C5-4B20-BF28-A71E0FB74FB3}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 										</Reference>
@@ -5334,7 +5324,13 @@
 									</ReferenceList>
 								</BlendContainer>
 								<BlendContainer Name="VO_NPC_CatChase" ID="{5608419B-9A26-475F-8B25-A30CE4156EFA}" ShortID="41631957">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Attenuation_NPC" ID="{549DA3BB-39C5-4B20-BF28-A71E0FB74FB3}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 										</Reference>
