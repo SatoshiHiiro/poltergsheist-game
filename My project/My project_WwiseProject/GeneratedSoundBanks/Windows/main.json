@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{65E86D28-8BA1-49D3-8B67-98495A6B0D5F}",
     "Language": "SFX",
-    "Hash": "{5B4E21DD-2999-6113-80FD-DFDF908F91F8}",
+    "Hash": "{B06CEC81-14F4-155B-6E78-FB977920048B}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\main",
     "ShortName": "main",
     "Path": "main.bnk",
@@ -464,14 +464,6 @@
       "CachePath": "83/{83BA10A9-EB21-1D4F-E548-645FF9BE4FBE}.wem"
      },
      {
-      "Id": "608843293",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "PH-VO_NPCLocked.wav",
-      "CachePath": "95/{95BE1CCF-A36E-FB9D-F5E6-0179BB82B017}.wem"
-     },
-     {
       "Id": "609654882",
       "Language": "SFX",
       "Streaming": "false",
@@ -606,6 +598,14 @@
       "Location": "Memory",
       "ShortName": "PH-VO_NPCWhatever.wav",
       "CachePath": "2D/{2DBED270-B588-1069-21F2-30551C26E0D0}.wem"
+     },
+     {
+      "Id": "778961871",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PH-VO_NPCLocked.wav",
+      "CachePath": "95/{95BE1CCF-A36E-FB9D-F5E6-0179BB82B017}.wem"
      },
      {
       "Id": "780691968",
@@ -1458,9 +1458,10 @@
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Doors\\SFX_DoorClose",
       "GUID": "{EBFB9DED-03AC-48C9-B41F-60CEBD1E8E27}",
       "Color": "24",
+      "MaxAttenuation": "40",
       "DurationType": "OneShot",
-      "DurationMin": "0.48583674",
-      "DurationMax": "0.92163485",
+      "DurationMin": "0.5453333",
+      "DurationMax": "0.8210833",
       "MediaRefs": [
        {
         "Id": "109700176"
@@ -1527,9 +1528,10 @@
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Doors\\SFX_DoorOpen",
       "GUID": "{76E6A55A-5685-46AA-B4B7-4B080E6C0AAF}",
       "Color": "24",
+      "MaxAttenuation": "40",
       "DurationType": "OneShot",
-      "DurationMin": "0.753107",
-      "DurationMax": "1.6990424",
+      "DurationMin": "0.8701042",
+      "DurationMax": "1.4705833",
       "MediaRefs": [
        {
         "Id": "47131481"
@@ -1599,7 +1601,7 @@
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\NPC\\SFX_FS_NPC",
       "GUID": "{7D546FC9-40E6-4E12-BE8B-EEED0B34ACED}",
       "Color": "24",
-      "MaxAttenuation": "100",
+      "MaxAttenuation": "70",
       "DurationType": "Infinite",
       "SwitchContainers": [
        {
@@ -2146,7 +2148,7 @@
       "DurationType": "Infinite",
       "MediaRefs": [
        {
-        "Id": "608843293"
+        "Id": "778961871"
        }
       ]
      },
@@ -2306,6 +2308,6 @@
     ]
    }
   ],
-  "FileHash": "{3AA9D2EC-75BD-A072-3A61-2D1E4F054EFF}"
+  "FileHash": "{F371DF52-F759-08FC-174B-9A2DFA90746E}"
  }
 }
