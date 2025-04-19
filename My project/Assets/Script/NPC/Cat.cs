@@ -5,6 +5,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
 {
     // Sound variables
     [SerializeField] protected AK.Wwise.Event catSlapEvent;
+    [SerializeField] protected AK.Wwise.Event catSoundsEvent;
+    protected bool isNormalCat = true;
 
     [Header("Patrolling Variables")]  
     [SerializeField] PatrolPointData[] patrolPoints;  // All cat patrol destinations
@@ -33,7 +35,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
 
     //public AK.Wwise.Event soundEvent;
     protected override void Start()
-   {
+    {
         base.Start();
         indexPatrolPoints = 0;
         nextPatrolPoint = patrolPoints[0];
@@ -46,21 +48,33 @@ public class Cat : BasicNPCBehaviour, IPatrol
         audioSource = GetComponent<AudioSource>();
         catCollider = GetComponent<Collider2D>();
         catAnim = GetComponentInChildren<Animator>();
-        
-   }
+
+        isNormalCat = true;
+        catSoundsEvent.Post(gameObject);
+    }
 
     protected override void Update()
     {
         if (canMove)
         {
             base.Update();
+            
+            // Patrolling cat
             if (!isHunting && !isAttacking && !isPatrolling)
             {
+                if (!isNormalCat)
+                {
+                    isNormalCat = true;
+                    catSoundsEvent.Post(gameObject);
+                }
                 isPatrolling = true;
                 patrolCoroutine = StartCoroutine(Patrol());
             }
+            // Hunting Cat
             else if (isHunting && targetPossessedObject != null && !isAttacking)
-            { 
+            {
+                isNormalCat = false;
+                catSoundsEvent.Stop(gameObject);
                 //StopAllCoroutines();
                 StopCoroutine(patrolCoroutine);
                 isPatrolling = false;
@@ -276,6 +290,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 StopAllCoroutines();
                 fovLight.enabled = false;
                 collision.GetComponentInParent<Animator>().SetBool("CloseCage", true);
+                catAnim.SetBool("IsAttacking", false);
+                catAnim.SetBool("IsCaught", true);
                 cage = collision.gameObject;
             }            
         }
@@ -298,6 +314,14 @@ public class Cat : BasicNPCBehaviour, IPatrol
             cageAnimator.Play("Idle", -1, 0f);
 
         }
+
+        catAnim.SetBool("IsAttacking", false);
+        catAnim.SetBool("IsCaught", false);
+
+        // Reset Sound variables
+        isNormalCat = true;
+        catSlapEvent.Stop(gameObject);
+        catSoundsEvent.Post(gameObject);
 
     }
 }
