@@ -95,6 +95,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             StopNonSuspiciousSound();
         }
+        // REMOVE HERE!!!
         // If investigation ended and nothing else is happening, start ambient sound
         else if (!isInvestigating && investigationQueue.Count == 0 && !seePolterg && !isNonSuspiciousSoundPlaying && nonSuspiciousSoundCoroutine == null)
         {
