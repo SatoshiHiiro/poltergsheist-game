@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class TrapDoor : MonoBehaviour
 {
+    [Header ("Sound Variables")]
+    [SerializeField] protected AK.Wwise.Event trapDoorOpenSoundEvent;
+    [SerializeField] protected AK.Wwise.Event trapDoorCloseSoundEvent;
+
+    [Header  ("Global variables")]
     private JointAngleLimits2D openDoorLimits;
     private JointAngleLimits2D closeDoorLimits;
     private HingeJoint2D hingeJoint2D;
@@ -22,6 +27,8 @@ public class TrapDoor : MonoBehaviour
         closeDoorLimits = new JointAngleLimits2D { min = 0f, max = 0f };
         trapCollider = GetComponent<BoxCollider2D>();
         CloseDoor();
+        //hingeJoint2D.limits = closeDoorLimits;
+        //isDoorOpen = false;
     }
 
     private void Start()
@@ -34,6 +41,10 @@ public class TrapDoor : MonoBehaviour
     public void OpenDoor()
     {
         hingeJoint2D.limits = openDoorLimits;
+        if (!isDoorOpen)
+        {
+            trapDoorOpenSoundEvent.Post(gameObject);
+        }
         isDoorOpen = true;
         HidePrompt();
         StartCoroutine(WaitBeforeClosing());
@@ -42,7 +53,11 @@ public class TrapDoor : MonoBehaviour
     private void CloseDoor()
     {
         hingeJoint2D.limits = closeDoorLimits;
-        isDoorOpen = false;
+        if (isDoorOpen)
+        {
+            trapDoorCloseSoundEvent.Post(gameObject);
+        }
+        isDoorOpen = false; 
         if (isPlayerTouchingTrap)
         {
             ShowPrompt();
