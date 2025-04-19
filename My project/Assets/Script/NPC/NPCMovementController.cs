@@ -5,6 +5,10 @@ using UnityEngine;
 public class NPCMovementController : MonoBehaviour
 {
     [Header("NPC global movements variables")]
+    [SerializeField] protected AK.Wwise.Event footstepsNPCSoundEvent;
+    [SerializeField] protected AK.Wwise.RTPC speedNPC;
+    [SerializeField] protected bool isMarble;
+    private bool isWalking = false;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float blindSpeed = 3f;
     private float normalSpeed;
@@ -88,15 +92,32 @@ public class NPCMovementController : MonoBehaviour
     // The NPC walks horizontally to a given destination
     protected IEnumerator HorizontalMovementToTarget(Vector2 destination)
     {
+        if (!isWalking)
+        {
+            isWalking = true;
+            footstepsNPCSoundEvent?.Post(gameObject);
+            if (isMarble)
+            {
+                AkUnitySoundEngine.SetSwitch("Material", "Marble", gameObject);
+            }
+            else
+            {
+                AkUnitySoundEngine.SetSwitch("Material", "Wood", gameObject);
+            }
+            
+        }
         // The NPC must walk until it reaches its destination
         while (Mathf.Abs(transform.position.x - destination.x) > 0.1f)
         {
             // NPC walk towards the destination
             npcAnim.SetBool("InMovement", true);
             transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
+            speedNPC.SetGlobalValue(movementSpeed);
             yield return null;
         }
+        isWalking = false;
         npcAnim.SetBool("InMovement", false);
+        footstepsNPCSoundEvent.Stop(gameObject);
     }
     // Pathfinding of the NPC to reach a target
     public IEnumerator ReachTarget(Vector2 target, float currentFloor, float targetFloor)
