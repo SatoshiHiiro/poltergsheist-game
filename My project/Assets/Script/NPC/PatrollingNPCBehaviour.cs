@@ -10,6 +10,8 @@ public interface IPatrol
 }
 public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialState
 {
+    [Header("Patrolling NPC Sound Variables")]
+    [SerializeField] protected AK.Wwise.Event npcLockedSoundEvent;
     // Enemy patrol variables
     [Header("Patrol variables")]
     [SerializeField] protected PatrolPointData[] patrolPoints;    // Points were the NPC patrol
@@ -68,6 +70,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         // Priority 1: If the NPC is blocked but the room is no longer blocked, get unstuck
         if(isBlocked && currentPoint != null && !IsRoomBlocked(currentPoint))
         {
+            npcLockedSoundEvent.Stop(gameObject);
             StopNonSuspiciousSound();
             StartCoroutine(GetUnstuck());
             return;
@@ -269,8 +272,9 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
                 }
                 else
                 {
-                    StopNonSuspiciousSound();
                     // The NPC is stuck
+                    StopNonSuspiciousSound();
+                    npcLockedSoundEvent.Post(gameObject);
                     isWaiting = false;
                     isBlocked = true;
                     yield break;
@@ -285,6 +289,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
             else if(isInRoom && IsRoomBlocked(currentPoint))
             {
                 StopNonSuspiciousSound();
+                npcLockedSoundEvent.Post(gameObject);
                 // The NPC is stuck
                 isWaiting = false;
                 isBlocked = true;
