@@ -22,6 +22,7 @@ public class ScoreUI : MonoBehaviour
 
     [Header ("Sound Variables")]
     [SerializeField] protected AK.Wwise.Event victorySoundEvent;
+    [SerializeField] protected AK.Wwise.Event winSoundEvent;
     [SerializeField] protected AK.Wwise.Event statsSoundEvent;
     [SerializeField] protected AK.Wwise.Event[] startSoundEvent;
     void Start()
@@ -35,6 +36,7 @@ public class ScoreUI : MonoBehaviour
         canvasScore.enabled = true;
         //AudioManager.Instance.StopMenuMusic();
         AkUnitySoundEngine.StopAll();
+        winSoundEvent.Post(gameObject);
         victorySoundEvent.Post(gameObject);
         ///scorePanel.SetActive(true);
     }
