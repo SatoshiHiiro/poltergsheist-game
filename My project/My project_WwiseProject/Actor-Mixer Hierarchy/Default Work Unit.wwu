@@ -2016,6 +2016,30 @@
 									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 								</Reference>
 							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_UI_Victory" ID="{CCCB1E36-1948-41B6-9767-DB445DA8CA11}" ShortID="10415488">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="UI_Victory" ID="{6CD4F1AE-7116-4B08-81D7-362AD5F20EF3}">
+											<Language>SFX</Language>
+											<AudioFile>UI_Victory.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="762616887"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="UI_Victory" ID="{6CD4F1AE-7116-4B08-81D7-362AD5F20EF3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="UI_Defeat" ID="{E8FCB711-8DBD-4691-9EF2-A51144C0AC8A}" ShortID="52016464">
 							<ReferenceList>

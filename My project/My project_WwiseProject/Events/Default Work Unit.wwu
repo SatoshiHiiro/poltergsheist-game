@@ -583,7 +583,17 @@
 								<Action Name="" ID="{A4918EA8-9DE2-4A0B-907E-DD0C5DF7413E}" ShortID="916146756">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="PH-UI_Victory" ID="{8713545F-1AA0-49BD-924B-1A9310722E6A}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+											<ObjectRef Name="SFX_UI_Victory" ID="{CCCB1E36-1948-41B6-9767-DB445DA8CA11}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{3EABE109-1A98-48C7-8CFE-8FFE920F908B}" ShortID="867925129">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="MUS_ScoreTable" ID="{77388C86-A3C5-44F4-B717-31210BEC1734}" WorkUnitID="{3ABD7CAF-F891-45FA-B460-8609763CDABC}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
