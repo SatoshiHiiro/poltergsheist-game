@@ -10,8 +10,16 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="SFX_MusicPlay" ID="{D402D07F-03AA-4F30-9F2F-4AF2DB44423A}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="MUS_Menu" ID="{F4D35B9C-635A-4269-B6BC-72F7A3755A6A}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
 							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="UI_Victory" ID="{6D4875EE-A022-419E-9766-9F4C0394351F}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
+							<Position X="1" Y="1"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="MUS_House" ID="{E093FBB3-B00E-4CBF-80C0-8939AD0DCFA2}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
@@ -24,7 +32,7 @@
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
 					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="None" ID="{351044FD-7A84-4CB7-81DE-F70664AB2218}"/>
+						<CurrentStateRef Name="MUS_ScoreTable" ID="{77388C86-A3C5-44F4-B717-31210BEC1734}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
 						<CurrentSwitchRef Name="Marble" ID="{C2300D73-0761-4E46-BD9D-A9D676CD0001}"/>
