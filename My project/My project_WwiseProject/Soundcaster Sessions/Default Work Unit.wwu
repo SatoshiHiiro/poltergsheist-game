@@ -10,6 +10,10 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="SFX_MusicPlay" ID="{D402D07F-03AA-4F30-9F2F-4AF2DB44423A}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="MUS_Menu" ID="{F4D35B9C-635A-4269-B6BC-72F7A3755A6A}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
 							<Position X="1" Y="0"/>
 						</Module>
@@ -24,7 +28,7 @@
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
 					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="None" ID="{351044FD-7A84-4CB7-81DE-F70664AB2218}"/>
+						<CurrentStateRef Name="MUS_House" ID="{E156AD50-2A7B-47B7-A3B8-21E361FABB8F}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
 						<CurrentSwitchRef Name="Marble" ID="{C2300D73-0761-4E46-BD9D-A9D676CD0001}"/>

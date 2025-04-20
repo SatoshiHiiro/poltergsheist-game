@@ -4,19 +4,12 @@
 		<WorkUnit Name="Default Work Unit" ID="{3EE76551-D3E9-405C-B0DA-9A53801BA5FB}" PersistMode="Standalone">
 			<ChildrenList>
 				<MusicSwitchContainer Name="Music" ID="{3E06EF00-42D8-4366-B185-B53A683EC61A}" ShortID="977743598">
-					<PropertyList>
-						<Property Name="Volume" Type="Real64">
-							<ValueList>
-								<Value>-96</Value>
-							</ValueList>
-						</Property>
-					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+							<ObjectRef Name="MUS" ID="{354894A3-B444-419A-BDE9-AD6AB9224808}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 						</Reference>
 						<Reference Name="TransitionRoot">
 							<Custom>
@@ -63,7 +56,7 @@
 								<Property Name="Tempo" Type="Real64" Value="145"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-4</Value>
+										<Value>-9</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -554,7 +547,7 @@
 								<Property Name="TimeSignatureUpper" Type="int16" Value="3"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>2</Value>
+										<Value>-13</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>

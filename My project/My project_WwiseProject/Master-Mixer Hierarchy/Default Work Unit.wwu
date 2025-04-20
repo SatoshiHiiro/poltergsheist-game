@@ -9,6 +9,26 @@
 							<ObjectRef Name="System" ID="{1B407F0B-19A6-40C2-B60E-9FC63AD5CDEA}" WorkUnitID="{FFF4DF5C-D9A5-4382-B0FD-D6B2B283FF31}"/>
 						</Reference>
 					</ReferenceList>
+					<ChildrenList>
+						<Bus Name="MUS" ID="{354894A3-B444-419A-BDE9-AD6AB9224808}"/>
+						<Bus Name="SFX" ID="{C80620A8-D5CA-426D-BB68-2EF1AE13386C}">
+							<ChildrenList>
+								<Bus Name="Gramophone" ID="{4A45D6B7-5FD4-44EA-AF7A-4056FD847C4A}">
+									<DuckingList>
+										<DuckItem>
+											<BusRef Name="MUS" ID="{354894A3-B444-419A-BDE9-AD6AB9224808}"/>
+											<DuckingParam>
+												<Volume>-26</Volume>
+												<FadeInTime>1</FadeInTime>
+												<FadeOutTime>1</FadeOutTime>
+												<FadeCurve>FadeLinear</FadeCurve>
+											</DuckingParam>
+										</DuckItem>
+									</DuckingList>
+								</Bus>
+							</ChildrenList>
+						</Bus>
+					</ChildrenList>
 				</Bus>
 			</ChildrenList>
 		</WorkUnit>
