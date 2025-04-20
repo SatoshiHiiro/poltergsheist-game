@@ -3,18 +3,25 @@ using System.Collections;
 
 public class FaceAnimationEventBehavior : MonoBehaviour
 {
+    Rigidbody2D playerRbd2D;
     RotationManager playerManager;
-    Animator anim;
+    Animator animEyes;
+    Animator animMustache;
     Coroutine turnBlink;
     Coroutine idleBlink;
-    int iteration;
+    Coroutine rumbling;
+    int iBlink;
+    int iRumble;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerRbd2D = this.GetComponentInParent<Rigidbody2D>();
         playerManager = this.GetComponentInParent<RotationManager>();
-        anim = this.GetComponent<Animator>();
-        iteration = -3;
+        animEyes = this.transform.Find("Eyes").GetComponent<Animator>();
+        animMustache = this.transform.Find("Mustache").GetComponent<Animator>();
+        iBlink = -3;
+        iRumble = -8;
     }
 
     // Update is called once per frame
@@ -37,30 +44,81 @@ public class FaceAnimationEventBehavior : MonoBehaviour
             if (turnBlink != null) 
             { 
                 StopCoroutine(turnBlink);
-                anim.SetBool("IsBlinking", false);
+                animEyes.SetBool("IsBlinking", false);
                 turnBlink = null;
             }
         }
         if (idleBlink == null && turnBlink == null) { idleBlink = StartCoroutine(IdleBlink()); }
+
+        if (playerRbd2D.linearVelocity == Vector2.zero)
+        {
+            animMustache.SetBool("IsRunning", false);
+            if (rumbling == null) { rumbling = StartCoroutine(MustacheRumble()); }
+        }
+        else if (playerRbd2D.linearVelocityX != 0)
+        {
+            if (rumbling != null)
+            {
+                StopCoroutine(rumbling);
+                animMustache.SetBool("IsRumbling", false);
+                rumbling = null;
+            }
+            animMustache.SetBool("IsRunning", true);
+        }
+        else if (rumbling != null)
+        {
+            StopCoroutine(rumbling);
+            animMustache.SetBool("IsRumbling", false);
+            rumbling = null;
+        }
+    }
+
+    IEnumerator MustacheRun()
+    {
+
+        yield return null;
+    }
+
+    IEnumerator MustacheRumble()
+    {
+        float time = 0;
+
+        if (Random.Range(1 + iRumble, 10) > 5)
+        {
+            Debug.Log("Rumbling");
+            time = Random.Range(1f, 3f);
+            float speed = 3f / time;
+            iRumble = -8;
+            animMustache.SetFloat("Speed", speed);
+            animMustache.SetBool("IsRumbling", true);
+            yield return new WaitForSecondsRealtime(time);
+            animMustache.SetBool("IsRumbling", false);
+        }
+        else
+        {
+            Debug.Log("Try " + (iRumble + 9));
+            iRumble++;
+        }
+        
+        yield return new WaitForSecondsRealtime(5f - time);
+        rumbling = null;
     }
 
     IEnumerator IdleBlink()
     {
         float time = 0;
 
-        if (Random.Range(1 + iteration, 10) > 5)
+        if (Random.Range(1 + iBlink, 10) > 5)
         {
-            Debug.Log("Blink");
             time = Random.Range(.1f, .3f);
-            iteration = -3;
-            anim.SetBool("IsBlinking", true);
+            iBlink = -3;
+            animEyes.SetBool("IsBlinking", true);
             yield return new WaitForSecondsRealtime(time);
-            anim.SetBool("IsBlinking", false);
+            animEyes.SetBool("IsBlinking", false);
         }
         else
         {
-            Debug.Log("Fail");
-            iteration++;
+            iBlink++;
         }
 
         yield return new WaitForSecondsRealtime(5f - time);
@@ -69,10 +127,10 @@ public class FaceAnimationEventBehavior : MonoBehaviour
 
     IEnumerator TurnBlink()
     {
-        iteration = -3;
-        anim.SetBool("IsBlinking", true);
+        iBlink = -3;
+        animEyes.SetBool("IsBlinking", true);
         yield return new WaitForSecondsRealtime(.5f);
-        anim.SetBool("IsBlinking", false);
+        animEyes.SetBool("IsBlinking", false);
         turnBlink = null;
     }
 }
