@@ -37,7 +37,6 @@ public class StairController : MonoBehaviour
     [Header ("Sound bariables")]
     [SerializeField] public AK.Wwise.Event doorOpenSoundEvent;
     [SerializeField] public AK.Wwise.Event doorCloseSoundEvent;
-    [SerializeField] public AK.Wwise.Event doorEndSoundEvent; // Sound event only for the ending door
 
     // Public properties to access from other scripts
     public Transform StartPoint { get { return startPoint; } }
@@ -136,10 +135,6 @@ public class StairController : MonoBehaviour
         if(doorOpenSoundEvent != null)
         {
             doorOpenSoundEvent.Post(gameObject);
-        }
-        else if(doorEndSoundEvent != null)
-        {
-            doorEndSoundEvent.Post(gameObject);
         }
         
         // Climbing stair animation

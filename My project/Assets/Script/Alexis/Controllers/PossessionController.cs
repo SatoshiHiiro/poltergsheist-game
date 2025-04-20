@@ -117,6 +117,7 @@ public class PossessionController : MovementController, IPossessable, IResetInit
         transform.rotation = initialRotation;
         isClimbing = false;
         OnDepossessed();
+        jumpBounceSoundEvent.Stop(gameObject);
         //jumpVelocityAdjustment = 0;
         //wantsToJump = false;
         //rigid2D.sharedMaterial = iniMat;

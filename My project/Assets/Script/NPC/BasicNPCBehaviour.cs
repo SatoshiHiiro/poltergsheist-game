@@ -31,10 +31,17 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
     [Header("NPC sound variables")]
     [SerializeField] protected AK.Wwise.Event surpriseSoundEvent;
+    [SerializeField] protected AK.Wwise.Event nonSuspiciousSoundEvent;
     [SerializeField] protected float soundCooldown = 1.5f;  // Cooldown between sound of surprise
     protected float lastSoundTime;
     protected GameObject lastMovingObject;
     protected bool soundHasPlayed;
+
+    protected float nonSuspiciousSoundCooldown = 0f;//3f;  // Cooldown before restarting ambient sound
+    protected float lastSuspiciousTime;  // Last time something suspicious happened
+    protected bool isNonSuspiciousSoundPlaying = false;  // Is the ambient sound currently playing
+    protected Coroutine nonSuspiciousSoundCoroutine = null;
+
 
     //Animation variables
     [HideInInspector] public float directionX { get; set; }
@@ -73,6 +80,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         lastMovingObject = null;
         soundHasPlayed = false;
         lastSoundTime = -soundCooldown;
+
+        lastSuspiciousTime = -nonSuspiciousSoundCooldown;
     }
     protected virtual void Update()
     {
@@ -82,6 +91,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     // Movement detection of the NPC
     protected virtual void DetectMovingObjects()
     {
+        bool wasObjectMoving = isObjectMoving;
         isObjectMoving = false;
         float objectSize = 0f;
         bool foundMovingObject = false;
@@ -120,6 +130,10 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                         // Check if the object is moving in front of him
                         if (possessedObject.IsMoving)
                         {
+                            if(!wasObjectMoving)
+                            {
+                                StopNonSuspiciousSound();
+                            }
                             isObjectMoving = true;
                             foundMovingObject = true;
                             currentMovingObject = possessedObject.gameObject;
@@ -140,6 +154,15 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
             //lastMovingObject = null;
             soundHasPlayed = false;
         }
+
+        //if(wasObjectMoving && !isObjectMoving)
+        //{
+        //    StartNonSuspiciousSound();
+        //}
+        //else if(!wasObjectMoving && !isObjectMoving && !isNonSuspiciousSoundPlaying)
+        //{
+        //    StartNonSuspiciousSound();
+        //}
 
         HandleMovementSuspicion(objectSize);
     }
@@ -217,6 +240,68 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         // Otherwise, it's the same object still moving, so don't play the sound again
     }
 
+    protected virtual void StartNonSuspiciousSound()
+    {
+        if(nonSuspiciousSoundCoroutine != null)
+        {
+            return;
+        }
+        nonSuspiciousSoundCoroutine = StartCoroutine(PlayNonSuspiciousSound());
+        //if(!isNonSuspiciousSoundPlaying && nonSuspiciousSoundCoroutine == null)
+        //{
+        //    nonSuspiciousSoundCoroutine = StartCoroutine(PlayNonSuspiciousSound());
+        //}
+    }
+
+    protected virtual IEnumerator PlayNonSuspiciousSound()
+    {
+        // Wait for the cooldown period
+        float timeToWait = Mathf.Max(0, (lastSuspiciousTime + nonSuspiciousSoundCooldown) - Time.time);
+        if (timeToWait > 0)
+        {
+            yield return new WaitForSeconds(timeToWait);
+        }
+
+        // Check if we should still play the sound (nothing happened during the waiting time)
+        if (CanPlayNonSuspiciousSound())
+        {
+            if(nonSuspiciousSoundEvent != null)
+            {
+                nonSuspiciousSoundEvent.Post(gameObject);
+            }
+            isNonSuspiciousSoundPlaying = true;
+        }
+        else
+        {
+            nonSuspiciousSoundCoroutine = null;
+        }
+
+
+    }
+
+    protected virtual void StopNonSuspiciousSound()
+    {
+        if (isNonSuspiciousSoundPlaying && nonSuspiciousSoundEvent != null)
+        {
+            nonSuspiciousSoundEvent.Stop(gameObject);
+            isNonSuspiciousSoundPlaying = false;
+        }
+
+        if (nonSuspiciousSoundCoroutine != null)
+        {
+            StopCoroutine(nonSuspiciousSoundCoroutine);
+            nonSuspiciousSoundCoroutine = null;
+        }
+
+        lastSuspiciousTime = Time.time;
+    }
+
+    protected virtual bool CanPlayNonSuspiciousSound()
+    {
+        // Base condition - no moving objects
+        return !isObjectMoving;
+    }
+
 
     // Debug method only
     private void OnDrawGizmos()
@@ -240,6 +325,11 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         lastMovingObject = null;
         soundHasPlayed = false;
 
+        StopNonSuspiciousSound();
+        lastSuspiciousTime = -nonSuspiciousSoundCooldown;
+        isNonSuspiciousSoundPlaying = false;
+
         StopAllCoroutines();
+        //StartNonSuspiciousSound();
     }
 }

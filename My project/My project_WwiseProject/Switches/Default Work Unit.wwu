@@ -9,6 +9,51 @@
 						<Switch Name="Marble" ID="{C2300D73-0761-4E46-BD9D-A9D676CD0001}"/>
 					</ChildrenList>
 				</SwitchGroup>
+				<SwitchGroup Name="Speed" ID="{0E4E15CA-92A3-4F0D-9AFA-D1295013B052}">
+					<PropertyList>
+						<Property Name="UseGameParameter" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Switch Name="Walking" ID="{4F764F3D-3C91-4AAA-AF72-D8764C2AFD3F}"/>
+						<Switch Name="Running" ID="{CB0675D8-8511-4EDC-9022-FC9CB9E942B3}"/>
+						<Switch Name="Sprinting" ID="{4A22FDEC-2AE7-4780-B416-F897036E9382}"/>
+					</ChildrenList>
+					<SwitchOnRTPC>
+						<GameParameterRef Name="NPC_Speed" ID="{B4D5A1B8-097C-4335-B7DF-40722B45BCB7}"/>
+						<Curve Name="" ID="{32DF8841-0EA5-426D-A789-0A6D7DD0BCFF}">
+							<PropertyList>
+								<Property Name="Flags" Type="int32" Value="65537"/>
+							</PropertyList>
+							<PointList>
+								<Point>
+									<XPos>0</XPos>
+									<YPos>0</YPos>
+									<Flags>5</Flags>
+								</Point>
+								<Point>
+									<XPos>0.5</XPos>
+									<YPos>1</YPos>
+									<Flags>0</Flags>
+								</Point>
+								<Point>
+									<XPos>4</XPos>
+									<YPos>2</YPos>
+									<Flags>0</Flags>
+								</Point>
+								<Point>
+									<XPos>7</XPos>
+									<YPos>3</YPos>
+									<Flags>0</Flags>
+								</Point>
+								<Point>
+									<XPos>10</XPos>
+									<YPos>3</YPos>
+									<Flags>37</Flags>
+								</Point>
+							</PointList>
+						</Curve>
+					</SwitchOnRTPC>
+				</SwitchGroup>
 			</ChildrenList>
 		</WorkUnit>
 	</Switches>
