@@ -30,11 +30,21 @@
 							<Position X="3" Y="0"/>
 						</Module>
 					</ModuleList>
-					<RTPCValueList ShowAll="true"/>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="NPC_Speed" ID="{B4D5A1B8-097C-4335-B7DF-40722B45BCB7}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SuspicionBar" ID="{9AF810B4-3D29-4516-ADA3-B13E459D3F82}"/>
+							<Value>0</Value>
+						</RTPCValue>
+					</RTPCValueList>
 					<CurrentStateList ShowAll="true">
 						<CurrentStateRef Name="MUS_House" ID="{E156AD50-2A7B-47B7-A3B8-21E361FABB8F}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}"/>
 						<CurrentSwitchRef Name="Marble" ID="{C2300D73-0761-4E46-BD9D-A9D676CD0001}"/>
 						<CurrentSwitchRef Name="Running" ID="{CB0675D8-8511-4EDC-9022-FC9CB9E942B3}"/>
 					</CurrentSwitchList>
