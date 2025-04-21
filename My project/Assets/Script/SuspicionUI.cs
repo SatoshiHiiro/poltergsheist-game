@@ -21,7 +21,7 @@ public class SuspicionUI : MonoBehaviour
         //print("UI CHANGE");
         suspicionSlider.value = suspiciousAmount;
         suspicionBarRTCP.SetValue(null, suspiciousAmount);
-        print(suspiciousAmount);
+        //print(suspiciousAmount);
     }
 
     private void OnDisable()
