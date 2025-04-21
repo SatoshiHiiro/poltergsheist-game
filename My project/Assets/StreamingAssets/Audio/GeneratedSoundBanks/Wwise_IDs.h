@@ -92,6 +92,7 @@ namespace AK
                 static const AkUniqueID MUS_HOUSE = 748137791U;
                 static const AkUniqueID MUS_MENU = 3149643052U;
                 static const AkUniqueID MUS_MUSEUM = 1081012053U;
+                static const AkUniqueID MUS_SCORETABLE = 3846572379U;
                 static const AkUniqueID NONE = 748895195U;
             } // namespace STATE
         } // namespace MUSIC
@@ -138,7 +139,10 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID GRAMOPHONE = 3151110061U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
+        static const AkUniqueID MUS = 712897226U;
+        static const AkUniqueID SFX = 393239870U;
     } // namespace BUSSES
 
     namespace AUDIO_DEVICES
