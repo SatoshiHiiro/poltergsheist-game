@@ -124,11 +124,24 @@ namespace AK
             } // namespace SWITCH
         } // namespace SPEED
 
+        namespace SUSPICIONBAR
+        {
+            static const AkUniqueID GROUP = 1734527613U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID SUSPICION_HIGH = 1718704965U;
+                static const AkUniqueID SUSPICION_LOW = 156183633U;
+                static const AkUniqueID SUSPICION_MID = 659365037U;
+            } // namespace SWITCH
+        } // namespace SUSPICIONBAR
+
     } // namespace SWITCHES
 
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID NPC_SPEED = 2586782490U;
+        static const AkUniqueID SUSPICIONBAR = 1734527613U;
     } // namespace GAME_PARAMETERS
 
     namespace BANKS

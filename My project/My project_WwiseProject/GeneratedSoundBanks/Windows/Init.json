@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{9A3E800B-8D41-1F6D-DAA2-239CD9B81268}",
+    "Hash": "{49097C25-9417-C562-9C8E-B1B515A3B5BB}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -61,6 +61,12 @@
      }
     ],
     "GameParameters": [
+     {
+      "Id": "1734527613",
+      "Name": "SuspicionBar",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\SuspicionBar",
+      "GUID": "{9AF810B4-3D29-4516-ADA3-B13E459D3F82}"
+     },
      {
       "Id": "2586782490",
       "Name": "NPC_Speed",
@@ -139,6 +145,35 @@
       ]
      },
      {
+      "Id": "1734527613",
+      "Name": "SuspicionBar",
+      "ObjectPath": "\\Switches\\Default Work Unit\\SuspicionBar",
+      "GUID": "{422A72FE-AA1F-442A-8A12-1DFA83181A03}",
+      "GameParameterRef": {
+       "Id": "1734527613"
+      },
+      "Switches": [
+       {
+        "Id": "156183633",
+        "Name": "Suspicion_Low",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SuspicionBar\\Suspicion_Low",
+        "GUID": "{FDD281CE-5D7A-4009-BACE-38705E097C4C}"
+       },
+       {
+        "Id": "659365037",
+        "Name": "Suspicion_Mid",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SuspicionBar\\Suspicion_Mid",
+        "GUID": "{EA3BD6A1-B740-4123-A7FF-7B6BB18A95F8}"
+       },
+       {
+        "Id": "1718704965",
+        "Name": "Suspicion_High",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SuspicionBar\\Suspicion_High",
+        "GUID": "{7F10F0A1-E982-448B-9F34-94D4F320DA3A}"
+       }
+      ]
+     },
+     {
       "Id": "3865314626",
       "Name": "Material",
       "ObjectPath": "\\Switches\\Default Work Unit\\Material",
@@ -161,6 +196,6 @@
     ]
    }
   ],
-  "FileHash": "{577BB42C-F893-A38A-EDB2-FC50C00F7EF6}"
+  "FileHash": "{7616BDE9-E755-980C-140F-92D5FDE4B8AA}"
  }
 }
