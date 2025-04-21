@@ -38,8 +38,28 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: c23e1d7182510c47ac9c86c3ec1dd706
     GuidInternal: 
-    m_lastTime: -8584578913933761772
+    m_lastTime: -8584564899006027761
     List:
+    - name: Gramophone
+      guid: b7d6454ad45fea44af7a4056fd847c4a
+      id: 3151110061
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c23e1d7182510c47ac9c86c3ec1dd706
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: SFX
+        ObjectType: 2
+        guid: a82006c8cad56d42bb682ef1ae13386c
+      - ElementName: Gramophone
+        ObjectType: 2
+        guid: b7d6454ad45fea44af7a4056fd847c4a
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\SFX\Gramophone
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
       id: 3803692087
@@ -54,6 +74,40 @@ MonoBehaviour:
         ObjectType: 2
         guid: d8a41415a61d2a41a17e75ca0c2149f3
       Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus
+    - name: MUS
+      guid: a394483544b49a41bde9ad6ab9224808
+      id: 712897226
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c23e1d7182510c47ac9c86c3ec1dd706
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: MUS
+        ObjectType: 2
+        guid: a394483544b49a41bde9ad6ab9224808
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\MUS
+    - name: SFX
+      guid: a82006c8cad56d42bb682ef1ae13386c
+      id: 393239870
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c23e1d7182510c47ac9c86c3ec1dd706
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: SFX
+        ObjectType: 2
+        guid: a82006c8cad56d42bb682ef1ae13386c
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\SFX
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     PathAndIcons:
@@ -94,7 +148,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: eaf8ae6ee9c7f44b9005b089581ca3bb
     GuidInternal: 
-    m_lastTime: -8584565008300057607
+    m_lastTime: -8584564042578153432
     List:
     - name: Doors
       guid: efcee1e45e52cd4da44768755966ea9f
@@ -500,8 +554,8 @@ MonoBehaviour:
         guid: eefe89447ec9284880058ced639bb69e
       Path: Events\Default Work Unit\SFX\House\SFX_BallJump
       maxAttenuation: 0
-      maxDuration: 1.8323333
-      minDuration: 1.8323333
+      maxDuration: 0.330875
+      minDuration: 0.306375
     - name: SFX_Bed
       guid: 1084bba13bb344439762227d79b2d481
       id: 4240001378
@@ -635,8 +689,8 @@ MonoBehaviour:
         guid: 7545c24b0a9139449cf7f247cbe22506
       Path: Events\Default Work Unit\SFX\SFX_CageClosed
       maxAttenuation: 0
-      maxDuration: 1.4823333
-      minDuration: 1.4823333
+      maxDuration: 1.4031875
+      minDuration: 1.0416666
     - name: SFX_CatSlap
       guid: c57885b84d0e4540a9ffdd6661b28b1c
       id: 801776781
@@ -1045,9 +1099,9 @@ MonoBehaviour:
         ObjectType: 3
         guid: 7fd002d4aa03304f9f2f4af2db44423a
       Path: Events\Default Work Unit\SFX\Museum\SFX_MusicPlay
-      maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
+      maxAttenuation: 40
+      maxDuration: 20.2
+      minDuration: 20.2
     - name: SFX_NPC_CatSlap
       guid: a2678be97983f5428e7b6987466255ac
       id: 1591108753
@@ -1115,8 +1169,8 @@ MonoBehaviour:
         guid: 34a6e467560bc34cbc0b90b2d9f8ea8b
       Path: Events\Default Work Unit\SFX\House\SFX_PillowFall
       maxAttenuation: 0
-      maxDuration: 1.7698333
-      minDuration: 1.7698333
+      maxDuration: 0.823402
+      minDuration: 0.23701015
     - name: SFX_PillowJump
       guid: 6545b6ada5ccde4494aad55d669b36dc
       id: 493063166
@@ -1138,8 +1192,8 @@ MonoBehaviour:
         guid: 6545b6ada5ccde4494aad55d669b36dc
       Path: Events\Default Work Unit\SFX\House\SFX_PillowJump
       maxAttenuation: 0
-      maxDuration: 1.1823334
-      minDuration: 1.1823334
+      maxDuration: 0.330875
+      minDuration: 0.306375
     - name: SFX_PossessedOff
       guid: 96e768d0da029548bba0df94fa568eb8
       id: 2573730023
@@ -1224,8 +1278,8 @@ MonoBehaviour:
         guid: f2715e8469e9544e8b81ec7ebccd37ad
       Path: Events\Default Work Unit\SFX\Doors\SFX_TrapDoorClose
       maxAttenuation: 0
-      maxDuration: 2.2073333
-      minDuration: 2.2073333
+      maxDuration: 0.8701042
+      minDuration: 0.8701042
     - name: SFX_TrapDoorOpen
       guid: e6af0c45882d3b4292a1bd1354500e33
       id: 334605088
@@ -1247,8 +1301,8 @@ MonoBehaviour:
         guid: e6af0c45882d3b4292a1bd1354500e33
       Path: Events\Default Work Unit\SFX\Doors\SFX_TrapDoorOpen
       maxAttenuation: 0
-      maxDuration: 2.0698333
-      minDuration: 2.0698333
+      maxDuration: 1.3112708
+      minDuration: 1.3112708
     - name: SFX_WoodBox
       guid: 6b3ea96c8699f44b94f3bc2105d32bf4
       id: 690079769
@@ -1487,8 +1541,8 @@ MonoBehaviour:
         guid: fe33ea76495f524094e724c7de3ae358
       Path: Events\Default Work Unit\UI\UI_Stats
       maxAttenuation: 0
-      maxDuration: 1.1948333
-      minDuration: 1.1948333
+      maxDuration: 3.0024583
+      minDuration: 3.0024583
     - name: UI_Victory
       guid: ee75486d22a09e4197669f4c0394351f
       id: 3107961688
@@ -1507,8 +1561,8 @@ MonoBehaviour:
         guid: ee75486d22a09e4197669f4c0394351f
       Path: Events\Default Work Unit\UI\UI_Victory
       maxAttenuation: 0
-      maxDuration: 1.0698333
-      minDuration: 1.0698333
+      maxDuration: 5.604694
+      minDuration: 5.604694
     - name: VO
       guid: 9e59704f38d06e409b8abd8325c6ce19
       id: 1534528548
@@ -1543,9 +1597,9 @@ MonoBehaviour:
         ObjectType: 3
         guid: 4ed357cd75c54c4e93f3707735a72b87
       Path: Events\Default Work Unit\VO\VO_NPC_Cat
-      maxAttenuation: 0
-      maxDuration: 0.87369615
-      minDuration: 0.87369615
+      maxAttenuation: 70
+      maxDuration: 3.1617708
+      minDuration: 1.568625
     - name: VO_NPC_CatChase
       guid: 119ec17b79d2934ba439629c745c74de
       id: 553568125
@@ -1564,8 +1618,8 @@ MonoBehaviour:
         guid: 119ec17b79d2934ba439629c745c74de
       Path: Events\Default Work Unit\VO\VO_NPC_CatChase
       maxAttenuation: 0
-      maxDuration: 1.9698334
-      minDuration: 1.9698334
+      maxDuration: 1.556375
+      minDuration: 0.8701042
     - name: VO_NPC_Curious
       guid: 2ab4ebc19a7d6540a88139c8c4ce36da
       id: 2127579795
@@ -1584,8 +1638,8 @@ MonoBehaviour:
         guid: 2ab4ebc19a7d6540a88139c8c4ce36da
       Path: Events\Default Work Unit\VO\VO_NPC_Curious
       maxAttenuation: 0
-      maxDuration: 1.2670295
-      minDuration: 1.2670295
+      maxDuration: 0.8333333
+      minDuration: 0.55147916
     - name: VO_NPC_Locked
       guid: 596a1d5d85e05f4584bdaeded7222ffa
       id: 1529802069
@@ -1603,9 +1657,9 @@ MonoBehaviour:
         ObjectType: 3
         guid: 596a1d5d85e05f4584bdaeded7222ffa
       Path: Events\Default Work Unit\VO\VO_NPC_Locked
-      maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
+      maxAttenuation: 70
+      maxDuration: 6.0235353
+      minDuration: 2.5252984
     - name: VO_NPC_Surprised
       guid: fc46c3fd640be14989d052b23909c023
       id: 3660578466
@@ -1624,8 +1678,8 @@ MonoBehaviour:
         guid: fc46c3fd640be14989d052b23909c023
       Path: Events\Default Work Unit\VO\VO_NPC_Surprised
       maxAttenuation: 0
-      maxDuration: 1.9448333
-      minDuration: 1.9448333
+      maxDuration: 0.73529166
+      minDuration: 0.5330833
     - name: VO_NPC_Whatever
       guid: 52eeab4b04035a45930a3319bc98aa4f
       id: 3470322369
@@ -1643,9 +1697,9 @@ MonoBehaviour:
         ObjectType: 3
         guid: 52eeab4b04035a45930a3319bc98aa4f
       Path: Events\Default Work Unit\VO\VO_NPC_Whatever
-      maxAttenuation: 0
-      maxDuration: 1.7073333
-      minDuration: 1.7073333
+      maxAttenuation: 70
+      maxDuration: 1.0723125
+      minDuration: 0.55147916
     - name: VO_Player_Barks
       guid: d5cca68b5d9ae34eb9171cde9fcb3d5e
       id: 2054537116
@@ -1664,8 +1718,8 @@ MonoBehaviour:
         guid: d5cca68b5d9ae34eb9171cde9fcb3d5e
       Path: Events\Default Work Unit\VO\VO_Player_Barks
       maxAttenuation: 0
-      maxDuration: 1.3948333
-      minDuration: 1.3948333
+      maxDuration: 4.1421666
+      minDuration: 2.6041667
     - name: VO_Player_Yay
       guid: ee2e19c5bea37d4094e95b5812dd16f4
       id: 2458294146
@@ -1726,7 +1780,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: af7cbd3a91f8fa45b4608609763cdabc
     GuidInternal: 
-    m_lastTime: -8584568450037958588
+    m_lastTime: -8584564899004317556
     List:
     - name: Music
       guid: ab59f37bea0fea4bbae3157f03df8dbc
@@ -1791,6 +1845,22 @@ MonoBehaviour:
         - ElementName: MUS_Museum
           ObjectType: 8
           guid: 1194d7899da78946af5509f7279b8236
+      - name: MUS_ScoreTable
+        guid: 868c3877c5a3f444b71731210bec1734
+        id: 3846572379
+        PathAndIcons:
+        - ElementName: States
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: af7cbd3a91f8fa45b4608609763cdabc
+        - ElementName: Music
+          ObjectType: 9
+          guid: ab59f37bea0fea4bbae3157f03df8dbc
+        - ElementName: MUS_ScoreTable
+          ObjectType: 8
+          guid: 868c3877c5a3f444b71731210bec1734
       - name: None
         guid: fd441035847ab74c81def70664ab2218
         id: 748895195
