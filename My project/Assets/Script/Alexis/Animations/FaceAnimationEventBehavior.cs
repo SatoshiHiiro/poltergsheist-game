@@ -4,6 +4,7 @@ using System.Collections;
 public class FaceAnimationEventBehavior : MonoBehaviour
 {
     Rigidbody2D playerRbd2D;
+    MovementController playerCon;
     RotationManager playerManager;
     Animator animEyes;
     Animator animMustache;
@@ -17,6 +18,7 @@ public class FaceAnimationEventBehavior : MonoBehaviour
     void Start()
     {
         playerRbd2D = this.GetComponentInParent<Rigidbody2D>();
+        playerCon = playerRbd2D.GetComponent<MovementController>();
         playerManager = this.GetComponentInParent<RotationManager>();
         animEyes = this.transform.Find("Eyes").GetComponent<Animator>();
         animMustache = this.transform.Find("Mustache").GetComponent<Animator>();
@@ -50,12 +52,12 @@ public class FaceAnimationEventBehavior : MonoBehaviour
         }
         if (idleBlink == null && turnBlink == null) { idleBlink = StartCoroutine(IdleBlink()); }
 
-        if (playerRbd2D.linearVelocity == Vector2.zero)
+        Vector2 moveInput = playerCon.move.ReadValue<Vector2>();
+        if (moveInput.x == 0)
         {
             animMustache.SetBool("IsRunning", false);
-            if (rumbling == null) { rumbling = StartCoroutine(MustacheRumble()); }
         }
-        else if (playerRbd2D.linearVelocityX != 0)
+        else
         {
             if (rumbling != null)
             {
@@ -65,18 +67,11 @@ public class FaceAnimationEventBehavior : MonoBehaviour
             }
             animMustache.SetBool("IsRunning", true);
         }
-        else if (rumbling != null)
+
+        if (moveInput == Vector2.zero)
         {
-            StopCoroutine(rumbling);
-            animMustache.SetBool("IsRumbling", false);
-            rumbling = null;
+            if (rumbling == null) { rumbling = StartCoroutine(MustacheRumble()); }
         }
-    }
-
-    IEnumerator MustacheRun()
-    {
-
-        yield return null;
     }
 
     IEnumerator MustacheRumble()
