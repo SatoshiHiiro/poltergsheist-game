@@ -17,6 +17,7 @@ public class BoutonsInGame : MonoBehaviour
 
     public void Accueil()
     {
+        AkUnitySoundEngine.WakeupFromSuspend();
         SceneManager.LoadScene("UI_Accueil");
     }
 
@@ -24,6 +25,7 @@ public class BoutonsInGame : MonoBehaviour
     {
         //Remet le temps actif si jamais
         Time.timeScale = 1f;
+        AkUnitySoundEngine.WakeupFromSuspend();
         //recommence la scène
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
