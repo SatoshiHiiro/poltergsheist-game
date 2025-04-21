@@ -6,17 +6,22 @@ public class SuspicionUI : MonoBehaviour
     // This class manage the suspicion UI.
 
     [SerializeField] private Slider suspicionSlider;
+    //[SerializeField] public AK.Wwise.Event suspicionBar;
+    [SerializeField] protected AK.Wwise.RTPC suspicionBarRTCP;
 
     private void Start()
     {
         suspicionSlider.value = 0;
         SuspicionManager.Instance.OnSuspicionChanged += UpdateUI;
+        //suspicionBar.Post(gameObject);
     }
 
     private void UpdateUI(float suspiciousAmount)
     {
         //print("UI CHANGE");
         suspicionSlider.value = suspiciousAmount;
+        suspicionBarRTCP.SetValue(null, suspiciousAmount);
+        print(suspiciousAmount);
     }
 
     private void OnDisable()
