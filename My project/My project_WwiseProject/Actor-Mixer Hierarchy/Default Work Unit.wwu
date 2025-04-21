@@ -1054,94 +1054,6 @@
 								<ActiveSource Name="PH-SFX_FS_NPC" ID="{8DE80E02-F39E-4461-9BDF-5B458C63B729}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<Sound Name="PH-SFX_MusicPlay" ID="{8C616DD0-8876-4A9C-9EB3-24DACC90A148}" ShortID="729107355">
-							<PropertyList>
-								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="PH-SFX_MusicPlay" ID="{440C7EA3-9976-4985-A544-BD69CE7E6F08}">
-									<Language>SFX</Language>
-									<AudioFile>PH-SFX_MusicPlay.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="693263473"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="PH-SFX_MusicStop" ID="{20C52C74-EA0F-46A2-B479-3EE239F3F68D}">
-									<Language>SFX</Language>
-									<AudioFile>PH-SFX_MusicStop.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="377625904"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="PH-SFX_PlayerNotMoving" ID="{877C98ED-3647-448F-949A-C10EE556F553}">
-									<Language>SFX</Language>
-									<AudioFile>PH-SFX_PlayerNotMoving.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="230955768"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="PH-VO_NPCCat" ID="{D96194D6-FD93-46AD-9B01-31A842F2AED3}">
-									<Language>SFX</Language>
-									<AudioFile>PH-VO_NPCCat.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="417950812"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="PH-VO_NPCCatChase" ID="{CA53AE62-CF80-4F53-A0D2-FF23DCC4B341}">
-									<Language>SFX</Language>
-									<AudioFile>PH-VO_NPCCatChase.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="501145020"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="PH-VO_NPCCurious" ID="{3F9E2206-ABAD-4216-98DE-D13E8343BE57}">
-									<Language>SFX</Language>
-									<AudioFile>PH-VO_NPCCurious.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="516533479"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="PH-VO_NPCLocked" ID="{4F8CB412-8E69-4371-8199-764D1E3760A6}">
-									<Language>SFX</Language>
-									<AudioFile>PH-VO_NPCLocked.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="778961871"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="PH-VO_NPCWhatever" ID="{9267E761-8EA3-4875-9FF3-3DA9CBBDDC65}">
-									<Language>SFX</Language>
-									<AudioFile>PH-VO_NPCWhatever.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="264852627"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="PH-VO_PlayerBarks" ID="{4F1D1ECE-E6D4-445F-8887-22C044F3899C}">
-									<Language>SFX</Language>
-									<AudioFile>PH-VO_PlayerBarks.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="518536363"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="PH-VO_PlayerYay" ID="{C516988E-1543-4F3C-B007-F37CBBBA297F}">
-									<Language>SFX</Language>
-									<AudioFile>PH-VO_PlayerYay.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="197530883"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="PH-VO_PlayerYay" ID="{C516988E-1543-4F3C-B007-F37CBBBA297F}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
 						<Sound Name="PH-SFX_PossessedOff" ID="{80F9FB2C-AA5D-48DF-833B-D7DB79B824F0}" ShortID="177145946">
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -1519,28 +1431,6 @@
 								<ActiveSource Name="PH-UI_Stats" ID="{2E3BD3F8-3571-4458-92D5-E814640BB991}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<Sound Name="PH-UI_Victory" ID="{8713545F-1AA0-49BD-924B-1A9310722E6A}" ShortID="896441322">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="PH-UI_Victory" ID="{AAF43156-61A6-4C5F-BD16-C071D9BE9406}">
-									<Language>SFX</Language>
-									<AudioFile>PH-UI_Victory.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="914413484"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="PH-UI_Victory" ID="{AAF43156-61A6-4C5F-BD16-C071D9BE9406}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
 						<Sound Name="PH-VO_NPC_Surprised" ID="{094A8922-C3D9-414B-A603-917333038BD9}" ShortID="811884036">
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -1808,31 +1698,6 @@
 								<ActiveSource Name="PH-VO_Hmm" ID="{86B0A7D1-EE15-4B2B-9387-2DD2D7EB1A57}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<Sound Name="PH-SFX_MusicPlay2" ID="{AF230CA7-0EB3-41DA-AD43-6B7531399B16}" ShortID="839106304">
-							<PropertyList>
-								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="PH-SFX_MusicPlay2" ID="{FA799018-A033-465B-A976-D97CC4291600}">
-									<Language>SFX</Language>
-									<AudioFile>PH-SFX_MusicPlay2.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="181169064"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="PH-SFX_MusicPlay2" ID="{FA799018-A033-465B-A976-D97CC4291600}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="New Virtual Folder" ID="{932D37C4-B414-4CEB-8696-033AB9ED9606}" ShortID="522633475">
@@ -2052,6 +1917,13 @@
 							</ReferenceList>
 						</BlendContainer>
 						<BlendContainer Name="UI_Stats" ID="{86CD02B4-0162-46EC-9036-DE4C465179B1}" ShortID="654672479">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2384,6 +2256,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<RandomSequenceContainer Name="SFX_Jump" ID="{60AFC6BC-C487-457F-9F7B-03F7D33B4541}" ShortID="51662262">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-9</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2452,6 +2331,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<RandomSequenceContainer Name="SFX_JumpBounce" ID="{1B174B87-3F0E-452E-8B5B-E7643C47B35F}" ShortID="402317146">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-14</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2578,6 +2464,11 @@
 														</ModifierInfo>
 													</ModifierList>
 												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -2691,6 +2582,11 @@
 															</Modifier>
 														</ModifierInfo>
 													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
 												</Property>
 											</PropertyList>
 											<ReferenceList>
@@ -2819,7 +2715,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-3</Value>
+														<Value>-7</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -3054,7 +2950,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+							<ObjectRef Name="SFX" ID="{C80620A8-D5CA-426D-BB68-2EF1AE13386C}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
@@ -3155,6 +3051,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="SFX_BookshelfFall" ID="{3AF79F63-4D7F-4221-99BA-CB5890B8E803}" ShortID="271856453">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-17</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -3287,6 +3190,11 @@
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -3354,6 +3262,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_Door_Open_3" ID="{4A6307C2-875F-47CB-84E4-13576EBFBF71}" ShortID="565727460">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>6</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -3376,6 +3291,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_Door_Open_4" ID="{782E8AD9-38E7-4B0B-86F7-1E5876426678}" ShortID="56175508">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -3404,6 +3326,11 @@
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-9</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -3525,7 +3452,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-7</Value>
+												<Value>-9</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -3659,6 +3586,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="SFX_Door_Unlocked_1" ID="{714B8CF9-DBBC-4340-B0C2-15E3977A2AFD}" ShortID="573761577">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -3703,6 +3637,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_Door_Unlocked_3" ID="{71B22931-EC15-4CD2-925B-31EAA71F6834}" ShortID="425255306">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>6</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -3725,6 +3666,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_Door_Unlocked_4" ID="{B568D791-979D-4E66-AA44-65D2FB3AC995}" ShortID="495584702">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -3766,7 +3714,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-7</Value>
+												<Value>-12</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -3908,11 +3856,6 @@
 												</ModifierInfo>
 											</ModifierList>
 										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-3</Value>
-											</ValueList>
-										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -3924,6 +3867,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="SFX_MouseDoor_Open_1" ID="{20FB024F-ECC6-4157-9B0D-46EB0AD3B392}" ShortID="154754806">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -3946,6 +3896,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_MouseDoor_Open_2" ID="{DFB435C9-D24B-4ACD-A9D0-5DF8F5092654}" ShortID="415011018">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-4</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -3968,6 +3925,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_MouseDoor_Open_3" ID="{D61C1A9D-F1DD-40BD-A847-58585BDF90E7}" ShortID="1547276">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>4</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4009,7 +3973,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-3</Value>
+												<Value>3</Value>
 											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
@@ -4028,6 +3992,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="SFX_MouseDoor_Close_1" ID="{1FEBD96C-1770-4226-AEE8-958EAB6CFFC7}" ShortID="329411180">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>7</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4072,6 +4043,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_MouseDoor_Close_3" ID="{C208001C-F7B9-4E65-9D83-3DD4718E423C}" ShortID="276707873">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4403,7 +4381,7 @@
 										<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-4</Value>
+												<Value>-9</Value>
 											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
@@ -4428,6 +4406,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="SFX_CookieJar_Fall_1" ID="{3CE2FE54-076E-44A3-A875-FA74C7B687BB}" ShortID="576228305">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-6</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4450,6 +4435,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_CookieJar_Fall_2" ID="{AE3708C6-52C2-4120-A2C6-C19129B90A5C}" ShortID="505847102">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4579,6 +4571,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="SFX_TrapdoorOpen" ID="{86F0B6D0-EA25-4E97-BD71-886A53D20A49}" ShortID="852247338">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4613,6 +4612,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="SFX_TrapdoorClose" ID="{E3C67D06-96CF-4A64-9F11-FC99621A2FCB}" ShortID="347017984">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-9</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4706,6 +4712,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="SFX_BallFall" ID="{21E5F7B0-1F70-485C-9625-9A2B74F61E07}" ShortID="680001268">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-8</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4806,6 +4819,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="SFX_BallJump" ID="{92A0095E-AE51-4730-93F3-6C5C3C32C589}" ShortID="529328490">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-9</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4928,6 +4948,13 @@
 							</ReferenceList>
 							<ChildrenList>
 								<RandomSequenceContainer Name="SFX_Pillow" ID="{3BFEC737-FEE1-4945-9E70-56E7A325AC51}" ShortID="929473229">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>8</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5044,6 +5071,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_PillowFall_2" ID="{DE338685-F4F7-420A-B136-29C7AE98BEBC}" ShortID="182097909">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>2</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5066,6 +5100,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_PillowFall_3" ID="{D602E6A8-76F6-48C4-8A11-5BD0088017CE}" ShortID="549300344">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-8</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5129,6 +5170,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_Player_Jump_2" ID="{E03D1610-3907-4D32-A8A6-CEAFF7FFB462}" ShortID="446253297">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-2</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5167,6 +5215,11 @@
 								<RandomSequenceContainer Name="SFX_CageClosed" ID="{BC507BEF-862F-4479-A7C1-782861D5E961}" ShortID="244447140">
 									<PropertyList>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-8</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -5178,6 +5231,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="SFX_CageClosed_1" ID="{07DF4EF4-63E5-428F-A548-E86E593A8C36}" ShortID="713141056">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5288,6 +5348,13 @@
 							</ReferenceList>
 							<ChildrenList>
 								<RandomSequenceContainer Name="SFX_FlowerPotFall" ID="{F0822943-F68B-4FEE-ABAE-3AD82CBE3A13}" ShortID="1023078805">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-11</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5298,6 +5365,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="SFX_FlowerPotFall_1" ID="{995DBAB8-567F-492E-9434-1705992D3760}" ShortID="105916811">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-4</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5364,6 +5438,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="SFX_FlowerPotFall_4" ID="{95A1BC5E-D0FA-4567-AFF7-401A2C226BAE}" ShortID="4757217">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5412,16 +5493,8 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="SFX_MusicPlay" ID="{473922B1-5623-4CF6-935C-07E2AE742BB4}" ShortID="211814764">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-										<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
-									</PropertyList>
+								<Sound Name="SFX_Gramophone" ID="{4455DD7C-480F-4E32-A895-3477E299845A}" ShortID="385258984">
 									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="Attenuation_Door" ID="{2CA30D17-B9F3-4A81-B1FD-5DD1F11744DC}" WorkUnitID="{7D7FD434-0F92-497D-BBAB-8BA845B369FC}"/>
-										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 										</Reference>
@@ -5430,16 +5503,16 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="SFX_MusicPlay" ID="{693F2D29-991B-48A0-B4C4-3CA494E66853}">
+										<AudioFileSource Name="SFX_Gramophone" ID="{28AC8BB6-2F20-4873-9AA5-6017B334B1D5}">
 											<Language>SFX</Language>
-											<AudioFile>SFX_MusicPlay.wav</AudioFile>
+											<AudioFile>SFX_Gramophone.wav</AudioFile>
 											<MediaIDList>
-												<MediaID ID="834284227"/>
+												<MediaID ID="209289830"/>
 											</MediaIDList>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="SFX_MusicPlay" ID="{693F2D29-991B-48A0-B4C4-3CA494E66853}" Platform="Linked"/>
+										<ActiveSource Name="SFX_Gramophone" ID="{28AC8BB6-2F20-4873-9AA5-6017B334B1D5}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -5549,6 +5622,11 @@
 														<Sound Name="NPC_Footsteps_Marble_Run" ID="{B7853065-E664-4095-AACD-B6DF52FC7B8C}" ShortID="844516840">
 															<PropertyList>
 																<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-7</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -5644,6 +5722,11 @@
 														<Sound Name="NPC_Footsteps_Marble_Sprint" ID="{E7782B9A-E7DF-47F8-9420-586623690D64}" ShortID="772146291">
 															<PropertyList>
 																<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-5</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -5714,6 +5797,11 @@
 														<Sound Name="NPC_Footsteps_Wood_Walk" ID="{BC44EB61-3D19-45AA-B24E-841164748A63}" ShortID="256821459">
 															<PropertyList>
 																<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>2</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -5739,6 +5827,11 @@
 														<Sound Name="NPC_Footsteps_Marble_Walk" ID="{6774E222-9DAB-42C0-9A1A-65FAD82FCC39}" ShortID="1065354773">
 															<PropertyList>
 																<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-4</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -5873,7 +5966,7 @@
 													<PropertyList>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-5</Value>
+																<Value>-10</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -5902,7 +5995,7 @@
 													<PropertyList>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-8</Value>
+																<Value>-11</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -5969,7 +6062,7 @@
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-2</Value>
+														<Value>5</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -6087,6 +6180,11 @@
 										<RandomSequenceContainer Name="Curious_Random" ID="{B9D7CA40-C8AF-4B8D-B1F7-5C8021A0EE7F}" ShortID="243792583">
 											<PropertyList>
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-2</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -6221,6 +6319,11 @@
 													</ModifierList>
 												</Property>
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -6232,6 +6335,13 @@
 											</ReferenceList>
 											<ChildrenList>
 												<Sound Name="VO_NPC_Locked_1" ID="{808CFF1F-E9DD-4A29-BBDF-9DA7BB73165D}" ShortID="584714250">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-2</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -6364,6 +6474,13 @@
 											</ReferenceList>
 											<ChildrenList>
 												<Sound Name="SFX_NPC_Locked_1" ID="{B07A6A8E-63DB-4D53-B756-6C66EECDC7F1}" ShortID="492374718">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-4</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -6391,6 +6508,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="SFX_NPC_Locked_2" ID="{FE5DEE13-F04E-4F19-8A82-BCDCE36EE473}" ShortID="950497347">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-4</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -6416,6 +6540,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="SFX_NPC_Locked_3" ID="{4E11A030-D5B8-4E56-AABC-D21937D530E4}" ShortID="354891226">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -6523,6 +6654,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="VO_NPC_Whatever_3" ID="{D8AEE478-BCF0-4656-9805-577C8A70E5F0}" ShortID="126070891">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -6588,6 +6726,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<RandomSequenceContainer Name="Cat_Random" ID="{5E524666-65DC-4E6F-8AC8-358958964F29}" ShortID="377382074">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>

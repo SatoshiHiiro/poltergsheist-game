@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{E5DCA1F9-F4CE-3558-4A45-3AC74D3F4D58}",
+    "Hash": "{72BCEADF-DCC5-C479-2C35-895B60349780}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -35,6 +35,24 @@
      ]
     },
     "Busses": [
+     {
+      "Id": "393239870",
+      "Name": "SFX",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\SFX",
+      "GUID": "{C80620A8-D5CA-426D-BB68-2EF1AE13386C}"
+     },
+     {
+      "Id": "712897226",
+      "Name": "MUS",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\MUS",
+      "GUID": "{354894A3-B444-419A-BDE9-AD6AB9224808}"
+     },
+     {
+      "Id": "3151110061",
+      "Name": "Gramophone",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\SFX\\Gramophone",
+      "GUID": "{4A45D6B7-5FD4-44EA-AF7A-4056FD847C4A}"
+     },
      {
       "Id": "3803692087",
       "Name": "Master Audio Bus",
@@ -80,6 +98,12 @@
         "Name": "MUS_Menu",
         "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_Menu",
         "GUID": "{99B39622-7DD2-4D89-AEE8-86D4B188B102}"
+       },
+       {
+        "Id": "3846572379",
+        "Name": "MUS_ScoreTable",
+        "ObjectPath": "\\States\\Default Work Unit\\Music\\MUS_ScoreTable",
+        "GUID": "{77388C86-A3C5-44F4-B717-31210BEC1734}"
        }
       ]
      }
@@ -137,6 +161,6 @@
     ]
    }
   ],
-  "FileHash": "{9435DFE2-96BC-C1AA-74B4-B6E4D7158586}"
+  "FileHash": "{353ED0B1-9E74-BE2B-C0BC-F75959373857}"
  }
 }
