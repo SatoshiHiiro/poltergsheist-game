@@ -80,7 +80,6 @@ public class FaceAnimationEventBehavior : MonoBehaviour
 
         if (Random.Range(1 + iRumble, 10) > 5)
         {
-            Debug.Log("Rumbling");
             time = Random.Range(1f, 3f);
             float speed = 3f / time;
             iRumble = -8;
@@ -91,7 +90,6 @@ public class FaceAnimationEventBehavior : MonoBehaviour
         }
         else
         {
-            Debug.Log("Try " + (iRumble + 9));
             iRumble++;
         }
         

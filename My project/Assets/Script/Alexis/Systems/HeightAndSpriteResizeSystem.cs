@@ -151,6 +151,7 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
         {
             if (!this.transform.TryGetComponent<Animator>(out Animator animat))
             {
+
                 if (isPossessable && !parentObject.GetComponent<Rigidbody2D>().freezeRotation)
                 {
                     sprite.rotation = parentObject.rotation;

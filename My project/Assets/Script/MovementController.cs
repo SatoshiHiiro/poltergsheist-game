@@ -370,6 +370,16 @@ public abstract class MovementController : MonoBehaviour
 
                 break;
             }
+            
+            if(curContact[i].normal.y >= 0.9f && objMat!= null && objMat.name == "Ballss")
+            {
+                rigid2D.linearVelocityY = -lastVelocityY * bounceForce;
+                objBounciness = bounceForce;
+            }
+        }
+
+        for (int i = 0; i < curContact.Count; i++)
+        {
             if (canMove && Mathf.Abs(lastVelocityX) >= maxSpeed - .1f)
             {
                 if (collision.GetContact(i).normal.x <= -.9f)
@@ -382,12 +392,6 @@ public abstract class MovementController : MonoBehaviour
                     if (onBonkL != null) { onBonkL(bonkLeftParam); }
                     break;
                 }
-            }
-
-            if(curContact[i].normal.y >= 0.9f && objMat!= null && objMat.name == "Ballss")
-            {
-                rigid2D.linearVelocityY = -lastVelocityY * bounceForce;
-                objBounciness = bounceForce;
             }
         }
     }

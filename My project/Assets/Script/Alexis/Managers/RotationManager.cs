@@ -30,7 +30,7 @@ public class RotationManager : SpriteManager
             else if (goesRight)
                 direction = new Quaternion(0, 0, 0, 1);     //Look right
         }
-        
+
         RotateSprite(direction);
         if (direction != this.transform.rotation)
             inRotation = true;
