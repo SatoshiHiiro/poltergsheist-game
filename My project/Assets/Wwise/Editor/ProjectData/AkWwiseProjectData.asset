@@ -1752,7 +1752,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 183607395b7abe48a4667fda80dcb427
     GuidInternal: 
-    m_lastTime: -8584563964120844508
+    m_lastTime: -8584563358400719649
     List:
     - name: NPC_Speed
       guid: b8a1d5b47c093543b7df40722b45bcb7
@@ -1768,6 +1768,20 @@ MonoBehaviour:
         ObjectType: 13
         guid: b8a1d5b47c093543b7df40722b45bcb7
       Path: Game Parameters\Default Work Unit\NPC_Speed
+    - name: SuspicionBar
+      guid: b410f89a293d1645ada3b13e459d3f82
+      id: 1734527613
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 183607395b7abe48a4667fda80dcb427
+      - ElementName: SuspicionBar
+        ObjectType: 13
+        guid: b410f89a293d1645ada3b13e459d3f82
+      Path: Game Parameters\Default Work Unit\SuspicionBar
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
@@ -1892,7 +1906,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 3bd6a9a5898ac445b699c94c0ef17091
     GuidInternal: 
-    m_lastTime: -8584563964097726722
+    m_lastTime: -8584563358395533113
     List:
     - name: Material
       guid: e3d291f643829b4cbd2cc7810fdd08d2
@@ -2007,6 +2021,72 @@ MonoBehaviour:
         - ElementName: Walking
           ObjectType: 10
           guid: 3d4f764f913caa4aaf72d8764c2afd3f
+      ValueGuids: []
+      ValueIcons: []
+      valuesInternal: []
+    - name: SuspicionBar
+      guid: fe722a421faa2a448a121dfa83181a03
+      id: 1734527613
+      PathAndIcons:
+      - ElementName: Switches
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 3bd6a9a5898ac445b699c94c0ef17091
+      - ElementName: SuspicionBar
+        ObjectType: 11
+        guid: fe722a421faa2a448a121dfa83181a03
+      Path: Switches\Default Work Unit\SuspicionBar
+      values:
+      - name: Suspicion_High
+        guid: a1f0107f82e98b449f3494d4f320da3a
+        id: 1718704965
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 3bd6a9a5898ac445b699c94c0ef17091
+        - ElementName: SuspicionBar
+          ObjectType: 11
+          guid: fe722a421faa2a448a121dfa83181a03
+        - ElementName: Suspicion_High
+          ObjectType: 10
+          guid: a1f0107f82e98b449f3494d4f320da3a
+      - name: Suspicion_Low
+        guid: ce81d2fd7a5d0940bace38705e097c4c
+        id: 156183633
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 3bd6a9a5898ac445b699c94c0ef17091
+        - ElementName: SuspicionBar
+          ObjectType: 11
+          guid: fe722a421faa2a448a121dfa83181a03
+        - ElementName: Suspicion_Low
+          ObjectType: 10
+          guid: ce81d2fd7a5d0940bace38705e097c4c
+      - name: Suspicion_Mid
+        guid: a1d63bea40b72341a7ff7b6bb18a95f8
+        id: 659365037
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 3bd6a9a5898ac445b699c94c0ef17091
+        - ElementName: SuspicionBar
+          ObjectType: 11
+          guid: fe722a421faa2a448a121dfa83181a03
+        - ElementName: Suspicion_Mid
+          ObjectType: 10
+          guid: a1d63bea40b72341a7ff7b6bb18a95f8
       ValueGuids: []
       ValueIcons: []
       valuesInternal: []
