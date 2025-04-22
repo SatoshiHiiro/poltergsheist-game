@@ -38,6 +38,7 @@ public class PlayerManager : RotationManager
         player.onLand += EventParameter;
         player.onBonkR += EventParameter;
         player.onBonkL += EventParameter;
+        StartCoroutine(OnEnableRelated());
     }
 
     void OnDisable()
@@ -72,34 +73,43 @@ public class PlayerManager : RotationManager
         }
     }
 
+    IEnumerator OnEnableRelated()
+    {
+        yield return new WaitForEndOfFrame();
+        canRotate = true;
+    }
+
     IEnumerator DepossessionDelay()
     {
         yield return new WaitForFixedUpdate();
+        //playerFace.SetParent(player.transform, true);
         playerFace.SetParent(bodyAnim.transform.parent, true);
         playerFace.SetAsLastSibling();
-        playerFace.eulerAngles = new Vector3(playerFace.eulerAngles.x, this.transform.eulerAngles.y, playerFace.eulerAngles.z);
+        //playerFace.eulerAngles = new Vector3(playerFace.eulerAngles.x, player.transform.eulerAngles.y, playerFace.eulerAngles.z);
         AnimatorClipInfo[] clip = bodyAnim.GetCurrentAnimatorClipInfo(0);
-        FaceLerpPosAndRot(facePosIni, faceRotIni, clip[0].clip.length);
+        FaceLerpPosAndRot(facePosIni, faceRotIni, clip[0].clip.length, true);
     }
 
-    IEnumerator FaceLerp(Vector3 posTarget, Quaternion rotTarget, float duration)
+    IEnumerator FaceLerp(Vector3 posTarget, Quaternion rotTarget, float duration, bool isDepossession)
     {
         float endTime = Time.time + duration;
-        float angle = Quaternion.Angle(playerFace.localRotation, rotTarget) / duration;
+        float angle = Quaternion.Angle(playerFace.rotation, rotTarget) / duration;
         float distance = Vector3.Distance(playerFace.localPosition, posTarget) / duration;
         float sizeDiff = Vector3.Distance(playerFace.localScale, faceScaleIni) / duration;
 
         while (Time.time <= endTime)
         {
             float deltaTime = Time.deltaTime;
-            playerFace.localRotation = Quaternion.RotateTowards(playerFace.localRotation, rotTarget, angle * deltaTime);
+            playerFace.rotation = Quaternion.RotateTowards(playerFace.rotation, rotTarget, angle * deltaTime);
             playerFace.localPosition = Vector3.MoveTowards(playerFace.localPosition, posTarget, distance * deltaTime);
             playerFace.localScale = Vector3.MoveTowards(playerFace.localScale, faceScaleIni, sizeDiff * deltaTime);
             yield return null;
         }
-        playerFace.localRotation = rotTarget;
+        playerFace.rotation = rotTarget;
         playerFace.localPosition = posTarget;
         playerFace.localScale = faceScaleIni;
+
+        if (isDepossession) { canRotate = true; }
     }
 
     public void PossessionParameter(string param)
@@ -117,10 +127,10 @@ public class PlayerManager : RotationManager
         }
     }
 
-    public void FaceLerpPosAndRot(Vector3 positionTarget, Quaternion rotationTarget, float time)
+    public void FaceLerpPosAndRot(Vector3 positionTarget, Quaternion rotationTarget, float time, bool isDepossession)
     {
         StopAllCoroutines();
-        StartCoroutine(FaceLerp(positionTarget, rotationTarget, time));
+        StartCoroutine(FaceLerp(positionTarget, rotationTarget, time, isDepossession));
     }
 
     public void EventParameter(string param)

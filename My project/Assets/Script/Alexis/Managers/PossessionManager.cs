@@ -71,6 +71,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     IEnumerator AnimationTime()
     {
         if (onPossess != null) { onPossess(possessParam); }
+        manager.canRotate = false;
 
         player.lastPossession = this;
         manager.gameObject.SetActive(true);
@@ -84,12 +85,13 @@ public class PossessionManager : InteractibleManager, IResetInitialState
 
         AnimatorClipInfo[] info =  playerBodyAnim.GetCurrentAnimatorClipInfo(0);
         float duration = info[0].clip.length;
+        playerFace.eulerAngles = new Vector3(playerFace.eulerAngles.x, spriteRenderer.transform.eulerAngles.y, playerFace.eulerAngles.z);
         playerFace.SetParent(this.GetComponentInChildren<SpriteRenderer>().transform, true);
         playerFace.SetAsLastSibling();
-        Vector3 center = spriteRenderer.transform.localPosition;
+        //Vector3 center = spriteRenderer.transform.localPosition;
+        Vector3 center = Vector3.zero;
         center.z = playerFace.position.z;
-        playerFace.eulerAngles = new Vector3(playerFace.eulerAngles.x, spriteRenderer.transform.eulerAngles.y, playerFace.eulerAngles.z);
-        manager.FaceLerpPosAndRot(center, manager.FaceRotationIni, duration);
+        manager.FaceLerpPosAndRot(center, manager.FaceRotationIni, duration, false);
 
         yield return new WaitForSecondsRealtime(duration);
         //yield return new WaitForSecondsRealtime(.5f);
