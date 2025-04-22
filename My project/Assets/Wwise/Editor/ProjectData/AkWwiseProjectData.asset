@@ -38,7 +38,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: c23e1d7182510c47ac9c86c3ec1dd706
     GuidInternal: 
-    m_lastTime: -8584563580437725555
+    m_lastTime: -8584562450984592514
     List:
     - name: Gramophone
       guid: b7d6454ad45fea44af7a4056fd847c4a
@@ -1752,7 +1752,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 183607395b7abe48a4667fda80dcb427
     GuidInternal: 
-    m_lastTime: -8584563252313809674
+    m_lastTime: -8584562450984597638
     List:
     - name: NPC_Speed
       guid: b8a1d5b47c093543b7df40722b45bcb7
@@ -1782,6 +1782,34 @@ MonoBehaviour:
         ObjectType: 13
         guid: b410f89a293d1645ada3b13e459d3f82
       Path: Game Parameters\Default Work Unit\SuspicionBar
+    - name: Volume_Music
+      guid: 80379e9f960f1e4ea24af6995322979f
+      id: 3891337659
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 183607395b7abe48a4667fda80dcb427
+      - ElementName: Volume_Music
+        ObjectType: 13
+        guid: 80379e9f960f1e4ea24af6995322979f
+      Path: Game Parameters\Default Work Unit\Volume_Music
+    - name: Volume_SFX
+      guid: e9475711da56a245b3a037dbd4453c31
+      id: 3673881719
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 183607395b7abe48a4667fda80dcb427
+      - ElementName: Volume_SFX
+        ObjectType: 13
+        guid: e9475711da56a245b3a037dbd4453c31
+      Path: Game Parameters\Default Work Unit\Volume_SFX
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
