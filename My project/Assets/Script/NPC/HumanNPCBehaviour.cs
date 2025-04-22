@@ -287,6 +287,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                         playerCollider.gameObject.GetComponent<MovementController>().canMove = false;
                         NPCSeePolterg();
                     }
+                    else
+                    {
+                        //print("BLOCKED!");
+                    }
                 } 
 
             }
