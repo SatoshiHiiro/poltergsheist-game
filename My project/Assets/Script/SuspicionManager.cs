@@ -40,6 +40,9 @@ public class SuspicionManager : MonoBehaviour
     public event Action<float> OnSuspicionChanged;  // Event called when the suspicious changed
 
     bool hasRespawn = false;
+
+    // Getters
+    public float CurrentSuspicion => currentSuspicion;
     private void Awake()
     {
         if (Instance == null)

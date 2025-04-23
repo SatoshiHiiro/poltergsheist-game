@@ -13,9 +13,10 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     protected bool isObjectMoving;    // Is there an object moving in front of him?
     protected bool isCurrentlyObserving;    // Is the NPC already watching an object moving?
     protected float fieldOfViewAngle;
-
+   
     [Header("NPC global variables")]
     [SerializeField] protected float currentFloorLevel;   // Floor where the npc is located
+    [SerializeField] protected SpriteRenderer alertIcon;
     protected float initialFloorLevel;
     protected NPCMovementController npcMovementController;
     protected SpriteRenderer npcSpriteRenderer;
@@ -138,6 +139,11 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                             foundMovingObject = true;
                             currentMovingObject = possessedObject.gameObject;
 
+                            if(alertIcon != null)
+                            {
+                                alertIcon.enabled = true;
+                            }
+
                             HandleSoundEvent(currentMovingObject);
                             //soundEvent.Post(gameObject);
                         }
@@ -149,10 +155,16 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                 }
             }
         }
+        // Object stopped moving
         if(!foundMovingObject && lastMovingObject != null)
         {
             //lastMovingObject = null;
             soundHasPlayed = false;
+
+            if(alertIcon != null && isObjectMoving == false)
+            {
+                alertIcon.enabled = false;
+            }
         }
 
         //if(wasObjectMoving && !isObjectMoving)
@@ -268,6 +280,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
             if(nonSuspiciousSoundEvent != null)
             {
                 nonSuspiciousSoundEvent.Post(gameObject);
+                //alertIcon.enabled = false;
             }
             isNonSuspiciousSoundPlaying = true;
         }
@@ -317,7 +330,13 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         facingRight = initialFacingRight;
         //npcSpriteRenderer.flipX = !facingRight;
         currentFloorLevel = initialFloorLevel;
-        
+
+        // Reset icon movement detection
+        if(alertIcon != null)
+        {
+            alertIcon.enabled = false;
+        }
+
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
         rotationDegrees.z = facingRight ? -90f : 90f;
         fieldOfView.transform.eulerAngles = rotationDegrees;
