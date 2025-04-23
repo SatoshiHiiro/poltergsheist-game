@@ -8,13 +8,15 @@ public class NPCSpriteManager : MonoBehaviour
     Transform pivot;
     Transform npcTrans;
     Animator npcAnim;
-    bool isStartRelatedFinished;
 
     float rotationSpeed = 1000f;        //Multiplier for the number of degrees to turn each frame
-    Quaternion directionSprite;
-    Quaternion directionView;
-    Vector3 lastNPCPos;
+    Vector3 directionSprite;
+    Vector3 directionView;
+    //Quaternion directionSprite;
+    //Quaternion directionView;
+    //Vector3 lastNPCPos;
 
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,20 +26,11 @@ public class NPCSpriteManager : MonoBehaviour
         //else { Debug.Log("No BasicNPCBehaviour in parent or grandparent for a NPC sprite"); }
         npcBehav = this.GetComponentInParent<BasicNPCBehaviour>();
         npcTrans = npcBehav.transform;
-        isStartRelatedFinished = false;
+        fieldOfView = npcTrans.Find("NPCLight").transform;
         npcAnim = this.GetComponentInParent<Animator>();
         pivot = npcAnim.transform;
 
-        lastNPCPos = npcTrans.position;
-        StartCoroutine(StartRelated());
-        //fieldOfView = npcBehav.FieldOfView;
-    }
-
-    IEnumerator StartRelated()
-    {
-        yield return new WaitForEndOfFrame();
-        fieldOfView = npcBehav.FieldOfView.transform;
-        isStartRelatedFinished = true;
+        //lastNPCPos = npcTrans.position;
     }
 
     // Update is called once per frame
@@ -65,26 +58,39 @@ public class NPCSpriteManager : MonoBehaviour
         }*/
         
         bool isFacingRight = npcBehav.FacingRight;
+        directionSprite = pivot.eulerAngles;
+        directionView = fieldOfView.eulerAngles;
+
         if (isFacingRight)
         {
-            directionSprite = new Quaternion(0, 0, 0, 1);     //Look right
-            directionView = new Quaternion(.70711f, .70711f, 0, 0);
+            directionSprite.y = 0;
+            directionView.y = 180;
+            //directionSprite = new Quaternion(0, 0, 0, 1);     //Look right
+            //directionView = new Quaternion(.70711f, .70711f, 0, 0);
         }
         else
         {
-            directionSprite = new Quaternion(0, 1, 0, 0);     //Look left
-            directionView = new Quaternion(0, 0, .70711f, .70711f);
+            directionSprite.y = 180;
+            directionView.y = 0;
+            //directionSprite = new Quaternion(0, 1, 0, 0);     //Look left
+            //directionView = new Quaternion(0, 0, .70711f, .70711f);
         }
 
-        if (isStartRelatedFinished) 
-        { 
-            RotateSprite(directionSprite, directionView);
-        }
-
-        lastNPCPos = npcTrans.position;
+        RotateSprite(directionSprite, directionView);
+        //lastNPCPos = npcTrans.position;
     }
 
-    void RotateSprite(Quaternion sprite, Quaternion view)
+    void RotateSprite(Vector3 sprite, Vector3 view)
+    {
+        float step = rotationSpeed * Time.deltaTime;
+        Vector3 spriteAngle = Vector3.MoveTowards(pivot.eulerAngles, sprite, step);
+        pivot.eulerAngles = spriteAngle;
+
+        Vector3 viewAngle = Vector3.MoveTowards(fieldOfView.eulerAngles, view, step);
+        fieldOfView.eulerAngles = viewAngle;
+    }
+
+    /*void RotateSprite(Quaternion sprite, Quaternion view)
     {
         float step = rotationSpeed * Time.deltaTime;
         Quaternion spriteAngle = Quaternion.RotateTowards(pivot.localRotation, sprite, step);
@@ -92,5 +98,5 @@ public class NPCSpriteManager : MonoBehaviour
 
         Quaternion viewAngle = Quaternion.RotateTowards(fieldOfView.localRotation, view, step);
         fieldOfView.rotation = viewAngle;
-    }
+    }*/
 }
