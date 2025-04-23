@@ -132,7 +132,7 @@ public class Mirror : MonoBehaviour
                 }
                 else
                 {
-                    print(hit.collider.gameObject.name);
+                    //print(hit.collider.gameObject.name);
                 }
             }
         }
