@@ -125,7 +125,7 @@ public class PlayerManager : RotationManager
         {
             for (int i = 0; i < faceSpriteArray.Length; i++)
             {
-                faceSpriteArray[i].sortingLayerName = playerFace.parent.GetComponent<SpriteRenderer>().sortingLayerName;
+                faceSpriteArray[i].sortingLayerName = playerFace.parent.GetComponentInParent<SpriteRenderer>().sortingLayerName;
             }
         }
     }

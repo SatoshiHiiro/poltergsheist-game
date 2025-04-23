@@ -89,7 +89,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         player.isPossessionInProgress = true;
 
         playerFace.eulerAngles = new Vector3(playerFace.eulerAngles.x, spriteRenderer.transform.eulerAngles.y, playerFace.eulerAngles.z);
-        playerFace.SetParent(this.GetComponentInChildren<SpriteRenderer>().transform, true);
+        playerFace.SetParent(this.GetComponentInChildren<SpriteRenderer>().transform.Find("FaceTarget"), true);
         playerFace.SetAsLastSibling();
         //Vector3 center = spriteRenderer.transform.localPosition;
         Vector3 center = Vector3.zero;
