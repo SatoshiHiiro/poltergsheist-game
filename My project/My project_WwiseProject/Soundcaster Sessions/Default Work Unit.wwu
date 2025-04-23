@@ -30,14 +30,48 @@
 							<Position X="3" Y="0"/>
 						</Module>
 					</ModuleList>
-					<RTPCValueList ShowAll="true"/>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="NPC_Speed" ID="{B4D5A1B8-097C-4335-B7DF-40722B45BCB7}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SuspicionBar" ID="{9AF810B4-3D29-4516-ADA3-B13E459D3F82}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Volume_SFX" ID="{115747E9-56DA-45A2-B3A0-37DBD4453C31}"/>
+							<Value>24</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Volume_Music" ID="{9F9E3780-0F96-4E1E-A24A-F6995322979F}"/>
+							<Value>100</Value>
+						</RTPCValue>
+					</RTPCValueList>
 					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="MUS_House" ID="{E156AD50-2A7B-47B7-A3B8-21E361FABB8F}"/>
+						<CurrentStateRef Name="MUS_Menu" ID="{99B39622-7DD2-4D89-AEE8-86D4B188B102}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Suspicion_High" ID="{7F10F0A1-E982-448B-9F34-94D4F320DA3A}"/>
 						<CurrentSwitchRef Name="Marble" ID="{C2300D73-0761-4E46-BD9D-A9D676CD0001}"/>
 						<CurrentSwitchRef Name="Running" ID="{CB0675D8-8511-4EDC-9022-FC9CB9E942B3}"/>
 					</CurrentSwitchList>
+				</SoundcasterSession>
+				<SoundcasterSession Name="SFX" ID="{260FF4C6-7392-4EFA-BD6A-C6F08385BC69}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="SFX_CatSlap" ID="{B88578C5-0E4D-4045-A9FF-DD6661B28B1C}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="Volume_SFX" ID="{115747E9-56DA-45A2-B3A0-37DBD4453C31}"/>
+							<Value>24</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>

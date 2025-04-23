@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{72BCEADF-DCC5-C479-2C35-895B60349780}",
+    "Hash": "{58B97441-1D33-0BD4-F970-054CBBA4D8B3}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -62,10 +62,28 @@
     ],
     "GameParameters": [
      {
+      "Id": "1734527613",
+      "Name": "SuspicionBar",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\SuspicionBar",
+      "GUID": "{9AF810B4-3D29-4516-ADA3-B13E459D3F82}"
+     },
+     {
       "Id": "2586782490",
       "Name": "NPC_Speed",
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\NPC_Speed",
       "GUID": "{B4D5A1B8-097C-4335-B7DF-40722B45BCB7}"
+     },
+     {
+      "Id": "3673881719",
+      "Name": "Volume_SFX",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\Volume_SFX",
+      "GUID": "{115747E9-56DA-45A2-B3A0-37DBD4453C31}"
+     },
+     {
+      "Id": "3891337659",
+      "Name": "Volume_Music",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\Volume_Music",
+      "GUID": "{9F9E3780-0F96-4E1E-A24A-F6995322979F}"
      }
     ],
     "StateGroups": [
@@ -139,6 +157,35 @@
       ]
      },
      {
+      "Id": "1734527613",
+      "Name": "SuspicionBar",
+      "ObjectPath": "\\Switches\\Default Work Unit\\SuspicionBar",
+      "GUID": "{422A72FE-AA1F-442A-8A12-1DFA83181A03}",
+      "GameParameterRef": {
+       "Id": "1734527613"
+      },
+      "Switches": [
+       {
+        "Id": "156183633",
+        "Name": "Suspicion_Low",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SuspicionBar\\Suspicion_Low",
+        "GUID": "{FDD281CE-5D7A-4009-BACE-38705E097C4C}"
+       },
+       {
+        "Id": "659365037",
+        "Name": "Suspicion_Mid",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SuspicionBar\\Suspicion_Mid",
+        "GUID": "{EA3BD6A1-B740-4123-A7FF-7B6BB18A95F8}"
+       },
+       {
+        "Id": "1718704965",
+        "Name": "Suspicion_High",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SuspicionBar\\Suspicion_High",
+        "GUID": "{7F10F0A1-E982-448B-9F34-94D4F320DA3A}"
+       }
+      ]
+     },
+     {
       "Id": "3865314626",
       "Name": "Material",
       "ObjectPath": "\\Switches\\Default Work Unit\\Material",
@@ -161,6 +208,6 @@
     ]
    }
   ],
-  "FileHash": "{353ED0B1-9E74-BE2B-C0BC-F75959373857}"
+  "FileHash": "{51F5D70F-4D23-6DAE-A131-7ACE9A105C9A}"
  }
 }

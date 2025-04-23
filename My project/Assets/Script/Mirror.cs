@@ -37,8 +37,23 @@ public class Mirror : MonoBehaviour
         {
             return false;
         }
-        planes = GeometryUtility.CalculateFrustumPlanes(mirrorCamera);
-        return GeometryUtility.TestPlanesAABB(planes, objCollider.bounds);
+        Vector2[] points = GetReflectionPoints(objCollider);
+
+        foreach (Vector2 point in points)
+        {
+            Vector3 viewportPoint = mirrorCamera.WorldToViewportPoint(point);
+
+            if (viewportPoint.z >= 0 &&
+                viewportPoint.x >= 0f && viewportPoint.x <= 1f &&
+                viewportPoint.y >= 0f && viewportPoint.y <= 1f)
+            {
+                return true; // Au moins un point est dans la vue de la caméra miroir
+            }
+        }
+
+        return false;
+        //planes = GeometryUtility.CalculateFrustumPlanes(mirrorCamera);
+        //return GeometryUtility.TestPlanesAABB(planes, objCollider.bounds);
     }
 
     public Vector2[] GetReflectionPoints(Collider2D objCollider)
@@ -78,15 +93,16 @@ public class Mirror : MonoBehaviour
         Bounds playerBounds = playerCollider.bounds;
 
         // Get the bounds of the mirror (assuming the mirror has a collider)
-        Bounds mirrorBounds = GetComponent<Collider2D>().bounds;
-
+        //Bounds mirrorBounds = GetComponent<Collider2D>().bounds;
+        Collider2D mirrorCollider  = GetComponent<Collider2D>();
         // Cast rays from multiple points on the mirror to various points on the player's collider
-        Vector2[] mirrorPoints = {
-        new Vector2(mirrorBounds.center.x, mirrorBounds.center.y),                  // Center
-        new Vector2(mirrorBounds.min.x, mirrorBounds.min.y),                        // Bottom-left
-        new Vector2(mirrorBounds.max.x, mirrorBounds.min.y),                        // Bottom-right
-        new Vector2(mirrorBounds.min.x, mirrorBounds.max.y),                        // Top-left
-        new Vector2(mirrorBounds.max.x, mirrorBounds.max.y)};                      // Top-right
+        Vector2[] mirrorPoints = LightUtility.GetSamplePointsFromObject(mirrorCollider);
+        //Vector2[] mirrorPoints = {
+        //new Vector2(mirrorBounds.center.x, mirrorBounds.center.y),                  // Center
+        //new Vector2(mirrorBounds.min.x, mirrorBounds.min.y),                        // Bottom-left
+        //new Vector2(mirrorBounds.max.x, mirrorBounds.min.y),                        // Bottom-right
+        //new Vector2(mirrorBounds.min.x, mirrorBounds.max.y),                        // Top-left
+        //new Vector2(mirrorBounds.max.x, mirrorBounds.max.y)};                      // Top-right
 
 
         //Vector2[] playerPoints = {
@@ -113,6 +129,10 @@ public class Mirror : MonoBehaviour
                 if (hit.collider == playerCollider)
                 {
                     return false; // Found at least one unobstructed view
+                }
+                else
+                {
+                    //print(hit.collider.gameObject.name);
                 }
             }
         }

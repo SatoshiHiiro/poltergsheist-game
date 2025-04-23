@@ -1,10 +1,14 @@
 Switch Group	ID	Name			Wwise Object Path	Notes
 	640949982	Speed			\Default Work Unit\Speed	
+	1734527613	SuspicionBar			\Default Work Unit\SuspicionBar	
 
 Switch	ID	Name	Switch Group			Notes
 	340271938	Walking	Speed			
 	3691594375	Sprinting	Speed			
 	3863236874	Running	Speed			
+	156183633	Suspicion_Low	SuspicionBar			
+	659365037	Suspicion_Mid	SuspicionBar			
+	1718704965	Suspicion_High	SuspicionBar			
 
 State Group	ID	Name			Wwise Object Path	Notes
 	3991942870	Music			\Default Work Unit\Music	
@@ -15,6 +19,10 @@ State	ID	Name	State Group			Notes
 	1081012053	MUS_Museum	Music			
 	3149643052	MUS_Menu	Music			
 	3846572379	MUS_ScoreTable	Music			
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	3673881719	Volume_SFX			\Default Work Unit\Volume_SFX	
+	3891337659	Volume_Music			\Default Work Unit\Volume_Music	
 
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	393239870	SFX			\Default Work Unit\Master Audio Bus\SFX	

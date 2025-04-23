@@ -556,7 +556,7 @@
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+									<ObjectRef Name="MUS" ID="{354894A3-B444-419A-BDE9-AD6AB9224808}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 								</Reference>
 								<Reference Name="PlaylistRoot">
 									<Custom>
@@ -639,9 +639,23 @@
 									</ReferenceList>
 									<ChildrenList>
 										<MusicTrack Name="MUS_House_120bpm_Intro_T1M" ID="{891DF38C-73C2-4251-8382-C6E54C1B9B41}" ShortID="908440395">
+											<PropertyList>
+												<Property Name="MusicTrackType" Type="int16" Value="3"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="DefaultSwitchOrState">
+													<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="SuspicionBar" ID="{422A72FE-AA1F-442A-8A12-1DFA83181A03}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
 												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
@@ -649,17 +663,60 @@
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
+															<ChildrenList>
+																<MusicTransition Name="Transition" ID="{945236B0-ED32-4418-8002-A8C8709FC504}">
+																	<PropertyList>
+																		<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+																		<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+																		<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+																	</PropertyList>
+																	<TransitionInfo>
+																		<SourceFadeOut>
+																			<MusicFade Name="Source Fade-out" ID="{E8809266-BC93-4C18-80FD-BC278F54E210}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																					<Property Name="FadeType" Type="int16" Value="1"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</SourceFadeOut>
+																		<DestinationFadeIn>
+																			<MusicFade Name="Destination Fade-in" ID="{5D9DAF6C-32D1-4D69-B16E-7A1E34048A69}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeOffset" Type="Real64" Value="-0.7"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</DestinationFadeIn>
+																	</TransitionInfo>
+																</MusicTransition>
+															</ChildrenList>
 															<TransitionInfo/>
 														</MusicTransition>
 													</Custom>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="MUS_House_120bpm_Intro_T1M" ID="{2FFACDD9-76C3-4842-966E-6DE7BF02A976}">
+												<AudioFileSource Name="MUS_House_120bpm_Intro_T1M" ID="{121AC623-1830-47BB-90EB-683845C0DC1D}">
 													<Language>SFX</Language>
 													<AudioFile>MUS_House_120bpm_Intro_T1M.wav</AudioFile>
 													<MediaIDList>
 														<MediaID ID="4159646"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_House_120bpm_Intro_T1M_High" ID="{C2D967F0-E8E1-4DC6-A439-49C0F427F9BF}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_House_120bpm_Intro_T1M_High.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="415402447"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_House_120bpm_Intro_T1M_Mid" ID="{EDE97D03-0F47-4C7B-A9A3-5FD177EC0572}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_House_120bpm_Intro_T1M_Mid.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="92865067"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
@@ -672,18 +729,80 @@
 																	<ObjectList Name="Clips">
 																		<Reference>
 																			<Local>
-																				<MusicClip Name="MUS_House_120bpm_Intro_T1M" ID="{78E10E4C-AC47-4C88-9288-D1820F9AFCC5}">
+																				<MusicClip Name="MUS_House_120bpm_Intro_T1M" ID="{C44FA991-9962-477D-82DF-C900943FB1E9}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="10500"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																					</PropertyList>
-																					<AudioSourceRef Name="MUS_House_120bpm_Intro_T1M" ID="{2FFACDD9-76C3-4842-966E-6DE7BF02A976}"/>
+																					<AudioSourceRef Name="MUS_House_120bpm_Intro_T1M" ID="{121AC623-1830-47BB-90EB-683845C0DC1D}"/>
 																				</MusicClip>
 																			</Local>
 																		</Reference>
 																	</ObjectList>
 																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{930FA6B6-D7C8-46DD-97B6-D54CB8F0793F}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_House_120bpm_Intro_T1M_Mid" ID="{B2D2EF5B-B8DC-4B78-83C2-EB295332EE64}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="10500"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="6.24500451351651E-14"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_House_120bpm_Intro_T1M_Mid" ID="{EDE97D03-0F47-4C7B-A9A3-5FD177EC0572}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Mid" ID="{EA3BD6A1-B740-4123-A7FF-7B6BB18A95F8}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{660148C9-4ED8-4A12-8963-BBE9A7597CDA}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_House_120bpm_Intro_T1M_High" ID="{59E670A8-3D46-49CB-9122-46EA2F478BD8}">
+																					<PropertyList>
+																						<Property Name="BeginTrimOffset" Type="Real64" Value="2.4980018054066E-13"/>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="10500"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="-1.87350135405495E-13"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_House_120bpm_Intro_T1M_High" ID="{C2D967F0-E8E1-4DC6-A439-49C0F427F9BF}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_High" ID="{7F10F0A1-E982-448B-9F34-94D4F320DA3A}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
 															</MusicTrackSequence>
 														</Local>
 													</Reference>
@@ -734,9 +853,18 @@
 									</ReferenceList>
 									<ChildrenList>
 										<MusicTrack Name="MUS_House_120bpm_Sg1" ID="{B08CE54D-6441-4AE0-94E3-40AAB64BA6A0}" ShortID="248060075">
+											<PropertyList>
+												<Property Name="MusicTrackType" Type="int16" Value="3"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="DefaultSwitchOrState">
+													<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="SuspicionBar" ID="{422A72FE-AA1F-442A-8A12-1DFA83181A03}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
 												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
@@ -744,6 +872,35 @@
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
+															<ChildrenList>
+																<MusicTransition Name="Transition" ID="{9FB29E69-73A0-47E8-8412-AD3E7EFBF5C4}">
+																	<PropertyList>
+																		<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+																		<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+																		<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+																	</PropertyList>
+																	<TransitionInfo>
+																		<SourceFadeOut>
+																			<MusicFade Name="Source Fade-out" ID="{C8DBD199-D3DE-4AEC-A290-315B2AD18181}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																					<Property Name="FadeType" Type="int16" Value="1"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</SourceFadeOut>
+																		<DestinationFadeIn>
+																			<MusicFade Name="Destination Fade-in" ID="{CA0A1848-5F7E-4E58-965C-103B3BB2E52E}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeOffset" Type="Real64" Value="-0.7"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</DestinationFadeIn>
+																	</TransitionInfo>
+																</MusicTransition>
+															</ChildrenList>
 															<TransitionInfo/>
 														</MusicTransition>
 													</Custom>
@@ -755,6 +912,20 @@
 													<AudioFile>MUS_House_120bpm_Sg1.wav</AudioFile>
 													<MediaIDList>
 														<MediaID ID="607261168"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_House_120bpm_Sg1_Mid" ID="{7D517CD4-2D3E-4BF7-9D8C-C4F5DED3D1C6}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_House_120bpm_Sg1_Mid.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="839661473"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_House_120bpm_Sg1_High" ID="{122C2D67-0871-48C1-B61E-098B09E3FEF8}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_House_120bpm_Sg1_High.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="121474629"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
@@ -779,6 +950,65 @@
 																		</Reference>
 																	</ObjectList>
 																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{25E9E063-24AF-4063-8B63-49A8E58152D9}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_House_120bpm_Sg1_Mid" ID="{FB557ED1-866E-421C-BEAF-D3085D6FA3D6}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="25000"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_House_120bpm_Sg1_Mid" ID="{7D517CD4-2D3E-4BF7-9D8C-C4F5DED3D1C6}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Mid" ID="{EA3BD6A1-B740-4123-A7FF-7B6BB18A95F8}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{D1261F3C-8B2E-4AE9-9A6B-B292CF8DBB9D}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_House_120bpm_Sg1_High" ID="{1F2ED164-EDB3-49BD-9ED7-36FAB5AAD411}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="25000"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_House_120bpm_Sg1_High" ID="{122C2D67-0871-48C1-B61E-098B09E3FEF8}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_High" ID="{7F10F0A1-E982-448B-9F34-94D4F320DA3A}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
 															</MusicTrackSequence>
 														</Local>
 													</Reference>
@@ -825,9 +1055,18 @@
 									</ReferenceList>
 									<ChildrenList>
 										<MusicTrack Name="MUS_House_120bpm_Sg2_P1B_T1M" ID="{D0CDEAE4-F382-4315-B7E9-A7355AF2B811}" ShortID="610933215">
+											<PropertyList>
+												<Property Name="MusicTrackType" Type="int16" Value="3"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="DefaultSwitchOrState">
+													<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="SuspicionBar" ID="{422A72FE-AA1F-442A-8A12-1DFA83181A03}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
 												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
@@ -835,6 +1074,35 @@
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
+															<ChildrenList>
+																<MusicTransition Name="Transition" ID="{F9496C75-1D65-4249-A136-24CBC2DF7C41}">
+																	<PropertyList>
+																		<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+																		<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+																		<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+																	</PropertyList>
+																	<TransitionInfo>
+																		<SourceFadeOut>
+																			<MusicFade Name="Source Fade-out" ID="{0A0D83B1-BF6E-45C3-AA35-8FFB67BCB8DE}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																					<Property Name="FadeType" Type="int16" Value="1"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</SourceFadeOut>
+																		<DestinationFadeIn>
+																			<MusicFade Name="Destination Fade-in" ID="{1A42D4FB-6D6A-4667-80BF-BFD519670AA9}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeOffset" Type="Real64" Value="-0.7"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</DestinationFadeIn>
+																	</TransitionInfo>
+																</MusicTransition>
+															</ChildrenList>
 															<TransitionInfo/>
 														</MusicTransition>
 													</Custom>
@@ -846,6 +1114,20 @@
 													<AudioFile>MUS_House_120bpm_Sg2_P1B_T1M.wav</AudioFile>
 													<MediaIDList>
 														<MediaID ID="435558096"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_House_120bpm_Sg2_P1B_T1M_High" ID="{C24EB944-BE46-4F33-8059-9B359FDA09C3}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_House_120bpm_Sg2_P1B_T1M_High.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="418061084"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_House_120bpm_Sg2_P1B_T1M_Mid" ID="{F1C05CF9-22B0-4BE8-A620-A08827FC1923}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_House_120bpm_Sg2_P1B_T1M_Mid.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="144851290"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
@@ -870,6 +1152,65 @@
 																		</Reference>
 																	</ObjectList>
 																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{7D6C79A5-FF32-460C-BB24-196581BB8AC5}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_House_120bpm_Sg2_P1B_T1M_Mid" ID="{5DBF4400-D80E-4058-9E77-0246E0D26EA3}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="29000"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_House_120bpm_Sg2_P1B_T1M_Mid" ID="{F1C05CF9-22B0-4BE8-A620-A08827FC1923}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Mid" ID="{EA3BD6A1-B740-4123-A7FF-7B6BB18A95F8}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{1130731D-FC62-485E-AEDA-C5BE096012A7}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_House_120bpm_Sg2_P1B_T1M_High" ID="{4EF836F9-D22D-4690-9DF9-EAB72EEB568E}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="29000"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_House_120bpm_Sg2_P1B_T1M_High" ID="{C24EB944-BE46-4F33-8059-9B359FDA09C3}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_High" ID="{7F10F0A1-E982-448B-9F34-94D4F320DA3A}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
 															</MusicTrackSequence>
 														</Local>
 													</Reference>
@@ -918,7 +1259,7 @@
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+									<ObjectRef Name="MUS" ID="{354894A3-B444-419A-BDE9-AD6AB9224808}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 								</Reference>
 								<Reference Name="PlaylistRoot">
 									<Custom>
@@ -980,7 +1321,7 @@
 							<ChildrenList>
 								<MusicSegment Name="MUS_Museum_Sg1" ID="{562FB18B-5A74-452F-9FAA-1B9DC701AE54}" ShortID="584712444">
 									<PropertyList>
-										<Property Name="EndPosition" Type="Real64" Value="29000"/>
+										<Property Name="EndPosition" Type="Real64" Value="53400"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -992,9 +1333,23 @@
 									</ReferenceList>
 									<ChildrenList>
 										<MusicTrack Name="MUS_Museum_75bpm_Sg1_P1B" ID="{27B904DB-2B17-4C8C-9BA7-16E1EC710E9F}" ShortID="1055173129">
+											<PropertyList>
+												<Property Name="MusicTrackType" Type="int16" Value="3"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-2</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="DefaultSwitchOrState">
+													<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="SuspicionBar" ID="{422A72FE-AA1F-442A-8A12-1DFA83181A03}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
 												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
@@ -1002,17 +1357,60 @@
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
+															<ChildrenList>
+																<MusicTransition Name="Transition" ID="{AD4BC1DD-9275-4619-B53C-85D2A6BF31E4}">
+																	<PropertyList>
+																		<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+																		<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+																		<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+																	</PropertyList>
+																	<TransitionInfo>
+																		<SourceFadeOut>
+																			<MusicFade Name="Source Fade-out" ID="{CCA84565-3F08-4787-BD10-51B98D6057CB}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																					<Property Name="FadeType" Type="int16" Value="1"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</SourceFadeOut>
+																		<DestinationFadeIn>
+																			<MusicFade Name="Destination Fade-in" ID="{E4F46461-68AC-4F3B-8142-8460561F39C4}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeOffset" Type="Real64" Value="-0.7"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</DestinationFadeIn>
+																	</TransitionInfo>
+																</MusicTransition>
+															</ChildrenList>
 															<TransitionInfo/>
 														</MusicTransition>
 													</Custom>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="MUS_Museum_750bpm_Sg1_P1B" ID="{8840199C-A41A-414A-B9AD-A42FD6E6063A}">
+												<AudioFileSource Name="MUS_Museum_75bpm_Sg1_P1B" ID="{14E18480-AD41-4F91-A655-E748D25E51EA}">
 													<Language>SFX</Language>
-													<AudioFile>MUS_Museum_750bpm_Sg1_P1B.wav</AudioFile>
+													<AudioFile>MUS_Museum_75bpm_Sg1_P1B.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="134195297"/>
+														<MediaID ID="94565054"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_Museum_75bpm_Sg1_P1B_Mid" ID="{937C8334-F0AC-4790-97A8-6F04EB098E8B}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_Museum_75bpm_Sg1_P1B_Mid.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="634830727"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_Museum_75bpm_Sg1_P1B_High" ID="{A4C575CB-9E2E-4229-B625-E3D8753E1D9B}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_Museum_75bpm_Sg1_P1B_High.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="283888229"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
@@ -1025,79 +1423,77 @@
 																	<ObjectList Name="Clips">
 																		<Reference>
 																			<Local>
-																				<MusicClip Name="MUS_Museum_750bpm_Sg1_P1B" ID="{34AB85BE-BDFD-421B-B2C6-0FBA58B9120A}">
+																				<MusicClip Name="MUS_Museum_75bpm_Sg1_P1B" ID="{53B13E6A-4937-4F6A-A9E8-D99342E8B8E2}">
 																					<PropertyList>
-																						<Property Name="BeginTrimOffset" Type="Real64" Value="800"/>
-																						<Property Name="EndTrimOffset" Type="Real64" Value="26800"/>
-																						<Property Name="FadeInDuration" Type="Real64" Value="60.6329406257141"/>
-																						<Property Name="FadeOutDuration" Type="Real64" Value="2485.95056565429"/>
-																						<Property Name="PlayAt" Type="Real64" Value="-800"/>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27400"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="211.435712693091"/>
+																						<Property Name="FadeOutDuration" Type="Real64" Value="2537.22855231708"/>
 																					</PropertyList>
-																					<AudioSourceRef Name="MUS_Museum_750bpm_Sg1_P1B" ID="{8840199C-A41A-414A-B9AD-A42FD6E6063A}"/>
-																					<PropertyCurveList>
-																						<PropertyCurve PropertyName="Highpass">
-																							<Curve Name="" ID="{84376629-7BEA-4A14-ABB3-91719E44374E}">
-																								<PropertyList>
-																									<Property Name="Flags" Type="int32" Value="1"/>
-																								</PropertyList>
-																								<PointList>
-																									<Point>
-																										<XPos>0.8</XPos>
-																										<YPos>0</YPos>
-																										<Flags>5</Flags>
-																									</Point>
-																									<Point>
-																										<XPos>26.8</XPos>
-																										<YPos>0</YPos>
-																										<Flags>37</Flags>
-																									</Point>
-																								</PointList>
-																							</Curve>
-																						</PropertyCurve>
-																						<PropertyCurve PropertyName="Lowpass">
-																							<Curve Name="" ID="{766DCD35-EBE6-40D6-BB6B-F23DA52A5C66}">
-																								<PropertyList>
-																									<Property Name="Flags" Type="int32" Value="1"/>
-																								</PropertyList>
-																								<PointList>
-																									<Point>
-																										<XPos>0.8</XPos>
-																										<YPos>0</YPos>
-																										<Flags>5</Flags>
-																									</Point>
-																									<Point>
-																										<XPos>26.8</XPos>
-																										<YPos>0</YPos>
-																										<Flags>37</Flags>
-																									</Point>
-																								</PointList>
-																							</Curve>
-																						</PropertyCurve>
-																						<PropertyCurve PropertyName="Volume">
-																							<Curve Name="" ID="{654CE054-71F6-4D5C-894D-A61FF31D317A}">
-																								<PropertyList>
-																									<Property Name="Flags" Type="int32" Value="3"/>
-																								</PropertyList>
-																								<PointList>
-																									<Point>
-																										<XPos>0.8</XPos>
-																										<YPos>0</YPos>
-																										<Flags>5</Flags>
-																									</Point>
-																									<Point>
-																										<XPos>26.8</XPos>
-																										<YPos>0</YPos>
-																										<Flags>37</Flags>
-																									</Point>
-																								</PointList>
-																							</Curve>
-																						</PropertyCurve>
-																					</PropertyCurveList>
+																					<AudioSourceRef Name="MUS_Museum_75bpm_Sg1_P1B" ID="{14E18480-AD41-4F91-A655-E748D25E51EA}"/>
 																				</MusicClip>
 																			</Local>
 																		</Reference>
 																	</ObjectList>
 																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{75E2495A-200B-4045-9E82-637FE8D6A953}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_Museum_75bpm_Sg1_P1B_Mid" ID="{79977298-61CF-4FB9-8B4F-B19DCBC9298F}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27400"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="160.271427702725"/>
+																						<Property Name="FadeOutDuration" Type="Real64" Value="2479.56426703716"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_Museum_75bpm_Sg1_P1B_Mid" ID="{937C8334-F0AC-4790-97A8-6F04EB098E8B}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Mid" ID="{EA3BD6A1-B740-4123-A7FF-7B6BB18A95F8}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{4A5F8DD7-18C6-48BC-8FA3-D23FE3616A63}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_Museum_75bpm_Sg1_P1B_High" ID="{5B67627B-8054-4E9B-A0B1-A8DF93F813C7}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27400"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="172.992855839801"/>
+																						<Property Name="FadeOutDuration" Type="Real64" Value="2441.12141018386"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_Museum_75bpm_Sg1_P1B_High" ID="{A4C575CB-9E2E-4229-B625-E3D8753E1D9B}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_High" ID="{7F10F0A1-E982-448B-9F34-94D4F320DA3A}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
 															</MusicTrackSequence>
 														</Local>
 													</Reference>
@@ -1109,7 +1505,11 @@
 										<ObjectList Name="Cues">
 											<Reference>
 												<Local>
-													<MusicCue Name="Entry Cue" ID="{AB98A198-9931-4BD5-B264-C4C4BAA47C1E}"/>
+													<MusicCue Name="Entry Cue" ID="{AB98A198-9931-4BD5-B264-C4C4BAA47C1E}">
+														<PropertyList>
+															<Property Name="TimeMs" Type="Real64" Value="800"/>
+														</PropertyList>
+													</MusicCue>
 												</Local>
 											</Reference>
 											<Reference>
@@ -1117,7 +1517,7 @@
 													<MusicCue Name="Exit Cue" ID="{FDFEFA74-FDFC-41D2-9D6F-46A21CF80A93}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="25600"/>
+															<Property Name="TimeMs" Type="Real64" Value="26400"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>
@@ -1138,28 +1538,80 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<MusicTrack Name="MUS_Museum_75bpm_Sg2_P1B_T1M" ID="{6B1D1708-01B8-4110-96DA-CBB99D5F396F}" ShortID="752727417">
+										<MusicTrack Name="MUS_Museum_75bpm_Sg2_P1B" ID="{2A84EA1D-EE1D-4A46-B9F1-4511609247B3}" ShortID="150483285">
+											<PropertyList>
+												<Property Name="MusicTrackType" Type="int16" Value="3"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="DefaultSwitchOrState">
+													<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="SuspicionBar" ID="{422A72FE-AA1F-442A-8A12-1DFA83181A03}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
-														<MusicTransition Name="Root" ID="{CBFCD5C5-B333-431E-AEFD-E6E8D60044A0}">
+														<MusicTransition Name="Root" ID="{390B2AF5-76E1-4C57-B84F-B413C6BDC16C}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
+															<ChildrenList>
+																<MusicTransition Name="Transition" ID="{B725ACBB-BB08-4EBA-A26E-5CECDEAFBC5D}">
+																	<PropertyList>
+																		<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+																		<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+																		<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+																	</PropertyList>
+																	<TransitionInfo>
+																		<SourceFadeOut>
+																			<MusicFade Name="Source Fade-out" ID="{1ED7D7A0-A7B5-4174-B2C6-9DDB88011413}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																					<Property Name="FadeType" Type="int16" Value="1"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</SourceFadeOut>
+																		<DestinationFadeIn>
+																			<MusicFade Name="Destination Fade-in" ID="{73A2CA7B-BCD7-4806-BA00-378C29C73579}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeOffset" Type="Real64" Value="-0.7"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</DestinationFadeIn>
+																	</TransitionInfo>
+																</MusicTransition>
+															</ChildrenList>
 															<TransitionInfo/>
 														</MusicTransition>
 													</Custom>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="MUS_Museum_750bpm_Sg2_P1B_T1M" ID="{883CF68D-1F1F-4834-B897-C212EB381A01}">
+												<AudioFileSource Name="MUS_Museum_75bpm_Sg2_P1B" ID="{823B139A-CFA7-472D-9928-EC7BEECD94FC}">
 													<Language>SFX</Language>
-													<AudioFile>MUS_Museum_750bpm_Sg2_P1B_T1M.wav</AudioFile>
+													<AudioFile>MUS_Museum_75bpm_Sg2_P1B.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="914694073"/>
+														<MediaID ID="310950775"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_Museum_75bpm_Sg2_P1B_Mid" ID="{C2164E75-578F-4600-9303-A98B9FB0EA93}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_Museum_75bpm_Sg2_P1B_Mid.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="969740200"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_Museum_75bpm_Sg2_P1B_High" ID="{62D371EB-FC36-4C30-B3A8-A58B432BD076}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_Museum_75bpm_Sg2_P1B_High.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="737666670"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
@@ -1167,23 +1619,82 @@
 												<ObjectList Name="Sequences">
 													<Reference>
 														<Local>
-															<MusicTrackSequence Name="" ID="{FF35C567-11EC-4B98-A8D7-C106506F2CD2}">
+															<MusicTrackSequence Name="" ID="{39A41FEB-08A7-4A16-935E-BE42E3782C2C}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
 																		<Reference>
 																			<Local>
-																				<MusicClip Name="MUS_Museum_750bpm_Sg2_P1B_T1M" ID="{DA6F5AAE-CE9A-4A00-9CCF-FCF5C8C5625D}">
+																				<MusicClip Name="MUS_Museum_75bpm_Sg2_P1B" ID="{D091B882-0612-4991-8EF7-494045518FF4}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="27400"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																					</PropertyList>
-																					<AudioSourceRef Name="MUS_Museum_750bpm_Sg2_P1B_T1M" ID="{883CF68D-1F1F-4834-B897-C212EB381A01}"/>
+																					<AudioSourceRef Name="MUS_Museum_75bpm_Sg2_P1B" ID="{823B139A-CFA7-472D-9928-EC7BEECD94FC}"/>
 																				</MusicClip>
 																			</Local>
 																		</Reference>
 																	</ObjectList>
 																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{A0E5662A-2191-48B2-892D-0D56E2CD8A77}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_Museum_75bpm_Sg2_P1B_Mid" ID="{78922AAF-2255-46C0-815D-844D23987CEB}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27400"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_Museum_75bpm_Sg2_P1B_Mid" ID="{C2164E75-578F-4600-9303-A98B9FB0EA93}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Mid" ID="{EA3BD6A1-B740-4123-A7FF-7B6BB18A95F8}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{04EDA0A7-FB06-433D-96CB-5E82AA1AA722}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_Museum_75bpm_Sg2_P1B_High" ID="{9EEB5274-AFC8-4546-A0C3-1EB2B5686085}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="27400"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_Museum_75bpm_Sg2_P1B_High" ID="{62D371EB-FC36-4C30-B3A8-A58B432BD076}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_High" ID="{7F10F0A1-E982-448B-9F34-94D4F320DA3A}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
 															</MusicTrackSequence>
 														</Local>
 													</Reference>
@@ -1228,8 +1739,9 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<MusicTrack Name="MUS_Museum_75bpm_Sg3_P1M_" ID="{A975452F-51FE-4E59-AA0C-1A5B7C432811}" ShortID="1048879902">
+										<MusicTrack Name="MUS_Museum_75bpm_Sg3_P1M" ID="{423AC440-C79F-42C0-8AA0-99E26C69DA2A}" ShortID="225799222">
 											<PropertyList>
+												<Property Name="MusicTrackType" Type="int16" Value="3"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
 														<Value>-6</Value>
@@ -1237,26 +1749,75 @@
 												</Property>
 											</PropertyList>
 											<ReferenceList>
+												<Reference Name="DefaultSwitchOrState">
+													<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 												</Reference>
+												<Reference Name="SwitchGroupOrStateGroup">
+													<ObjectRef Name="SuspicionBar" ID="{422A72FE-AA1F-442A-8A12-1DFA83181A03}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
-														<MusicTransition Name="Root" ID="{713BBD99-1F2B-4736-8B3F-78767C715BB8}">
+														<MusicTransition Name="Root" ID="{4877A220-4CB1-44DC-B217-EEAA4EF66783}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
+															<ChildrenList>
+																<MusicTransition Name="Transition" ID="{E0718F6D-C064-4CEC-A811-BCA7923E635A}">
+																	<PropertyList>
+																		<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+																		<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+																		<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+																	</PropertyList>
+																	<TransitionInfo>
+																		<SourceFadeOut>
+																			<MusicFade Name="Source Fade-out" ID="{FD211953-9591-449D-88B4-0714160EC01F}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																					<Property Name="FadeType" Type="int16" Value="1"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</SourceFadeOut>
+																		<DestinationFadeIn>
+																			<MusicFade Name="Destination Fade-in" ID="{0149098A-C179-472A-811E-F5C1FDE59B6D}">
+																				<PropertyList>
+																					<Property Name="FadeCurve" Type="int16" Value="1"/>
+																					<Property Name="FadeOffset" Type="Real64" Value="-0.7"/>
+																					<Property Name="FadeTime" Type="Real64" Value="0.7"/>
+																				</PropertyList>
+																			</MusicFade>
+																		</DestinationFadeIn>
+																	</TransitionInfo>
+																</MusicTransition>
+															</ChildrenList>
 															<TransitionInfo/>
 														</MusicTransition>
 													</Custom>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="MUS_Museum_750bpm_Sg3_P1M_" ID="{7AB4640D-6BC1-458F-A9A6-4BC461FA4BBF}">
+												<AudioFileSource Name="MUS_Museum_75bpm_Sg3_P1M" ID="{B31BA19E-BDE4-4CDF-9E00-52E28F9C063E}">
 													<Language>SFX</Language>
-													<AudioFile>MUS_Museum_750bpm_Sg3_P1M_.wav</AudioFile>
+													<AudioFile>MUS_Museum_75bpm_Sg3_P1M.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="321750336"/>
+														<MediaID ID="327017229"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_Museum_75bpm_Sg3_P1M_Mid" ID="{F76C0ACC-B120-4D05-8642-AD6FBD26CD37}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_Museum_75bpm_Sg3_P1M_Mid.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="33856581"/>
+													</MediaIDList>
+												</AudioFileSource>
+												<AudioFileSource Name="MUS_Museum_75bpm_Sg3_P1M_High" ID="{01A8DCFB-DA1D-4350-B5F9-45FCCEB3FE55}">
+													<Language>SFX</Language>
+													<AudioFile>MUS_Museum_75bpm_Sg3_P1M_High.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="254687907"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
@@ -1264,23 +1825,82 @@
 												<ObjectList Name="Sequences">
 													<Reference>
 														<Local>
-															<MusicTrackSequence Name="" ID="{A64E91BF-61F5-4D64-8AD8-967E328EE95C}">
+															<MusicTrackSequence Name="" ID="{559D0070-9892-428D-870F-59C9674BBEC6}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
 																		<Reference>
 																			<Local>
-																				<MusicClip Name="MUS_Museum_750bpm_Sg3_P1M_" ID="{26ED663D-F272-4D25-8E4F-897D722AA845}">
+																				<MusicClip Name="MUS_Museum_75bpm_Sg3_P1M" ID="{839D57EF-3C0C-4344-97C1-2BBCA21F47AC}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="33000"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																					</PropertyList>
-																					<AudioSourceRef Name="MUS_Museum_750bpm_Sg3_P1M_" ID="{7AB4640D-6BC1-458F-A9A6-4BC461FA4BBF}"/>
+																					<AudioSourceRef Name="MUS_Museum_75bpm_Sg3_P1M" ID="{B31BA19E-BDE4-4CDF-9E00-52E28F9C063E}"/>
 																				</MusicClip>
 																			</Local>
 																		</Reference>
 																	</ObjectList>
 																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{43145E90-9B9B-4A46-A27A-4E10D939ABAF}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_Museum_75bpm_Sg3_P1M_Mid" ID="{C2D79A30-9464-41C1-ACD3-9114C7AA21D7}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="33000"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_Museum_75bpm_Sg3_P1M_Mid" ID="{F76C0ACC-B120-4D05-8642-AD6FBD26CD37}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_Mid" ID="{EA3BD6A1-B740-4123-A7FF-7B6BB18A95F8}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{0E1AA844-0596-4D1D-86B5-0386ABF3E577}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="MUS_Museum_75bpm_Sg3_P1M_High" ID="{9ACC6208-0DFC-4CCA-B8E7-668C7C705D78}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="33000"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="MUS_Museum_75bpm_Sg3_P1M_High" ID="{01A8DCFB-DA1D-4350-B5F9-45FCCEB3FE55}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+																<ReferenceList>
+																	<Reference Name="TrackSequenceSwitch">
+																		<ObjectRef Name="Suspicion_High" ID="{7F10F0A1-E982-448B-9F34-94D4F320DA3A}" WorkUnitID="{A5A9D63B-8A89-45C4-B699-C94C0EF17091}"/>
+																	</Reference>
+																</ReferenceList>
 															</MusicTrackSequence>
 														</Local>
 													</Reference>

@@ -307,7 +307,7 @@ public abstract class MovementController : MonoBehaviour
         Physics2D.GetContacts(col2D, collision.collider, filter.NoFilter(), curContact);
         if (canMove)
         {
-            print("TEST1");
+            //print("TEST1");
             float bounce;
             if (collision.collider.sharedMaterial != null)
             {
@@ -362,7 +362,7 @@ public abstract class MovementController : MonoBehaviour
                 if (isPreJumpBufferFinished) { isJumping = false; }
                 if (lastPosY - this.transform.position.y > .2f && onLand != null) { onLand(landParam); }
 
-                if (objMat != null && objMat.name == "Ballss")
+                if (objMat != null && objMat != null && objMat.name == "Ballss")
                 {
                     rigid2D.linearVelocityY = -lastVelocityY * bounceForce;
                     objBounciness = bounceForce;

@@ -1786,7 +1786,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+							<ObjectRef Name="SFX" ID="{C80620A8-D5CA-426D-BB68-2EF1AE13386C}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
@@ -2171,6 +2171,42 @@
 									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 								</Reference>
 							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="UI_FowRemoved" ID="{445A16B6-7AAE-4AFD-81AB-ECA215249B77}" ShortID="447328786">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-24</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="UI_FowRemoved" ID="{2350D2C6-9E45-4FFA-B0B4-0C38FD145A6D}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.0129437869822484"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="1.32673816568047"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>UI_FowRemoved.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="393182831"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="UI_FowRemoved" ID="{2350D2C6-9E45-4FFA-B0B4-0C38FD145A6D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
 						</BlendContainer>
 					</ChildrenList>
 				</ActorMixer>
@@ -2180,7 +2216,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+							<ObjectRef Name="SFX" ID="{C80620A8-D5CA-426D-BB68-2EF1AE13386C}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
@@ -2196,9 +2232,14 @@
 							<ChildrenList>
 								<BlendContainer Name="Hovering" ID="{4BBC034D-FBC8-46C0-B092-1A73FDE8EE8F}" ShortID="583445275">
 									<PropertyList>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-6</Value>
+												<Value>-3</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -2211,7 +2252,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="SFX_Player_Hovering" ID="{4A8C559B-7AE8-4366-8429-3172C263F34C}" ShortID="806005960">
+										<Sound Name="SFX_Player_Hovering" ID="{8071BEC1-5F84-4BB6-BF58-17CCBD39CA22}" ShortID="336965073">
 											<PropertyList>
 												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 											</PropertyList>
@@ -2224,13 +2265,13 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="SFX_Player_Hovering" ID="{88FA02DF-B0DC-47A4-A513-D080309D85A4}">
+												<AudioFileSource Name="SFX_Player_Hovering" ID="{4415B42D-0D33-4287-BD39-C1E9C1B479C5}">
 													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.0137231320871112"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.00452744083867174"/>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0183092577264716"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.00677244601361338"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="8.02600303369624"/>
-														<Property Name="TrimEnd" Type="Real64" Value="33.9329940972273"/>
+														<Property Name="TrimBegin" Type="Real64" Value="23.6527817009469"/>
+														<Property Name="TrimEnd" Type="Real64" Value="55.9842546368565"/>
 													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>SFX_Player_Hovering.wav</AudioFile>
@@ -2240,7 +2281,7 @@
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="SFX_Player_Hovering" ID="{88FA02DF-B0DC-47A4-A513-D080309D85A4}" Platform="Linked"/>
+												<ActiveSource Name="SFX_Player_Hovering" ID="{4415B42D-0D33-4287-BD39-C1E9C1B479C5}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -2439,7 +2480,7 @@
 										</RandomSequenceContainer>
 									</ChildrenList>
 								</BlendContainer>
-								<BlendContainer Name="Possessed" ID="{B9C67424-983D-4A42-A2CD-CA940F6D2E46}" ShortID="942685217">
+								<BlendContainer Name="PossessedOn" ID="{B9C67424-983D-4A42-A2CD-CA940F6D2E46}" ShortID="942685217">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2568,6 +2609,65 @@
 												</Sound>
 											</ChildrenList>
 										</RandomSequenceContainer>
+										<Sound Name="SFX_Possessed_Magical" ID="{0CE899FF-5D4B-4E66-B34D-AF23254397E1}" ShortID="982502191">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>40</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{5D762D26-D936-401F-94BB-D6ABD4BEF6E0}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="300"/>
+																	<Property Name="Min" Type="Real64" Value="-200"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-17</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_Possessed_Magical" ID="{016D4631-8180-4541-B2DD-E052713EC67E}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_Possessed_Magical.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1047483479"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_Possessed_Magical" ID="{016D4631-8180-4541-B2DD-E052713EC67E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</BlendContainer>
+								<BlendContainer Name="PossessedOff" ID="{058C750D-7D4B-494F-A9ED-9CFC12808E6D}" ShortID="277284977">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
 										<RandomSequenceContainer Name="SFX_PossessedOff" ID="{3DD6A1F8-32B3-4693-8E14-04445E49187C}" ShortID="228817770">
 											<PropertyList>
 												<Property Name="Pitch" Type="int32">
@@ -2687,6 +2787,53 @@
 												</Sound>
 											</ChildrenList>
 										</RandomSequenceContainer>
+										<Sound Name="SFX_Possessed_Magical" ID="{71EF02A1-6317-4AE3-B0EB-8614F5B475FA}" ShortID="97114636">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>40</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{AEC52797-A805-48EE-8D68-37F981B16DFB}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="300"/>
+																	<Property Name="Min" Type="Real64" Value="-100"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-17</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_Possessed_Magical" ID="{0AA1268E-516A-4D8A-9EB9-0D7FE14EEE9E}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_Possessed_Magical.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1047483479"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_Possessed_Magical" ID="{0AA1268E-516A-4D8A-9EB9-0D7FE14EEE9E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 								</BlendContainer>
 							</ChildrenList>
@@ -2702,6 +2849,13 @@
 							</ReferenceList>
 							<ChildrenList>
 								<BlendContainer Name="VO_Player_Yay" ID="{8999A753-77A1-453B-BDF9-5258C6D3568B}" ShortID="191120323">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2728,7 +2882,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="VO_Player_Yay_1" ID="{2E535774-6F99-4BF5-B180-38A488371A70}" ShortID="276461072">
+												<Sound Name="VO_Player_Yay_1" ID="{DF54B1E3-D5B5-45DF-9BEE-3FBF1EA6769A}" ShortID="986017790">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2738,7 +2892,12 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="VO_Player_Yay_1" ID="{DB7E0FE9-7065-49D1-99F8-9C76791021E2}">
+														<AudioFileSource Name="VO_Player_Yay_1" ID="{6F799EE3-14DB-46B8-B15F-CBB5B898C453}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0186892867793698"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="2.24645236497612"/>
+															</PropertyList>
 															<Language>SFX</Language>
 															<AudioFile>VO_Player_Yay_1.wav</AudioFile>
 															<MediaIDList>
@@ -2747,10 +2906,10 @@
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="VO_Player_Yay_1" ID="{DB7E0FE9-7065-49D1-99F8-9C76791021E2}" Platform="Linked"/>
+														<ActiveSource Name="VO_Player_Yay_1" ID="{6F799EE3-14DB-46B8-B15F-CBB5B898C453}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="VO_Player_Yay_2" ID="{7B1660BA-4386-492B-9CF2-5F6D1A8C3803}" ShortID="826023077">
+												<Sound Name="VO_Player_Yay_2" ID="{CB03FEDB-BE87-47E5-AD26-3A6FF0222942}" ShortID="551433240">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2760,7 +2919,12 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="VO_Player_Yay_2" ID="{3245E903-01BD-4D59-ACDC-8312A97FF8B7}">
+														<AudioFileSource Name="VO_Player_Yay_2" ID="{BC651F32-1852-426D-9C00-B7CBDE796B58}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0260724548757429"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.76920224809176"/>
+															</PropertyList>
 															<Language>SFX</Language>
 															<AudioFile>VO_Player_Yay_2.wav</AudioFile>
 															<MediaIDList>
@@ -2769,10 +2933,10 @@
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="VO_Player_Yay_2" ID="{3245E903-01BD-4D59-ACDC-8312A97FF8B7}" Platform="Linked"/>
+														<ActiveSource Name="VO_Player_Yay_2" ID="{BC651F32-1852-426D-9C00-B7CBDE796B58}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="VO_Player_Yay_3" ID="{6453ED20-D039-4EB5-9B71-7B75877A4F89}" ShortID="633174948">
+												<Sound Name="VO_Player_Yay_3" ID="{9A232CCC-5402-4396-B7D1-C5E1C72DF007}" ShortID="986039523">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2782,7 +2946,12 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="VO_Player_Yay_3" ID="{B3F4CC47-14FE-4718-BD2E-AA5FA1728FBA}">
+														<AudioFileSource Name="VO_Player_Yay_3" ID="{169D8CE6-10C5-4698-ABFE-29A26998C473}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0342351127658371"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="2.08834201985986"/>
+															</PropertyList>
 															<Language>SFX</Language>
 															<AudioFile>VO_Player_Yay_3.wav</AudioFile>
 															<MediaIDList>
@@ -2791,7 +2960,34 @@
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="VO_Player_Yay_3" ID="{B3F4CC47-14FE-4718-BD2E-AA5FA1728FBA}" Platform="Linked"/>
+														<ActiveSource Name="VO_Player_Yay_3" ID="{169D8CE6-10C5-4698-ABFE-29A26998C473}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="VO_Player_Yay_4" ID="{462FA781-C2B1-4662-945E-ED61D585B2A1}" ShortID="173160654">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="VO_Player_Yay_4" ID="{CB424C76-AC9D-478F-84EE-2DF85D7A8F03}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0456465440388971"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="3.03803095655611"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>VO_Player_Yay_4.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="224122764"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="VO_Player_Yay_4" ID="{CB424C76-AC9D-478F-84EE-2DF85D7A8F03}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
@@ -2799,6 +2995,9 @@
 									</ChildrenList>
 								</BlendContainer>
 								<BlendContainer Name="VO_Player_Barks" ID="{F7F4A546-1E9C-4809-BE6F-E47BB336F51D}" ShortID="37824017">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2810,7 +3009,39 @@
 									<ChildrenList>
 										<RandomSequenceContainer Name="Barks_Random" ID="{C4AD2118-2E58-43E5-B04A-E8F3BFCD62BB}" ShortID="115770182">
 											<PropertyList>
+												<Property Name="InitialDelay" Type="Real64">
+													<ValueList>
+														<Value>1.5</Value>
+													</ValueList>
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{2EF7B79E-1602-40BD-A7E4-ECFBD5922E5E}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="10">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{5173CC4F-BA41-4FF1-AD1D-2A71614581EF}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="8"/>
+																	<Property Name="Min" Type="Real64" Value="-3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
 														<Value>-4</Value>
@@ -2826,7 +3057,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="VO_Player_Bark_1" ID="{A0694EC5-4443-430F-9544-75C5BC9CEB8D}" ShortID="824009542">
+												<Sound Name="VO_Player_Barks_1" ID="{C2928CCE-927F-4E86-B5DD-C5204E5D52A5}" ShortID="486720586">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2836,19 +3067,24 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="VO_Player_Bark_1" ID="{5B5BDC48-D31B-484D-B2E1-9B8B04759144}">
+														<AudioFileSource Name="VO_Player_Barks_1" ID="{30037B16-D604-4876-A6FC-73205A44C532}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0172363477345756"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.72708199595653"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>VO_Player_Bark_1.wav</AudioFile>
+															<AudioFile>VO_Player_Barks_1.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="308101713"/>
+																<MediaID ID="916258070"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="VO_Player_Bark_1" ID="{5B5BDC48-D31B-484D-B2E1-9B8B04759144}" Platform="Linked"/>
+														<ActiveSource Name="VO_Player_Barks_1" ID="{30037B16-D604-4876-A6FC-73205A44C532}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="VO_Player_Bark_2" ID="{83F3C72B-3C45-4E18-AC25-584BFACF3FCF}" ShortID="327894730">
+												<Sound Name="VO_Player_Barks_2" ID="{51B290C1-9EA5-4BAA-A089-DFA1EE5989B3}" ShortID="304565883">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2858,19 +3094,24 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="VO_Player_Bark_2" ID="{73CDD746-BF2F-4ABF-A017-D79939E34392}">
+														<AudioFileSource Name="VO_Player_Barks_2" ID="{CF79ED1F-BEFC-411B-9E0B-A74648D79F25}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.02032710673541"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.46693967721589"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>VO_Player_Bark_2.wav</AudioFile>
+															<AudioFile>VO_Player_Barks_2.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="681825343"/>
+																<MediaID ID="116290927"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="VO_Player_Bark_2" ID="{73CDD746-BF2F-4ABF-A017-D79939E34392}" Platform="Linked"/>
+														<ActiveSource Name="VO_Player_Barks_2" ID="{CF79ED1F-BEFC-411B-9E0B-A74648D79F25}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="VO_Player_Bark_3" ID="{680F3171-C00D-45E5-B323-C7CD5E567C72}" ShortID="1023005999">
+												<Sound Name="VO_Player_Barks_3" ID="{EF472DAD-013A-4C5E-8CBB-58F76E7F851A}" ShortID="1023626582">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2880,19 +3121,24 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="VO_Player_Bark_3" ID="{E1E16810-0894-4B1C-B0BA-52B880983A71}">
+														<AudioFileSource Name="VO_Player_Barks_3" ID="{7A0CB104-6C0B-4E75-8487-D8D36BCB7B02}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0214497976049164"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.49842147826866"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>VO_Player_Bark_3.wav</AudioFile>
+															<AudioFile>VO_Player_Barks_3.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="976401329"/>
+																<MediaID ID="624071402"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="VO_Player_Bark_3" ID="{E1E16810-0894-4B1C-B0BA-52B880983A71}" Platform="Linked"/>
+														<ActiveSource Name="VO_Player_Barks_3" ID="{7A0CB104-6C0B-4E75-8487-D8D36BCB7B02}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="VO_Player_Bark_4" ID="{6DF8F1FC-0305-4395-BC3B-A5ABC14DB68C}" ShortID="77271372">
+												<Sound Name="VO_Player_Barks_4" ID="{56382D12-7F12-41C5-8CA3-EEA96FDEFC8A}" ShortID="882678723">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2902,19 +3148,24 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="VO_Player_Bark_4" ID="{E902CDCF-03AA-4BB6-B23A-3AC8D85E4EA4}">
+														<AudioFileSource Name="VO_Player_Barks_4" ID="{BD8E71AD-76BE-4A99-9FAA-4E700B933486}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.017005208681321"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.65630727851273"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>VO_Player_Bark_4.wav</AudioFile>
+															<AudioFile>VO_Player_Barks_4.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="33538087"/>
+																<MediaID ID="390294512"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="VO_Player_Bark_4" ID="{E902CDCF-03AA-4BB6-B23A-3AC8D85E4EA4}" Platform="Linked"/>
+														<ActiveSource Name="VO_Player_Barks_4" ID="{BD8E71AD-76BE-4A99-9FAA-4E700B933486}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="VO_Player_Bark_5" ID="{7C4BC1CF-70C7-4F9F-8B54-61FE5E7FDEFB}" ShortID="157564649">
+												<Sound Name="VO_Player_Barks_5" ID="{FB31A104-6C79-4FDD-B5E0-2C5D6C9B987B}" ShortID="645770693">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -2924,16 +3175,75 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="VO_Player_Bark_5" ID="{C0D5EEA9-665D-4BF1-8BB5-520B2F052CAA}">
+														<AudioFileSource Name="VO_Player_Barks_5" ID="{00B9266D-D41D-4953-9978-1DFD62E14DE0}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0155524230567661"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.35928167788658"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>VO_Player_Bark_5.wav</AudioFile>
+															<AudioFile>VO_Player_Barks_5.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="1004999315"/>
+																<MediaID ID="1024032748"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="VO_Player_Bark_5" ID="{C0D5EEA9-665D-4BF1-8BB5-520B2F052CAA}" Platform="Linked"/>
+														<ActiveSource Name="VO_Player_Barks_5" ID="{00B9266D-D41D-4953-9978-1DFD62E14DE0}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="VO_Player_Barks_6" ID="{46433682-6512-4B1F-AEDE-0B71518EC3A0}" ShortID="422192382">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="VO_Player_Barks_6" ID="{D154D51B-4557-4A7D-BADF-58DF161D32CA}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.023668578390539"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.38968357997721"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>VO_Player_Barks_6.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1007483953"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="VO_Player_Barks_6" ID="{D154D51B-4557-4A7D-BADF-58DF161D32CA}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="VO_Player_Barks_7" ID="{54B769B0-2B9B-4386-87B9-226D5FC19CB4}" ShortID="51153308">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="VO_Player_Barks_7" ID="{344CD35E-FAF2-4819-9E60-2167A44E3E92}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0209609841453957"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.69783966872913"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>VO_Player_Barks_7.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="626933099"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="VO_Player_Barks_7" ID="{344CD35E-FAF2-4819-9E60-2167A44E3E92}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
@@ -2964,92 +3274,6 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="SFX_Bookshelf" ID="{9EFDBDB0-97CE-4843-8D18-31DB1B964A44}" ShortID="308075712">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="SFX_BookShelf_1" ID="{9F6F7018-FF6B-42E2-AB9F-ED46BED3D31A}" ShortID="458584412">
-											<PropertyList>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
-												</Property>
-												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_BookShelf_1" ID="{BD6F9EC3-2342-4007-AB05-A28602AA7E78}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.0152365141742866"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0152365141742865"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.179029041547867"/>
-														<Property Name="TrimEnd" Type="Real64" Value="2.92160132843378"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>SFX_BookShelf_1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="275599333"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_BookShelf_1" ID="{BD6F9EC3-2342-4007-AB05-A28602AA7E78}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_BookShelf_2" ID="{4307370D-E247-4547-BDE5-10EC4A8A612F}" ShortID="93161295">
-											<PropertyList>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
-												</Property>
-												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_BookShelf_2" ID="{0711BE36-A02C-4E51-9176-78D09F8B7EF4}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.00995632306555844"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.00995632306555838"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.0995632306555836"/>
-														<Property Name="TrimEnd" Type="Real64" Value="1.10266292446909"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>SFX_BookShelf_2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="147450849"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_BookShelf_2" ID="{0711BE36-A02C-4E51-9176-78D09F8B7EF4}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="SFX_BookshelfFall" ID="{3AF79F63-4D7F-4221-99BA-CB5890B8E803}" ShortID="271856453">
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
@@ -3157,7 +3381,28 @@
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="SFX_ArcheologyRack" ID="{53E532DD-8D5C-4184-9D42-C63A5D0E013A}" ShortID="619853411">
+								<BlendContainer Name="SFX_Bookshelf" ID="{B2582768-1D0E-424E-96C0-39FE56EE4ACF}" ShortID="415266314">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{4DE53E92-D1F8-4DE8-9C96-6839BBB5E70F}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -3166,12 +3411,384 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
-								</RandomSequenceContainer>
+									<ChildrenList>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L1" ID="{EE6F15C5-42C4-480E-B64D-C7F61B9AEBEE}" ShortID="13446818">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{4A0A96BE-D045-42A9-8260-1B34DFE2B10A}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0542185997821876"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.487967398039688"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.27851333089223"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="471946920"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{4A0A96BE-D045-42A9-8260-1B34DFE2B10A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L2_" ID="{BF48BC9B-AD1B-43F8-BCCD-052D24E4654A}" ShortID="980965911">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L2_" ID="{EF4EB8EB-8EA2-43F0-99D6-BC51AF405110}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0053888375942524"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0138853838472137"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0390903283039118"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.73604689871959"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L2_.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="712021937"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L2_" ID="{EF4EB8EB-8EA2-43F0-99D6-BC51AF405110}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L3" ID="{66418BE8-3970-4D3C-9530-EE43517EA8C9}" ShortID="1060192819">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{01E78B13-6476-42FE-86BC-AC82129C9EBD}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0650623197386251"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.379530198475313"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.0809486076686"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="833143720"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{01E78B13-6476-42FE-86BC-AC82129C9EBD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L4" ID="{40B5FC1A-391A-4872-9E20-D6A5455ECCBE}" ShortID="179501039">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L4" ID="{61626624-DB1F-4683-90CA-01D6A9370D47}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.021687439912875"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.021687439912875"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.157233939368344"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.96166768814779"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="685336186"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L4" ID="{61626624-DB1F-4683-90CA-01D6A9370D47}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</BlendContainer>
+								<BlendContainer Name="SFX_ArcheologyRack" ID="{6CB2CAD5-C84A-43F6-957B-A9669D737280}" ShortID="276193194">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{0C2B703B-EB1C-4194-A692-CC3E1E50EC20}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L1" ID="{D89ACACF-5783-480A-96AD-B36B7E1D7927}" ShortID="914559823">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{6363F3F4-E981-4940-941F-1B08DDAF774B}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0542185997821876"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.487967398039688"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.27851333089223"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="471946920"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{6363F3F4-E981-4940-941F-1B08DDAF774B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L3" ID="{203234E7-1903-4D75-9C94-5137E8299549}" ShortID="623183837">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{9EF46030-58EA-4D17-A58F-A3A91B906DDA}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0650623197386251"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.379530198475313"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.0809486076686"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="833143720"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{9EF46030-58EA-4D17-A58F-A3A91B906DDA}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{EC88792E-4978-4BF4-A519-C37597A5095E}" ShortID="391341803">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{D98C0A21-7D9F-4D8F-B77C-A964FCF5C364}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0405748299593051"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0405748299593061"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.142011904857568"/>
+														<Property Name="TrimEnd" Type="Real64" Value="13.5519923468294"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementMarbre_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="991877394"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{D98C0A21-7D9F-4D8F-B77C-A964FCF5C364}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="SFX_Shake" ID="{B43DEDAB-55D3-4EE7-A293-F671623739DB}" ShortID="174830096">
+											<PropertyList>
+												<Property Name="InitialDelay" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{C183092F-8EE0-4F3E-9993-4305D3CBACE2}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{D981B003-D9AE-4253-98DF-9094DF80B59E}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="4"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_ToolBox_1" ID="{B2073EF6-457C-4003-B0ED-4ABBB4018BC9}" ShortID="1052607842">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_ToolBox_1" ID="{C7335FD7-04C0-4AD6-B5BC-23A42A168F94}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_ToolBox_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="922866144"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_ToolBox_1" ID="{C7335FD7-04C0-4AD6-B5BC-23A42A168F94}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_ToolBox_2" ID="{2651366C-C9CA-4811-89C3-4F8020894C3F}" ShortID="1068449380">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_ToolBox_2" ID="{EFA082C7-02F7-458C-8DFC-7081C9BCD489}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_ToolBox_2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="111274860"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_ToolBox_2" ID="{EFA082C7-02F7-458C-8DFC-7081C9BCD489}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_ToolBox_3" ID="{77C98DD9-A621-4023-AA6C-D55B8F0D79B6}" ShortID="123146381">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_ToolBox_3" ID="{C0CEE93B-7184-434B-B9A2-D7AE1A989992}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_ToolBox_3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="533581285"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_ToolBox_3" ID="{C0CEE93B-7184-434B-B9A2-D7AE1A989992}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</BlendContainer>
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="Door" ID="{2EC09DAF-2898-4890-AE0E-18DB31F96C1A}" ShortID="748283182">
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-10</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
@@ -3832,6 +4449,13 @@
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="MouseDoor" ID="{A4E27FA9-A8FA-4EE3-96C8-8B5EC0E74F1E}" ShortID="307044293">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-7</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4085,7 +4709,20 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="SFX_CardboardBox" ID="{97C3E449-BFBC-4F85-89DB-88EB8D999C9D}" ShortID="148684827">
+								<Sound Name="SFX_Box" ID="{71C1E6E1-BB7E-400E-BA06-252D7656C5F4}" ShortID="764107297">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>35</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-1010</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4095,177 +4732,62 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="SFX_Box_1" ID="{94BDC4BA-1747-4BE3-B1F4-2FAD624D53A0}" ShortID="844492763">
+										<AudioFileSource Name="SFX_Box" ID="{6712D9F7-3811-4155-B6CB-07D1212F019C}">
 											<PropertyList>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
-												</Property>
+												<Property Name="CrossfadeDuration" Type="Real64" Value="182"/>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.0290377209513789"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.044807585194544"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0.091"/>
+												<Property Name="LoopEnd" Type="Real64" Value="17.51116"/>
+												<Property Name="MarkerInputMode" Type="int16" Value="2"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Box_1" ID="{E4154554-0383-41E9-BD00-F5371CF887BD}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.00856395140849253"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.00428197570424627"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.313654720336039"/>
-														<Property Name="TrimEnd" Type="Real64" Value="0.617674995655416"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>SFX_Box_1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="253266551"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Box_1" ID="{E4154554-0383-41E9-BD00-F5371CF887BD}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Box_2" ID="{EB46ADDD-BFA9-4509-A153-5312ED955A57}" ShortID="620242923">
-											<PropertyList>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
-												</Property>
-												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Box_2" ID="{B75DAB8B-AF6F-4E15-A53B-956499991C6D}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.00428197570424627"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.00428197570424627"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.0278328420776008"/>
-														<Property Name="TrimEnd" Type="Real64" Value="0.311513732801807"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>SFX_Box_2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="580873536"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Box_2" ID="{B75DAB8B-AF6F-4E15-A53B-956499991C6D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Box_3" ID="{44428C34-119A-4BAD-92A5-8C60CACD05D9}" ShortID="555822762">
-											<PropertyList>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Box_3" ID="{2A8D0FB5-FCA4-42CE-AE28-788EE0F6F13B}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Box_3.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1018477045"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Box_3" ID="{2A8D0FB5-FCA4-42CE-AE28-788EE0F6F13B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Box_4" ID="{D107C74D-DC0F-403F-85BD-78409504AFD5}" ShortID="835133167">
-											<PropertyList>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
-												</Property>
-												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Box_4" ID="{B2EA37B1-C562-4A51-99A1-C5639F07C234}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.0166879911514724"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.00953599494369839"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.15972791530695"/>
-														<Property Name="TrimEnd" Type="Real64" Value="1.8142230507543"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>SFX_Box_4.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="638445457"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Box_4" ID="{B2EA37B1-C562-4A51-99A1-C5639F07C234}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Box_5" ID="{162580B2-F55C-41E0-AD83-288BFEF7B6BA}" ShortID="612877231">
-											<PropertyList>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Box_5" ID="{800A52EF-EE9D-4221-8EC7-23DACE6D32CD}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Box_5.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="909705253"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Box_5" ID="{800A52EF-EE9D-4221-8EC7-23DACE6D32CD}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
+											<Language>SFX</Language>
+											<AudioFile>SFX_Box.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="945713881"/>
+											</MediaIDList>
+											<ObjectLists>
+												<ObjectList Name="Markers">
+													<Reference>
+														<Local>
+															<Marker Name="" ID="{8757C476-F304-4687-A546-7240A2998DAE}">
+																<PropertyList>
+																	<Property Name="Time" Type="Real64" Value="3.13975508973571"/>
+																</PropertyList>
+															</Marker>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</AudioFileSource>
 									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="SFX_WoodBox" ID="{19D61678-AA45-4E19-A15E-AEB5D0F25ACC}" ShortID="44648103">
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Box" ID="{6712D9F7-3811-4155-B6CB-07D1212F019C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<BlendContainer Name="SFX_WoodBox" ID="{C5B0760D-FC36-45F3-BBEE-1A85FD0E757E}" ShortID="161270986">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{8C104CBE-B521-4B5F-B6D1-4DF00DA3345C}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4274,7 +4796,105 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
-								</RandomSequenceContainer>
+									<ChildrenList>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L1" ID="{EF1FF2DF-6B2A-421A-B3F3-A6D9E333EDE5}" ShortID="354438161">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{AA9E451F-5FEC-4F80-A7AF-96BC07E434F6}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0542185997821876"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.487967398039688"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.27851333089223"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="471946920"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{AA9E451F-5FEC-4F80-A7AF-96BC07E434F6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L3" ID="{1E550275-AE7A-4875-B266-CE243D60890F}" ShortID="203555197">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{E466E2A7-8011-411D-8CC3-E95FDF3A4E7C}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0650623197386251"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.379530198475313"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.0809486076686"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="833143720"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{E466E2A7-8011-411D-8CC3-E95FDF3A4E7C}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{24FA90A8-0089-4AEC-9F3E-08CDF5803504}" ShortID="1066966216">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{F324484E-4D35-4E22-99AB-A96B2DB200E9}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0405748299593051"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0405748299593061"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.142011904857568"/>
+														<Property Name="TrimEnd" Type="Real64" Value="13.5519923468294"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementMarbre_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="991877394"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{F324484E-4D35-4E22-99AB-A96B2DB200E9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</BlendContainer>
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="CookieJar" ID="{A776DC86-EADA-4F12-AA0B-14EB031242BB}" ShortID="93516649">
@@ -4287,76 +4907,6 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="SFX_CookieJar" ID="{E86FB807-B628-4BF6-A642-38CE2BDDF329}" ShortID="784843718">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="SFX_CookieJar_1" ID="{BE608D9B-BC0E-47EB-8A71-10ED28036BD9}" ShortID="516646706">
-											<PropertyList>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_CookieJar_1" ID="{B40D3587-4616-484F-B156-7A925CE02BEC}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_CookieJar_1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="331011531"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_CookieJar_1" ID="{B40D3587-4616-484F-B156-7A925CE02BEC}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_CookieJar_2" ID="{6083A757-AB66-49C0-8C3A-6D7059048C9C}" ShortID="365637484">
-											<PropertyList>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_CookieJar_2" ID="{2EA268ED-7492-4F8E-A488-3E8BF8F41CE4}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_CookieJar_2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="43840373"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_CookieJar_2" ID="{2EA268ED-7492-4F8E-A488-3E8BF8F41CE4}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="SFX_CookieJarFall" ID="{3D37C0B9-1DA4-45EB-892A-AE122820D037}" ShortID="817383353">
 									<PropertyList>
 										<Property Name="Highpass" Type="int16">
@@ -4516,6 +5066,44 @@
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
+								<Sound Name="SFX_CookieJar" ID="{866E51BB-7CC3-48B6-8AE5-23A3FDF15DC6}" ShortID="343555762">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="SFX" ID="{C80620A8-D5CA-426D-BB68-2EF1AE13386C}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_CookieJar" ID="{BA9757B5-00C7-460E-A7F2-EC33F10CCF1C}">
+											<PropertyList>
+												<Property Name="CrossfadeDuration" Type="Real64" Value="231.788984724059"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0.231788984724058"/>
+												<Property Name="LoopEnd" Type="Real64" Value="11.9747092742215"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.10225984620179"/>
+												<Property Name="TrimEnd" Type="Real64" Value="12.0906037665836"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>SFX_CookieJar.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="433655671"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_CookieJar" ID="{BA9757B5-00C7-460E-A7F2-EC33F10CCF1C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="Couch" ID="{C57BADAD-0DC1-48C0-8887-D97E789B2809}" ShortID="60394162">
@@ -4528,7 +5116,14 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="SFX_Couch" ID="{02FABF34-C64E-428D-952E-F4F7C5904E30}" ShortID="868429268">
+								<RandomSequenceContainer Name="SFX_CouchFall" ID="{EDFAEAF7-C3B7-43C1-B7DA-C17941BF1916}" ShortID="695242957">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-17</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4537,8 +5132,119 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="SFX_BookShelf_Fall_1" ID="{4C051A4D-B70C-43D0-86B7-787DC09E5B76}" ShortID="84547922">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_BookShelf_Fall_1" ID="{6F4BAB21-809B-4D1E-87FB-3A05DBDF7B75}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_BookShelf_Fall_1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="903068677"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_BookShelf_Fall_1" ID="{6F4BAB21-809B-4D1E-87FB-3A05DBDF7B75}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SFX_BookShelf_Fall_2" ID="{D679655B-440A-4C1C-9DC9-33FA774E1433}" ShortID="240896618">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_BookShelf_Fall_2" ID="{9F19CACE-1609-475D-AFA4-516D39B84063}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_BookShelf_Fall_2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="254238891"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_BookShelf_Fall_2" ID="{9F19CACE-1609-475D-AFA4-516D39B84063}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SFX_BookShelf_Fall_3" ID="{2D4BE5EC-FFE0-462E-87B9-6AAED50C87E8}" ShortID="879559653">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_BookShelf_Fall_3" ID="{830C660C-75FA-4A2B-BB45-0B2EE12DF22A}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_BookShelf_Fall_3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="125841915"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_BookShelf_Fall_3" ID="{830C660C-75FA-4A2B-BB45-0B2EE12DF22A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SFX_BookShelf_Fall_4" ID="{C468674F-68D5-4C34-BC5E-95FC54563388}" ShortID="913384719">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_BookShelf_Fall_4" ID="{5CC350F0-6CD5-4D5D-93A5-27772CFC0AD9}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_BookShelf_Fall_4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1013806964"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_BookShelf_Fall_4" ID="{5CC350F0-6CD5-4D5D-93A5-27772CFC0AD9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
 								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="SFX_CouchFall" ID="{6244293A-4279-4B61-92EE-F7CF60481F64}" ShortID="114536223">
+								<BlendContainer Name="SFX_Couch" ID="{F2A0A7DF-9BC8-4E3E-8591-CA1DABD007A5}" ShortID="396946122">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{FE56B7D3-3B6F-4520-9AA0-14CC724566E4}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4547,7 +5253,137 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
-								</RandomSequenceContainer>
+									<ChildrenList>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L1" ID="{66138A4E-5A4D-4631-AE7B-57E70594C614}" ShortID="866015973">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{187E27E4-67DD-4896-969F-8C20ADE679BD}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0542185997821876"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.487967398039688"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.27851333089223"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="471946920"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{187E27E4-67DD-4896-969F-8C20ADE679BD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L2_" ID="{B9FFFF6C-BD11-4840-89FB-88CD85518FE2}" ShortID="708879283">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L2_" ID="{431617BA-B710-43CF-99B5-78B2E7BA75A0}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0053888375942524"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0138853838472137"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0390903283039118"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.73604689871959"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L2_.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="712021937"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L2_" ID="{431617BA-B710-43CF-99B5-78B2E7BA75A0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L3" ID="{2CB383D1-054F-4DF9-BA15-769D37D66B8C}" ShortID="327178904">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{53E3CBDD-CB6B-48AC-94F8-19FD43794DFC}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0650623197386251"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.379530198475313"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.0809486076686"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="833143720"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{53E3CBDD-CB6B-48AC-94F8-19FD43794DFC}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L4" ID="{7A70FAAA-D102-46B5-97F8-A5FF03E587EA}" ShortID="642609866">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L4" ID="{B12D74C5-2311-41F8-BF9C-5335EE45585E}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.021687439912875"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.021687439912875"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.157233939368344"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.96166768814779"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="685336186"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L4" ID="{B12D74C5-2311-41F8-BF9C-5335EE45585E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</BlendContainer>
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="TrapDoor" ID="{C9E0D91A-45A3-42A6-963A-E1F182FED54F}" ShortID="283848892">
@@ -4666,19 +5502,31 @@
 									<ChildrenList>
 										<Sound Name="SFX_Ball" ID="{35E2D341-844C-4226-A32E-A4D392130246}" ShortID="483106699">
 											<PropertyList>
+												<Property Name="Highpass" Type="int16">
+													<ValueList>
+														<Value>43</Value>
+													</ValueList>
+												</Property>
 												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>230</Value>
+													</ValueList>
 													<ModifierList>
 														<ModifierInfo>
 															<Modifier Name="" ID="{D700FDC1-15DC-4DE7-A5B0-5DDF640D7B20}">
 																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
 																	<Property Name="Max" Type="Real64" Value="200"/>
 																	<Property Name="Min" Type="Real64" Value="-150"/>
 																</PropertyList>
 															</Modifier>
 														</ModifierInfo>
 													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>7</Value>
+													</ValueList>
 												</Property>
 											</PropertyList>
 											<ReferenceList>
@@ -4893,7 +5741,28 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="SFX_Bed" ID="{2DDFACCF-BA75-41AD-9BEB-A987E972A5EA}" ShortID="643675247">
+								<BlendContainer Name="SFX_Bed" ID="{5F406FB3-1B58-4702-BA6E-C08F73347B02}" ShortID="609818315">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{99F9B208-1345-45F3-A1C6-365FFC66F65C}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4902,7 +5771,137 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
-								</RandomSequenceContainer>
+									<ChildrenList>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L1" ID="{663856FA-CA41-47C2-AEC3-9031BE54CB4C}" ShortID="568135901">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{88F98A3B-BDC5-47CA-8862-89893C702FCE}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0542185997821876"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.487967398039688"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.27851333089223"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="471946920"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{88F98A3B-BDC5-47CA-8862-89893C702FCE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L2_" ID="{6F0CEDCB-6B65-4887-A742-E006B01D5C21}" ShortID="227391124">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L2_" ID="{200BD46E-BD81-4E3C-A031-53976A99775D}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0053888375942524"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0138853838472137"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0390903283039118"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.73604689871959"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L2_.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="712021937"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L2_" ID="{200BD46E-BD81-4E3C-A031-53976A99775D}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L3" ID="{A82C36A0-B23E-4B07-ADC2-898C4459D6B8}" ShortID="438364801">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{2420C5F9-53F7-4FE3-ABCF-9C3021DA4554}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0650623197386251"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.379530198475313"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.0809486076686"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="833143720"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{2420C5F9-53F7-4FE3-ABCF-9C3021DA4554}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L4" ID="{521CCB20-258D-4CD5-AF49-0984A74874C4}" ShortID="651991042">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L4" ID="{BAB37E42-285F-49AA-BAD6-77320C9BA953}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.021687439912875"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.021687439912875"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.157233939368344"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.96166768814779"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="685336186"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L4" ID="{BAB37E42-285F-49AA-BAD6-77320C9BA953}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</BlendContainer>
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="Doll" ID="{FB7CC568-9B15-46A9-839C-0C0BEE349E9E}" ShortID="426286040">
@@ -4915,7 +5914,34 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="SFX_Doll" ID="{5C650605-C24D-4ABD-A599-536EA982131A}" ShortID="362987879">
+								<RandomSequenceContainer Name="SFX_DollFall" ID="{7CB284C7-A557-4350-A34C-D3BEE286645A}" ShortID="805079137">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{30BA72C5-4006-475B-AA84-E060CF8BE5DE}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-300"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{5B12BC89-C0FA-42B3-BFB7-AEDB20A5F6F1}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Min" Type="Real64" Value="-4"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4924,8 +5950,103 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="SFX_PillowFall_1" ID="{E5D84CFA-7F92-4AFB-B4F2-F06329BED92C}" ShortID="257675945">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_PillowFall_1" ID="{B95DB132-476C-4BC6-A0DB-822C1D799B6D}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_PillowFall_1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="208281501"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_PillowFall_1" ID="{B95DB132-476C-4BC6-A0DB-822C1D799B6D}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SFX_PillowFall_2" ID="{EDBDB23E-C1F8-43BE-B1DC-F0B5D537328B}" ShortID="407196689">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>2</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_PillowFall_2" ID="{39FAE718-8BB3-456F-A84A-35A90387FEF1}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_PillowFall_2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="544149770"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_PillowFall_2" ID="{39FAE718-8BB3-456F-A84A-35A90387FEF1}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SFX_PillowFall_3" ID="{4B5F94C1-AA51-4FE1-81EC-608F5DAA6D67}" ShortID="799419936">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-8</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_PillowFall_3" ID="{7E9B0FB0-3589-430F-B203-B9DE45FDE547}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_PillowFall_3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="263089427"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_PillowFall_3" ID="{7E9B0FB0-3589-430F-B203-B9DE45FDE547}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
 								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="SFX_DollFall" ID="{C471CFAA-781D-460B-A50D-EAF347E9F520}" ShortID="512712279">
+								<Sound Name="SFX_Doll" ID="{21EFE1F1-A2BE-4E4B-8E16-C3684AC146E4}" ShortID="339326229">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-1300</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -4934,7 +6055,27 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
-								</RandomSequenceContainer>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Doll" ID="{F5E50F07-83DD-4AE7-8EE4-5AD834017367}">
+											<PropertyList>
+												<Property Name="CrossfadeDuration" Type="Real64" Value="680.206391374035"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0.797951395809772"/>
+												<Property Name="LoopEnd" Type="Real64" Value="8.7505118968424"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.457848200122755"/>
+												<Property Name="TrimEnd" Type="Real64" Value="9.09807362262857"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>SFX_Doll.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="304036052"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Doll" ID="{F5E50F07-83DD-4AE7-8EE4-5AD834017367}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="Pillow" ID="{76D5F191-5F10-4715-B837-2A682E1AE7D3}" ShortID="832320092">
@@ -4951,7 +6092,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>8</Value>
+												<Value>6</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -4980,6 +6121,11 @@
 														</ModifierInfo>
 													</ModifierList>
 												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-7</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -4992,8 +6138,9 @@
 											<ChildrenList>
 												<AudioFileSource Name="SFX_Pillow" ID="{4CCF7850-C3C6-4ACD-B25E-AD88957E2E7A}">
 													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.0500979576495457"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.150293872948636"/>
+														<Property Name="CrossfadeDuration" Type="Real64" Value="182.238979664447"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.281648923244336"/>
+														<Property Name="LoopEnd" Type="Real64" Value="8.25019206098998"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 														<Property Name="TrimBegin" Type="Real64" Value="0.17534285177341"/>
 														<Property Name="TrimEnd" Type="Real64" Value="8.3413115508222"/>
@@ -5295,7 +6442,28 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="SFX_DinausorDisplay" ID="{FDA47B74-9F34-41D8-BB14-7CF6434A16CB}" ShortID="991837206">
+								<BlendContainer Name="SFX_ArmorDisplay" ID="{EF7058CF-5B86-4584-9146-0477BC402716}" ShortID="921490859">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{714DE5AF-DFBB-45AE-9868-D2A649236F2E}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5304,8 +6472,235 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="SFX_BoneDisplay" ID="{8599EA6C-9943-4937-A6ED-4107FF58A512}" ShortID="965581406">
+									<ChildrenList>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L1" ID="{05693772-E43D-47EA-8D6B-31B29C4B4C5C}" ShortID="135969255">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{8FC5F25A-D79E-4BE3-BB3C-17E4F3DD242B}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0542185997821876"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.487967398039688"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.27851333089223"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="471946920"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{8FC5F25A-D79E-4BE3-BB3C-17E4F3DD242B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L3" ID="{5FDF9ACD-439B-465C-89DA-C1F3F29EA399}" ShortID="743683205">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{7996D854-6F37-4FDD-B830-0A53751A28EA}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0650623197386251"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.379530198475313"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.0809486076686"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="833143720"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{7996D854-6F37-4FDD-B830-0A53751A28EA}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{139F9083-6EB8-4229-80F2-5941F298274C}" ShortID="1005324136">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{11333AB3-C101-4A59-A823-0B8A21743F02}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0405748299593051"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0405748299593061"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.142011904857568"/>
+														<Property Name="TrimEnd" Type="Real64" Value="13.5519923468294"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementMarbre_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="991877394"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{11333AB3-C101-4A59-A823-0B8A21743F02}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="SFX_Shake" ID="{0E416616-5B87-4DEC-9EB7-A6549A6EAF52}" ShortID="803183635">
+											<PropertyList>
+												<Property Name="InitialDelay" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{B21FFB91-C906-417A-8A47-D409A60B9F9A}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{1F2C90A6-95BF-47A2-9F8E-2E16647E7A6F}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="4"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_ToolBox_1" ID="{42B6584A-BCDF-4F2F-B693-0424E6CBF2F2}" ShortID="601783106">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_ToolBox_1" ID="{61348F2E-FCED-4C54-AA7B-F72D1418FD84}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_ToolBox_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="922866144"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_ToolBox_1" ID="{61348F2E-FCED-4C54-AA7B-F72D1418FD84}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_ToolBox_2" ID="{6075C0AD-5078-4EED-A73A-A050EB79433F}" ShortID="1025493529">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_ToolBox_2" ID="{17B7E02C-8B0F-441B-9BA2-5719F36147E6}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_ToolBox_2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="111274860"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_ToolBox_2" ID="{17B7E02C-8B0F-441B-9BA2-5719F36147E6}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_ToolBox_3" ID="{CE319E3D-D862-48AD-A993-78666EE50545}" ShortID="46567598">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_ToolBox_3" ID="{2FA17D91-88C7-40CA-A84A-BCAFC2B6095C}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_ToolBox_3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="533581285"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_ToolBox_3" ID="{2FA17D91-88C7-40CA-A84A-BCAFC2B6095C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</BlendContainer>
+								<BlendContainer Name="SFX_ToolsDisplay" ID="{C7DD84A1-DD6E-442F-AC24-9D98EBC78D65}" ShortID="1058736500">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{88FDCB41-F124-41A0-8156-5855E80AD2E4}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5314,8 +6709,235 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="SFX_ArmorDisplay" ID="{183BD536-F073-4DBF-9F91-A1C69FF17587}" ShortID="970322978">
+									<ChildrenList>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L1" ID="{7CE2EF6F-6C6D-4837-BD73-73A2FDAB7B9C}" ShortID="601740343">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{4CC0D802-0E79-4E2D-8D38-8FFFC71FBA09}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0542185997821876"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.487967398039688"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.27851333089223"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="471946920"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{4CC0D802-0E79-4E2D-8D38-8FFFC71FBA09}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L3" ID="{CD60EBC6-6B30-4476-970F-55509D2F692E}" ShortID="213708124">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{8C7E9E98-5962-4DB9-88D5-EB8C4EA12470}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0650623197386251"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.379530198475313"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.0809486076686"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="833143720"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{8C7E9E98-5962-4DB9-88D5-EB8C4EA12470}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{A9C413BC-06B6-4925-82B8-8DE7659BB84B}" ShortID="925855381">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{00B7DDF5-EC86-4F6C-B4DB-CBD47DBBF4A5}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0405748299593051"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0405748299593061"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.142011904857568"/>
+														<Property Name="TrimEnd" Type="Real64" Value="13.5519923468294"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementMarbre_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="991877394"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{00B7DDF5-EC86-4F6C-B4DB-CBD47DBBF4A5}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="SFX_Shake" ID="{A7C563E6-7E6C-4DE2-A821-4DB78037D30E}" ShortID="441203974">
+											<PropertyList>
+												<Property Name="InitialDelay" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{267540B4-177F-4C99-AA7F-39D71F984B0F}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{88B1C282-7F8E-4EE6-9597-6DF04AE8866E}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="4"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_ToolBox_1" ID="{A06487AE-B551-4760-B6DF-5F38C3A832A3}" ShortID="350808728">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_ToolBox_1" ID="{93E5A60B-619E-45E5-A656-136AFE9858BE}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_ToolBox_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="922866144"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_ToolBox_1" ID="{93E5A60B-619E-45E5-A656-136AFE9858BE}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_ToolBox_2" ID="{4B404719-926A-403C-81F7-0A6171C2E0C9}" ShortID="772437820">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_ToolBox_2" ID="{6547783D-A767-4BAF-B420-8AF74828B76F}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_ToolBox_2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="111274860"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_ToolBox_2" ID="{6547783D-A767-4BAF-B420-8AF74828B76F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_ToolBox_3" ID="{353D7F97-F51F-4656-A38A-D7BCE3BE2FA2}" ShortID="272697909">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_ToolBox_3" ID="{548B93BB-4C84-438E-9AF2-6172335FABAB}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_ToolBox_3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="533581285"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_ToolBox_3" ID="{548B93BB-4C84-438E-9AF2-6172335FABAB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</BlendContainer>
+								<BlendContainer Name="SFX_DinosaurDisplay" ID="{58A6AA24-607A-4222-A2C8-F74BD772865C}" ShortID="8872702">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{F5C85193-F3A9-4081-9C43-6B3869065BF4}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5324,8 +6946,240 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="SFX_ToolsDisplay" ID="{5F0BFE2D-D631-4521-92FF-5F4E7423277C}" ShortID="372508083">
+									<ChildrenList>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L1" ID="{D3C2111B-4640-405E-AE6D-955F101ACBC2}" ShortID="201594645">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{601E6968-3BC5-40ED-98EF-9010AB5FA782}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0542185997821876"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.487967398039688"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.27851333089223"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="471946920"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{601E6968-3BC5-40ED-98EF-9010AB5FA782}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L3" ID="{7D61EA46-A4A3-4879-BEFD-A3ECB59F59E1}" ShortID="909421038">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{C695642F-2283-4709-99D4-198ABF1B082A}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0650623197386251"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.379530198475313"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.0809486076686"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="833143720"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{C695642F-2283-4709-99D4-198ABF1B082A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{B0815AE9-4FB5-42BB-87E0-AB46615B55C6}" ShortID="526601143">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{1049C22C-D3E7-4FC0-849A-BBF9C2D3CC03}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0405748299593051"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0405748299593061"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.142011904857568"/>
+														<Property Name="TrimEnd" Type="Real64" Value="13.5519923468294"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementMarbre_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="991877394"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{1049C22C-D3E7-4FC0-849A-BBF9C2D3CC03}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="SFX_Shake" ID="{8A283443-5E58-43F1-8E9A-B40A79004AE9}" ShortID="965833079">
+											<PropertyList>
+												<Property Name="InitialDelay" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{24A25027-8620-4B01-A536-E212BF783893}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{EDAA45ED-97EC-4E68-BD16-EC9464EAFB96}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="4"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-1</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_OtherShake_1" ID="{2766CEFB-02C6-406B-AC23-903CDC5F6A0F}" ShortID="292671877">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_OtherShake_1" ID="{0B3745E9-083A-4AE2-86DF-7B64AD17C2B5}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_OtherShake_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="901288849"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_OtherShake_1" ID="{0B3745E9-083A-4AE2-86DF-7B64AD17C2B5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_OtherShake_2" ID="{11FBE96F-4B30-4E37-A9D0-8CD2C4D8AC1D}" ShortID="502532379">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_OtherShake_2" ID="{A9C54F39-42FF-49EB-9197-C9524BA350A4}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_OtherShake_2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="433544683"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_OtherShake_2" ID="{A9C54F39-42FF-49EB-9197-C9524BA350A4}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_OtherShake_3" ID="{D8FFFD7B-E0DE-4C12-9F79-2C9009EEA850}" ShortID="383697664">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_OtherShake_3" ID="{59BE8F56-A0F2-4B92-813B-ACDDC41ACC58}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_OtherShake_3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="367701152"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_OtherShake_3" ID="{59BE8F56-A0F2-4B92-813B-ACDDC41ACC58}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</BlendContainer>
+								<BlendContainer Name="SFX_BoneDisplay" ID="{7047ACE2-2304-4C81-87F1-FD5634400076}" ShortID="389526603">
+									<PropertyList>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{C03C91FD-C569-4FCB-BE4E-37C993703A9F}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -5334,7 +7188,218 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 										</Reference>
 									</ReferenceList>
-								</RandomSequenceContainer>
+									<ChildrenList>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L1" ID="{A9C94E88-80CC-4444-ABA0-1FE238CFC7B1}" ShortID="757701474">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{E117E1DC-DCF9-4DE1-A128-F6E66114E867}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0542185997821876"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.487967398039688"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.27851333089223"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="471946920"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L1" ID="{E117E1DC-DCF9-4DE1-A128-F6E66114E867}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementBois_L3" ID="{24C836A2-F1CA-41B0-B873-A09600CC78E8}" ShortID="271783831">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{83A5B739-4712-4428-92E7-BE8B34DDC46D}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0650623197386251"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0325311598693121"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.379530198475313"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.0809486076686"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementBois_L3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="833143720"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementBois_L3" ID="{83A5B739-4712-4428-92E7-BE8B34DDC46D}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{C9F56C8B-9232-49BE-97FB-846BA2F73BB4}" ShortID="74118006">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{61D706D1-8BBF-4F5F-8E9F-E769B7A02F55}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0405748299593051"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0405748299593061"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.142011904857568"/>
+														<Property Name="TrimEnd" Type="Real64" Value="13.5519923468294"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Poltergsheist_MeubleFrottementMarbre_L1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="991877394"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Poltergsheist_MeubleFrottementMarbre_L1" ID="{61D706D1-8BBF-4F5F-8E9F-E769B7A02F55}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="SFX_Shake" ID="{81D01AAD-368A-4F4B-8156-63FC4347FB53}" ShortID="980322233">
+											<PropertyList>
+												<Property Name="InitialDelay" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{C4F6F6B8-8CF1-447D-AEEC-573A76713089}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{7F949CAE-2CEC-4A2A-9AF2-E41EE23BB1F0}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="4"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-1</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_OtherShake_1" ID="{5E213197-8900-4D16-B804-0FD88589E880}" ShortID="92775042">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_OtherShake_1" ID="{EA94C8B1-D399-4E41-B4E1-61F0B329A0BB}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_OtherShake_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="901288849"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_OtherShake_1" ID="{EA94C8B1-D399-4E41-B4E1-61F0B329A0BB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_OtherShake_2" ID="{546AEAB5-B39C-4803-AE01-188233A8239B}" ShortID="11704528">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_OtherShake_2" ID="{F4670EB6-EE25-457B-9A7A-73EA9096066D}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_OtherShake_2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="433544683"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_OtherShake_2" ID="{F4670EB6-EE25-457B-9A7A-73EA9096066D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_OtherShake_3" ID="{E9CA68BB-DB1E-4666-BFB9-44FE70A95779}" ShortID="700780846">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_OtherShake_3" ID="{DEE9F465-ECE4-409A-9C01-DBCDD4E82646}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_OtherShake_3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="367701152"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_OtherShake_3" ID="{DEE9F465-ECE4-409A-9C01-DBCDD4E82646}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</BlendContainer>
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="FlowerPot" ID="{309A737C-7BE4-43A4-8085-605353BB6B0C}" ShortID="17745848">
@@ -5525,7 +7590,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+							<ObjectRef Name="SFX" ID="{C80620A8-D5CA-426D-BB68-2EF1AE13386C}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
@@ -5962,35 +8027,6 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="SFX_NPC_CatSlap_1" ID="{DED78F8E-140C-4672-8CB7-3EB016C620E7}" ShortID="299672713">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>-10</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="SFX_NPC_CatSlap_1" ID="{E3147E9F-AA1D-4B6F-A250-CD9D87BDB410}">
-															<Language>SFX</Language>
-															<AudioFile>SFX_NPC_CatSlap_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="980785033"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="SFX_NPC_CatSlap_1" ID="{E3147E9F-AA1D-4B6F-A250-CD9D87BDB410}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
 												<Sound Name="SFX_NPC_CatSlap_2" ID="{D3D6F7FE-69A2-4D83-A137-D6D55411BE13}" ShortID="180283822">
 													<PropertyList>
 														<Property Name="Volume" Type="Real64">
@@ -6018,6 +8054,69 @@
 													</ChildrenList>
 													<ActiveSourceList>
 														<ActiveSource Name="SFX_NPC_CatSlap_2" ID="{1EDE745E-A455-4A22-8A40-02EC1BA488C5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_NPC_CatSlap_1" ID="{2DDA63F6-9219-4C54-A2AD-52987E978F22}" ShortID="316664944">
+													<PropertyList>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>-50</Value>
+															</ValueList>
+														</Property>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-11</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_NPC_CatSlap_1" ID="{4FC8F0A6-DD9F-4B6C-B34D-F002BCF87EAC}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_NPC_CatSlap_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="980785033"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_NPC_CatSlap_1" ID="{4FC8F0A6-DD9F-4B6C-B34D-F002BCF87EAC}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_NPC_CatSlap_3" ID="{BFAE0909-A526-465F-8815-ABB91ECC8ECB}" ShortID="917015457">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-9</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_NPC_CatSlap_3" ID="{818B07A9-6F6F-4AEA-B363-F02BB83E7C19}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_NPC_CatSlap_3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="584508982"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_NPC_CatSlap_3" ID="{818B07A9-6F6F-4AEA-B363-F02BB83E7C19}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
@@ -6290,6 +8389,12 @@
 								<BlendContainer Name="VO_NPC_Locked" ID="{87EB5B04-2925-4663-8B2F-A484D7DA8574}" ShortID="568120146">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="BlendBehavior" Type="int16" Value="1"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>45</Value>
+											</ValueList>
+										</Property>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
@@ -6319,6 +8424,22 @@
 													</ModifierList>
 												</Property>
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{8E7D5B2C-85DF-4188-8294-C0DDFAC944A7}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="5"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
 														<Value>-3</Value>
@@ -6458,6 +8579,22 @@
 														</ModifierInfo>
 													</ModifierList>
 												</Property>
+												<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{34810B38-FCC1-48C0-99AD-1D347999F68F}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="5"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
 														<Value>-5</Value>

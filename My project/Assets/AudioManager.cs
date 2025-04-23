@@ -27,6 +27,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //PlayerPrefs.DeleteAll();
         //state = GetComponent<AK.Wwise.State>();
     }
 

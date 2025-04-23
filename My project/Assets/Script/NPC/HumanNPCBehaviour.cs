@@ -44,8 +44,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
 
     protected bool seePolterg = false;
+    protected bool hasSeenMovement = false;
 
-    
     protected override void Start()
     {
         base.Start();
@@ -62,7 +62,22 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     protected override void Update()
     {
         base.Update();
-       // DetectMovingObjects();
+
+        if (hasSeenMovement && alertIcon != null)
+        {
+            // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
+            if (SuspicionManager.Instance.CurrentSuspicion > 0)
+            {
+                alertIcon.enabled = true;
+            }
+            else
+            {
+                alertIcon.enabled = false;
+                hasSeenMovement = false; // Reset the flag when suspicion is gone
+            }
+        }
+
+        // DetectMovingObjects();
         CheckMirrorReflection();
 
         if (npcSpriteRenderer == null)
@@ -140,12 +155,18 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         if (isObjectMoving && !isCurrentlyObserving)
         {
             isCurrentlyObserving = true;
+            hasSeenMovement = true;
             SuspicionManager.Instance.AddParanormalObserver();
         }
         // If the object has stopped moving
         else if (!isObjectMoving && isCurrentlyObserving)
         {
             isCurrentlyObserving = false;
+
+            if(alertIcon != null && hasSeenMovement && SuspicionManager.Instance.CurrentSuspicion > 0)
+            {
+                alertIcon.enabled = true;
+            }
             SuspicionManager.Instance.RemoveParanormalObserver();
         }
         // If the object is still moving
@@ -287,6 +308,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                         playerCollider.gameObject.GetComponent<MovementController>().canMove = false;
                         NPCSeePolterg();
                     }
+                    else
+                    {
+                        //print("BLOCKED!");
+                    }
                 } 
 
             }
@@ -414,8 +439,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         isInvestigating = false;
         investigationQueue.Clear(); // Clear all the investigations he should be doing
 
+        hasSeenMovement = false;
+
         // Reset sounds
-        if(nonSuspiciousSoundEvent != null)
+        if (nonSuspiciousSoundEvent != null)
         {
             nonSuspiciousSoundEvent.Stop(gameObject);
         }

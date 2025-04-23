@@ -54,6 +54,46 @@
 						</Curve>
 					</SwitchOnRTPC>
 				</SwitchGroup>
+				<SwitchGroup Name="SuspicionBar" ID="{422A72FE-AA1F-442A-8A12-1DFA83181A03}">
+					<PropertyList>
+						<Property Name="UseGameParameter" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Switch Name="Suspicion_Low" ID="{FDD281CE-5D7A-4009-BACE-38705E097C4C}"/>
+						<Switch Name="Suspicion_Mid" ID="{EA3BD6A1-B740-4123-A7FF-7B6BB18A95F8}"/>
+						<Switch Name="Suspicion_High" ID="{7F10F0A1-E982-448B-9F34-94D4F320DA3A}"/>
+					</ChildrenList>
+					<SwitchOnRTPC>
+						<GameParameterRef Name="SuspicionBar" ID="{9AF810B4-3D29-4516-ADA3-B13E459D3F82}"/>
+						<Curve Name="" ID="{8AE6354F-90CF-4E23-AB1C-A9BA143B29F8}">
+							<PropertyList>
+								<Property Name="Flags" Type="int32" Value="65537"/>
+							</PropertyList>
+							<PointList>
+								<Point>
+									<XPos>0</XPos>
+									<YPos>1</YPos>
+									<Flags>5</Flags>
+								</Point>
+								<Point>
+									<XPos>33.3</XPos>
+									<YPos>2</YPos>
+									<Flags>0</Flags>
+								</Point>
+								<Point>
+									<XPos>66.7</XPos>
+									<YPos>3</YPos>
+									<Flags>0</Flags>
+								</Point>
+								<Point>
+									<XPos>100</XPos>
+									<YPos>3</YPos>
+									<Flags>37</Flags>
+								</Point>
+							</PointList>
+						</Curve>
+					</SwitchOnRTPC>
+				</SwitchGroup>
 			</ChildrenList>
 		</WorkUnit>
 	</Switches>
