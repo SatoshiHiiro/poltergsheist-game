@@ -66,6 +66,8 @@ public class FaceAnimationEventBehavior : MonoBehaviour
                 rumbling = null;
                 iRumble = -3;
             }
+
+            animMustache.SetFloat("Direction", Mathf.Round(moveInput.x));
             animMustache.SetBool("IsRunning", true);
         }
 

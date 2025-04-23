@@ -36,6 +36,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     PlayerController player;
     PlayerManager manager;
     Animator playerBodyAnim;
+    Animator mustacheAnim;
     Transform playerFace;
     IPossessable possession;
     SpriteRenderer spriteRenderer;
@@ -50,6 +51,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         base.Start();
         player = FindFirstObjectByType<PlayerController>();
         playerBodyAnim = player.GetComponentInChildren<HeightAndSpriteResizeSystem>().transform.GetChild(0).Find("Body").GetComponent<Animator>();
+        mustacheAnim = playerBodyAnim.transform.parent.Find("Face").Find("Mustache").GetComponent<Animator>();
         manager = FindFirstObjectByType<PlayerManager>();
         playerFace = manager.playerFace;
         spriteRenderer = this.GetComponentInChildren<SpriteRenderer>();
@@ -72,6 +74,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     {
         if (onPossess != null) { onPossess(possessParam); }
         manager.canRotate = false;
+        mustacheAnim.SetBool("IsPossessing", true);
 
         player.lastPossession = this;
         manager.gameObject.SetActive(true);
@@ -96,7 +99,6 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         float width = col2D.bounds.extents.x / size * 2f;
         width = Mathf.Clamp(width, .5f / size, 1.5f / size);
         Vector3 scale = Vector3.one * width;
-        Debug.Log(width);
         manager.FaceLerping(center, scale, duration, false);
 
         yield return new WaitForSecondsRealtime(duration);

@@ -6,6 +6,7 @@ public class PlayerManager : RotationManager
     //General animation variables
     Animator baseHeight;
     Animator bodyAnim;
+    Animator mustacheAnim;
     [HideInInspector] public Transform playerFace;
     SpriteRenderer[] faceSpriteArray;
     PossessionManager lastPossession;
@@ -33,6 +34,7 @@ public class PlayerManager : RotationManager
     {
         baseHeight = GetComponentInParent<HeightAndSpriteResizeSystem>().GetComponent<Animator>();
         bodyAnim = baseHeight.transform.GetChild(0).Find("Body").GetComponent<Animator>();
+        mustacheAnim = bodyAnim.transform.parent.Find("Face").Find("Mustache").GetComponent<Animator>();
         playerFace = bodyAnim.transform.parent.Find("Face");
         facePosIni = playerFace.localPosition;
         faceScaleIni = playerFace.localScale;
@@ -114,7 +116,11 @@ public class PlayerManager : RotationManager
         playerFace.localPosition = posTarget;
         playerFace.localScale = scalTarget;
 
-        if (isDepossession) { canRotate = true; }
+        if (isDepossession) 
+        {
+            mustacheAnim.SetBool("IsPossessing", false);
+            canRotate = true;
+        }
         else
         {
             for (int i = 0; i < faceSpriteArray.Length; i++)
