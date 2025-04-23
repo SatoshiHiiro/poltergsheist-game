@@ -12,6 +12,7 @@ public class NPCSpriteManager : MonoBehaviour
     float rotationSpeed = 1000f;        //Multiplier for the number of degrees to turn each frame
     Vector3 directionSprite;
     Vector3 directionView;
+    float iniRotationY;
     //Quaternion directionSprite;
     //Quaternion directionView;
     //Vector3 lastNPCPos;
@@ -29,6 +30,7 @@ public class NPCSpriteManager : MonoBehaviour
         fieldOfView = npcTrans.Find("NPCLight").transform;
         npcAnim = this.GetComponentInParent<Animator>();
         pivot = npcAnim.transform;
+        iniRotationY = pivot.eulerAngles.y;
 
         //lastNPCPos = npcTrans.position;
     }
@@ -64,14 +66,16 @@ public class NPCSpriteManager : MonoBehaviour
         if (isFacingRight)
         {
             directionSprite.y = 0;
-            directionView.y = 180;
+            if (iniRotationY != 0) { directionView.y = 180; }
+            else { directionView.y = 0; }
             //directionSprite = new Quaternion(0, 0, 0, 1);     //Look right
             //directionView = new Quaternion(.70711f, .70711f, 0, 0);
         }
         else
         {
             directionSprite.y = 180;
-            directionView.y = 0;
+            if (iniRotationY != 0) { directionView.y = 0; }
+            else { directionView.y = 180; }
             //directionSprite = new Quaternion(0, 1, 0, 0);     //Look left
             //directionView = new Quaternion(0, 0, .70711f, .70711f);
         }
