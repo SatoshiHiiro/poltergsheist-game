@@ -121,6 +121,11 @@ public class Cat : BasicNPCBehaviour, IPatrol
                             isObjectMoving = true;
                             isHunting = true;
                             targetPossessedObject = possessedObject.gameObject;
+
+                            if(alertIcon != null)
+                            {
+                                alertIcon.enabled = true;
+                            }
                         }
                     }
                 }
@@ -175,6 +180,12 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 isHunting = false;
                 isAttacking = false;
                 targetPossessedObject = null;
+
+                if(alertIcon != null)
+                {
+                    alertIcon.enabled = false;
+                }
+
                 //StartCoroutine(Patrol());
                 yield break;
             }
@@ -274,6 +285,11 @@ public class Cat : BasicNPCBehaviour, IPatrol
         targetObjectManager.LockPossession(false);
         catAnim.SetBool("IsAttacking", false);
         isAttacking = false;
+
+        if(alertIcon != null)
+        {
+            alertIcon.enabled = false;
+        }
     }
 
     // If the cat enters the cage it remains trapped.
@@ -295,6 +311,10 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 catAnim.SetBool("IsAttacking", false);
                 catAnim.SetBool("IsCaught", true);
                 cage = collision.gameObject;
+                if (alertIcon != null)
+                {
+                    alertIcon.enabled = false;
+                }
             }            
         }
     }

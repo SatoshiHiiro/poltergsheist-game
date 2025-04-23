@@ -139,10 +139,10 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                             foundMovingObject = true;
                             currentMovingObject = possessedObject.gameObject;
 
-                            if(alertIcon != null)
-                            {
-                                alertIcon.enabled = true;
-                            }
+                            //if(alertIcon != null)
+                            //{
+                            //    alertIcon.enabled = true;
+                            //}
 
                             HandleSoundEvent(currentMovingObject);
                             //soundEvent.Post(gameObject);
@@ -161,10 +161,10 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
             //lastMovingObject = null;
             soundHasPlayed = false;
 
-            if(alertIcon != null && isObjectMoving == false)
-            {
-                alertIcon.enabled = false;
-            }
+            //if(alertIcon != null && isObjectMoving == false)
+            //{
+            //    alertIcon.enabled = false;
+            //}
         }
 
         //if(wasObjectMoving && !isObjectMoving)
