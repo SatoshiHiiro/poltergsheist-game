@@ -8,15 +8,21 @@ using System.Collections;
 /// �tat: Ad�quat(temp)
 public class PossessionManager : InteractibleManager, IResetInitialState
 {
+    public delegate void Callback(string parameter);
+    [HideInInspector] public string possessParam = "poss";
+    [HideInInspector] public string depossessParam = "deposs";
+    public event Callback onPossess;
+    public event Callback onDepossess;
+
     [Header("Sound variables")]
     [SerializeField] public AK.Wwise.Event onPossessionSoundEvent;
     [SerializeField] public AK.Wwise.Event possessionOffSoundEvent;
 
     //Variables
     [Header("Variables")]
-    [SerializeField] private Sprite normalSprite;
-    [SerializeField] private Sprite possessedSprite;
-    [SerializeField] public float lerpSpeed;            //Vitesse du lerp
+    //[SerializeField] private Sprite normalSprite;
+    //[SerializeField] private Sprite possessedSprite;
+    //private float duration;            //Vitesse du lerp
     [SerializeField] private float possessionDistance;  // Distance between the player and the object so he can possessed it
 
     //Conditions
@@ -29,6 +35,9 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     //Shortcuts
     PlayerController player;
     PlayerManager manager;
+    Animator playerBodyAnim;
+    Animator mustacheAnim;
+    Transform playerFace;
     IPossessable possession;
     SpriteRenderer spriteRenderer;
     Collider2D col2D;
@@ -41,7 +50,10 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     {
         base.Start();
         player = FindFirstObjectByType<PlayerController>();
+        playerBodyAnim = player.GetComponentInChildren<HeightAndSpriteResizeSystem>().transform.GetChild(0).Find("Body").GetComponent<Animator>();
+        mustacheAnim = playerBodyAnim.transform.parent.Find("Face").Find("Mustache").GetComponent<Animator>();
         manager = FindFirstObjectByType<PlayerManager>();
+        playerFace = manager.playerFace;
         spriteRenderer = this.GetComponentInChildren<SpriteRenderer>();
         //if (this.TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
         //else if (this.transform.GetChild(0).TryGetComponent<SpriteRenderer>(out spriteRenderer)) { }
@@ -60,25 +72,46 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     //Pour l'animation de possession
     IEnumerator AnimationTime()
     {
+        if (onPossess != null) { onPossess(possessParam); }
+        manager.canRotate = false;
+        mustacheAnim.SetBool("IsPossessing", true);
+
         player.lastPossession = this;
         manager.gameObject.SetActive(true);
         player.GetComponent<Rigidbody2D>().simulated = false;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         player.GetComponent<Collider2D>().enabled = false;
         player.canMove = false;
-        isAnimationFinished = false;
 
+        AnimatorClipInfo[] info = playerBodyAnim.GetCurrentAnimatorClipInfo(0);
+        float duration = info[0].clip.length;
+        isAnimationFinished = false;
         player.isPossessionInProgress = true;
 
-        yield return new WaitForSecondsRealtime(.5f);
-        manager.gameObject.SetActive(false);
-        yield return new WaitForSecondsRealtime(.5f);
-        if(possessedSprite != null)
+        playerFace.eulerAngles = new Vector3(playerFace.eulerAngles.x, spriteRenderer.transform.eulerAngles.y, playerFace.eulerAngles.z);
+        playerFace.SetParent(this.GetComponentInChildren<SpriteRenderer>().transform.Find("FaceTarget"), true);
+        playerFace.SetAsLastSibling();
+        //Vector3 center = spriteRenderer.transform.localPosition;
+        Vector3 center = Vector3.zero;
+        center.z = playerFace.position.z;
+
+        float size = col2D.transform.localScale.x * spriteRenderer.transform.localScale.x;
+        float width = col2D.bounds.extents.x / size * 2f;
+        width = Mathf.Clamp(width, .5f / size, 1.5f / size);
+        Vector3 scale = Vector3.one * width;
+        manager.FaceLerping(center, scale, duration, false);
+
+        yield return new WaitForSecondsRealtime(duration);
+        //yield return new WaitForSecondsRealtime(.5f);
+        //manager.gameObject.SetActive(false);
+        //yield return new WaitForSecondsRealtime(.5f);
+        /*if (possessedSprite != null)
         {
             spriteRenderer.sprite = possessedSprite;
-        }
+        }*/
         isAnimationFinished = true;
         possession.OnPossessed();
+        
         //possession.enabled = true;
         player.isPossessionInProgress = false;
     }
@@ -88,17 +121,18 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         //Pour le mouvement de l'animation
         if (isPossessed)
         {
-            Vector3 pos = new Vector3(0,0,player.transform.position.z);
+            Vector3 pos = player.transform.position;
+            Vector3 center = col2D.bounds.center;
 
             if (!isAnimationFinished)
             {
-                pos.y = Mathf.Lerp(player.transform.position.y, transform.position.y, lerpSpeed * Time.deltaTime);
-                pos.x = Mathf.Lerp(player.transform.position.x, transform.position.x, lerpSpeed * Time.deltaTime);
+                pos.y = Mathf.Lerp(player.transform.position.y, center.y, 3f * Time.deltaTime);
+                pos.x = Mathf.Lerp(player.transform.position.x, center.x, 3f * Time.deltaTime);
             }
             else
             {
-                pos.y = transform.position.y;
-                pos.x = transform.position.x;
+                pos.y = center.y;
+                pos.x = center.x;
             }
 
             player.transform.position = pos;
@@ -167,11 +201,13 @@ public class PossessionManager : InteractibleManager, IResetInitialState
             print("NOT DEPOSSESSING CAUSE CLIMBING");
         }
         print("STOP POSSESSION!");
+        if (onDepossess != null) { onDepossess(depossessParam); }
+
         possessionOffSoundEvent.Post(gameObject);
         isPossessed = false;
 
-        if(normalSprite != null)
-            spriteRenderer.sprite = normalSprite;
+        //if(normalSprite != null)
+        //    spriteRenderer.sprite = normalSprite;
 
         possession.OnDepossessed();
         //possession.enabled = false;
@@ -190,7 +226,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
             player.transform.position += new Vector3(0, player.GetComponent<Collider2D>().bounds.extents.y - col2D.bounds.extents.y + 0.1f, 0);
 
         manager.GetComponent<PlayerManager>().VariablesToDefaultValues();
-        manager.gameObject.SetActive(true);
+        //manager.gameObject.SetActive(true);
         player.canMove = true;
         player.isPossessionInProgress = false;
     }

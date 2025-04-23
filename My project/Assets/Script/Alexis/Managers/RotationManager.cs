@@ -5,7 +5,10 @@ public class RotationManager : SpriteManager
     //[Header("Rotation Animation")]
     float rotationSpeed = 1000f;        //Multiplier for the number of degrees to turn each frame
     Quaternion direction = new Quaternion(0, 0, 0, 1);
+    [HideInInspector] public bool canRotate;
     [HideInInspector] public bool inRotation;
+
+    public Quaternion Direction { get { return direction; } }
 
     private void OnEnable()
     {
@@ -23,14 +26,14 @@ public class RotationManager : SpriteManager
         base.Update();
 
         //To change target rotation depending on the last position
-        if (player.canMove)
+        if (player.canMove && canRotate)
         {
             if (goesLeft)
                 direction = new Quaternion(0, 1, 0, 0);     //Look left
             else if (goesRight)
                 direction = new Quaternion(0, 0, 0, 1);     //Look right
         }
-        
+
         RotateSprite(direction);
         if (direction != this.transform.rotation)
             inRotation = true;
