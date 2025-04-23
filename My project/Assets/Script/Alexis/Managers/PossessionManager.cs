@@ -20,9 +20,9 @@ public class PossessionManager : InteractibleManager, IResetInitialState
 
     //Variables
     [Header("Variables")]
-    [SerializeField] private Sprite normalSprite;
-    [SerializeField] private Sprite possessedSprite;
-    [SerializeField] public float lerpSpeed;            //Vitesse du lerp
+    //[SerializeField] private Sprite normalSprite;
+    //[SerializeField] private Sprite possessedSprite;
+    //private float duration;            //Vitesse du lerp
     [SerializeField] private float possessionDistance;  // Distance between the player and the object so he can possessed it
 
     //Conditions
@@ -79,28 +79,34 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         player.GetComponent<Collider2D>().enabled = false;
         player.canMove = false;
-        isAnimationFinished = false;
 
+        AnimatorClipInfo[] info = playerBodyAnim.GetCurrentAnimatorClipInfo(0);
+        float duration = info[0].clip.length;
+        isAnimationFinished = false;
         player.isPossessionInProgress = true;
 
-        AnimatorClipInfo[] info =  playerBodyAnim.GetCurrentAnimatorClipInfo(0);
-        float duration = info[0].clip.length;
         playerFace.eulerAngles = new Vector3(playerFace.eulerAngles.x, spriteRenderer.transform.eulerAngles.y, playerFace.eulerAngles.z);
         playerFace.SetParent(this.GetComponentInChildren<SpriteRenderer>().transform, true);
         playerFace.SetAsLastSibling();
         //Vector3 center = spriteRenderer.transform.localPosition;
         Vector3 center = Vector3.zero;
         center.z = playerFace.position.z;
-        manager.FaceLerpPosAndRot(center, manager.FaceRotationIni, duration, false);
+
+        float size = col2D.transform.localScale.x * spriteRenderer.transform.localScale.x;
+        float width = col2D.bounds.extents.x / size * 2f;
+        width = Mathf.Clamp(width, .5f / size, 1.5f / size);
+        Vector3 scale = Vector3.one * width;
+        Debug.Log(width);
+        manager.FaceLerping(center, scale, duration, false);
 
         yield return new WaitForSecondsRealtime(duration);
         //yield return new WaitForSecondsRealtime(.5f);
         //manager.gameObject.SetActive(false);
         //yield return new WaitForSecondsRealtime(.5f);
-        if (possessedSprite != null)
+        /*if (possessedSprite != null)
         {
             spriteRenderer.sprite = possessedSprite;
-        }
+        }*/
         isAnimationFinished = true;
         possession.OnPossessed();
         
@@ -113,13 +119,13 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         //Pour le mouvement de l'animation
         if (isPossessed)
         {
-            Vector3 pos = new Vector3(0,0,player.transform.position.z);
+            Vector3 pos = player.transform.position;
             Vector3 center = col2D.bounds.center;
 
             if (!isAnimationFinished)
             {
-                pos.y = Mathf.Lerp(player.transform.position.y, center.y, lerpSpeed * Time.deltaTime);
-                pos.x = Mathf.Lerp(player.transform.position.x, center.x, lerpSpeed * Time.deltaTime);
+                pos.y = Mathf.Lerp(player.transform.position.y, center.y, 3f * Time.deltaTime);
+                pos.x = Mathf.Lerp(player.transform.position.x, center.x, 3f * Time.deltaTime);
             }
             else
             {
@@ -198,8 +204,8 @@ public class PossessionManager : InteractibleManager, IResetInitialState
         possessionOffSoundEvent.Post(gameObject);
         isPossessed = false;
 
-        if(normalSprite != null)
-            spriteRenderer.sprite = normalSprite;
+        //if(normalSprite != null)
+        //    spriteRenderer.sprite = normalSprite;
 
         possession.OnDepossessed();
         //possession.enabled = false;

@@ -7,6 +7,7 @@ public class PlayerManager : RotationManager
     Animator baseHeight;
     Animator bodyAnim;
     [HideInInspector] public Transform playerFace;
+    SpriteRenderer[] faceSpriteArray;
     PossessionManager lastPossession;
     //Coroutine lerpFace;
     private Vector3 facePosIni;
@@ -14,6 +15,7 @@ public class PlayerManager : RotationManager
     private Quaternion faceRotIni;
 
     private Vector3 scaleIni;
+
 
     public Vector3 FacePositionIni { get { return facePosIni; } }
     public Vector3 FaceScaleIni { get { return faceScaleIni; } }
@@ -24,6 +26,7 @@ public class PlayerManager : RotationManager
         base.Start();
         scaleIni = this.transform.lossyScale;
         lastPossession = null;
+        faceSpriteArray = playerFace.GetComponentsInChildren<SpriteRenderer>(true);
     }
 
     void OnEnable()
@@ -87,50 +90,59 @@ public class PlayerManager : RotationManager
         playerFace.SetAsLastSibling();
         //playerFace.eulerAngles = new Vector3(playerFace.eulerAngles.x, player.transform.eulerAngles.y, playerFace.eulerAngles.z);
         AnimatorClipInfo[] clip = bodyAnim.GetCurrentAnimatorClipInfo(0);
-        FaceLerpPosAndRot(facePosIni, faceRotIni, clip[0].clip.length, true);
+        FaceLerping(facePosIni, faceScaleIni, clip[0].clip.length, true);
     }
 
-    IEnumerator FaceLerp(Vector3 posTarget, Quaternion rotTarget, float duration, bool isDepossession)
+    IEnumerator FaceLerp(Vector3 posTarget, Vector3 scalTarget, float duration, bool isDepossession)
     {
+        for (int i = 0; i < faceSpriteArray.Length; i++) { faceSpriteArray[i].sortingLayerName = "Player"; }
+
         float endTime = Time.time + duration;
-        float angle = Quaternion.Angle(playerFace.rotation, rotTarget) / duration;
+        float angle = Quaternion.Angle(playerFace.rotation, faceRotIni) / duration;
         float distance = Vector3.Distance(playerFace.localPosition, posTarget) / duration;
-        float sizeDiff = Vector3.Distance(playerFace.localScale, faceScaleIni) / duration;
+        float sizeDiff = Vector3.Distance(playerFace.localScale, scalTarget) / duration;
 
         while (Time.time <= endTime)
         {
             float deltaTime = Time.deltaTime;
-            playerFace.rotation = Quaternion.RotateTowards(playerFace.rotation, rotTarget, angle * deltaTime);
+            playerFace.rotation = Quaternion.RotateTowards(playerFace.rotation, faceRotIni, angle * deltaTime);
             playerFace.localPosition = Vector3.MoveTowards(playerFace.localPosition, posTarget, distance * deltaTime);
-            playerFace.localScale = Vector3.MoveTowards(playerFace.localScale, faceScaleIni, sizeDiff * deltaTime);
+            playerFace.localScale = Vector3.MoveTowards(playerFace.localScale, scalTarget, sizeDiff * deltaTime);
             yield return null;
         }
-        playerFace.rotation = rotTarget;
+        playerFace.rotation = faceRotIni;
         playerFace.localPosition = posTarget;
-        playerFace.localScale = faceScaleIni;
+        playerFace.localScale = scalTarget;
 
         if (isDepossession) { canRotate = true; }
+        else
+        {
+            for (int i = 0; i < faceSpriteArray.Length; i++)
+            {
+                faceSpriteArray[i].sortingLayerName = playerFace.parent.GetComponent<SpriteRenderer>().sortingLayerName;
+            }
+        }
     }
 
     public void PossessionParameter(string param)
     {
         if (param == lastPossession.possessParam)
         {
-            Debug.Log("Possessing Animation");
+            //Debug.Log("Possessing Animation");
             bodyAnim.SetTrigger("IsPossessing");
         }
         else if (param == lastPossession.depossessParam)
         {
-            Debug.Log("Depossessing Animation");
+            //Debug.Log("Depossessing Animation");
             bodyAnim.SetTrigger("IsDepossessing");
             StartCoroutine(DepossessionDelay());
         }
     }
 
-    public void FaceLerpPosAndRot(Vector3 positionTarget, Quaternion rotationTarget, float time, bool isDepossession)
+    public void FaceLerping(Vector3 positionTarget, Vector3 scaleTarget, float time, bool isDepossession)
     {
         StopAllCoroutines();
-        StartCoroutine(FaceLerp(positionTarget, rotationTarget, time, isDepossession));
+        StartCoroutine(FaceLerp(positionTarget, scaleTarget, time, isDepossession));
     }
 
     public void EventParameter(string param)

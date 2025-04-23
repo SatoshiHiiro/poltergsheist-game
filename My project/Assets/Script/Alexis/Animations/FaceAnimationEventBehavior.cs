@@ -64,6 +64,7 @@ public class FaceAnimationEventBehavior : MonoBehaviour
                 StopCoroutine(rumbling);
                 animMustache.SetBool("IsRumbling", false);
                 rumbling = null;
+                iRumble = -3;
             }
             animMustache.SetBool("IsRunning", true);
         }
