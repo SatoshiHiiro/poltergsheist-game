@@ -311,6 +311,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                     else
                     {
                         //print("BLOCKED!");
+
                     }
                 } 
 
