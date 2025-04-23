@@ -65,16 +65,26 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
         if (hasSeenMovement && alertIcon != null)
         {
-            // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
-            if (SuspicionManager.Instance.CurrentSuspicion > 0)
-            {
-                alertIcon.enabled = true;
-            }
-            else
+            if (SuspicionManager.Instance.HasSuspicionDecrease)
             {
                 alertIcon.enabled = false;
-                hasSeenMovement = false; // Reset the flag when suspicion is gone
+                print("already here");
             }
+
+            if(SuspicionManager.Instance.CurrentSuspicion <= 0)
+            {
+                hasSeenMovement = false;
+            }
+            // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
+            //if (SuspicionManager.Instance.CurrentSuspicion > 0)
+            //{
+            //    alertIcon.enabled = true;
+            //}
+            //else
+            //{
+            //    alertIcon.enabled = false;
+            //    hasSeenMovement = false; // Reset the flag when suspicion is gone
+            //}
         }
 
         // DetectMovingObjects();
@@ -156,6 +166,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             isCurrentlyObserving = true;
             hasSeenMovement = true;
+            if(alertIcon != null)
+            {
+                alertIcon.enabled = true;
+            }
             SuspicionManager.Instance.AddParanormalObserver();
         }
         // If the object has stopped moving
@@ -163,7 +177,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             isCurrentlyObserving = false;
 
-            if(alertIcon != null && hasSeenMovement && SuspicionManager.Instance.CurrentSuspicion > 0)
+            if (alertIcon != null && hasSeenMovement && SuspicionManager.Instance.CurrentSuspicion > 0)
             {
                 alertIcon.enabled = true;
             }

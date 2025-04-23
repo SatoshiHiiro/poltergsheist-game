@@ -67,17 +67,31 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
 
         if (hasSeenMovement && alertIcon != null)
         {
-            // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
-            if (SuspicionManager.Instance.CurrentSuspicion > 0)
-            {
-                alertIcon.enabled = true;
-            }
-            else
+            if (SuspicionManager.Instance.HasSuspicionDecrease)
             {
                 alertIcon.enabled = false;
-                hasSeenMovement = false; // Reset the flag when suspicion is gone
+                print("already here");
             }
+
+            if (SuspicionManager.Instance.CurrentSuspicion <= 0)
+            {
+                hasSeenMovement = false;
+            }
+
         }
+        //if (hasSeenMovement && alertIcon != null)
+        //{
+        //    // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
+        //    if (SuspicionManager.Instance.CurrentSuspicion > 0)
+        //    {
+        //        alertIcon.enabled = true;
+        //    }
+        //    else
+        //    {
+        //        alertIcon.enabled = false;
+        //        hasSeenMovement = false; // Reset the flag when suspicion is gone
+        //    }
+        //}
 
         CheckMirrorReflection();
 

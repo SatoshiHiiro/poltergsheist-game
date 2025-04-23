@@ -40,9 +40,11 @@ public class SuspicionManager : MonoBehaviour
     public event Action<float> OnSuspicionChanged;  // Event called when the suspicious changed
 
     bool hasRespawn = false;
+    bool hasSuspicionDecrease = false;
 
     // Getters
     public float CurrentSuspicion => currentSuspicion;
+    public bool HasSuspicionDecrease => hasSuspicionDecrease;
     private void Awake()
     {
         if (Instance == null)
@@ -88,9 +90,21 @@ public class SuspicionManager : MonoBehaviour
         if (Time.time - timeSinceSuspicionIncrease >= timeUntilSuspicionDecrease && !hasRespawn)
         {
             currentSuspicion -= suspicionDecrease;
+
             if (currentSuspicion < 0f)
+            {
                 currentSuspicion = 0f;
+            }
+            else
+            {
+                hasSuspicionDecrease = true;
+            }
+
             OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
+        }
+        else
+        {
+            hasSuspicionDecrease = false;
         }
     }
 
@@ -100,6 +114,7 @@ public class SuspicionManager : MonoBehaviour
         currentSuspicion = 0f;
         OnSuspicionChanged?.Invoke(currentSuspicion / maxSuspicion);
         hasRespawn = false;
+        hasSuspicionDecrease = false;
     }
 
     // Record how many NPCs witness a moving object
