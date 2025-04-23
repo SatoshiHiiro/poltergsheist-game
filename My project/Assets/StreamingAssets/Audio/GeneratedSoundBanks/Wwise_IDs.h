@@ -142,6 +142,8 @@ namespace AK
     {
         static const AkUniqueID NPC_SPEED = 2586782490U;
         static const AkUniqueID SUSPICIONBAR = 1734527613U;
+        static const AkUniqueID VOLUME_MUSIC = 3891337659U;
+        static const AkUniqueID VOLUME_SFX = 3673881719U;
     } // namespace GAME_PARAMETERS
 
     namespace BANKS
