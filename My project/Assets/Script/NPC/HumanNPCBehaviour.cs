@@ -265,7 +265,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
             SpriteRenderer objectSprite = objectCollider.GetComponentInChildren<SpriteRenderer>();
             // Check if there is light toutching the object
-            if (!IsObjectLit(objectCollider))
+            if (!IsObjectLit(objectCollider) && !objectCollider.GetComponent<PlayerController>())
             {
                 if(objectSprite != null)
                 {
@@ -275,7 +275,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             }
 
             // Object is in field of view and area is sufficiently lit
-            if (objectSprite != null)
+            if (objectSprite != null && !objectCollider.GetComponent<PlayerController>())
             {
                 int objectSortingLayer = objectSprite.sortingLayerID;
                 objectSprite.sortingLayerID = visibleLayerID;

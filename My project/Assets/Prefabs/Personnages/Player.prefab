@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 8332067426027086855}
   - component: {fileID: 9034743346255938406}
   - component: {fileID: 8514320754969125315}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pupil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 7120630054222776957}
   - component: {fileID: 8557374600694359765}
   - component: {fileID: 3067860568515749219}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 3047122540229731896}
   - component: {fileID: 4192705580547669112}
   - component: {fileID: 1452236630601878844}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 4b883b207859b9342b1d4e8dee263d8f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.73333335}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -782,7 +782,7 @@ Transform:
   m_GameObject: {fileID: 5451062341301957079}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.98999023, z: 0}
+  m_LocalPosition: {x: 0, y: 0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 3264637488912747436}
   - component: {fileID: 6118274394646663}
   - component: {fileID: 2048019832237814565}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -976,7 +976,7 @@ Transform:
   m_GameObject: {fileID: 6328761558664252938}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.98999023, z: 0}
+  m_LocalPosition: {x: 0, y: -0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1018,7 +1018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionAdjuster: {x: 0, y: 0, z: 0}
-  pivotPos: {x: -9.1, y: 277.09, z: 0}
+  pivotPos: {x: 0, y: -3.84, z: 0}
 --- !u!1 &6605465171680768661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 2311095322754679695}
   - component: {fileID: 7919886115461120213}
   - component: {fileID: 6411921516292806734}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pupil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
