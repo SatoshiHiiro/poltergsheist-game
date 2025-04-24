@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Drawing;
 
 public interface IPatrol
 {
@@ -327,6 +328,11 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
                     // The NPC is stuck
                     StopNonSuspiciousSound();
                     npcLockedSoundEvent.Post(gameObject);
+                    Animator roomAnimator = currentPoint.GetComponent<Animator>();
+                    if(roomAnimator != null)
+                    {
+                        roomAnimator.SetBool("IsNPCBlocked", true);
+                    }
                     isWaiting = false;
                     isBlocked = true;
                     yield break;
@@ -342,6 +348,11 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
             {
                 StopNonSuspiciousSound();
                 npcLockedSoundEvent.Post(gameObject);
+                Animator roomAnimator = currentPoint.GetComponent<Animator>();
+                if (roomAnimator != null)
+                {
+                    roomAnimator.SetBool("IsNPCBlocked", true);
+                }
                 // The NPC is stuck
                 isWaiting = false;
                 isBlocked = true;
@@ -362,6 +373,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         //}
         MoveToNextAvailablePatrolPoint();
     }
+
 
     // NPC is not blocked anymore
     protected IEnumerator GetUnstuck()
@@ -416,6 +428,19 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
             nextPatrolPoint = initialPatrolPoint;
         }
         npcLockedSoundEvent.Stop(gameObject);
+
+        // Stop room animation
+        foreach(PatrolPointData patrolPoint in patrolPoints)
+        {
+            if (patrolPoint.PatrolPointType == PatrolPointType.Room && patrolPoint.SpriteRenderer != null)
+            {
+                Animator roomAnimator = currentPoint.GetComponent<Animator>();
+                if (roomAnimator != null)
+                {
+                    roomAnimator.SetBool("IsNPCBlocked", false);
+                }
+            }
+        }
 
         //if (CanPlayNonSuspiciousSound())
         //{
