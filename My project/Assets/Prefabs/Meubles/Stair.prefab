@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2683665245919204320}
   - component: {fileID: 1876316933075809272}
   - component: {fileID: 7870897076570347812}
+  - component: {fileID: 9125795943089313643}
   m_Layer: 11
   m_Name: Stair
   m_TagString: Stair
@@ -172,6 +173,34 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 942d40447590dfa418422741b1ba09cd, type: 2}
+  npcLockedSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 33926de69ee9b3b4b8184033f21fccff, type: 2}
+  stairAnimator: {fileID: 9125795943089313643}
+  promptAnimator: {fileID: 2183036124267366824}
+--- !u!95 &9125795943089313643
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671070218178525982}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 884abc2a5c78f0343bc7c7735e085c85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1342544161445364882
 GameObject:
   m_ObjectHideFlags: 0

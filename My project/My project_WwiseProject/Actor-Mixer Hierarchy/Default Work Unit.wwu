@@ -7559,6 +7559,9 @@
 							</ReferenceList>
 							<ChildrenList>
 								<Sound Name="SFX_Gramophone" ID="{4455DD7C-480F-4E32-A895-3477E299845A}" ShortID="385258984">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>

@@ -191,6 +191,7 @@ public class NPCMovementController : MonoBehaviour
                 {
                     bool findAlternative = false;
                     blockedStairs.Add(currentStair);    // Remove these stairs from the possible alternative to find a path
+                    //print("TEST: " + blockedStairs.Count);
                     // As long as we did not find a new path
                     while (!findAlternative)
                     {
@@ -222,6 +223,12 @@ public class NPCMovementController : MonoBehaviour
                                 {
                                     currentStair = alternativeStair;
                                     findAlternative = true;
+
+                                    blockedStair = null;
+                                    secundBlockedStair = null;
+                                    blockedSoundEvent.Stop(gameObject);
+
+
                                     break;
                                 }
                                 else
@@ -231,10 +238,37 @@ public class NPCMovementController : MonoBehaviour
                                 }
 
                             }
+                            //print("TEST2: " + blockedStairs.Count);
+                        }
+                        if(blockedStairs.Count == 1)
+                        {
+                            //print("IM IN!");
+                            //FloorNavigationRequest alternativeFloorRequest = new FloorNavigationRequest(transform.position, currentFloor, targetFloor, npcSpriteRenderer);
+                            //StairController alternativeStair = FloorNavigation.Instance.FindNearestStairToFloor(alternativeFloorRequest, stairDirection, blockedStairs);
+                            blockedStair = blockedStairs[0];
+                            if(blockedStair.UpperFloor != null)
+                            {
+                                secundBlockedStair = blockedStair.UpperFloor;
+                            }
+                            else if(blockedStair.BottomFloor != null)
+                            {
+                                secundBlockedStair = blockedStair.BottomFloor;
+                            }
+                            blockedSoundEvent = blockedStair.npcLockedSoundEvent;
+                            if(blockedSoundEvent != null)
+                            {
+                                blockedStair.npcLockedSoundEvent.Post(gameObject, (uint)AkCallbackType.AK_Marker, MarkerCallback);
+                            }
+
+                        }
+                        else
+                        {
+                            //print("WEIRD " + blockedStairs.Count);
                         }
                         // All stairs are blocked so we wait and check if any of them got unblocked
                         yield return new WaitForSeconds(0.5f);
                         blockedStairs.Clear();
+                        //print("CLEAR");
                     }
                 }
                 // Determine if we need to go up or down
@@ -255,6 +289,35 @@ public class NPCMovementController : MonoBehaviour
                     currentFloor = currentStair.BottomFloor.FloorLevel;
                 }
             }
+        }
+
+    }
+
+    StairController blockedStair;
+    StairController secundBlockedStair;
+    AK.Wwise.Event blockedSoundEvent;
+    private void MarkerCallback(object in_cookie, AkCallbackType in_type, AkCallbackInfo in_info)
+    {
+        if (in_type == AkCallbackType.AK_Marker)
+        {
+            AkMarkerCallbackInfo markerInfo = (AkMarkerCallbackInfo)in_info;
+            //Debug.Log("Marker Triggered: " + markerInfo.strLabel);
+
+            // Ici tu déclenches ton animation
+            Animator roomAnimator = blockedStair.stairAnimator;
+            Animator secundAnimator = secundBlockedStair.stairAnimator;
+            if (roomAnimator != null)
+            {
+                roomAnimator.SetTrigger("NPCBlocked");
+                secundAnimator.SetTrigger("NPCBlocked");
+            }
+            //Animator roomAnimator = blockedStair.GetComponent<Animator>();
+            //Animator secundAnimator = secundBlockedStair.GetComponent<Animator>();
+            //if (roomAnimator != null)
+            //{
+            //    roomAnimator.SetTrigger("NPCBlocked");
+
+            //}
         }
     }
 }

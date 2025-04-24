@@ -51,13 +51,13 @@ public class StairController : MonoBehaviour
     private bool canCharacterMove;
 
     private Canvas uiPromptCanvas;  // Canvas with prompt image
-    private Animator animator;  // Animator of the canvas for the prompt image
+    [SerializeField]  private Animator promptAnimator;  // Animator of the canvas for the prompt image
 
     private void Start()
     {
         stairCollider = GetComponent<Collider2D>();
         uiPromptCanvas = GetComponentInChildren<Canvas>();
-        animator = GetComponentInChildren<Animator>();
+        //promptAnimator = GetComponentInChildren<Animator>();
     }
     public void ClimbStair(GameObject character, StairDirection direction)
     {
@@ -242,7 +242,7 @@ public class StairController : MonoBehaviour
             if (uiPromptCanvas != null)
             {
                 uiPromptCanvas.enabled = true;
-                animator.SetBool("PromptAppear", true);
+                promptAnimator.SetBool("PromptAppear", true);
             }
 
         }
@@ -255,7 +255,7 @@ public class StairController : MonoBehaviour
                 if (uiPromptCanvas != null && (collision.bounds.size.y < minimumBlockHeight))
                 {
                     uiPromptCanvas.enabled = true;
-                    animator.SetBool("PromptAppear", true);
+                    promptAnimator.SetBool("PromptAppear", true);
                 }
 
             }
@@ -274,7 +274,7 @@ public class StairController : MonoBehaviour
             if (uiPromptCanvas != null)
             {
                 uiPromptCanvas.enabled = false;
-                animator.SetBool("PromptAppear", false);
+                promptAnimator.SetBool("PromptAppear", false);
             }
 
         }
@@ -287,7 +287,7 @@ public class StairController : MonoBehaviour
                 if (uiPromptCanvas != null)
                 {
                     uiPromptCanvas.enabled = false;
-                    animator.SetBool("PromptAppear", false);
+                    promptAnimator.SetBool("PromptAppear", false);
                 }
 
             }
