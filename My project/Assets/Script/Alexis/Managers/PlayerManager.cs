@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerManager : RotationManager
+public class PlayerManager : RotationManager, IResetInitialState
 {
     //General animation variables
     Animator baseHeight;
@@ -159,5 +159,16 @@ public class PlayerManager : RotationManager
     public void VariablesToDefaultValues()
     {
         this.transform.localScale = scaleIni;
+    }
+
+    public void ResetInitialState()
+    {
+        StopAllCoroutines();
+        playerFace.SetParent(bodyAnim.transform.parent, true);
+        playerFace.SetAsLastSibling();
+        for (int i = 0; i < faceSpriteArray.Length; i++) { faceSpriteArray[i].sortingLayerName = "Player"; }
+        playerFace.position = facePosIni;
+        playerFace.rotation = faceRotIni;
+        playerFace.localScale = faceScaleIni;
     }
 }
