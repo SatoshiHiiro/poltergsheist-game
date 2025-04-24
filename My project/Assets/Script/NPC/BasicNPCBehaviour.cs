@@ -107,6 +107,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
             if (this.IsObjectInFieldOfView(obj))
             {
+                //print("NOM DE L'OBJET " + obj.gameObject.name);
                 // Check if there is no object blocking the sight of the NPC
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, (obj.transform.position - transform.position).normalized, detectionRadius, ~ignoreLayerSightBlocked);
 
@@ -129,6 +130,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
                     if (possessedObject != null)
                     {
+                        //print("NON NULLLL");
                         // Check if the object is moving in front of him
                         if (possessedObject.IsMoving)
                         {
@@ -153,6 +155,10 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                     }
 
 
+                }
+                else if(hit.collider != null)
+                {
+                    print(hit.collider.gameObject.name);
                 }
             }
         }

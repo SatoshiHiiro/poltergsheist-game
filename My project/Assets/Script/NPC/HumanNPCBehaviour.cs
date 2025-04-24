@@ -546,6 +546,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             nonSuspiciousSoundEvent.Stop(gameObject);
         }
+        npcAnim.SetBool("InMovement", false);
 
     }
 
