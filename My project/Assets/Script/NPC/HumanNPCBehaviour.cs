@@ -24,8 +24,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [Header("Investigation Variables")]
     [SerializeField] protected float surpriseWaitTime = 2f;
     [SerializeField] protected float investigationWaitTime = 3f;
+    [SerializeField] protected Sprite investigationIcon;
 
-    protected bool isInvestigating = false; // Is the NPC investigating a suspect sound
+    protected bool isInvestigating = false; // Is the NPC investigating something suspectful
+    protected bool hasActiveInvestigation = false;
     public AudioSource audioSource;  // Source of the surprised sound
 
 
@@ -63,19 +65,9 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         base.Update();
 
-        if (hasSeenMovement && alertIcon != null)
-        {
-            // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
-            if (SuspicionManager.Instance.CurrentSuspicion > 0)
-            {
-                alertIcon.enabled = true;
-            }
-            else
-            {
-                alertIcon.enabled = false;
-                hasSeenMovement = false; // Reset the flag when suspicion is gone
-            }
-        }
+        UpdateIconDisplay();
+
+        
 
         // DetectMovingObjects();
         CheckMirrorReflection();
@@ -96,6 +88,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             }
 
             isAtInitialPosition = false;
+            hasActiveInvestigation = true;
             IEnumerator investigationCoroutine = investigationQueue.Dequeue();
             currentInvestigation = StartCoroutine(RunInvestigation(investigationCoroutine));
         }
@@ -119,6 +112,65 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
     }
 
+    protected virtual void UpdateIconDisplay()
+    {
+        if (alertSpriteRenderer == null) return;
+
+        // We don't show anything
+        if (!hasActiveInvestigation && SuspicionManager.Instance.HasSuspicionDecrease)
+        {
+            alertSpriteRenderer.enabled = false;
+        }
+        // Case 2: If there is an investigation and nothing to alert
+        else if (hasActiveInvestigation && (!hasSeenMovement || SuspicionManager.Instance.HasSuspicionDecrease))
+        {
+            alertSpriteRenderer.sprite = investigationIcon;
+            alertSpriteRenderer.enabled = true;
+        }
+        // Case 1: The NPC saw an object moving
+        else if (hasSeenMovement && SuspicionManager.Instance.CurrentSuspicion > 0)
+        {
+            alertSpriteRenderer.sprite = alertIcon;
+            alertSpriteRenderer.enabled = true;
+        }
+        //print("ACTIVE" + hasActiveInvestigation);
+
+
+        if(hasSeenMovement && SuspicionManager.Instance.CurrentSuspicion <= 0)
+        {
+            hasSeenMovement = false;
+
+            if (hasActiveInvestigation)
+            {
+                alertSpriteRenderer.sprite = investigationIcon;
+                alertSpriteRenderer.enabled = true;
+            }
+        }
+        //if (hasSeenMovement && alertSpriteRenderer != null)
+        //{
+        //    if (SuspicionManager.Instance.HasSuspicionDecrease)
+        //    {
+        //        alertSpriteRenderer.enabled = false;
+        //        //print("already here");
+        //    }
+
+        //    if (SuspicionManager.Instance.CurrentSuspicion <= 0)
+        //    {
+        //        hasSeenMovement = false;
+        //    }
+        //    // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
+        //    //if (SuspicionManager.Instance.CurrentSuspicion > 0)
+        //    //{
+        //    //    alertIcon.enabled = true;
+        //    //}
+        //    //else
+        //    //{
+        //    //    alertIcon.enabled = false;
+        //    //    hasSeenMovement = false; // Reset the flag when suspicion is gone
+        //    //}
+        //}
+
+    }
     protected override bool CanPlayNonSuspiciousSound()
     {
         bool baseConditions =  base.CanPlayNonSuspiciousSound();
@@ -156,6 +208,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             isCurrentlyObserving = true;
             hasSeenMovement = true;
+            if(alertSpriteRenderer != null)
+            {
+                alertSpriteRenderer.sprite = alertIcon;
+                alertSpriteRenderer.enabled = true;
+            }
             SuspicionManager.Instance.AddParanormalObserver();
         }
         // If the object has stopped moving
@@ -163,10 +220,11 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             isCurrentlyObserving = false;
 
-            if(alertIcon != null && hasSeenMovement && SuspicionManager.Instance.CurrentSuspicion > 0)
-            {
-                alertIcon.enabled = true;
-            }
+            //if (alertSpriteRenderer != null && hasSeenMovement && SuspicionManager.Instance.CurrentSuspicion > 0)
+            //{
+            //    alertSpriteRenderer.sprite = alertIcon;
+            //    alertSpriteRenderer.enabled = true;
+            //}
             SuspicionManager.Instance.RemoveParanormalObserver();
         }
         // If the object is still moving
@@ -251,7 +309,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
             SpriteRenderer objectSprite = objectCollider.GetComponentInChildren<SpriteRenderer>();
             // Check if there is light toutching the object
-            if (!IsObjectLit(objectCollider))
+            if (!IsObjectLit(objectCollider) && !objectCollider.GetComponent<PlayerController>())
             {
                 if(objectSprite != null)
                 {
@@ -261,7 +319,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             }
 
             // Object is in field of view and area is sufficiently lit
-            if (objectSprite != null)
+            if (objectSprite != null && !objectCollider.GetComponent<PlayerController>())
             {
                 int objectSortingLayer = objectSprite.sortingLayerID;
                 objectSprite.sortingLayerID = visibleLayerID;
@@ -311,6 +369,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                     else
                     {
                         //print("BLOCKED!");
+
                     }
                 } 
 
@@ -326,6 +385,12 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         surpriseSoundEvent.Post(gameObject);
         npcAnim.SetTrigger("IsSurprised");
 
+        if(alertSpriteRenderer != null)
+        {
+            alertSpriteRenderer.sprite = alertIcon;
+            alertSpriteRenderer.enabled = true;
+        }
+
         SuspicionManager.Instance.UpdateSeeingPoltergSuspicion();
     }
 
@@ -335,6 +400,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         // Stop ambient sound when starting investigation
         StopNonSuspiciousSound();
         curiousNPCSoundEvent.Post(gameObject);
+
+        hasActiveInvestigation = true;
+        // Activate investigation icon if there is no other alert
+        if (!hasSeenMovement && alertSpriteRenderer != null)
+        {
+            alertSpriteRenderer.sprite = investigationIcon;
+            alertSpriteRenderer.enabled = true;
+        }
+
         investigationQueue.Enqueue(InvestigateSoundObject(objectsound, replaceObject, targetFloor));
         //switch (objectsound.ObjectType)
         //{
@@ -354,6 +428,15 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     public void EnqueueInvestigation(IEnumerator investigation)
     {
         curiousNPCSoundEvent.Post(gameObject);
+
+        hasActiveInvestigation = true;
+
+        if (!hasSeenMovement && alertSpriteRenderer != null)
+        {
+            alertSpriteRenderer.sprite = investigationIcon;
+            alertSpriteRenderer.enabled = true;
+        }
+
         investigationQueue.Enqueue(investigation);
     }
 
@@ -361,6 +444,19 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         isInvestigating = true;
         yield return StartCoroutine(investigation);
+
+        // If there is no more investigation we disable the icons
+        if(investigationQueue.Count == 0 && !hasSeenMovement)
+        {
+            hasActiveInvestigation = false;
+
+            if(alertSpriteRenderer != null)
+            {
+                alertSpriteRenderer.enabled = false;
+            }
+        }
+        //print(investigationQueue.Count);
+        //print("HASSEENMOVEMENT" + hasSeenMovement);
         isInvestigating = false;
         currentInvestigation = null;
 
@@ -441,11 +537,17 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
         hasSeenMovement = false;
 
+        if(alertSpriteRenderer != null)
+        {
+            alertSpriteRenderer.enabled = false;
+        }
+
         // Reset sounds
         if (nonSuspiciousSoundEvent != null)
         {
             nonSuspiciousSoundEvent.Stop(gameObject);
         }
+        npcAnim.SetBool("InMovement", false);
 
     }
 

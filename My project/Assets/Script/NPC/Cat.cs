@@ -122,9 +122,9 @@ public class Cat : BasicNPCBehaviour, IPatrol
                             isHunting = true;
                             targetPossessedObject = possessedObject.gameObject;
 
-                            if(alertIcon != null)
+                            if(alertSpriteRenderer != null)
                             {
-                                alertIcon.enabled = true;
+                                alertSpriteRenderer.enabled = true;
                             }
                         }
                     }
@@ -181,9 +181,9 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 isAttacking = false;
                 targetPossessedObject = null;
 
-                if(alertIcon != null)
+                if(alertSpriteRenderer != null)
                 {
-                    alertIcon.enabled = false;
+                    alertSpriteRenderer.enabled = false;
                 }
 
                 //StartCoroutine(Patrol());
@@ -286,9 +286,9 @@ public class Cat : BasicNPCBehaviour, IPatrol
         catAnim.SetBool("IsAttacking", false);
         isAttacking = false;
 
-        if(alertIcon != null)
+        if(alertSpriteRenderer != null)
         {
-            alertIcon.enabled = false;
+            alertSpriteRenderer.enabled = false;
         }
     }
 
@@ -311,9 +311,9 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 catAnim.SetBool("IsAttacking", false);
                 catAnim.SetBool("IsCaught", true);
                 cage = collision.gameObject;
-                if (alertIcon != null)
+                if (alertSpriteRenderer != null)
                 {
-                    alertIcon.enabled = false;
+                    alertSpriteRenderer.enabled = false;
                 }
             }            
         }

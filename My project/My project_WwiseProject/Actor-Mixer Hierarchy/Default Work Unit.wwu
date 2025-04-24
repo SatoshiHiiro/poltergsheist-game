@@ -7559,6 +7559,9 @@
 							</ReferenceList>
 							<ChildrenList>
 								<Sound Name="SFX_Gramophone" ID="{4455DD7C-480F-4E32-A895-3477E299845A}" ShortID="385258984">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
@@ -8630,6 +8633,7 @@
 														<AudioFileSource Name="SFX_NPC_Locked_1" ID="{C1D0BB59-355F-49E1-AE62-270CBDD039D6}">
 															<PropertyList>
 																<Property Name="FadeOutDuration" Type="Real64" Value="0.158303069369056"/>
+																<Property Name="MarkerInputMode" Type="int16" Value="2"/>
 																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 																<Property Name="TrimEnd" Type="Real64" Value="3.00310287435492"/>
 															</PropertyList>
@@ -8638,6 +8642,15 @@
 															<MediaIDList>
 																<MediaID ID="465706454"/>
 															</MediaIDList>
+															<ObjectLists>
+																<ObjectList Name="Markers">
+																	<Reference>
+																		<Local>
+																			<Marker Name="" ID="{6F8977B0-17CC-499B-B595-0C3A5A03A943}"/>
+																		</Local>
+																	</Reference>
+																</ObjectList>
+															</ObjectLists>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
@@ -8664,12 +8677,22 @@
 														<AudioFileSource Name="SFX_NPC_Locked_2" ID="{63D91AD8-7CD0-4793-8EFF-D57A1F76FB49}">
 															<PropertyList>
 																<Property Name="FadeInDuration" Type="Real64" Value="0.0492836279567505"/>
+																<Property Name="MarkerInputMode" Type="int16" Value="2"/>
 															</PropertyList>
 															<Language>SFX</Language>
 															<AudioFile>SFX_NPC_Locked_2.wav</AudioFile>
 															<MediaIDList>
 																<MediaID ID="296349931"/>
 															</MediaIDList>
+															<ObjectLists>
+																<ObjectList Name="Markers">
+																	<Reference>
+																		<Local>
+																			<Marker Name="" ID="{DE45E27C-7470-47BA-B386-B2CB65F6CCBF}"/>
+																		</Local>
+																	</Reference>
+																</ObjectList>
+															</ObjectLists>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
@@ -8696,12 +8719,22 @@
 														<AudioFileSource Name="SFX_NPC_Locked_3" ID="{25787CED-1A77-466F-9162-50EF25E2C488}">
 															<PropertyList>
 																<Property Name="FadeInDuration" Type="Real64" Value="0.111709556701968"/>
+																<Property Name="MarkerInputMode" Type="int16" Value="2"/>
 															</PropertyList>
 															<Language>SFX</Language>
 															<AudioFile>SFX_NPC_Locked_3.wav</AudioFile>
 															<MediaIDList>
 																<MediaID ID="169925908"/>
 															</MediaIDList>
+															<ObjectLists>
+																<ObjectList Name="Markers">
+																	<Reference>
+																		<Local>
+																			<Marker Name="" ID="{0DE35717-4D81-4EFE-BA96-C8B594A9B524}"/>
+																		</Local>
+																	</Reference>
+																</ObjectList>
+															</ObjectLists>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>

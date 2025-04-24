@@ -437,9 +437,10 @@ MonoBehaviour:
     m_Bits: 128
   ignoreLayerSightBlocked:
     serializedVersion: 2
-    m_Bits: 1195328
+    m_Bits: 1211720
   currentFloorLevel: 0
-  alertIcon: {fileID: 3511663466270294725}
+  alertSpriteRenderer: {fileID: 3511663466270294725}
+  alertIcon: {fileID: 21300000, guid: 0f2a294604cb26142a964f4745c1af41, type: 3}
   surpriseSoundEvent:
     idInternal: 0
     valueGuidInternal: 
@@ -460,6 +461,7 @@ MonoBehaviour:
     m_Bits: 1024
   surpriseWaitTime: 2
   investigationWaitTime: 3
+  investigationIcon: {fileID: 21300000, guid: 65770edc1ca5be2499feb7db7c35ce62, type: 3}
   audioSource: {fileID: 0}
   detectionRadiusLight: 20
   lightLayer:
@@ -774,7 +776,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.52922, y: 0.52922, z: 0.52922}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3525294555537672930}
@@ -823,7 +825,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 94bfc0aa2eb34ae4a80fd1f545005396, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f2a294604cb26142a964f4745c1af41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

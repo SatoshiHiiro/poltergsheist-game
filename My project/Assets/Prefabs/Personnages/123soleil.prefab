@@ -9,9 +9,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3444647450879541081, guid: c0334a18f965cab4b9f672bd24fe6717, type: 3}
+      propertyPath: alertIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 0f2a294604cb26142a964f4745c1af41, type: 3}
+    - target: {fileID: 3444647450879541081, guid: c0334a18f965cab4b9f672bd24fe6717, type: 3}
       propertyPath: detectionRadius
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3444647450879541081, guid: c0334a18f965cab4b9f672bd24fe6717, type: 3}
+      propertyPath: investigationIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 65770edc1ca5be2499feb7db7c35ce62, type: 3}
+    - target: {fileID: 3444647450879541081, guid: c0334a18f965cab4b9f672bd24fe6717, type: 3}
+      propertyPath: alertSpriteRenderer
+      value: 
+      objectReference: {fileID: 4414479617686780899}
     - target: {fileID: 3444647450879541081, guid: c0334a18f965cab4b9f672bd24fe6717, type: 3}
       propertyPath: detectionRadiusLight
       value: 13.9
@@ -85,3 +97,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0334a18f965cab4b9f672bd24fe6717, type: 3}
+--- !u!212 &4414479617686780899 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3588996521330335409, guid: c0334a18f965cab4b9f672bd24fe6717, type: 3}
+  m_PrefabInstance: {fileID: 904603954232288594}
+  m_PrefabAsset: {fileID: 0}

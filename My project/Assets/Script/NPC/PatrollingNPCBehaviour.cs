@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Drawing;
 
 public interface IPatrol
 {
@@ -12,6 +13,8 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
 {
     [Header("Patrolling NPC Sound Variables")]
     [SerializeField] protected AK.Wwise.Event npcLockedSoundEvent;
+    [SerializeField] protected AK.Wwise.Event doorOpenSoundEvent;
+    [SerializeField] protected AK.Wwise.Event doorCloseSoundEvent;
     // Enemy patrol variables
     [Header("Patrol variables")]
     [SerializeField] protected PatrolPointData[] patrolPoints;    // Points were the NPC patrol
@@ -63,21 +66,38 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         {
             print("WTF");
         }
+
+        UpdateIconDisplay();
+
         DetectMovingObjects();
 
-        if (hasSeenMovement && alertIcon != null)
-        {
-            // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
-            if (SuspicionManager.Instance.CurrentSuspicion > 0)
-            {
-                alertIcon.enabled = true;
-            }
-            else
-            {
-                alertIcon.enabled = false;
-                hasSeenMovement = false; // Reset the flag when suspicion is gone
-            }
-        }
+        //if (hasSeenMovement && alertSpriteRenderer != null)
+        //{
+        //    if (SuspicionManager.Instance.HasSuspicionDecrease)
+        //    {
+        //        alertSpriteRenderer.enabled = false;
+        //        print("already here");
+        //    }
+
+        //    if (SuspicionManager.Instance.CurrentSuspicion <= 0)
+        //    {
+        //        hasSeenMovement = false;
+        //    }
+
+        //}
+        //if (hasSeenMovement && alertIcon != null)
+        //{
+        //    // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
+        //    if (SuspicionManager.Instance.CurrentSuspicion > 0)
+        //    {
+        //        alertIcon.enabled = true;
+        //    }
+        //    else
+        //    {
+        //        alertIcon.enabled = false;
+        //        hasSeenMovement = false; // Reset the flag when suspicion is gone
+        //    }
+        //}
 
         CheckMirrorReflection();
 
@@ -142,6 +162,20 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
 
     }
 
+    protected override void UpdateIconDisplay()
+    {
+        if(isBlocked || isInRoom)
+        {
+            if(alertSpriteRenderer != null)
+            {
+                alertSpriteRenderer.enabled = false;
+            }
+            return;
+        }
+
+        base.UpdateIconDisplay();
+    }
+
     // Override to add patrolling-specific conditions
     protected override bool CanPlayNonSuspiciousSound()
     {
@@ -162,7 +196,18 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         //rightFloor = false;
         print(investigation.ToString());
         yield return StartCoroutine(investigation);
-        isInvestigating = false;        
+        isInvestigating = false;
+
+        // If there is no more investigation we disable the icons
+        if (investigationQueue.Count == 0 && !hasSeenMovement)
+        {
+            hasActiveInvestigation = false;
+
+            if (alertSpriteRenderer != null)
+            {
+                alertSpriteRenderer.enabled = false;
+            }
+        }
 
         lastSuspiciousTime = Time.time;
 
@@ -270,16 +315,20 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
                 
                 canSee = false;
                 fovLight.enabled = false;
+                doorOpenSoundEvent.Post(gameObject);
                 animator.SetBool("EnterRoom", true);
                 isInRoom = true;
                 yield return new WaitForSeconds(0.5f);
+                doorCloseSoundEvent.Post(gameObject);
                 yield return new WaitForSeconds(currentPoint.WaitTime); // Waiting in the room
 
                 // Check again if the room became blocked while waiting
                 if (!IsRoomBlocked(currentPoint))
                 {
+                    doorOpenSoundEvent.Post(gameObject);
                     animator.SetTrigger("ExitRoom");
                     yield return new WaitForSeconds(0.5f);
+                    doorCloseSoundEvent.Post(gameObject);
                     isInRoom = false;
                     canSee = true;
                     fovLight.enabled = true;
@@ -289,7 +338,12 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
                 {
                     // The NPC is stuck
                     StopNonSuspiciousSound();
-                    npcLockedSoundEvent.Post(gameObject);
+                    uint playingID = npcLockedSoundEvent.Post(gameObject, (uint)AkCallbackType.AK_Marker, MarkerCallback);
+                    //Animator roomAnimator = currentPoint.GetComponent<Animator>();
+                    //if(roomAnimator != null)
+                    //{
+                    //    roomAnimator.SetBool("IsNPCBlocked", true);
+                    //}
                     isWaiting = false;
                     isBlocked = true;
                     yield break;
@@ -304,7 +358,12 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
             else if(isInRoom && IsRoomBlocked(currentPoint))
             {
                 StopNonSuspiciousSound();
-                npcLockedSoundEvent.Post(gameObject);
+                uint playingID = npcLockedSoundEvent.Post(gameObject, (uint)AkCallbackType.AK_Marker, MarkerCallback);
+                //Animator roomAnimator = currentPoint.GetComponent<Animator>();
+                //if (roomAnimator != null)
+                //{
+                //    roomAnimator.SetBool("IsNPCBlocked", true);
+                //}
                 // The NPC is stuck
                 isWaiting = false;
                 isBlocked = true;
@@ -326,6 +385,24 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         MoveToNextAvailablePatrolPoint();
     }
 
+    private void MarkerCallback(object in_cookie, AkCallbackType in_type, AkCallbackInfo in_info)
+    {
+        if (in_type == AkCallbackType.AK_Marker)
+        {
+            AkMarkerCallbackInfo markerInfo = (AkMarkerCallbackInfo)in_info;
+            //Debug.Log("Marker Triggered: " + markerInfo.strLabel);
+
+            // Ici tu déclenches ton animation
+            Animator roomAnimator = currentPoint.GetComponent<Animator>();
+            if (roomAnimator != null)
+            {
+                roomAnimator.SetTrigger("NPCBlocked");
+                
+            }
+        }
+    }
+
+
     // NPC is not blocked anymore
     protected IEnumerator GetUnstuck()
     {
@@ -342,7 +419,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         fovLight.enabled = true;
         animator.SetBool("EnterRoom", false);
         isWaiting = false;
-        print("ISWAITING2 " + isWaiting); 
+        //print("ISWAITING2 " + isWaiting); 
         isInRoom = false;
         isPatrolling = false;
 
@@ -378,6 +455,20 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         {
             nextPatrolPoint = initialPatrolPoint;
         }
+        npcLockedSoundEvent.Stop(gameObject);
+
+        // Stop room animation
+        //foreach(PatrolPointData patrolPoint in patrolPoints)
+        //{
+        //    if (patrolPoint.PatrolPointType == PatrolPointType.Room && patrolPoint.SpriteRenderer != null)
+        //    {
+        //        Animator roomAnimator = currentPoint.GetComponent<Animator>();
+        //        if (roomAnimator != null)
+        //        {
+        //            roomAnimator.SetBool("IsNPCBlocked", false);
+        //        }
+        //    }
+        //}
 
         //if (CanPlayNonSuspiciousSound())
         //{
