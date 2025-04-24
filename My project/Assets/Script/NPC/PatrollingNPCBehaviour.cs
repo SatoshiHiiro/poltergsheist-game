@@ -196,7 +196,18 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         //rightFloor = false;
         print(investigation.ToString());
         yield return StartCoroutine(investigation);
-        isInvestigating = false;        
+        isInvestigating = false;
+
+        // If there is no more investigation we disable the icons
+        if (investigationQueue.Count == 0 && !hasSeenMovement)
+        {
+            hasActiveInvestigation = false;
+
+            if (alertSpriteRenderer != null)
+            {
+                alertSpriteRenderer.enabled = false;
+            }
+        }
 
         lastSuspiciousTime = Time.time;
 

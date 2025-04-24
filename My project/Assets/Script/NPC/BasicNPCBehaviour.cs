@@ -158,7 +158,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                 }
                 else if(hit.collider != null)
                 {
-                    print(hit.collider.gameObject.name);
+                    //print(hit.collider.gameObject.name);
                 }
             }
         }

@@ -37,6 +37,8 @@ public class StairController : MonoBehaviour
     [Header ("Sound bariables")]
     [SerializeField] public AK.Wwise.Event doorOpenSoundEvent;
     [SerializeField] public AK.Wwise.Event doorCloseSoundEvent;
+    [SerializeField] public AK.Wwise.Event npcLockedSoundEvent;
+    [SerializeField] public Animator stairAnimator;
 
     // Public properties to access from other scripts
     public Transform StartPoint { get { return startPoint; } }

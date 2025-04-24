@@ -133,7 +133,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             alertSpriteRenderer.sprite = alertIcon;
             alertSpriteRenderer.enabled = true;
         }
-
+        //print("ACTIVE" + hasActiveInvestigation);
 
 
         if(hasSeenMovement && SuspicionManager.Instance.CurrentSuspicion <= 0)
@@ -455,7 +455,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
                 alertSpriteRenderer.enabled = false;
             }
         }
-
+        //print(investigationQueue.Count);
+        //print("HASSEENMOVEMENT" + hasSeenMovement);
         isInvestigating = false;
         currentInvestigation = null;
 
