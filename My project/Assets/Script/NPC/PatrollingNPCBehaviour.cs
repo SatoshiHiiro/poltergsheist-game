@@ -63,22 +63,25 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         {
             print("WTF");
         }
+
+        UpdateIconDisplay();
+
         DetectMovingObjects();
 
-        if (hasSeenMovement && alertIcon != null)
-        {
-            if (SuspicionManager.Instance.HasSuspicionDecrease)
-            {
-                alertIcon.enabled = false;
-                print("already here");
-            }
+        //if (hasSeenMovement && alertSpriteRenderer != null)
+        //{
+        //    if (SuspicionManager.Instance.HasSuspicionDecrease)
+        //    {
+        //        alertSpriteRenderer.enabled = false;
+        //        print("already here");
+        //    }
 
-            if (SuspicionManager.Instance.CurrentSuspicion <= 0)
-            {
-                hasSeenMovement = false;
-            }
+        //    if (SuspicionManager.Instance.CurrentSuspicion <= 0)
+        //    {
+        //        hasSeenMovement = false;
+        //    }
 
-        }
+        //}
         //if (hasSeenMovement && alertIcon != null)
         //{
         //    // Keep alert icon visible while suspicion exists, hide it when suspicion is gone
@@ -154,6 +157,20 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         //    StartNonSuspiciousSound();
         //}
 
+    }
+
+    protected override void UpdateIconDisplay()
+    {
+        if(isBlocked || isInRoom)
+        {
+            if(alertSpriteRenderer != null)
+            {
+                alertSpriteRenderer.enabled = false;
+            }
+            return;
+        }
+
+        base.UpdateIconDisplay();
     }
 
     // Override to add patrolling-specific conditions

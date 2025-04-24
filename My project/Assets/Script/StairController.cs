@@ -170,12 +170,12 @@ public class StairController : MonoBehaviour
 
         if (possessionController != null)
         {
-            print("ISCLIMBINGFASLSE");
+            //print("ISCLIMBINGFASLSE");
             possessionController.isClimbing = false;
         }
         else
         {
-            print("NO POSSESSIONCONTROLLER");
+            //print("NO POSSESSIONCONTROLLER");
         }
 
         if(doorCloseSoundEvent != null)

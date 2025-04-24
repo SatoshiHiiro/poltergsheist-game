@@ -16,7 +16,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
    
     [Header("NPC global variables")]
     [SerializeField] protected float currentFloorLevel;   // Floor where the npc is located
-    [SerializeField] protected SpriteRenderer alertIcon;
+    [SerializeField] protected SpriteRenderer alertSpriteRenderer;
+    [SerializeField] protected Sprite alertIcon;
     protected float initialFloorLevel;
     protected NPCMovementController npcMovementController;
     protected SpriteRenderer npcSpriteRenderer;
@@ -332,9 +333,9 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         currentFloorLevel = initialFloorLevel;
 
         // Reset icon movement detection
-        if(alertIcon != null)
+        if(alertSpriteRenderer != null)
         {
-            alertIcon.enabled = false;
+            alertSpriteRenderer.enabled = false;
         }
 
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
