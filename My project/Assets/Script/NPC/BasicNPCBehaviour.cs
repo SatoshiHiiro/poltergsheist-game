@@ -56,6 +56,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 
     //Getters and Setters
     public bool FacingRight {  get { return facingRight; } set { facingRight = value; } }
+    public bool IniFacingRight { get { return initialFacingRight; } }
 
     protected virtual void Start()
     {
