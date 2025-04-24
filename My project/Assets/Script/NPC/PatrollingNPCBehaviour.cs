@@ -12,6 +12,8 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
 {
     [Header("Patrolling NPC Sound Variables")]
     [SerializeField] protected AK.Wwise.Event npcLockedSoundEvent;
+    [SerializeField] protected AK.Wwise.Event doorOpenSoundEvent;
+    [SerializeField] protected AK.Wwise.Event doorCloseSoundEvent;
     // Enemy patrol variables
     [Header("Patrol variables")]
     [SerializeField] protected PatrolPointData[] patrolPoints;    // Points were the NPC patrol
@@ -301,16 +303,20 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
                 
                 canSee = false;
                 fovLight.enabled = false;
+                doorOpenSoundEvent.Post(gameObject);
                 animator.SetBool("EnterRoom", true);
                 isInRoom = true;
                 yield return new WaitForSeconds(0.5f);
+                doorCloseSoundEvent.Post(gameObject);
                 yield return new WaitForSeconds(currentPoint.WaitTime); // Waiting in the room
 
                 // Check again if the room became blocked while waiting
                 if (!IsRoomBlocked(currentPoint))
                 {
+                    doorOpenSoundEvent.Post(gameObject);
                     animator.SetTrigger("ExitRoom");
                     yield return new WaitForSeconds(0.5f);
+                    doorCloseSoundEvent.Post(gameObject);
                     isInRoom = false;
                     canSee = true;
                     fovLight.enabled = true;
@@ -373,7 +379,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         fovLight.enabled = true;
         animator.SetBool("EnterRoom", false);
         isWaiting = false;
-        print("ISWAITING2 " + isWaiting); 
+        //print("ISWAITING2 " + isWaiting); 
         isInRoom = false;
         isPatrolling = false;
 
@@ -409,6 +415,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         {
             nextPatrolPoint = initialPatrolPoint;
         }
+        npcLockedSoundEvent.Stop(gameObject);
 
         //if (CanPlayNonSuspiciousSound())
         //{
