@@ -327,12 +327,12 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
                 {
                     // The NPC is stuck
                     StopNonSuspiciousSound();
-                    npcLockedSoundEvent.Post(gameObject);
-                    Animator roomAnimator = currentPoint.GetComponent<Animator>();
-                    if(roomAnimator != null)
-                    {
-                        roomAnimator.SetBool("IsNPCBlocked", true);
-                    }
+                    uint playingID = npcLockedSoundEvent.Post(gameObject, (uint)AkCallbackType.AK_Marker, MarkerCallback);
+                    //Animator roomAnimator = currentPoint.GetComponent<Animator>();
+                    //if(roomAnimator != null)
+                    //{
+                    //    roomAnimator.SetBool("IsNPCBlocked", true);
+                    //}
                     isWaiting = false;
                     isBlocked = true;
                     yield break;
@@ -347,12 +347,12 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
             else if(isInRoom && IsRoomBlocked(currentPoint))
             {
                 StopNonSuspiciousSound();
-                npcLockedSoundEvent.Post(gameObject);
-                Animator roomAnimator = currentPoint.GetComponent<Animator>();
-                if (roomAnimator != null)
-                {
-                    roomAnimator.SetBool("IsNPCBlocked", true);
-                }
+                uint playingID = npcLockedSoundEvent.Post(gameObject, (uint)AkCallbackType.AK_Marker, MarkerCallback);
+                //Animator roomAnimator = currentPoint.GetComponent<Animator>();
+                //if (roomAnimator != null)
+                //{
+                //    roomAnimator.SetBool("IsNPCBlocked", true);
+                //}
                 // The NPC is stuck
                 isWaiting = false;
                 isBlocked = true;
@@ -372,6 +372,23 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         //    StartNonSuspiciousSound();
         //}
         MoveToNextAvailablePatrolPoint();
+    }
+
+    private void MarkerCallback(object in_cookie, AkCallbackType in_type, AkCallbackInfo in_info)
+    {
+        if (in_type == AkCallbackType.AK_Marker)
+        {
+            AkMarkerCallbackInfo markerInfo = (AkMarkerCallbackInfo)in_info;
+            //Debug.Log("Marker Triggered: " + markerInfo.strLabel);
+
+            // Ici tu déclenches ton animation
+            Animator roomAnimator = currentPoint.GetComponent<Animator>();
+            if (roomAnimator != null)
+            {
+                roomAnimator.SetTrigger("NPCBlocked");
+                
+            }
+        }
     }
 
 
@@ -430,17 +447,17 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         npcLockedSoundEvent.Stop(gameObject);
 
         // Stop room animation
-        foreach(PatrolPointData patrolPoint in patrolPoints)
-        {
-            if (patrolPoint.PatrolPointType == PatrolPointType.Room && patrolPoint.SpriteRenderer != null)
-            {
-                Animator roomAnimator = currentPoint.GetComponent<Animator>();
-                if (roomAnimator != null)
-                {
-                    roomAnimator.SetBool("IsNPCBlocked", false);
-                }
-            }
-        }
+        //foreach(PatrolPointData patrolPoint in patrolPoints)
+        //{
+        //    if (patrolPoint.PatrolPointType == PatrolPointType.Room && patrolPoint.SpriteRenderer != null)
+        //    {
+        //        Animator roomAnimator = currentPoint.GetComponent<Animator>();
+        //        if (roomAnimator != null)
+        //        {
+        //            roomAnimator.SetBool("IsNPCBlocked", false);
+        //        }
+        //    }
+        //}
 
         //if (CanPlayNonSuspiciousSound())
         //{
