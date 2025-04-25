@@ -18,6 +18,8 @@ public class CursorManager : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0) return;
+
         Vector2 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1000f, ~ignoreCollision);
 

@@ -142,6 +142,8 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     //Input de possession
     private void OnMouseDown()
     {
+        if (Time.timeScale == 0) return;
+
         if (isPossessionLocked || player.isPossessionInProgress || (posControl != null && posControl.isClimbing))
         {
             return; // Can't possessed an object if the possession on this object is locked
@@ -181,7 +183,7 @@ public class PossessionManager : InteractibleManager, IResetInitialState
                 //Si le joueur veut sortir de l'objet
                 else if (player.isPossessing && isPossessed && hasEnoughSpace)
                 {
-                    print("IM IN THE IF!");
+                    //print("IM IN THE IF!");
                     StopPossession();
                 }
             }
