@@ -16,6 +16,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     protected Light2D fovLight;
     [SerializeField] protected Color nonSuspiciousColorFOV;//"00FF1A";
     [SerializeField] protected Color alertColorFOV;
+    protected Quaternion initialFOVRotation;
 
     [Header("NPC global variables")]
     [SerializeField] protected float currentFloorLevel;   // Floor where the npc is located
@@ -87,6 +88,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         lastSoundTime = -soundCooldown;
 
         lastSuspiciousTime = -nonSuspiciousSoundCooldown;
+
+        initialFOVRotation = fovLight.transform.rotation;
     }
     protected virtual void Update()
     {
@@ -349,7 +352,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
         rotationDegrees.z = facingRight ? -90f : 90f;
         fieldOfView.transform.eulerAngles = rotationDegrees;
-
+        fovLight.transform.rotation = initialFOVRotation;
         lastMovingObject = null;
         soundHasPlayed = false;
 
