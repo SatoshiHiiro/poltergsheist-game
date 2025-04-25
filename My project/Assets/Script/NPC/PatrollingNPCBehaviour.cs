@@ -206,6 +206,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
             if (alertSpriteRenderer != null)
             {
                 alertSpriteRenderer.enabled = false;
+                fovLight.color = nonSuspiciousColorFOV;
             }
         }
 

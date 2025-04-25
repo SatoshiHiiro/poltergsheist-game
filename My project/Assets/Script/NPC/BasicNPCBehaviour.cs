@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Rendering.Universal;
-
 public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
 {
     // NPC vision variables
@@ -13,7 +12,11 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     protected bool isObjectMoving;    // Is there an object moving in front of him?
     protected bool isCurrentlyObserving;    // Is the NPC already watching an object moving?
     protected float fieldOfViewAngle;
-   
+    protected GameObject fieldOfView;
+    protected Light2D fovLight;
+    [SerializeField] protected Color nonSuspiciousColorFOV;//"00FF1A";
+    [SerializeField] protected Color alertColorFOV;
+
     [Header("NPC global variables")]
     [SerializeField] protected float currentFloorLevel;   // Floor where the npc is located
     [SerializeField] protected SpriteRenderer alertSpriteRenderer;
@@ -23,8 +26,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     protected SpriteRenderer npcSpriteRenderer;
     protected Animator npcAnim;
 
-    protected GameObject fieldOfView;
-    protected Light2D fovLight;
+
 
     // Initial variables
     protected Vector3 initialPosition;  // Initial position of the NPC
@@ -338,13 +340,12 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         facingRight = initialFacingRight;
         //npcSpriteRenderer.flipX = !facingRight;
         currentFloorLevel = initialFloorLevel;
-
         // Reset icon movement detection
         if(alertSpriteRenderer != null)
         {
             alertSpriteRenderer.enabled = false;
         }
-
+        fovLight.color = nonSuspiciousColorFOV;
         Vector3 rotationDegrees = fieldOfView.transform.eulerAngles;
         rotationDegrees.z = facingRight ? -90f : 90f;
         fieldOfView.transform.eulerAngles = rotationDegrees;

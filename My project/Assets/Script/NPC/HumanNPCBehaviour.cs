@@ -120,17 +120,20 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         if (!hasActiveInvestigation && SuspicionManager.Instance.HasSuspicionDecrease)
         {
             alertSpriteRenderer.enabled = false;
+            fovLight.color = nonSuspiciousColorFOV;
         }
         // Case 2: If there is an investigation and nothing to alert
         else if (hasActiveInvestigation && (!hasSeenMovement || SuspicionManager.Instance.HasSuspicionDecrease))
         {
             alertSpriteRenderer.sprite = investigationIcon;
             alertSpriteRenderer.enabled = true;
+            fovLight.color = nonSuspiciousColorFOV;
         }
         // Case 1: The NPC saw an object moving
         else if (hasSeenMovement && SuspicionManager.Instance.CurrentSuspicion > 0)
         {
             alertSpriteRenderer.sprite = alertIcon;
+            fovLight.color = alertColorFOV;
             alertSpriteRenderer.enabled = true;
         }
         //print("ACTIVE" + hasActiveInvestigation);
@@ -143,6 +146,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             if (hasActiveInvestigation)
             {
                 alertSpriteRenderer.sprite = investigationIcon;
+                fovLight.color = nonSuspiciousColorFOV;
                 alertSpriteRenderer.enabled = true;
             }
         }
@@ -211,6 +215,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             if(alertSpriteRenderer != null)
             {
                 alertSpriteRenderer.sprite = alertIcon;
+                fovLight.color = alertColorFOV;
                 alertSpriteRenderer.enabled = true;
             }
             SuspicionManager.Instance.AddParanormalObserver();
@@ -388,6 +393,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         if(alertSpriteRenderer != null)
         {
             alertSpriteRenderer.sprite = alertIcon;
+            fovLight.color = alertColorFOV;
             alertSpriteRenderer.enabled = true;
         }
 
@@ -406,6 +412,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         if (!hasSeenMovement && alertSpriteRenderer != null)
         {
             alertSpriteRenderer.sprite = investigationIcon;
+            fovLight.color = nonSuspiciousColorFOV;
             alertSpriteRenderer.enabled = true;
         }
 
@@ -434,6 +441,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         if (!hasSeenMovement && alertSpriteRenderer != null)
         {
             alertSpriteRenderer.sprite = investigationIcon;
+            fovLight.color = nonSuspiciousColorFOV;
             alertSpriteRenderer.enabled = true;
         }
 
@@ -453,6 +461,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             if(alertSpriteRenderer != null)
             {
                 alertSpriteRenderer.enabled = false;
+                fovLight.color = nonSuspiciousColorFOV;
             }
         }
         //print(investigationQueue.Count);
@@ -541,14 +550,14 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         {
             alertSpriteRenderer.enabled = false;
         }
-
+        fovLight.color = nonSuspiciousColorFOV;
         // Reset sounds
         if (nonSuspiciousSoundEvent != null)
         {
             nonSuspiciousSoundEvent.Stop(gameObject);
         }
         npcAnim.SetBool("InMovement", false);
-
+        //print("INMOVEMENTFALSE!!!");
     }
 
     public void ResetSeePolterg()

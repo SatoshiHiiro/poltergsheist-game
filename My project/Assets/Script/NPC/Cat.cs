@@ -125,6 +125,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                             if(alertSpriteRenderer != null)
                             {
                                 alertSpriteRenderer.enabled = true;
+                                fovLight.color = alertColorFOV;
                             }
                         }
                     }
@@ -184,6 +185,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 if(alertSpriteRenderer != null)
                 {
                     alertSpriteRenderer.enabled = false;
+                    fovLight.color = nonSuspiciousColorFOV;
                 }
 
                 //StartCoroutine(Patrol());
@@ -289,6 +291,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         if(alertSpriteRenderer != null)
         {
             alertSpriteRenderer.enabled = false;
+            fovLight.color = nonSuspiciousColorFOV;
         }
     }
 
@@ -314,6 +317,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 if (alertSpriteRenderer != null)
                 {
                     alertSpriteRenderer.enabled = false;
+                    fovLight.color = nonSuspiciousColorFOV;
                 }
             }            
         }
