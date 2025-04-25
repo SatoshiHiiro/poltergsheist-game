@@ -195,6 +195,10 @@ public class PossessionManager : MonoBehaviour, IResetInitialState
     public void LockPossession(bool locked)
     {
         isPossessionLocked = locked;
+        if(posControl != null)
+        {
+            posControl.IsMoving = false;
+        }
     }
 
     //Pour arr�ter la possession

@@ -20,7 +20,7 @@ public class PossessionController : MovementController, IPossessable, IResetInit
     private bool isMoving;
     private Vector2 lastPosition;
     private bool canObjectJump = false;
-    public bool IsMoving { get { return isMoving; } private set { isMoving = value; } } // Is the object moving?
+    public bool IsMoving;// { get { return isMoving; } private set { isMoving = value; } } // Is the object moving?
 
     public bool isClimbing;
 
