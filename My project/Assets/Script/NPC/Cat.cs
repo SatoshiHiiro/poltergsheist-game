@@ -32,6 +32,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
     Collider2D catCollider;
     Coroutine patrolCoroutine;
 
+    Quaternion initialFOVRotation;
+
     GameObject cage;    // Cage the cat is trapped in
 
     //public AK.Wwise.Event soundEvent;
@@ -46,6 +48,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         canMove = true;
         isPatrolling = false;
 
+        initialFOVRotation = fovLight.transform.rotation;
         audioSource = GetComponent<AudioSource>();
         catCollider = GetComponent<Collider2D>();
         catAnim = GetComponentInChildren<Animator>();
@@ -349,5 +352,6 @@ public class Cat : BasicNPCBehaviour, IPatrol
         catSlapEvent.Stop(gameObject);
         catSoundsEvent.Post(gameObject);
 
+        fovLight.transform.rotation = initialFOVRotation;
     }
 }
