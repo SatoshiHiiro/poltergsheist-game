@@ -543,6 +543,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         seePolterg = false;
         isInvestigating = false;
         investigationQueue.Clear(); // Clear all the investigations he should be doing
+        hasActiveInvestigation = false;
 
         hasSeenMovement = false;
 
