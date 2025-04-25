@@ -39,8 +39,8 @@ public class AudioManager : MonoBehaviour
         SetMusicVolume(savedMusicVolume);
         SetSFXVolume(savedSFXVolume);
 
-        print(savedMusicVolume);
-        print(savedSFXVolume);
+        //print(savedMusicVolume);
+        //print(savedSFXVolume);
     }
 
     private void OnEnable()

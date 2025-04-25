@@ -167,7 +167,7 @@ public abstract class MovementController : MonoBehaviour
                 rigid2D.linearVelocityY = _jumpSpeed;
                 if (jumpSoundEvent != null)
                 {
-                    print("IS JUMPING " + isJumping);
+                    //print("IS JUMPING " + isJumping);
                     jumpSoundEvent.Post(gameObject);
                 }
 
