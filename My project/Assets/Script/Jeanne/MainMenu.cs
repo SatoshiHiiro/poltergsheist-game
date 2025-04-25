@@ -7,6 +7,7 @@ using System.Collections;
 public class MainMenu : MonoBehaviour
 {
     int buttonNb;
+    bool isEnableFinished;
     Image[] buttons;
     TextMeshProUGUI[] texts;
     Vector4 transButtonColor;
@@ -14,7 +15,7 @@ public class MainMenu : MonoBehaviour
     Vector4 transTextColor;
     Coroutine sequence;
 
-    private void Awake()
+    private void Start()
     {
         buttons = this.GetComponentsInChildren<Image>();
         texts = this.GetComponentsInChildren<TextMeshProUGUI>();
@@ -27,13 +28,9 @@ public class MainMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        buttonNb = 0;
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i].color = transButtonColor;
-            texts[i].color = transTextColor;
-        }
-        sequence = null;
+        print("Enabled");
+        isEnableFinished = false;
+        StartCoroutine(OnEnableRelated());
     }
 
     private void OnDisable()
@@ -43,6 +40,19 @@ public class MainMenu : MonoBehaviour
         {
             texts[i].color = iniTextColor;
         }
+    }
+
+    IEnumerator OnEnableRelated()
+    {
+        sequence = null;
+        buttonNb = 0;
+        yield return new WaitForEndOfFrame();
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].color = transButtonColor;
+            texts[i].color = transTextColor;
+        }
+        isEnableFinished = true;
     }
 
     IEnumerator Sequence()
@@ -79,7 +89,7 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (sequence == null) { sequence = StartCoroutine(Sequence()); }
+        if (sequence == null && isEnableFinished) { sequence = StartCoroutine(Sequence()); }
     }
 
     public void Jouer()
