@@ -9,8 +9,12 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
 
     [SerializeField] public AK.Wwise.Event eventMusic;
+    [SerializeField] protected AK.Wwise.RTPC volume_Music;
+    [SerializeField] protected AK.Wwise.RTPC volume_SFX;
+    [HideInInspector] public float savedMusicVolume;
+    [HideInInspector] public float savedSFXVolume;
     //[SerializeField] public AK.Wwise.Event houseMusic;
-    private List<string> menuScenes = new List<string> { "UI_Accueil", "Histoire", "LevelSelect", "Controls" };
+    private List<string> menuScenes = new List<string> { "UI_Accueil", "Histoire", "LevelSelect", "Controls", "AudioSettings" };
     private List<string> houseScenes = new List<string> { "Niveau1", "Niveau2", "Niveau3" };
     private List<string> museumScenes = new List<string> { "Niveau4", "Niveau5", "Niveau6" };
     //public AK.Wwise.State state;
@@ -29,6 +33,14 @@ public class AudioManager : MonoBehaviour
         }
         //PlayerPrefs.DeleteAll();
         //state = GetComponent<AK.Wwise.State>();
+        savedMusicVolume = PlayerPrefs.HasKey("MusicVolume") ? PlayerPrefs.GetFloat("MusicVolume") : volume_Music.GetGlobalValue();
+        savedSFXVolume = PlayerPrefs.HasKey("SFXVolume") ? PlayerPrefs.GetFloat("SFXVolume") : volume_SFX.GetGlobalValue();
+
+        SetMusicVolume(savedMusicVolume);
+        SetSFXVolume(savedSFXVolume);
+
+        print(savedMusicVolume);
+        print(savedSFXVolume);
     }
 
     private void OnEnable()
@@ -116,5 +128,18 @@ public class AudioManager : MonoBehaviour
     {
         eventMusic.Stop(gameObject);
         isMusicPlaying = false;
+    }
+
+
+    public void SetMusicVolume(float volume)
+    {
+        volume_Music.SetGlobalValue(volume);
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        volume_SFX.SetGlobalValue(volume);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 }

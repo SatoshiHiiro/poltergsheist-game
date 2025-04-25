@@ -20,6 +20,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Histoire");
     }
 
+    public void AudioSettings()
+    {
+        SceneManager.LoadScene("AudioSettings");
+    }
+
     public void Quit()
     {
         Application.Quit();
