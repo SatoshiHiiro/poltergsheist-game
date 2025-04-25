@@ -20,6 +20,7 @@ public class HoverMaterialSwitcher1 : MonoBehaviour
 
     void OnMouseEnter()
     {
+        if (Time.timeScale == 0) return;
         if (CompareTag("Possess") && spriteRenderer != null)
         {
             spriteRenderer.material = hoverMaterial;
@@ -28,6 +29,7 @@ public class HoverMaterialSwitcher1 : MonoBehaviour
 
     void OnMouseExit()
     {
+        if (Time.timeScale == 0) return;
         if (CompareTag("Possess") && spriteRenderer != null)
         {
             spriteRenderer.material = defaultMaterial;

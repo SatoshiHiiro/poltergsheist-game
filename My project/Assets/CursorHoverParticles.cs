@@ -19,6 +19,7 @@ public class CursorHoverParticles : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0) return;
         // Follow mouse position
         Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0;
