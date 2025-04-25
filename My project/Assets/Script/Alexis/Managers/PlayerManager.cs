@@ -167,7 +167,7 @@ public class PlayerManager : RotationManager, IResetInitialState
         playerFace.SetParent(bodyAnim.transform.parent, true);
         playerFace.SetAsLastSibling();
         for (int i = 0; i < faceSpriteArray.Length; i++) { faceSpriteArray[i].sortingLayerName = "Player"; }
-        playerFace.position = facePosIni;
+        playerFace.localPosition = facePosIni;
         playerFace.rotation = faceRotIni;
         playerFace.localScale = faceScaleIni;
     }

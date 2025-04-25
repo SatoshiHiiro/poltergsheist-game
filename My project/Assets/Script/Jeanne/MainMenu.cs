@@ -1,9 +1,96 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
+    int buttonNb;
+    bool isEnableFinished;
+    Image[] buttons;
+    TextMeshProUGUI[] texts;
+    Vector4 transButtonColor;
+    Vector4 iniTextColor;
+    Vector4 transTextColor;
+    Coroutine sequence;
+
+    private void Start()
+    {
+        buttons = this.GetComponentsInChildren<Image>();
+        texts = this.GetComponentsInChildren<TextMeshProUGUI>();
+        transButtonColor = Vector4.one;
+        transButtonColor.w = 0;
+        iniTextColor = buttons[0].GetComponentInChildren<TextMeshProUGUI>().color;
+        transTextColor = iniTextColor;
+        transTextColor.w = 0;
+    }
+
+    private void OnEnable()
+    {
+        print("Enabled");
+        isEnableFinished = false;
+        StartCoroutine(OnEnableRelated());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            texts[i].color = iniTextColor;
+        }
+    }
+
+    IEnumerator OnEnableRelated()
+    {
+        sequence = null;
+        buttonNb = 0;
+        yield return new WaitForEndOfFrame();
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].color = transButtonColor;
+            texts[i].color = transTextColor;
+        }
+        isEnableFinished = true;
+    }
+
+    IEnumerator Sequence()
+    {
+        float iniDelay = .5f;
+        yield return new WaitForSecondsRealtime(iniDelay);
+
+        float delay = .5f;
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            yield return new WaitForSecondsRealtime(delay);
+            StartCoroutine(ButtonApparition(buttonNb));
+            buttonNb++;
+        }
+
+        yield return null;
+    }
+
+    IEnumerator ButtonApparition(int index)
+    {
+        float animTime = 1f;
+        float startTime = Time.time;
+        float endTime = startTime + animTime;
+        float step = Vector4.Distance(transButtonColor, Vector4.one) / animTime;
+
+        while (Time.time <= endTime)
+        {
+            float stepTime = step * Time.deltaTime;
+            buttons[index].color = Vector4.MoveTowards(buttons[index].color, Vector4.one, stepTime);
+            texts[index].color = Vector4.MoveTowards(texts[index].color, iniTextColor, stepTime);
+            yield return null;
+        }
+    }
+
+    private void Update()
+    {
+        if (sequence == null && isEnableFinished) { sequence = StartCoroutine(Sequence()); }
+    }
 
     public void Jouer()
     {

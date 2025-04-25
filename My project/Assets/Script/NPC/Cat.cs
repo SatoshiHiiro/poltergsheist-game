@@ -32,6 +32,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
     Collider2D catCollider;
     Coroutine patrolCoroutine;
 
+
+
     GameObject cage;    // Cage the cat is trapped in
 
     //public AK.Wwise.Event soundEvent;
@@ -46,6 +48,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         canMove = true;
         isPatrolling = false;
 
+        //initialFOVRotation = fovLight.transform.rotation;
         audioSource = GetComponent<AudioSource>();
         catCollider = GetComponent<Collider2D>();
         catAnim = GetComponentInChildren<Animator>();
@@ -125,6 +128,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                             if(alertSpriteRenderer != null)
                             {
                                 alertSpriteRenderer.enabled = true;
+                                fovLight.color = alertColorFOV;
                             }
                         }
                     }
@@ -184,6 +188,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 if(alertSpriteRenderer != null)
                 {
                     alertSpriteRenderer.enabled = false;
+                    fovLight.color = nonSuspiciousColorFOV;
                 }
 
                 //StartCoroutine(Patrol());
@@ -289,6 +294,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         if(alertSpriteRenderer != null)
         {
             alertSpriteRenderer.enabled = false;
+            fovLight.color = nonSuspiciousColorFOV;
         }
     }
 
@@ -314,6 +320,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
                 if (alertSpriteRenderer != null)
                 {
                     alertSpriteRenderer.enabled = false;
+                    fovLight.color = nonSuspiciousColorFOV;
                 }
             }            
         }
@@ -344,6 +351,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
         isNormalCat = true;
         catSlapEvent.Stop(gameObject);
         catSoundsEvent.Post(gameObject);
+
 
     }
 }
