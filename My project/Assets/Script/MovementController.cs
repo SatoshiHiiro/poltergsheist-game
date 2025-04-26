@@ -351,17 +351,14 @@ public abstract class MovementController : MonoBehaviour
             }
 
            
-
-            if(fallSoundEvent != null)
-            {
-                fallSoundEvent.Post(gameObject);
-            }
+            
         }
         
         for (int i = 0; i < curContact.Count; i++)
         {
             if (curContact[i].normal.y <= -.9f)
             {
+                
                 isInContact = true;
                 
                 if (isPreJumpBufferFinished) { isJumping = false; }
@@ -371,6 +368,12 @@ public abstract class MovementController : MonoBehaviour
                 {
                     rigid2D.linearVelocityY = -lastVelocityY * bounceForce;
                     objBounciness = bounceForce;
+                }
+
+                if (fallSoundEvent != null)
+                {
+                    fallSoundEvent.Stop(gameObject);
+                    fallSoundEvent.Post(gameObject);
                 }
 
                 break;

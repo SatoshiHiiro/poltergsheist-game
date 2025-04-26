@@ -113,25 +113,21 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
         }
         else if (rotationZ <= 181 && rotationZ >= 179)
         {
-            if (parentObject.name == "Test") { Debug.Log("Top down"); }
             pivotPos = parentObject.position - new Vector3(col2D.offset.x * parentObject.localScale.x, col2D.bounds.extents.y + (col2D.offset.y * parentObject.localScale.y), 0);
             sideDown = Side.Top;
         }
         else if (rotationZ <= 91 && rotationZ >= 89)
         {
-            if (parentObject.name == "Test") { Debug.Log("Left down"); }
             pivotPos = parentObject.position + new Vector3(-col2D.offset.y * parentObject.localScale.y, -col2D.bounds.extents.y + (col2D.offset.x * parentObject.localScale.x), 0);
             sideDown = Side.Left;
         }
         else if (rotationZ <= 271 && rotationZ >= 269)
         {
-            if (parentObject.name == "Test") { Debug.Log("Right down"); }
             pivotPos = parentObject.position - new Vector3(-col2D.offset.y * parentObject.localScale.y, col2D.bounds.extents.y + (col2D.offset.x * parentObject.localScale.x), 0);
             sideDown = Side.Right;
         }
         else
         {
-            if (parentObject.name == "Test") { Debug.Log("Whatever: " + parentObject.rotation.eulerAngles); }
             pivotPos = col2D.ClosestPoint(parentObject.position + (Vector3.down * 100));
             sideDown = Side.None;
         }
@@ -189,27 +185,30 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
 
         if (isColSmaller)
         {
-            switch (curEvent)
+            switch (side)
             {
                 case Side.Bottom:   //Works
                     spritePos.x = colCenter.x;
                     spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
+                    spritePos += positionAdjuster;
                     break;
                 case Side.Top:      //Works
                     spritePos.x = colCenter.x;
                     spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
+                    spritePos -= positionAdjuster;
                     break;
                 case Side.Left:     //Works
                     spritePos.x = colCenter.x - (spriteSize.x - spriteSize.x * heightScale.x) / 2;
                     spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
+                    spritePos.x -= positionAdjuster.y; 
                     break;
                 case Side.Right:    //Works
                     spritePos.x = colCenter.x + (spriteSize.x - spriteSize.x * heightScale.x) / 2;
                     spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
+                    spritePos.x += positionAdjuster.y;
                     break;
                 default:
-                    spritePos.x = colCenter.x;
-                    spritePos.y = colCenter.y;
+                    spritePos = parentObject.position;
                     break;
             }
         }
@@ -239,7 +238,7 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
                         break;
             }
         }
-        sprite.position = spritePos + positionAdjuster;
+        sprite.position = spritePos; //+ positionAdjuster;
     }
 
     void EventParameter(string param)
