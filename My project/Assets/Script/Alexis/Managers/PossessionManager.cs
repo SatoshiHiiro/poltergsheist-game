@@ -6,7 +6,7 @@ using System.Collections;
 /// Requiert Externe: PlayerController(1)
 /// Input: Click Gauche = possession/d�possession
 /// �tat: Ad�quat(temp)
-public class PossessionManager : InteractibleManager, IResetInitialState
+public class PossessionManager : MonoBehaviour, IResetInitialState
 {
     public delegate void Callback(string parameter);
     [HideInInspector] public string possessParam = "poss";
@@ -45,10 +45,12 @@ public class PossessionManager : InteractibleManager, IResetInitialState
 
     // Getters
     public bool IsPossessing => isPossessed;
+    public PlayerController Player => player;
+    public float PossessionDistance => possessionDistance;
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
+        //base.Start();
         player = FindFirstObjectByType<PlayerController>();
         playerBodyAnim = player.GetComponentInChildren<HeightAndSpriteResizeSystem>().transform.GetChild(0).Find("Body").GetComponent<Animator>();
         mustacheAnim = playerBodyAnim.transform.parent.Find("Face").Find("Mustache").GetComponent<Animator>();
@@ -193,6 +195,10 @@ public class PossessionManager : InteractibleManager, IResetInitialState
     public void LockPossession(bool locked)
     {
         isPossessionLocked = locked;
+        if(posControl != null)
+        {
+            posControl.IsMoving = false;
+        }
     }
 
     //Pour arr�ter la possession

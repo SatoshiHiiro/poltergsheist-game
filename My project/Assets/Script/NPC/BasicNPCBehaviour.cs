@@ -26,6 +26,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
     protected NPCMovementController npcMovementController;
     protected SpriteRenderer npcSpriteRenderer;
     protected Animator npcAnim;
+    protected Animator npcAnimMouth;
 
 
 
@@ -72,7 +73,14 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         //npcSpriteRenderer = GetComponent<SpriteRenderer>();
         npcMovementController = GetComponent<NPCMovementController>();
         if (TryGetComponent<Cat>(out Cat cat)) { npcAnim = GetComponentInChildren<Animator>(); }
-        else { npcAnim = GetComponentInChildren<Animator>().transform.GetChild(0).GetComponentInChildren<Animator>(); }
+        else 
+        {
+            npcAnim = GetComponentInChildren<Animator>();
+            npcAnimMouth = npcAnim.transform.GetChild(0).GetComponentInChildren<Animator>();
+
+        }
+        print(this.gameObject.name);
+        print("ANIM" + npcAnim.gameObject.name);
         fieldOfView = transform.GetChild(0).gameObject;
         fovLight = GetComponentInChildren<Light2D>();
 
@@ -249,7 +257,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         if (lastMovingObject != currentMovingObject)
         {
             surpriseSoundEvent.Post(gameObject);
-            npcAnim.SetTrigger("IsSurprised");
+            npcAnimMouth.SetTrigger("IsSurprised");
             lastMovingObject = currentMovingObject;
             soundHasPlayed = true;
             lastSoundTime = Time.time;
@@ -258,7 +266,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         else if(lastMovingObject == currentMovingObject && !soundHasPlayed && cooldownElapsed)
         {
             surpriseSoundEvent.Post(gameObject);
-            npcAnim.SetTrigger("IsSurprised");
+            npcAnimMouth.SetTrigger("IsSurprised");
             soundHasPlayed = true;
             lastSoundTime = Time.time;
         }

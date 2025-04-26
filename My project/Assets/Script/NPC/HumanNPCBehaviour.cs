@@ -388,7 +388,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         seePolterg = true;
         audioSource.Play();
         surpriseSoundEvent.Post(gameObject);
-        npcAnim.SetTrigger("IsSurprised");
+        npcAnimMouth.SetTrigger("IsSurprised");
 
         if(alertSpriteRenderer != null)
         {
@@ -538,11 +538,13 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     public override void ResetInitialState()
     {
         base.ResetInitialState();
+        StopAllCoroutines();
         isAtInitialPosition = true;
         canSee = true;
         seePolterg = false;
         isInvestigating = false;
         investigationQueue.Clear(); // Clear all the investigations he should be doing
+        hasActiveInvestigation = false;
 
         hasSeenMovement = false;
 
@@ -557,6 +559,8 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
             nonSuspiciousSoundEvent.Stop(gameObject);
         }
         npcAnim.SetBool("InMovement", false);
+        npcAnimMouth.SetBool("IsSurprised", false);
+        npcMovementController.Reset();
         //print("INMOVEMENTFALSE!!!");
     }
 

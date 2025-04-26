@@ -97,6 +97,7 @@ public class NPCMovementController : MonoBehaviour
         if (!isWalking)
         {
             isWalking = true;
+            //print("POSTTTTTT");
             footstepsNPCSoundEvent?.Post(gameObject);
             if (isMarble)
             {
@@ -291,6 +292,16 @@ public class NPCMovementController : MonoBehaviour
             }
         }
 
+    }
+
+    public void Reset()
+    {
+        //footstepsNPCSoundEvent.Stop(gameObject);
+        //StopAllCoroutines();
+        footstepsNPCSoundEvent.Stop(gameObject);
+        StopAllCoroutines();
+        isWalking = false;  // Reset walking state
+        npcAnim.SetBool("InMovement", false);
     }
 
     StairController blockedStair;
