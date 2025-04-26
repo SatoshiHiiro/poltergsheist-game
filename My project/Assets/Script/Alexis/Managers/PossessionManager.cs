@@ -30,7 +30,7 @@ public class PossessionManager : MonoBehaviour, IResetInitialState
     bool isAnimationFinished;                       //Pour savoir si l'animation de possession est fini
     bool hasEnoughSpace;
     bool hasPosControl;
-    bool isPossessionLocked;
+    public bool isPossessionLocked;
 
     //Shortcuts
     PlayerController player;

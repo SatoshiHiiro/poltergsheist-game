@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class BreakableObject : SoundDetection, IResetInitialState
 {
@@ -32,6 +33,12 @@ public class BreakableObject : SoundDetection, IResetInitialState
         initialSprite = spriteRenderer.sprite;
 
         hiddenGameObject = gameObject.transform.GetChild(0).gameObject;
+        StartCoroutine(StartRelated());
+    }
+
+    IEnumerator StartRelated()
+    {
+        yield return new WaitForFixedUpdate();
         hiddenGameObject.SetActive(false);
     }
 
