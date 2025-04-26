@@ -17,6 +17,7 @@ public class PlayerManager : RotationManager, IResetInitialState
 
     private Vector3 scaleIni;
 
+    private bool isFaceLerpFinished;
 
     public Vector3 FacePositionIni { get { return facePosIni; } }
     public Vector3 FaceScaleIni { get { return faceScaleIni; } }
@@ -43,6 +44,7 @@ public class PlayerManager : RotationManager, IResetInitialState
         player.onLand += EventParameter;
         player.onBonkR += EventParameter;
         player.onBonkL += EventParameter;
+        isFaceLerpFinished = false;
         StartCoroutine(OnEnableRelated());
     }
 
@@ -76,11 +78,21 @@ public class PlayerManager : RotationManager, IResetInitialState
             lastPossession.onPossess += PossessionParameter;
             lastPossession.onDepossess += PossessionParameter;
         }
+        if (isFaceLerpFinished && playerFace.parent.GetComponentInParent<SpriteRenderer>())
+        {
+            SpriteRenderer parentSprite = playerFace.parent.GetComponentInParent<SpriteRenderer>();
+
+            foreach (SpriteRenderer sprite in faceSpriteArray) 
+            { 
+                sprite.sortingLayerName = parentSprite.sortingLayerName; 
+            }
+        }
     }
 
     IEnumerator OnEnableRelated()
     {
         yield return new WaitForEndOfFrame();
+        isFaceLerpFinished = true;
         canRotate = true;
     }
 
@@ -97,7 +109,14 @@ public class PlayerManager : RotationManager, IResetInitialState
 
     IEnumerator FaceLerp(Vector3 posTarget, Vector3 scalTarget, float duration, bool isDepossession)
     {
-        for (int i = 0; i < faceSpriteArray.Length; i++) { faceSpriteArray[i].sortingLayerName = "Player"; }
+        isFaceLerpFinished = false;
+        foreach (SpriteRenderer sprite in faceSpriteArray)
+        {
+            if (sprite.transform.name == "Pupil") { sprite.sortingOrder = 12; }
+            else { sprite.sortingOrder = 11; }
+            sprite.sortingLayerName = "Player";
+        }
+        //for (int i = 0; i < faceSpriteArray.Length; i++) { faceSpriteArray[i].sortingLayerName = "Player"; }
 
         float endTime = Time.time + duration;
         float angle = Quaternion.Angle(playerFace.rotation, faceRotIni) / duration;
@@ -123,11 +142,19 @@ public class PlayerManager : RotationManager, IResetInitialState
         }
         else
         {
-            for (int i = 0; i < faceSpriteArray.Length; i++)
+            foreach (SpriteRenderer sprite in faceSpriteArray)
             {
-                faceSpriteArray[i].sortingLayerName = playerFace.parent.GetComponentInParent<SpriteRenderer>().sortingLayerName;
+                SpriteRenderer parentSprite = playerFace.parent.GetComponentInParent<SpriteRenderer>();
+                int parentOrder = parentSprite.sortingOrder;
+
+                if (sprite.transform.name == "Pupil") { sprite.sortingOrder = parentOrder + 2; }
+                else { sprite.sortingOrder = parentOrder + 1; }
+
+                sprite.sortingLayerName = parentSprite.sortingLayerName;
             }
+            //for (int i = 0; i < faceSpriteArray.Length; i++) { faceSpriteArray[i].sortingLayerName = playerFace.parent.GetComponentInParent<SpriteRenderer>().sortingLayerName; }
         }
+        isFaceLerpFinished = true;
     }
 
     public void PossessionParameter(string param)
@@ -164,6 +191,7 @@ public class PlayerManager : RotationManager, IResetInitialState
     public void ResetInitialState()
     {
         StopAllCoroutines();
+        isFaceLerpFinished = true;
         playerFace.SetParent(bodyAnim.transform.parent, true);
         playerFace.SetAsLastSibling();
         for (int i = 0; i < faceSpriteArray.Length; i++) { faceSpriteArray[i].sortingLayerName = "Player"; }
