@@ -484,8 +484,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         // Take a surprise pause before going on investigation
         audioSource.Play();
+        npcMovementController.Reset();
         yield return new WaitForSeconds(surpriseWaitTime);
 
+        //npcAnim.SetBool("InMovement", false);
         yield return (npcMovementController.ReachTarget(objectsound.transform.position, currentFloorLevel, targetFloor));
 
         // We can't find a path
