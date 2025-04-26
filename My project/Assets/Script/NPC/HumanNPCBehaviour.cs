@@ -27,7 +27,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [SerializeField] protected Sprite investigationIcon;
 
     protected bool isInvestigating = false; // Is the NPC investigating something suspectful
-    protected bool hasActiveInvestigation = false;
+    [SerializeField]protected bool hasActiveInvestigation = false;
     public AudioSource audioSource;  // Source of the surprised sound
 
 
@@ -46,7 +46,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
 
     protected bool seePolterg = false;
-    protected bool hasSeenMovement = false;
+    [SerializeField] protected bool hasSeenMovement = false;
 
     protected override void Start()
     {

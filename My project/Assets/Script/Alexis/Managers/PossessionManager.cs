@@ -244,7 +244,7 @@ public class PossessionManager : MonoBehaviour, IResetInitialState
         if (collision.CompareTag("SizeTrigger"))
         {
             hasEnoughSpace = false;
-            Debug.Log("Entered Trigger");
+            //Debug.Log("Entered Trigger");
         }
     }
 
@@ -253,7 +253,7 @@ public class PossessionManager : MonoBehaviour, IResetInitialState
         if (collision.CompareTag("SizeTrigger"))
         {
             hasEnoughSpace = true;
-            Debug.Log("Entered Trigger");
+            //Debug.Log("Entered Trigger");
 
             if (isPossessed && hasEnoughSpace)
             {
@@ -268,7 +268,7 @@ public class PossessionManager : MonoBehaviour, IResetInitialState
         if (collision.CompareTag("SizeTrigger"))
         {
             hasEnoughSpace = false;
-            Debug.Log("Entered Trigger");
+            //Debug.Log("Entered Trigger");
         }
     }
 
