@@ -330,6 +330,14 @@ public class Cat : BasicNPCBehaviour, IPatrol
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Cage"))
+        {
+            catAnim.SetBool("IsCaught", false);
+        }
+    }
+
     public override void ResetInitialState()
     {
         base.ResetInitialState();
