@@ -6,7 +6,7 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
-    int buttonNb;
+    //int buttonNb;
     bool isEnableFinished;
     Image[] buttons;
     TextMeshProUGUI[] texts;
@@ -30,23 +30,29 @@ public class MainMenu : MonoBehaviour
     {
         print("Enabled");
         isEnableFinished = false;
+        Time.timeScale = 1f;
         StartCoroutine(OnEnableRelated());
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
-        for (int i = 0; i < buttons.Length; i++)
+        foreach (TextMeshProUGUI txt in texts)
         {
-            texts[i].color = iniTextColor;
+            txt.color = transTextColor;
         }
+        foreach (Image img in buttons)
+        {
+            img.color = transButtonColor;
+            img.GetComponent<Button>().interactable = false;
+        }
+        sequence = null;
     }
 
     IEnumerator OnEnableRelated()
     {
         sequence = null;
-        buttonNb = 0;
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForFixedUpdate();
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].color = transButtonColor;
@@ -55,7 +61,7 @@ public class MainMenu : MonoBehaviour
         isEnableFinished = true;
     }
 
-    IEnumerator Sequence()
+    /*IEnumerator Sequence()
     {
         float iniDelay = .5f;
         yield return new WaitForSecondsRealtime(iniDelay);
@@ -64,15 +70,17 @@ public class MainMenu : MonoBehaviour
         for (int i = 0; i < buttons.Length; i++)
         {
             yield return new WaitForSecondsRealtime(delay);
-            StartCoroutine(ButtonApparition(buttonNb));
+            StartCoroutine(ButtonsApparition(buttonNb));
             buttonNb++;
         }
 
         yield return null;
-    }
+    }*/
 
-    IEnumerator ButtonApparition(int index)
+    IEnumerator ButtonsApparition()
     {
+        yield return new WaitForSecondsRealtime(.5f);
+
         float animTime = 1f;
         float startTime = Time.time;
         float endTime = startTime + animTime;
@@ -81,15 +89,28 @@ public class MainMenu : MonoBehaviour
         while (Time.time <= endTime)
         {
             float stepTime = step * Time.deltaTime;
-            buttons[index].color = Vector4.MoveTowards(buttons[index].color, Vector4.one, stepTime);
-            texts[index].color = Vector4.MoveTowards(texts[index].color, iniTextColor, stepTime);
+
+            foreach (Image img in buttons)
+            {
+                img.color = Vector4.MoveTowards(img.color, Vector4.one, stepTime);
+            }
+            foreach (TextMeshProUGUI txt in texts)
+            {
+                txt.color = Vector4.MoveTowards(txt.color, iniTextColor, stepTime);
+            }
+
             yield return null;
+        }
+
+        foreach (Image img in buttons)
+        {
+            img.GetComponent<Button>().interactable = true;
         }
     }
 
     private void Update()
     {
-        if (sequence == null && isEnableFinished) { sequence = StartCoroutine(Sequence()); }
+        if (sequence == null && isEnableFinished) { sequence = StartCoroutine(ButtonsApparition()); }
     }
 
     public void Jouer()
