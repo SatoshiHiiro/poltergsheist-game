@@ -40,6 +40,8 @@ public abstract class MovementController : MonoBehaviour
     public float inputBuffer;
     protected Vector2 moveInput;
     Vector2 lastInput;
+    float velocityJumpCap;
+    public float jumpBufferTest = 0.5f;
 
     //Contacts
     [Header("GameObjets in contact")]
@@ -132,6 +134,7 @@ public abstract class MovementController : MonoBehaviour
         {
             objBounciness = bounceForce;
         }
+        velocityJumpCap = 8.5f;
     }
 
     //Physics
@@ -164,9 +167,11 @@ public abstract class MovementController : MonoBehaviour
 
             if (isJumping && isInContact && !isPerformingJump)
             {
+                StartCoroutine(PostJumpBuffer());
                 isPerformingJump = true;
                 if (onJump != null) { onJump(jumpParam); };
-                float _jumpSpeed = jumpSpeed + Mathf.Abs(lastVelocityY * objBounciness);
+                float _jumpSpeed = jumpSpeed + Mathf.Abs(lastVelocityY * objBounciness * 1.5f);
+                //print("SPEED" + _jumpSpeed);
                 rigid2D.linearVelocityY = _jumpSpeed;
                 if (jumpSoundEvent != null)
                 {
@@ -177,7 +182,7 @@ public abstract class MovementController : MonoBehaviour
                 StartCoroutine(InputReset());
             }
 
-            rigid2D.linearVelocityY = Mathf.Clamp(rigid2D.linearVelocityY, -8.5f, 8.5f);
+            rigid2D.linearVelocityY = Mathf.Clamp(rigid2D.linearVelocityY, -velocityJumpCap, velocityJumpCap);
 
             lastInput = moveInput;
 
@@ -239,7 +244,7 @@ public abstract class MovementController : MonoBehaviour
                 {
                     if (canJump && isJumpCdFinished)
                     {
-                        StartCoroutine(PostJumpBuffer());
+                        
                         if (jumpReset != null) { StopCoroutine(jumpReset); }
                         jumpReset = StartCoroutine(PreJumpBuffer());
                     }
@@ -286,8 +291,9 @@ public abstract class MovementController : MonoBehaviour
     //To permit frame contact jumps for bouncy objects
     IEnumerator PostJumpBuffer()
     {
+        //print("TEST");
         isJumpCdFinished = false;
-        yield return new WaitForSecondsRealtime(.15f);
+        yield return new WaitForSecondsRealtime(jumpBufferTest);
         isJumpCdFinished = true;
     }
 
@@ -319,11 +325,22 @@ public abstract class MovementController : MonoBehaviour
                 if (objMat != null) 
                 { 
                     bounce = objMat.bounciness;
-                    if (collision.collider.sharedMaterial.name == "Bounce" && jumpBounceSoundEvent != null)
+                    if (collision.collider.sharedMaterial.name == "Bounce")
                     {
-                        jumpBounceSoundEvent.Post(gameObject);
+                        velocityJumpCap = 9f;
+                        //print("JUMPBOUNCE");
+                        
+                        if (jumpBounceSoundEvent != null)
+                        {
+                            jumpBounceSoundEvent.Post(gameObject);
+                        }
                     }
-                    
+                    else
+                    {
+                        velocityJumpCap = 8.5f;
+                    }
+
+
                 }
                 else { bounce = 0; }
                 objBounciness = Mathf.Max(collision.collider.sharedMaterial.bounciness, bounce);
@@ -335,10 +352,20 @@ public abstract class MovementController : MonoBehaviour
                     if (objMat != null)
                     {
                         bounce = objMat.bounciness;
-                        if (rb2d.sharedMaterial.name == "Bounce" && jumpBounceSoundEvent != null)
+                        if (rb2d.sharedMaterial.name == "Bounce")
                         {
-                            jumpBounceSoundEvent.Post(gameObject);
+                            velocityJumpCap = 9f;
+                            //print("JUMPBOUNCE");
+                            if (jumpBounceSoundEvent != null)
+                            {
+                                jumpBounceSoundEvent.Post(gameObject);
+                            }
                         }
+                        else
+                        {
+                            velocityJumpCap = 8.5f;
+                        }
+
                     }
                     else { bounce = 0; }
                     objBounciness = Mathf.Max(rb2d.sharedMaterial.bounciness, bounce);
@@ -360,7 +387,7 @@ public abstract class MovementController : MonoBehaviour
             {
                 
                 isInContact = true;
-                
+
                 if (isPreJumpBufferFinished) { isJumping = false; }
                 if (lastPosY - this.transform.position.y > .2f && onLand != null) { onLand(landParam); }
 

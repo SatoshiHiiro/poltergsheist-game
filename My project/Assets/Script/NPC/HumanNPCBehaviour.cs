@@ -27,7 +27,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     [SerializeField] protected Sprite investigationIcon;
 
     protected bool isInvestigating = false; // Is the NPC investigating something suspectful
-    protected bool hasActiveInvestigation = false;
+    [SerializeField]protected bool hasActiveInvestigation = false;
     public AudioSource audioSource;  // Source of the surprised sound
 
 
@@ -46,7 +46,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
 
 
     protected bool seePolterg = false;
-    protected bool hasSeenMovement = false;
+    [SerializeField] protected bool hasSeenMovement = false;
 
     protected override void Start()
     {
@@ -484,8 +484,10 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
     {
         // Take a surprise pause before going on investigation
         audioSource.Play();
+        npcMovementController.Reset();
         yield return new WaitForSeconds(surpriseWaitTime);
 
+        //npcAnim.SetBool("InMovement", false);
         yield return (npcMovementController.ReachTarget(objectsound.transform.position, currentFloorLevel, targetFloor));
 
         // We can't find a path
@@ -561,6 +563,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         npcAnim.SetBool("InMovement", false);
         npcAnimMouth.SetBool("IsSurprised", false);
         npcMovementController.Reset();
+        fovLight.color = nonSuspiciousColorFOV;
         //print("INMOVEMENTFALSE!!!");
     }
 

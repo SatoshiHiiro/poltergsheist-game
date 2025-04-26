@@ -3,6 +3,7 @@ using UnityEngine;
 public class BreakableObject : SoundDetection, IResetInitialState
 {
     [SerializeField] private GameObject prefabBrokenObject;
+    [SerializeField] Material greyMaterial;
     private GameObject brokenObject;
     private GameObject hiddenGameObject;
     private SpriteRenderer spriteRenderer;
@@ -55,7 +56,12 @@ public class BreakableObject : SoundDetection, IResetInitialState
         // Instantiate the broken object
         if (prefabBrokenObject != null)
         {
-            brokenObject = Instantiate(prefabBrokenObject, transform.position, Quaternion.identity);            
+            brokenObject = Instantiate(prefabBrokenObject, transform.position, Quaternion.identity);   
+            if(greyMaterial != null)
+            {
+                SpriteRenderer spriteBrokenObject = brokenObject.GetComponent<SpriteRenderer>();
+                spriteBrokenObject.material = greyMaterial;
+            }
         }
         spriteRenderer.sprite = null;
         objCollider.isTrigger = true;

@@ -298,6 +298,7 @@ public class NPCMovementController : MonoBehaviour
     {
         //footstepsNPCSoundEvent.Stop(gameObject);
         //StopAllCoroutines();
+        //print("RESET");
         footstepsNPCSoundEvent.Stop(gameObject);
         StopAllCoroutines();
         isWalking = false;  // Reset walking state

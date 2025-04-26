@@ -367,7 +367,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
         StopNonSuspiciousSound();
         lastSuspiciousTime = -nonSuspiciousSoundCooldown;
         isNonSuspiciousSoundPlaying = false;
-
+        fovLight.color = nonSuspiciousColorFOV;
         StopAllCoroutines();
         //StartNonSuspiciousSound();
     }
