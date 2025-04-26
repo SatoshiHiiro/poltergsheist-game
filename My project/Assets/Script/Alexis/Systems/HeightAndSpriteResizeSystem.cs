@@ -185,30 +185,27 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
 
         if (isColSmaller)
         {
-            switch (side)
+            switch (curEvent)
             {
                 case Side.Bottom:   //Works
                     spritePos.x = colCenter.x;
                     spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
-                    spritePos += positionAdjuster;
                     break;
                 case Side.Top:      //Works
                     spritePos.x = colCenter.x;
                     spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
-                    spritePos -= positionAdjuster;
                     break;
                 case Side.Left:     //Works
                     spritePos.x = colCenter.x - (spriteSize.x - spriteSize.x * heightScale.x) / 2;
                     spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
-                    spritePos.x -= positionAdjuster.y; 
                     break;
                 case Side.Right:    //Works
                     spritePos.x = colCenter.x + (spriteSize.x - spriteSize.x * heightScale.x) / 2;
                     spritePos.y = colCenter.y - (spriteSize.y - spriteSize.y * heightScale.y) / 2;
-                    spritePos.x += positionAdjuster.y;
                     break;
                 default:
-                    spritePos = parentObject.position;
+                    spritePos.x = colCenter.x;
+                    spritePos.y = colCenter.y;
                     break;
             }
         }
@@ -238,7 +235,7 @@ public class HeightAndSpriteResizeSystem : MonoBehaviour
                         break;
             }
         }
-        sprite.position = spritePos; //+ positionAdjuster;
+        sprite.position = spritePos + positionAdjuster;
     }
 
     void EventParameter(string param)
