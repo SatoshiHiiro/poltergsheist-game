@@ -563,6 +563,7 @@ public class HumanNPCBehaviour : BasicNPCBehaviour
         npcAnim.SetBool("InMovement", false);
         npcAnimMouth.SetBool("IsSurprised", false);
         npcMovementController.Reset();
+        fovLight.color = nonSuspiciousColorFOV;
         //print("INMOVEMENTFALSE!!!");
     }
 

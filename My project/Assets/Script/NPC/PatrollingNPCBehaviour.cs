@@ -458,6 +458,7 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         }
         npcLockedSoundEvent.Stop(gameObject);
 
+        fovLight.color = nonSuspiciousColorFOV;
         // Stop room animation
         //foreach(PatrolPointData patrolPoint in patrolPoints)
         //{

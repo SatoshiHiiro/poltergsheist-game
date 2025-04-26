@@ -356,6 +356,8 @@ public class Cat : BasicNPCBehaviour, IPatrol
         catSlapEvent.Stop(gameObject);
         catSoundsEvent.Post(gameObject);
 
+        fovLight.color = nonSuspiciousColorFOV;
+
 
     }
 }
