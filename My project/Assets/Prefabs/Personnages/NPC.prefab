@@ -437,7 +437,7 @@ MonoBehaviour:
     m_Bits: 128
   ignoreLayerSightBlocked:
     serializedVersion: 2
-    m_Bits: 1211720
+    m_Bits: 3308872
   nonSuspiciousColorFOV: {r: 0, g: 1, b: 0.101960786, a: 1}
   alertColorFOV: {r: 1, g: 0.015686275, b: 0, a: 1}
   currentFloorLevel: 0
@@ -464,6 +464,7 @@ MonoBehaviour:
   surpriseWaitTime: 2
   investigationWaitTime: 3
   investigationIcon: {fileID: 21300000, guid: 65770edc1ca5be2499feb7db7c35ce62, type: 3}
+  hasActiveInvestigation: 0
   audioSource: {fileID: 0}
   detectionRadiusLight: 20
   lightLayer:
@@ -472,6 +473,7 @@ MonoBehaviour:
   wallFloorLayer:
     serializedVersion: 2
     m_Bits: 33280
+  hasSeenMovement: 0
 --- !u!114 &5139380479391363131
 MonoBehaviour:
   m_ObjectHideFlags: 0
