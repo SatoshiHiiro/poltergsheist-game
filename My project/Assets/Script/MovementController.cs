@@ -64,6 +64,7 @@ public abstract class MovementController : MonoBehaviour
     public bool canJump;                                                //Can stop the physics using the y axis
     public bool isInContact;                                            //To know if the object is in contact with another at the bottom
     public bool isJumping;                                              //To stop multijump.
+    private bool isJumpCdFinished;
     private bool isPreJumpBufferFinished = true;
     private bool isPerformingJump = false;
     private bool canClimbAgain;
@@ -74,7 +75,7 @@ public abstract class MovementController : MonoBehaviour
     [SerializeField] public AK.Wwise.Event fallSoundEvent;
     [SerializeField] public AK.Wwise.Event jumpBounceSoundEvent;
     protected bool isMovementXAxisSoundOn = false;
-    private float stopThresholdSound = 0.05f;
+    //private float stopThresholdSound = 0.05f;
 
     // Ball
     private float bounceForce = 0.6f;
@@ -97,6 +98,7 @@ public abstract class MovementController : MonoBehaviour
         moveInput = Vector2.zero;
         lastInput = Vector2.zero;
         canClimbAgain = true;
+        isJumpCdFinished = true;
         inputBuffer = .3f;
         halfSizeOfObject = (transform.lossyScale.y * gameObject.GetComponent<Collider2D>().bounds.size.y) / 2;
 
@@ -235,9 +237,9 @@ public abstract class MovementController : MonoBehaviour
             {
                 if (canMove)
                 {
-                    if (canJump)
+                    if (canJump && isJumpCdFinished)
                     {
-                        //isJumping = true;
+                        StartCoroutine(PostJumpBuffer());
                         if (jumpReset != null) { StopCoroutine(jumpReset); }
                         jumpReset = StartCoroutine(PreJumpBuffer());
                     }
@@ -284,8 +286,9 @@ public abstract class MovementController : MonoBehaviour
     //To permit frame contact jumps for bouncy objects
     IEnumerator PostJumpBuffer()
     {
-        yield return new WaitForSecondsRealtime(.1f);
-        isInContact = false;
+        isJumpCdFinished = false;
+        yield return new WaitForSecondsRealtime(.15f);
+        isJumpCdFinished = true;
     }
 
     //To permit frame contact jumps
