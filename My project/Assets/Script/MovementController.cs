@@ -52,6 +52,7 @@ public abstract class MovementController : MonoBehaviour
     float lastVelocityY { get { return lastVelocity.y; } }
     PhysicsMaterial2D objMat;
     //[HideInInspector] public float lastVelocityX;
+    float lastPosX;
     [HideInInspector] public float lastPosY;
     ContactFilter2D filter = new ContactFilter2D();
     float objBounciness;
@@ -170,7 +171,6 @@ public abstract class MovementController : MonoBehaviour
                     //print("IS JUMPING " + isJumping);
                     jumpSoundEvent.Post(gameObject);
                 }
-
                 //rigid2D.AddForceY(jumpSpeed, ForceMode2D.Impulse);
                 StartCoroutine(InputReset());
             }
@@ -187,7 +187,7 @@ public abstract class MovementController : MonoBehaviour
             rigid2D.linearVelocityX = 0;
         }
 
-        if (Mathf.Abs(rigid2D.linearVelocityX) <= stopThresholdSound && isInContact)
+        if (((lastPosX == rigid2D.position.x) && isInContact) || !isInContact) /*(Mathf.Abs(rigid2D.linearVelocityX) <= stopThresholdSound &&*/
         {
             if (movementXAxisSoundEvent != null)
             {
@@ -196,6 +196,8 @@ public abstract class MovementController : MonoBehaviour
             }
 
         }
+
+        lastPosX = rigid2D.position.x;
     }
 
     //To get the inputs
