@@ -350,7 +350,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
 
         catAnim.SetBool("IsAttacking", false);
         catAnim.SetBool("IsCaught", false);
-
+        npcMovementController.Reset();
         // Reset Sound variables
         isNormalCat = true;
         catSlapEvent.Stop(gameObject);
