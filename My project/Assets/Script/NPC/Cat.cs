@@ -283,7 +283,11 @@ public class Cat : BasicNPCBehaviour, IPatrol
         targetObjectManager.LockPossession(true);   // The player can't possessed this object as long as the cat attack it
         // After the attack the object is no longer a target
         targetPossessedObject = null;
-        targetObjectManager.StopPossession();
+        if (targetObjectManager.IsPossessing)
+        {
+            targetObjectManager.StopPossession();
+        }
+
 
         yield return new WaitForSeconds(attackTime);      
         
