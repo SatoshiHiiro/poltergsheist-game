@@ -252,12 +252,27 @@ public class Cat : BasicNPCBehaviour, IPatrol
             Vector3 moveDestination = new Vector3(objectPosition.x, transform.position.y, objectPosition.z);
             transform.position = Vector3.MoveTowards(transform.position, moveDestination, huntingSpeed * Time.deltaTime);
             // Verify if the Cat toutched the object
-            if (catCollider.bounds.Intersects(targetPossessedObject.GetComponent<Collider2D>().bounds))
+
+            Bounds catBounds = catCollider.bounds;
+            Bounds targetBounds = targetPossessedObject.GetComponent<Collider2D>().bounds;
+
+            // Check if bounds overlap in X and Y axes only
+            bool xOverlap = Mathf.Max(catBounds.min.x, targetBounds.min.x) <= Mathf.Min(catBounds.max.x, targetBounds.max.x);
+            bool yOverlap = Mathf.Max(catBounds.min.y, targetBounds.min.y) <= Mathf.Min(catBounds.max.y, targetBounds.max.y);
+
+            if (xOverlap && yOverlap)
             {
                 isHunting = false;
                 yield return AttackObject();
                 break;
             }
+
+            //if (catCollider.bounds.Intersects(targetPossessedObject.GetComponent<Collider2D>().bounds))
+            //{
+            //    isHunting = false;
+            //    yield return AttackObject();
+            //    break;
+            //}
             yield return null;
         }
         
