@@ -36,7 +36,7 @@ public abstract class MovementController : MonoBehaviour
     [SerializeField][HideInInspector] public int horizontalDirection;
     private bool playerInputEnable;
     Coroutine jumpReset;
-    Coroutine jumpBuff;
+    Coroutine stairDelay;
     public float inputBuffer;
     protected Vector2 moveInput;
     Vector2 lastInput;
@@ -106,6 +106,11 @@ public abstract class MovementController : MonoBehaviour
 
         move.Enable();
         jump.Enable();
+    }
+
+    private void OnEnable()
+    {
+        stairDelay = null;
     }
 
     private void OnDisable()
@@ -311,6 +316,12 @@ public abstract class MovementController : MonoBehaviour
         isPreJumpBufferFinished = true;
     }
 
+    IEnumerator StairClimbDelay()
+    {
+        yield return new WaitForSecondsRealtime(.5f);
+        stairDelay = null;
+    }
+
     //Stock les GameObjets en contact avec l'objet
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
@@ -483,11 +494,12 @@ public abstract class MovementController : MonoBehaviour
     private void HandleStairClimbing(Collider2D collider)
     {
         StairController stair = collider.gameObject.GetComponent<StairController>();
-        if (moveInput.y != 0 && canClimbAgain)
+        if (moveInput.y != 0 && canClimbAgain && stairDelay == null)
         {
             moveInput.x = 0f;
             rigid2D.linearVelocityX = 0f;
             canClimbAgain = false;
+            stairDelay = StartCoroutine(StairClimbDelay());
             //StairDirection direction = moveInput.y > 0 ? StairDirection.Upward : StairDirection.Downward;
             StairDirection direction;
             if (stair.UpperFloor != null)
