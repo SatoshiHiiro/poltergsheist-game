@@ -22,7 +22,7 @@ public class Cat : BasicNPCBehaviour, IPatrol
     [SerializeField] float maxHeightObject = 0.6f;  // Maximum height of an object that the cat can chase
     [SerializeField] float maxWidthObject = 0.6f;   //Maximum width of an object thtat the cat can chase
     //[SerializeField] float distanceWithTarget;  // Object targeted by the cat
-    protected bool isHunting;   // Is the cat chasing an objet
+    public bool isHunting;   // Is the cat chasing an objet
     private bool isAttacking;   // Is the cat attacking the object
     private bool isPatrolling;
     GameObject targetPossessedObject; // Cat hunting target
@@ -202,48 +202,48 @@ public class Cat : BasicNPCBehaviour, IPatrol
             // Check if cat is directly beneath the object
             bool isCatUnderObject = Mathf.Abs(transform.position.x - objectPosition.x) < 0.5f;
 
-            if (isCatUnderObject && objectPosition.y > transform.position.y)
-            {
-                // If directly under and object is higher, use object's movement direction
-                if (possessionController != null)
-                {
-                    // Get movement direction from the possessed object
-                    Vector2 objectDirection = possessionController.GetMovementDirection();
-                    bool faceRight = objectDirection.x >= 0;
+            //if (isCatUnderObject && objectPosition.y > transform.position.y)
+            //{
+            //    // If directly under and object is higher, use object's movement direction
+            //    if (possessionController != null)
+            //    {
+            //        // Get movement direction from the possessed object
+            //        Vector2 objectDirection = possessionController.GetMovementDirection();
+            //        bool faceRight = objectDirection.x >= 0;
 
-                    // Only update facing if the object is actually moving horizontally
-                    if (possessionController.IsMoving)
-                    {
-                        if(faceRight != FacingRight)
-                        {
-                            //npcSpriteRenderer.flipX = !faceRight;
-                            FacingRight = faceRight;
-                            FlipFieldOfView();
-                        }
-                        //npcSpriteRenderer.flipX = objectDirection.x < 0;
-                        //facingRight = !npcSpriteRenderer.flipX;
-                    }
-                }
-            }
-            else
-            {
-                // Regular behavior - move toward object
-                Vector3 destination = new Vector3(objectPosition.x, transform.position.y, objectPosition.z);
-                Vector2 direction = (new Vector2(destination.x, destination.y) - (Vector2)transform.position).normalized;
-                bool faceRight = direction.x >= 0;
+            //        // Only update facing if the object is actually moving horizontally
+            //        if (possessionController.IsMoving)
+            //        {
+            //            if(faceRight != FacingRight)
+            //            {
+            //                //npcSpriteRenderer.flipX = !faceRight;
+            //                FacingRight = faceRight;
+            //                FlipFieldOfView();
+            //            }
+            //            //npcSpriteRenderer.flipX = objectDirection.x < 0;
+            //            //facingRight = !npcSpriteRenderer.flipX;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    // Regular behavior - move toward object
+            //    Vector3 destination = new Vector3(objectPosition.x, transform.position.y, objectPosition.z);
+            //    Vector2 direction = (new Vector2(destination.x, destination.y) - (Vector2)transform.position).normalized;
+            //    bool faceRight = direction.x >= 0;
 
-                // Flip sprite based on direction
-                if (faceRight != FacingRight)
-                {
-                    //npcSpriteRenderer.flipX = !faceRight;
-                    FacingRight = faceRight;
-                    FlipFieldOfView();
-                }
+            //    // Flip sprite based on direction
+            //    if (faceRight != FacingRight)
+            //    {
+            //        //npcSpriteRenderer.flipX = !faceRight;
+            //        FacingRight = faceRight;
+            //        FlipFieldOfView();
+            //    }
 
-                // Flip sprite based on direction
-                //npcSpriteRenderer.flipX = direction.x < 0;
-                //facingRight = !npcSpriteRenderer.flipX;
-            }
+            //    // Flip sprite based on direction
+            //    //npcSpriteRenderer.flipX = direction.x < 0;
+            //    //facingRight = !npcSpriteRenderer.flipX;
+            //}
 
             // Cat is running towards the object target
             //transform.position = Vector2.MoveTowards(transform.position, destination, huntingSpeed * Time.deltaTime);
@@ -252,12 +252,27 @@ public class Cat : BasicNPCBehaviour, IPatrol
             Vector3 moveDestination = new Vector3(objectPosition.x, transform.position.y, objectPosition.z);
             transform.position = Vector3.MoveTowards(transform.position, moveDestination, huntingSpeed * Time.deltaTime);
             // Verify if the Cat toutched the object
-            if (catCollider.bounds.Intersects(targetPossessedObject.GetComponent<Collider2D>().bounds))
+
+            Bounds catBounds = catCollider.bounds;
+            Bounds targetBounds = targetPossessedObject.GetComponent<Collider2D>().bounds;
+
+            // Check if bounds overlap in X and Y axes only
+            bool xOverlap = Mathf.Max(catBounds.min.x, targetBounds.min.x) <= Mathf.Min(catBounds.max.x, targetBounds.max.x);
+            bool yOverlap = Mathf.Max(catBounds.min.y, targetBounds.min.y) <= Mathf.Min(catBounds.max.y, targetBounds.max.y);
+
+            if (xOverlap && yOverlap)
             {
                 isHunting = false;
                 yield return AttackObject();
                 break;
             }
+
+            //if (catCollider.bounds.Intersects(targetPossessedObject.GetComponent<Collider2D>().bounds))
+            //{
+            //    isHunting = false;
+            //    yield return AttackObject();
+            //    break;
+            //}
             yield return null;
         }
         
