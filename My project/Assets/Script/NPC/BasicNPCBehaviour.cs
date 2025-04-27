@@ -152,6 +152,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                             {
                                 StopNonSuspiciousSound();
                             }
+                            print(possessedObject.gameObject.name);
                             isObjectMoving = true;
                             foundMovingObject = true;
                             currentMovingObject = possessedObject.gameObject;
@@ -165,7 +166,7 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
                             //soundEvent.Post(gameObject);
                         }
 
-                        HandleChangedPositionSuspicion(possessedObject, objectSize);
+                        //HandleChangedPositionSuspicion(possessedObject, objectSize);
                     }
 
 
