@@ -57,7 +57,8 @@ public class FloorNavigation : MonoBehaviour
     {
         float currentFloor = floorRequest.CurrentFloorLevel;
         float targetFloor = floorRequest.TargetFloorLevel;
-
+        print("CURRENT FLOOR " + currentFloor);
+        print("TARGET FLOOR " + targetFloor);
         // If we're already on the right floor, no stairs needed
         if (currentFloor == targetFloor)
         {
@@ -77,6 +78,10 @@ public class FloorNavigation : MonoBehaviour
         // Find an available stair that leads to the targeted floor level
         foreach (StairController stair in stairsByFloorLevel[currentFloor])
         {
+            if(currentFloor == 5)
+            {
+                print("TEST STAIR");
+            }
             // Skip this stair if it's in the exclude list
             if (excludeStairs != null && excludeStairs.Contains(stair))
             {
@@ -108,7 +113,7 @@ public class FloorNavigation : MonoBehaviour
         }
         if(closestStair != null)
         {
-            print(closestStair.gameObject.name);
+            //print(closestStair.gameObject.name);
         }
         return closestStair;
     }
@@ -140,7 +145,10 @@ public class FloorNavigation : MonoBehaviour
             }
             // Determine if we need to go up or down
             StairDirection direction = (targetFloor > currentFloor) ? StairDirection.Upward : StairDirection.Downward;
-
+            //print("CHECKING");
+            //print(direction);
+            //print(targetFloor);
+            //print(currentFloor);
             // Find the nearest stair to used to go to the targeted floor
             StairController nextStair = FindNearestStairToFloor(floorRequest, direction, null);
 
@@ -155,15 +163,18 @@ public class FloorNavigation : MonoBehaviour
             // Add the found staircase to the list the NPC must used
             path.Add(nextStair);
 
-            
+            print(nextStair.gameObject.name);
             // Update floor level of the NPC
             if(direction == StairDirection.Upward && nextStair.UpperFloor != null)
             {
-                currentFloor = nextStair.UpperFloor.FloorLevel;                
+                currentFloor = nextStair.UpperFloor.FloorLevel;   
+                floorRequest.CurrentFloorLevel = currentFloor;
+                
             }
             else if(direction == StairDirection.Downward && nextStair.BottomFloor != null)
             {
-                currentFloor = nextStair.BottomFloor.FloorLevel;                
+                currentFloor = nextStair.BottomFloor.FloorLevel;
+                floorRequest.CurrentFloorLevel = currentFloor;
             }
         }
         return path;

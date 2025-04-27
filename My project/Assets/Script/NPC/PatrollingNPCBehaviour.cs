@@ -242,8 +242,8 @@ public class PatrollingNPCBehaviour : HumanNPCBehaviour, IPatrol, IResetInitialS
         Vector2 destination = new Vector2(nextPatrolPoint.Point.position.x, transform.position.y);
 
         currentPoint = null;
-        print("CURRENTFLOOR" + currentFloorLevel);
-        print("NEXTPOINT " + nextPatrolPoint.FloorLevel);
+        //print("CURRENTFLOOR" + currentFloorLevel);
+        //print("NEXTPOINT " + nextPatrolPoint.FloorLevel);
         yield return npcMovementController.ReachTarget(destination, currentFloorLevel, nextPatrolPoint.FloorLevel);
 
         // NPC has arrived to the patrol point

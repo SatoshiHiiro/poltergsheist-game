@@ -62,8 +62,10 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
 
         foreach (HumanNPCBehaviour npc in allNPCs)
         {
+            //print("NPC");
             if (IsNPCAffected(npc, lightsClosed))
             {
+                //print("YES HERE");
                 PatrollingNPCBehaviour npcPatrol = npc.GetComponent<PatrollingNPCBehaviour>();
                 // Check if the NPC is blocked
                 if (npcPatrol != null && (npcPatrol.IsBlocked || npcPatrol.IsInRoom))
@@ -75,6 +77,10 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
                     // The NPC is availabe to go an investigate
                     availableNPCs.Add(npc);
                 }
+            }
+            else
+            {
+                //print("NOT AFFECYED");
             }
         }
         if(availableNPCs.Count > 0)
@@ -97,6 +103,7 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
             {
                 isRepairing = true;
                 npc.EnqueueInvestigation(RepairLights(npc, lightsClosed));
+                print("Électricien : " + npc.gameObject.transform.parent.gameObject.name);
             }
             npc.NpcMovementController.ChangeSpeed();
             affectedNPCs.Add(npc);
@@ -114,6 +121,7 @@ public class PowerOutage : MonoBehaviour, IPossessable, IResetInitialState
             Collider2D lightCollider = gameObjectLight.GetComponent<Collider2D>();
             if (LightUtility.IsPointHitByLight(lightCollider, npcCollider, wallFloorLayer))
             {
+                print("SHOULD BE TRUE");
                 return true;
             }
         }
