@@ -79,8 +79,8 @@ public abstract class BasicNPCBehaviour : MonoBehaviour, IResetInitialState
             npcAnimMouth = npcAnim.transform.GetChild(0).GetComponentInChildren<Animator>();
 
         }
-        print(this.gameObject.name);
-        print("ANIM" + npcAnim.gameObject.name);
+        //print(this.gameObject.name);
+        //print("ANIM" + npcAnim.gameObject.name);
         fieldOfView = transform.GetChild(0).gameObject;
         fovLight = GetComponentInChildren<Light2D>();
 
