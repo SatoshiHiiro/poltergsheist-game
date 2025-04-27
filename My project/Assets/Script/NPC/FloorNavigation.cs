@@ -86,12 +86,12 @@ public class FloorNavigation : MonoBehaviour
             bool canUseStair = false;
 
             // If the NPC needs to go up and the stair leads upward
-            if(neededDirection == StairDirection.Upward && stair.UpperFloor != null)
+            if(neededDirection == StairDirection.Upward && stair.UpperFloor != null && stair.UpperFloor.FloorLevel <= targetFloor)
             {
                 canUseStair = true;
             }
             // If the NPC nees to go down and the stair leads downstair
-            else if (neededDirection == StairDirection.Downward && stair.BottomFloor != null)
+            else if (neededDirection == StairDirection.Downward && stair.BottomFloor != null && stair.BottomFloor.FloorLevel >= targetFloor)
             {
                 canUseStair = true;
             }
@@ -105,6 +105,10 @@ public class FloorNavigation : MonoBehaviour
                     closestStair = stair;
                 }
             }
+        }
+        if(closestStair != null)
+        {
+            print(closestStair.gameObject.name);
         }
         return closestStair;
     }

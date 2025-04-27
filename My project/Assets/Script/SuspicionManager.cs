@@ -108,6 +108,11 @@ public class SuspicionManager : MonoBehaviour
         }
     }
 
+    public bool IsPlayerDead()
+    {
+        return currentSuspicion >= maxSuspicion;
+    }
+
     public void ResetSuspicion()
     {
         print("RESET SUSPICION");

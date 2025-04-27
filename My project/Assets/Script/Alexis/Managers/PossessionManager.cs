@@ -147,7 +147,7 @@ public class PossessionManager : MonoBehaviour, IResetInitialState
     {
         if (Time.timeScale == 0) return;
 
-        if (isPossessionLocked || player.isPossessionInProgress || (posControl != null && posControl.isClimbing))
+        if (isPossessionLocked || player.isPossessionInProgress || (posControl != null && posControl.isClimbing) || SuspicionManager.Instance.IsPlayerDead())
         {
             return; // Can't possessed an object if the possession on this object is locked
         }
