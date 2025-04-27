@@ -57,8 +57,8 @@ public class FloorNavigation : MonoBehaviour
     {
         float currentFloor = floorRequest.CurrentFloorLevel;
         float targetFloor = floorRequest.TargetFloorLevel;
-        print("CURRENT FLOOR " + currentFloor);
-        print("TARGET FLOOR " + targetFloor);
+        //print("CURRENT FLOOR " + currentFloor);
+        //print("TARGET FLOOR " + targetFloor);
         // If we're already on the right floor, no stairs needed
         if (currentFloor == targetFloor)
         {
@@ -163,7 +163,7 @@ public class FloorNavigation : MonoBehaviour
             // Add the found staircase to the list the NPC must used
             path.Add(nextStair);
 
-            print(nextStair.gameObject.name);
+            //print(nextStair.gameObject.name);
             // Update floor level of the NPC
             if(direction == StairDirection.Upward && nextStair.UpperFloor != null)
             {
