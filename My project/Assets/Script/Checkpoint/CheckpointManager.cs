@@ -10,7 +10,7 @@ public class CheckpointManager : MonoBehaviour
     private Checkpoint currentCheckpoint;    // Current checkpoint when player dies
     private GameObject player;
     [SerializeField] private bool resetAll = false;
-    [SerializeField] private GameObject resetGameObject;
+    [SerializeField] private GameObject[] resetGameObject;
     BasicNPCBehaviour[] allNPCs;
     JukeBox[] allJukeBox;
     
@@ -68,7 +68,23 @@ public class CheckpointManager : MonoBehaviour
                 box.ResetInitialState();
             }
         }
+    }
 
+    private void ResetObjects()
+    {
+        print("RESETOBJECTS");
+        if (resetGameObject != null)
+        {
+            foreach (GameObject go in resetGameObject)
+            {
+                PossessionManager posssessManager = go.GetComponentInChildren<PossessionManager>();
+                if (posssessManager != null)
+                {
+                    print("TESTING RESET" +  go.name);
+                    posssessManager.StopPossession();
+                }
+            }
+        }
     }
 
     public void SetCheckPoint(Checkpoint newCheckpoint)
@@ -118,6 +134,7 @@ public class CheckpointManager : MonoBehaviour
             //}
 
         }
+        ResetObjects();
         //yield return null;
         if (player != null)
         {
