@@ -7585,6 +7585,103 @@
 								</Sound>
 							</ChildrenList>
 						</BlendContainer>
+						<BlendContainer Name="CantMove" ID="{5C62CFDD-025E-4311-B7D3-860775B2D2D4}" ShortID="757297921">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-5</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<RandomSequenceContainer Name="SFX_CantMove" ID="{5B5ACA82-2206-4FD4-983F-B56C717D9703}" ShortID="321303091">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="CantMove1" ID="{0EEBE3C0-5A5D-4BDD-B1A9-320950068AA2}" ShortID="693302003">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CantMove1" ID="{2AEDE652-080F-4AB0-BBE0-A6C783497986}">
+													<Language>SFX</Language>
+													<AudioFile>CantMove1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="165282309"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CantMove1" ID="{2AEDE652-080F-4AB0-BBE0-A6C783497986}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="CantMove2" ID="{77ECD22A-CB69-4AEA-A8E5-ECA818CC2708}" ShortID="270875952">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CantMove2" ID="{0B579EB7-A473-4576-B833-09F7EB09C7D9}">
+													<Language>SFX</Language>
+													<AudioFile>CantMove2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1065804614"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CantMove2" ID="{0B579EB7-A473-4576-B833-09F7EB09C7D9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="CantMove3" ID="{63CE5DE8-24CA-4497-8CFF-2CBCCDB176C8}" ShortID="826359140">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CantMove3" ID="{D0AD41F1-C859-41D8-A160-A6AA476D5BD0}">
+													<Language>SFX</Language>
+													<AudioFile>CantMove3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="249089653"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CantMove3" ID="{D0AD41F1-C859-41D8-A160-A6AA476D5BD0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+							</ChildrenList>
+						</BlendContainer>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="NPC" ID="{11BBCD1F-B6C3-4F76-8980-DAB0474E87FE}" ShortID="37025077">

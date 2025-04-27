@@ -515,6 +515,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="SFX_CantMove" ID="{A55C2123-BAF4-49FF-B932-427A066D53FC}">
+							<ChildrenList>
+								<Action Name="" ID="{C2B4F151-2A1A-4F58-B3C2-23D81A2C21AF}" ShortID="346057471">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="CantMove" ID="{5C62CFDD-025E-4311-B7D3-860775B2D2D4}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="UI" ID="{63038ABB-513D-43FC-A32A-AB33D68D7EB9}" ShortID="109762461">
