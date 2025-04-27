@@ -22,6 +22,12 @@ public class LightFlickering : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        StopAllCoroutines();
+        StartCoroutine(WaitingStart());
+    }
+
     private IEnumerator WaitingStart()
     {
         yield return new WaitForSeconds(delayBeforeLightOn);
