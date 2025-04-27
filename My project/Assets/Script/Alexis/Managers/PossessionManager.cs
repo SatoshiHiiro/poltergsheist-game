@@ -31,6 +31,7 @@ public class PossessionManager : MonoBehaviour, IResetInitialState
     bool hasEnoughSpace;
     bool hasPosControl;
     public bool isPossessionLocked;
+    public bool isAttacked = false;
 
     //Shortcuts
     PlayerController player;
@@ -204,9 +205,11 @@ public class PossessionManager : MonoBehaviour, IResetInitialState
     //Pour arr�ter la possession
     public void StopPossession()
     {
-        if (posControl != null && posControl.isClimbing)
+        if (posControl != null && posControl.isClimbing && !isAttacked)
         {
+
             print("NOT DEPOSSESSING CAUSE CLIMBING");
+            return;
         }
         print("STOP POSSESSION!");
         if (onDepossess != null) { onDepossess(depossessParam); }
@@ -286,5 +289,6 @@ public class PossessionManager : MonoBehaviour, IResetInitialState
         isAnimationFinished = true;
         hasEnoughSpace = true;
         isPossessionLocked = false;
+        isAttacked = false;
     }
 }
