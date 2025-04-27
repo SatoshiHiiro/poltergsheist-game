@@ -125,9 +125,10 @@ GameObject:
   - component: {fileID: 6515431873818118548}
   - component: {fileID: 5015702848702394750}
   - component: {fileID: 2454090806262149162}
+  - component: {fileID: 340694066106455347}
   m_Layer: 8
   m_Name: JukeBox
-  m_TagString: Untagged
+  m_TagString: Possess
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,6 +266,8 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: af963a8c3e7c1db47a885b102a84acb5, type: 2}
   possessionDistance: 3
+  isPossessionLocked: 0
+  isAttacked: 0
 --- !u!82 &2454090806262149162
 AudioSource:
   m_ObjectHideFlags: 0
@@ -362,6 +365,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &340694066106455347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5222468327137196824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5615745db618a6047a44921b29ee7bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: c4129cd86799ef046892f241316dd588, type: 2}
+  hoverMaterial: {fileID: 2100000, guid: 3fe82e8d59c86a54cb5d45ee3529e5f4, type: 2}
 --- !u!1 &7823736026268752583
 GameObject:
   m_ObjectHideFlags: 0
