@@ -227,7 +227,11 @@ public class NPCMovementController : MonoBehaviour
 
                                     blockedStair = null;
                                     secundBlockedStair = null;
-                                    blockedSoundEvent.Stop(gameObject);
+                                    if(blockedSoundEvent != null)
+                                    {
+                                        blockedSoundEvent.Stop(gameObject);
+                                    }
+                                    print("alternative stair");
 
 
                                     break;
@@ -241,11 +245,8 @@ public class NPCMovementController : MonoBehaviour
                             }
                             //print("TEST2: " + blockedStairs.Count);
                         }
-                        if(blockedStairs.Count == 1)
+                        if(blockedStairs.Count == 1 && !findAlternative)
                         {
-                            //print("IM IN!");
-                            //FloorNavigationRequest alternativeFloorRequest = new FloorNavigationRequest(transform.position, currentFloor, targetFloor, npcSpriteRenderer);
-                            //StairController alternativeStair = FloorNavigation.Instance.FindNearestStairToFloor(alternativeFloorRequest, stairDirection, blockedStairs);
                             blockedStair = blockedStairs[0];
                             if(blockedStair.UpperFloor != null)
                             {
