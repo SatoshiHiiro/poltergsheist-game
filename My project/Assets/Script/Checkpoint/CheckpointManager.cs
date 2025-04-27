@@ -9,6 +9,11 @@ public class CheckpointManager : MonoBehaviour
     public static CheckpointManager Instance { get; private set; }  // Singleton
     private Checkpoint currentCheckpoint;    // Current checkpoint when player dies
     private GameObject player;
+    [SerializeField] private bool resetAll = false;
+    [SerializeField] private GameObject[] resetGameObject;
+    BasicNPCBehaviour[] allNPCs;
+    JukeBox[] allJukeBox;
+    
 
     // Tempory getters
     public Checkpoint CurrentCheckpoint { get { return currentCheckpoint; } }
@@ -27,6 +32,59 @@ public class CheckpointManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        if (resetAll)
+        {
+            StartCoroutine(FindAllNPCs());
+            StartCoroutine(FindAllJukeBox());
+        }
+
+    }
+
+    private IEnumerator FindAllNPCs()
+    {
+        yield return new WaitForSeconds(0.2f);
+        allNPCs = GameObject.FindObjectsByType<BasicNPCBehaviour>(FindObjectsSortMode.None);
+        print(allNPCs.Length);
+    }
+
+    private IEnumerator FindAllJukeBox()
+    {
+        yield return new WaitForSeconds(0.2f);
+        allJukeBox = GameObject.FindObjectsByType<JukeBox>(FindObjectsSortMode.None);
+        print(allJukeBox.Length);
+    }
+
+    private void ResetAll()
+    {
+        if (resetAll)
+        {
+            foreach (BasicNPCBehaviour npc in allNPCs)
+            {
+                npc.ResetInitialState();
+            }
+
+            foreach (JukeBox box in allJukeBox)
+            {
+                box.ResetInitialState();
+            }
+        }
+    }
+
+    private void ResetObjects()
+    {
+        print("RESETOBJECTS");
+        if (resetGameObject != null)
+        {
+            foreach (GameObject go in resetGameObject)
+            {
+                PossessionManager posssessManager = go.GetComponentInChildren<PossessionManager>();
+                if (posssessManager != null)
+                {
+                    print("TESTING RESET" +  go.name);
+                    posssessManager.StopPossession();
+                }
+            }
+        }
     }
 
     public void SetCheckPoint(Checkpoint newCheckpoint)
@@ -76,6 +134,7 @@ public class CheckpointManager : MonoBehaviour
             //}
 
         }
+        ResetObjects();
         //yield return null;
         if (player != null)
         {
@@ -85,6 +144,7 @@ public class CheckpointManager : MonoBehaviour
 
 
         ResetEnemies();
+        ResetAll();
         SuspicionManager.Instance.ResetSuspicion();
     }
 
