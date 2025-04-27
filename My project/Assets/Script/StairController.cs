@@ -90,7 +90,7 @@ public class StairController : MonoBehaviour
                         return;
                     }
                     possessionController.isClimbing = true;
-                    print("IS CLIMBING!!");
+                    //print("IS CLIMBING!!");
                 }
                 
             }
@@ -133,6 +133,21 @@ public class StairController : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(0.1f);
+
+        //If it's an object
+        PossessionManager possessManage = character.GetComponent<PossessionManager>();
+        if(possessManage != null)
+        {
+            if (possessManage.isAttacked)
+            {
+                if (possessionController != null)
+                {
+                    possessionController.isClimbing = false;
+                    print("Climbing false");
+                }
+                yield break;
+            }
+        }
 
         if(doorOpenSoundEvent != null)
         {
