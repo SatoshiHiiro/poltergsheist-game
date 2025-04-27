@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 //using UnityEngine.UIElements;
 
 public class UIPupilFollowBehavior : MonoBehaviour
@@ -7,6 +8,7 @@ public class UIPupilFollowBehavior : MonoBehaviour
     RectTransform pupilTrans;
     RectTransform eyeTrans;
     Camera cam;
+    Scene curScene;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,13 +16,17 @@ public class UIPupilFollowBehavior : MonoBehaviour
         pupilTrans = this.GetComponent<RectTransform>();
         eyeTrans = this.transform.parent.GetComponent<RectTransform>();
         cam = Camera.main;
+        curScene = SceneManager.GetActiveScene();
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 eyePos = eyeTrans.position;
-        Vector3 pupilPos = Input.mousePosition;
+        Vector3 pupilPos;
+        if (curScene.name.Contains("Niveau")) { pupilPos = cam.ScreenToWorldPoint(Input.mousePosition); }
+        else { pupilPos = Input.mousePosition; }
+
         pupilPos.z = 0;
         Vector3 closestPt = ClosestPoint(pupilPos, eyePos);
         float distanceXFromCenter = eyePos.x - pupilPos.x;
