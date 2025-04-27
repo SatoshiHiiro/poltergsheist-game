@@ -30,7 +30,8 @@ public class PossessionController : MovementController, IPossessable, IResetInit
 
     private Vector3 initialPosition;
     private Quaternion initialRotation;
-    
+
+    float movementThreshold = 0.01f;    
     public enum objectType
     {
         Lightest = 6,
@@ -65,7 +66,7 @@ public class PossessionController : MovementController, IPossessable, IResetInit
     protected override void Update()
     {
         base.Update();
-        if ((canMove && canWalk && moveInput.x != 0) || (canMove && isJumping))
+        if ((canMove && canWalk && moveInput.x != 0 && (Mathf.Abs(transform.position.x - lastPosition.x) > movementThreshold)) || (canMove && isJumping))
         {
             IsMoving = true;
             //IsMoving = (moveInput.x != 0 || isJumping) ? true : false;
