@@ -81,7 +81,8 @@ public class CheckpointManager : MonoBehaviour
                 if (posssessManager != null)
                 {
                     print("TESTING RESET" +  go.name);
-                    posssessManager.StopPossession();
+                    //posssessManager.StopPossession();
+                    posssessManager.ResetInitialState();
                 }
             }
         }
