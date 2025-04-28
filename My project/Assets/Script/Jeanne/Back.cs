@@ -8,4 +8,9 @@ public class Back : MonoBehaviour
     {
         SceneManager.LoadScene("UI_Accueil");
     }
+
+    public void ClearPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
