@@ -23,9 +23,9 @@ public class UIPupilFollowBehavior : MonoBehaviour
     void Update()
     {
         Vector3 eyePos = eyeTrans.position;
-        Vector3 pupilPos = Input.mousePosition;
-        //if (curScene.name.Contains("Niveau")) { pupilPos = cam.ScreenToWorldPoint(Input.mousePosition); }
-        //else { pupilPos = Input.mousePosition; }
+        Vector3 pupilPos; //= Input.mousePosition;
+        if (curScene.name.Contains("Niveau")) { pupilPos = cam.ScreenToWorldPoint(Input.mousePosition); }
+        else { pupilPos = Input.mousePosition; }
 
         pupilPos.z = 0;
         Vector3 closestPt = ClosestPoint(pupilPos, eyePos);

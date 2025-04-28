@@ -63,6 +63,7 @@ public class ScoreManager : MonoBehaviour
     public void CalculateScore()
     {
         scoreUI.ShowScorePanel();
+        this.GetComponentInChildren<UIFaceAnimationBehavior>().transform.parent.parent.GetComponent<Animator>().SetTrigger("IsLevelDone");
         if (!levelCriteria.ContainsKey(currentLevel))
         {
             Debug.LogError("No criteria for this level");
@@ -122,7 +123,12 @@ public class ScoreManager : MonoBehaviour
         SceneManager.LoadScene("LevelSelect");
     }
 
-
+    public void GoNextLevel()
+    {
+        Scene curScene = SceneManager.GetActiveScene();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(curScene.buildIndex + 1);
+    }
 
     private class DataLevel
     {
