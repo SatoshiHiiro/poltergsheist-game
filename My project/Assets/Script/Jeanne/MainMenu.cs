@@ -7,6 +7,13 @@ using System.Collections;
 public class MainMenu : MonoBehaviour
 {
     //int buttonNb;
+    Animator animLogo;
+    Animator animButton;
+    Animator animPolterg;
+    public float logoDelay;
+    public float buttonDelay;
+    public float poltergDelay;
+
     bool isEnableFinished;
     Image[] buttons;
     TextMeshProUGUI[] texts;
@@ -24,6 +31,19 @@ public class MainMenu : MonoBehaviour
         iniTextColor = buttons[0].GetComponentInChildren<TextMeshProUGUI>().color;
         transTextColor = iniTextColor;
         transTextColor.w = 0;
+
+        animButton = this.GetComponent<Animator>();
+        animPolterg = this.transform.parent.Find("Polterg").GetComponent<Animator>();
+        animLogo = this.transform.parent.Find("Logo").GetComponent<Animator>();
+        if (PlayerPrefs.GetInt("FirstTime", 0) == 0)
+        {
+            PlayerPrefs.SetInt("FirstTime", 1);
+            StartCoroutine(FirstStart(true));
+        }
+        else
+        {
+            StartCoroutine(FirstStart(false));
+        }
     }
 
     private void OnEnable()
@@ -61,21 +81,24 @@ public class MainMenu : MonoBehaviour
         isEnableFinished = true;
     }
 
-    /*IEnumerator Sequence()
+    IEnumerator FirstStart(bool first)
     {
-        float iniDelay = .5f;
-        yield return new WaitForSecondsRealtime(iniDelay);
-
-        float delay = .5f;
-        for (int i = 0; i < buttons.Length; i++)
+        if (first)
         {
-            yield return new WaitForSecondsRealtime(delay);
-            StartCoroutine(ButtonsApparition(buttonNb));
-            buttonNb++;
+            yield return new WaitForSecondsRealtime(logoDelay);
+            animLogo.SetBool("IsStartDone", true);
+            yield return new WaitForSecondsRealtime(buttonDelay);
+            animButton.SetBool("IsStartDone", true);
+            yield return new WaitForSecondsRealtime(poltergDelay);
+            animPolterg.SetBool("IsStartDone", true);
         }
-
-        yield return null;
-    }*/
+        else
+        {
+            animLogo.SetBool("IsStartDone", true);
+            animButton.SetBool("IsStartDone", true);
+            animPolterg.SetBool("IsStartDone", true);
+        }
+    }
 
     IEnumerator ButtonsApparition()
     {
@@ -135,6 +158,7 @@ public class MainMenu : MonoBehaviour
 
     public void Quit()
     {
+        PlayerPrefs.SetInt("FirstTime", 0);
         Application.Quit();
     }
 
