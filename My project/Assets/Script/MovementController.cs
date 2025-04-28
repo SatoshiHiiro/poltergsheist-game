@@ -77,6 +77,7 @@ public abstract class MovementController : MonoBehaviour
     [SerializeField] public AK.Wwise.Event jumpSoundEvent;
     [SerializeField] public AK.Wwise.Event fallSoundEvent;
     [SerializeField] public AK.Wwise.Event jumpBounceSoundEvent;
+    [SerializeField] public AK.Wwise.Event moveFailSoundEvent;
     protected bool isMovementXAxisSoundOn = false;
     //private float stopThresholdSound = 0.05f;
 
@@ -267,7 +268,12 @@ public abstract class MovementController : MonoBehaviour
                         if (jumpReset != null) { StopCoroutine(jumpReset); }
                         jumpReset = StartCoroutine(PreJumpBuffer());
                     }
-                    else if (!isJumping && onJump != null && jump.WasPressedThisFrame()) { onJump(jumpParam); };
+                    else if (!isJumping && onJump != null && jump.WasPressedThisFrame())
+                    { 
+                        onJump(jumpParam);
+                        moveFailSoundEvent.Post(gameObject);
+                    
+                    };
                 }
 
                 /*if (!isJumping)
