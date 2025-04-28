@@ -10,9 +10,9 @@ public class MainMenu : MonoBehaviour
     Animator animLogo;
     Animator animButton;
     Animator animPolterg;
-    public float logoDelay;
-    public float buttonDelay;
-    public float poltergDelay;
+    //public float logoDelay;
+    //public float buttonDelay;
+    //public float poltergDelay;
 
     bool isEnableFinished;
     Image[] buttons;
@@ -86,11 +86,11 @@ public class MainMenu : MonoBehaviour
     {
         if (first)
         {
-            yield return new WaitForSecondsRealtime(logoDelay);
+            yield return new WaitForSecondsRealtime(.5f);//logoDelay);
             animLogo.SetBool("IsStartDone", true);
-            yield return new WaitForSecondsRealtime(buttonDelay);
+            yield return new WaitForSecondsRealtime(2.5f);//buttonDelay);
             animButton.SetBool("IsStartDone", true);
-            yield return new WaitForSecondsRealtime(poltergDelay);
+            yield return new WaitForSecondsRealtime(.5f);//poltergDelay);
             animPolterg.SetBool("IsStartDone", true);
         }
         else
