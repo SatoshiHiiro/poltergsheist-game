@@ -38,6 +38,7 @@ public class MainMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("FirstTime", 0) == 0)
         {
             PlayerPrefs.SetInt("FirstTime", 1);
+            animLogo.SetTrigger("IsFirstStart");
             StartCoroutine(FirstStart(true));
         }
         else
