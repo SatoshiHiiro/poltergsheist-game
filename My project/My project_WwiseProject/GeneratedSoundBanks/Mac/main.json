@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{65E86D28-8BA1-49D3-8B67-98495A6B0D5F}",
     "Language": "SFX",
-    "Hash": "{8E52F787-B3F8-79B8-AEDF-14E8E6827FE3}",
+    "Hash": "{FA617CA2-2161-3748-6A66-A1AB20AC602B}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\main",
     "ShortName": "main",
     "Path": "main.bnk",
@@ -1008,6 +1008,14 @@
       "CachePath": "7B/{7BB740BF-6B4C-4053-4C4D-6058604E970D}.wem"
      },
      {
+      "Id": "867578094",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Checkpoint.wav",
+      "CachePath": "8C/{8CD50DE1-AF4B-0C96-DF8A-CD6E49841DFE}.wem"
+     },
+     {
       "Id": "882795064",
       "Language": "SFX",
       "Streaming": "false",
@@ -1860,6 +1868,21 @@
        },
        {
         "Id": "980785033"
+       }
+      ]
+     },
+     {
+      "Id": "24284063",
+      "Name": "SFX_Checkpoint",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\SFX_Checkpoint",
+      "GUID": "{7DD6790B-AD3E-4969-9999-A32C5C0AADB9}",
+      "Color": "24",
+      "DurationType": "OneShot",
+      "DurationMin": "1.0118958",
+      "DurationMax": "1.0118958",
+      "MediaRefs": [
+       {
+        "Id": "867578094"
        }
       ]
      },
@@ -3042,6 +3065,6 @@
     ]
    }
   ],
-  "FileHash": "{6C8E6492-3EA0-76E9-EDC7-8C4FC5AD6CCD}"
+  "FileHash": "{A0CC17F1-E5FC-5547-6AD7-60214EB8B3E1}"
  }
 }

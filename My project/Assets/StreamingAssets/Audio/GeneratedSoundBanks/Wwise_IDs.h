@@ -35,6 +35,7 @@ namespace AK
         static const AkUniqueID SFX_CAGECLOSED = 420178041U;
         static const AkUniqueID SFX_CANTMOVE = 3980636124U;
         static const AkUniqueID SFX_CATSLAP = 801776781U;
+        static const AkUniqueID SFX_CHECKPOINT = 24284063U;
         static const AkUniqueID SFX_COOKIEJAR = 3916115538U;
         static const AkUniqueID SFX_COOKIEJARFALL = 627751985U;
         static const AkUniqueID SFX_COUCH = 3154666949U;
