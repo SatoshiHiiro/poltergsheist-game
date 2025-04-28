@@ -305,6 +305,7 @@ MonoBehaviour:
   huntingSpeed: 5
   maxHeightObject: 1
   maxWidthObject: 1
+  isHunting: 0
 --- !u!61 &4700009154862043946
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -736,7 +737,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0
   m_Color: {r: 1, g: 0, b: 0.8324599, a: 1}
-  m_Intensity: 4
+  m_Intensity: 8
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000454a968e
