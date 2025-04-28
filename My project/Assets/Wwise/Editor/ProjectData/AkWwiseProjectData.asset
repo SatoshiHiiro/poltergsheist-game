@@ -148,7 +148,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: eaf8ae6ee9c7f44b9005b089581ca3bb
     GuidInternal: 
-    m_lastTime: -8584560855359886519
+    m_lastTime: -8584558073880138071
     List:
     - name: Doors
       guid: efcee1e45e52cd4da44768755966ea9f
@@ -441,6 +441,29 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: SFX_Airplane
+      guid: 6a345e11626b454ab886bb4c9a158a69
+      id: 2433176043
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: eaf8ae6ee9c7f44b9005b089581ca3bb
+      - ElementName: SFX
+        ObjectType: 4
+        guid: db137fb99900914cbbe003c24a05fc00
+      - ElementName: Museum
+        ObjectType: 4
+        guid: b5d85200d09065479372803669e9596b
+      - ElementName: SFX_Airplane
+        ObjectType: 3
+        guid: 6a345e11626b454ab886bb4c9a158a69
+      Path: Events\Default Work Unit\SFX\Museum\SFX_Airplane
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: SFX_ArcheologyRack
       guid: dc3052182e9e0a448f73340b2061966e
       id: 2341548939
@@ -691,6 +714,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.4031875
       minDuration: 1.0416666
+    - name: SFX_CantMove
+      guid: 23215ca5f4baff49b932427a066d53fc
+      id: 3980636124
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: eaf8ae6ee9c7f44b9005b089581ca3bb
+      - ElementName: SFX
+        ObjectType: 4
+        guid: db137fb99900914cbbe003c24a05fc00
+      - ElementName: SFX_CantMove
+        ObjectType: 3
+        guid: 23215ca5f4baff49b932427a066d53fc
+      Path: Events\Default Work Unit\SFX\SFX_CantMove
+      maxAttenuation: 0
+      maxDuration: 0.9375
+      minDuration: 0.6914167
     - name: SFX_CatSlap
       guid: c57885b84d0e4540a9ffdd6661b28b1c
       id: 801776781
@@ -2133,7 +2176,7 @@ MonoBehaviour:
     m_lastTime: -8584578913928872863
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 05000000060000000700000008000000090000000a0000000b0000000e0000000f000000120000001400000015000000180000001a0000001b0000001c0000002400000026000000280000002a0000002c0000002e00000032000000340000003f0000004a0000004b000000
+  ExpandedWaapiItemIds: 05000000060000000700000008000000090000000a0000000b0000000e0000000f000000120000001400000015000000180000001a0000001b0000001c0000002400000026000000280000002c0000002e00000032000000340000003f000000450000004a0000004b000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

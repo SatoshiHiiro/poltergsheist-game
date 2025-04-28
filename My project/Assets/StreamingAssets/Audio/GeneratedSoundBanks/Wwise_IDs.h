@@ -21,6 +21,7 @@ namespace AK
         static const AkUniqueID PLY_HOVERING = 1595454055U;
         static const AkUniqueID PLY_JUMP = 4285040421U;
         static const AkUniqueID PLY_JUMPBOUNCE = 638840749U;
+        static const AkUniqueID SFX_AIRPLANE = 2433176043U;
         static const AkUniqueID SFX_ARCHEOLOGYRACK = 2341548939U;
         static const AkUniqueID SFX_ARMORDISPLAY = 2979590924U;
         static const AkUniqueID SFX_BALL = 1639431926U;
@@ -32,6 +33,7 @@ namespace AK
         static const AkUniqueID SFX_BOOKSHELFFALL = 79086085U;
         static const AkUniqueID SFX_BOX = 45699584U;
         static const AkUniqueID SFX_CAGECLOSED = 420178041U;
+        static const AkUniqueID SFX_CANTMOVE = 3980636124U;
         static const AkUniqueID SFX_CATSLAP = 801776781U;
         static const AkUniqueID SFX_COOKIEJAR = 3916115538U;
         static const AkUniqueID SFX_COOKIEJARFALL = 627751985U;
