@@ -537,6 +537,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="SFX_Checkpoint" ID="{7DD6790B-AD3E-4969-9999-A32C5C0AADB9}">
+							<ChildrenList>
+								<Action Name="" ID="{571C4975-2287-40B7-86E4-132A7CB5E739}" ShortID="460066527">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Checkpoint" ID="{60346D8C-9571-4BFA-8447-0B28A719D52E}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="UI" ID="{63038ABB-513D-43FC-A32A-AB33D68D7EB9}" ShortID="109762461">

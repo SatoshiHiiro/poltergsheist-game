@@ -7697,7 +7697,7 @@
 										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-8</Value>
+												<Value>-24</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -7720,6 +7720,47 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="AirplaneMoving" ID="{A1B9637B-576D-4FCB-BAD5-CFF969F43BDB}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</BlendContainer>
+						<BlendContainer Name="Checkpoint" ID="{60346D8C-9571-4BFA-8447-0B28A719D52E}" ShortID="446526032">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Checkpoint" ID="{73F68AF8-A597-4837-BDE9-AB0CD22372D0}" ShortID="198942824">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-14</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C151C197-5C21-4297-8BA3-7554B79DCE1E}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{711D3EC2-5182-470C-AC9C-86C3EC1DD706}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Checkpoint" ID="{57AFFBE6-84A4-40D6-86B3-EA66FD2A1A95}">
+											<Language>SFX</Language>
+											<AudioFile>Checkpoint.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="867578094"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Checkpoint" ID="{57AFFBE6-84A4-40D6-86B3-EA66FD2A1A95}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
