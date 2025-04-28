@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4776273120045682672}
   - component: {fileID: 8136874992096003072}
   - component: {fileID: 7512768408028675749}
+  - component: {fileID: 3715296385082684827}
   m_Layer: 13
   m_Name: ElectricityPanel
   m_TagString: Untagged
@@ -183,6 +184,8 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 0}
   possessionDistance: 3
+  isPossessionLocked: 0
+  isAttacked: 0
 --- !u!50 &8136874992096003072
 Rigidbody2D:
   serializedVersion: 5
@@ -232,6 +235,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3715296385082684827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616390318111413801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5615745db618a6047a44921b29ee7bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hoverMaterial: {fileID: 2100000, guid: 3fe82e8d59c86a54cb5d45ee3529e5f4, type: 2}
 --- !u!1 &4456955340129928246
 GameObject:
   m_ObjectHideFlags: 0
