@@ -181,6 +181,7 @@ MonoBehaviour:
     WwiseObjectReference: {fileID: 11400000, guid: af963a8c3e7c1db47a885b102a84acb5, type: 2}
   possessionDistance: 3
   isPossessionLocked: 0
+  isAttacked: 0
 --- !u!114 &1009231874053363211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +207,7 @@ MonoBehaviour:
   horizontalDirection: 0
   inputBuffer: 0
   jumpBufferTest: 0.5
+  isAPlane: 0
   curObject: []
   halfSizeOfObject: 0
   lastPosY: 0
@@ -501,3 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c02cb4f39c5215a46b504131f5107e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveFailSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: cd392c69aacb2dc4da31975754e422c3, type: 2}

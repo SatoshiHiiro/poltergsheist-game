@@ -156,19 +156,15 @@ public abstract class MovementController : MonoBehaviour
                 rigid2D.linearVelocityX = rigid2D.linearVelocityX + moveInput.x * speed;
                 if(movementXAxisSoundEvent != null && isInContact && !isMovementXAxisSoundOn)
                 {
-                    print("MAYBE");
+                    //print("MAYBE");
                     isMovementXAxisSoundOn = true;
                     movementXAxisSoundEvent.Post(gameObject);
                 }
                 else if(isAPlane && movementXAxisSoundEvent != null && !isMovementXAxisSoundOn)
                 {
-                    print("HELLO");
+                    //print("HELLO");
                     isMovementXAxisSoundOn = true;
                     movementXAxisSoundEvent.Post(gameObject);
-                }
-                else
-                {
-                    print("ERROR souns");
                 }
                 
             }
