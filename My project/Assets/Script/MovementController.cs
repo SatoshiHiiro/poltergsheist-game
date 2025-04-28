@@ -428,7 +428,7 @@ public abstract class MovementController : MonoBehaviour
                     objBounciness = bounceForce;
                 }
 
-                if (fallSoundEvent != null)
+                if (fallSoundEvent != null && lastPosY - transform.position.y > 0.2f)
                 {
                     fallSoundEvent.Stop(gameObject);
                     fallSoundEvent.Post(gameObject);
