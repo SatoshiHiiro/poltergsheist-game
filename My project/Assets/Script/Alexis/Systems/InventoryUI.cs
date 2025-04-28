@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour
                 objectImage.sprite = stealableItem.ItemSpriteRenderer.sprite;
                 objectImage.color = Color.black;
                 objectImage.preserveAspect = true;
-                obj.transform.SetParent(stealableBar.transform);
+                obj.transform.SetParent(stealableBar.transform, false);
 
                 stealableUI[sprite] = obj;
             }
