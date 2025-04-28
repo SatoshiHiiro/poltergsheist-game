@@ -443,6 +443,17 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="SFX_Airplane" ID="{115E346A-6B62-4A45-B886-BB4C9A158A69}">
+									<ChildrenList>
+										<Action Name="" ID="{F9C4631B-47B9-4C16-980C-518732A05B25}" ShortID="682636457">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Airplane" ID="{4976A6F2-25B5-4FCD-A16E-296D532DA8C3}" WorkUnitID="{CAFBD9AD-E440-4B03-BCC4-50C4FD979515}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Event Name="SFX_CageClosed" ID="{4BC24575-910A-4439-9CF7-F247CBE22506}">
