@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{65E86D28-8BA1-49D3-8B67-98495A6B0D5F}",
     "Language": "SFX",
-    "Hash": "{E3B8C939-263C-D88E-1308-5268CFFCD359}",
+    "Hash": "{8E52F787-B3F8-79B8-AEDF-14E8E6827FE3}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\main",
     "ShortName": "main",
     "Path": "main.bnk",
@@ -208,6 +208,14 @@
       "CachePath": "8F/{8F5909B8-654E-78E4-25C0-29EC8B36C90D}.wem"
      },
      {
+      "Id": "165282309",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CantMove1.wav",
+      "CachePath": "15/{1516ACD4-A700-FADA-7FD3-8F8959E65FBC}.wem"
+     },
+     {
       "Id": "169925908",
       "Language": "SFX",
       "Streaming": "false",
@@ -278,6 +286,14 @@
       "Location": "Memory",
       "ShortName": "SFX_DoorEnd_4.wav",
       "CachePath": "EC/{EC5CAA28-286A-8DCF-1E6D-FB87774F9417}.wem"
+     },
+     {
+      "Id": "249089653",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CantMove3.wav",
+      "CachePath": "89/{899EE0A4-EB2F-134C-70A0-8C3789FE39C9}.wem"
      },
      {
       "Id": "254238891",
@@ -1280,6 +1296,22 @@
       "CachePath": "5C/{5C1450F3-055D-BD18-34BF-6192D4C27367}.wem"
      },
      {
+      "Id": "1061133350",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AirplaneMoving.wav",
+      "CachePath": "7F/{7F754CD2-06EC-5DCA-621D-186C2EA34504}.wem"
+     },
+     {
+      "Id": "1065804614",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CantMove2.wav",
+      "CachePath": "8D/{8D4F86E9-2C75-0478-AEBD-0814496552B5}.wem"
+     },
+     {
       "Id": "1069086032",
       "Language": "SFX",
       "Streaming": "false",
@@ -1539,6 +1571,19 @@
       ]
      },
      {
+      "Id": "2433176043",
+      "Name": "SFX_Airplane",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Museum\\SFX_Airplane",
+      "GUID": "{115E346A-6B62-4A45-B886-BB4C9A158A69}",
+      "Color": "24",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "1061133350"
+       }
+      ]
+     },
+     {
       "Id": "2341548939",
       "Name": "SFX_ArcheologyRack",
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Museum\\SFX_ArcheologyRack",
@@ -1773,6 +1818,27 @@
        },
        {
         "Id": "574288060"
+       }
+      ]
+     },
+     {
+      "Id": "3980636124",
+      "Name": "SFX_CantMove",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\SFX_CantMove",
+      "GUID": "{A55C2123-BAF4-49FF-B932-427A066D53FC}",
+      "Color": "24",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6914167",
+      "DurationMax": "0.9375",
+      "MediaRefs": [
+       {
+        "Id": "165282309"
+       },
+       {
+        "Id": "249089653"
+       },
+       {
+        "Id": "1065804614"
        }
       ]
      },
@@ -2976,6 +3042,6 @@
     ]
    }
   ],
-  "FileHash": "{40452BAC-09EB-F3B5-65E4-3AD8E9E2BF95}"
+  "FileHash": "{95519B25-5334-A15F-CF64-7C80DDEF19AE}"
  }
 }
