@@ -9,6 +9,7 @@ public class CanvasCameraSetter : MonoBehaviour
         Canvas canvas = this.GetComponent<Canvas>();
         canvas.worldCamera = Camera.main;
         canvas.sortingLayerName = "UI";
+        canvas.planeDistance = 10;
         //Canvas score = this.transform.Find("ScoreCanvas").GetComponent<Canvas>();
         //score.sortingLayerName = "UI";
     }
