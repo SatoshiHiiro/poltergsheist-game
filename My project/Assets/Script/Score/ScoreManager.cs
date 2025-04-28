@@ -21,11 +21,11 @@ public class ScoreManager : MonoBehaviour
     {
         //                                     1S                       2S                       3S  1S 2S 3S
         {1, new DataLevel(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3), TimeSpan.FromMinutes(2), 3, 2, 1)},  // Level 1 Data
-        {2, new DataLevel(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3), TimeSpan.FromMinutes(2), 3, 2, 1)},  // Level 2 Data
-        {3, new DataLevel(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3), TimeSpan.FromMinutes(2), 3, 2, 1)},  // Level 3 Data
-        {4, new DataLevel(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3), TimeSpan.FromMinutes(2), 3, 2, 1)},  // Level 4 Data
-        {5, new DataLevel(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3), TimeSpan.FromMinutes(2), 3, 2, 1)},  // Level 5 Data
-        {6, new DataLevel(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3), TimeSpan.FromMinutes(2), 3, 2, 1)}   // Level 6 Data
+        {2, new DataLevel(TimeSpan.FromMinutes(7), TimeSpan.FromMinutes(6), TimeSpan.FromMinutes(4), 3, 2, 1)},  // Level 2 Data
+        {3, new DataLevel(TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(7), TimeSpan.FromMinutes(4), 3, 2, 1)},  // Level 3 Data
+        {4, new DataLevel(TimeSpan.FromMinutes(7), TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3), 3, 2, 1)},  // Level 4 Data
+        {5, new DataLevel(TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(7), TimeSpan.FromMinutes(5), 3, 2, 1)},  // Level 5 Data
+        {6, new DataLevel(TimeSpan.FromMinutes(9), TimeSpan.FromMinutes(7), TimeSpan.FromMinutes(5), 3, 2, 1)}   // Level 6 Data
     };
 
     //public event Action<TimeSpan, int> OnShowTimer;
@@ -49,7 +49,7 @@ public class ScoreManager : MonoBehaviour
         scoreUI = GetComponent<ScoreUI>();
         SetCurrentLevel();
         timer = Time.time;
-        //Debug.Log($"Niveau actuel détecté : {currentLevel}");
+        //Debug.Log($"Niveau actuel d?tect? : {currentLevel}");
         //CalculateScore();
     }
 
