@@ -13,7 +13,7 @@ public class Checkpoint : MonoBehaviour
 {
     // This class manage the reset of objets and enemies when the player dies
     // for some specefic part of the game
-
+    [SerializeField] public AK.Wwise.Event checkPointSound;
     [SerializeField] private Sprite unlitLanternSprite;
     [SerializeField] private Sprite litLanternSprite;
     List<IResetInitialState> resetGameObject;   // All objects and enemies that must be reset when dying at this checkpoint
@@ -42,6 +42,7 @@ public class Checkpoint : MonoBehaviour
             checkpointCollider.enabled = false; // The player can't reactivate the same checkpoint
             CheckpointManager.Instance.SetCheckPoint(this);
             checkpointLight.enabled = true;//SetActive(true);
+            checkPointSound.Post(gameObject);
             sr.sprite = litLanternSprite;
         }
     }
