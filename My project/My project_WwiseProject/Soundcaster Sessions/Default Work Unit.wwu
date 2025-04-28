@@ -63,6 +63,14 @@
 							<ObjectRef Name="SFX_CatSlap" ID="{B88578C5-0E4D-4045-A9FF-DD6661B28B1C}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
 							<Position X="0" Y="0"/>
 						</Module>
+						<Module>
+							<ObjectRef Name="SFX_Checkpoint" ID="{7DD6790B-AD3E-4969-9999-A32C5C0AADB9}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="SFX_Airplane" ID="{115E346A-6B62-4A45-B886-BB4C9A158A69}" WorkUnitID="{6EAEF8EA-C7E9-4BF4-9005-B089581CA3BB}"/>
+							<Position X="2" Y="0"/>
+						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true">
 						<RTPCValue>
@@ -70,8 +78,14 @@
 							<Value>24</Value>
 						</RTPCValue>
 					</RTPCValueList>
-					<CurrentStateList ShowAll="true"/>
-					<CurrentSwitchList ShowAll="true"/>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="MUS_Museum" ID="{89D79411-A79D-4689-AF55-09F7279B8236}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Suspicion_High" ID="{7F10F0A1-E982-448B-9F34-94D4F320DA3A}"/>
+						<CurrentSwitchRef Name="Marble" ID="{C2300D73-0761-4E46-BD9D-A9D676CD0001}"/>
+						<CurrentSwitchRef Name="Running" ID="{CB0675D8-8511-4EDC-9022-FC9CB9E942B3}"/>
+					</CurrentSwitchList>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>

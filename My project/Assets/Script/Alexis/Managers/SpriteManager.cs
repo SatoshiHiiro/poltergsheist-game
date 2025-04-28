@@ -3,6 +3,9 @@ using System.Collections;
 
 public abstract class SpriteManager : MonoBehaviour
 {
+    [SerializeField] public AK.Wwise.Event moveFailSoundEvent;
+    bool soundIsPlaying = false;
+
     protected Vector2 lastPos;
     protected Vector2 input;
     protected bool goesLeft;
@@ -88,11 +91,28 @@ public abstract class SpriteManager : MonoBehaviour
         {
             anim.SetFloat("velocityX", -1f);
             anim.SetTrigger("moveFail");
+            moveFailSoundEvent.Post(gameObject);
+            //StartCoroutine(MoveFailSoundEvent());
         }
         else if (param == controller.cantWalkRightParam)
         {
             anim.SetFloat("velocityX", 1f);
             anim.SetTrigger("moveFail");
+            moveFailSoundEvent.Post(gameObject);
+            //StartCoroutine(MoveFailSoundEvent());
         }
     }
+
+    //private IEnumerator MoveFailSoundEvent()
+    //{
+    //    if (!soundIsPlaying)
+    //    {
+    //        soundIsPlaying = true;
+    //        yield return new WaitForSeconds(2f);
+    //        moveFailSoundEvent.Post(gameObject);
+    //        soundIsPlaying = false;
+            
+    //    }
+
+    //}
 }

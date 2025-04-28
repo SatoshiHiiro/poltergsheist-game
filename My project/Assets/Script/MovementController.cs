@@ -42,6 +42,7 @@ public abstract class MovementController : MonoBehaviour
     Vector2 lastInput;
     float velocityJumpCap;
     public float jumpBufferTest = 0.5f;
+    public bool isAPlane = false;
 
     //Contacts
     [Header("GameObjets in contact")]
@@ -155,6 +156,13 @@ public abstract class MovementController : MonoBehaviour
                 rigid2D.linearVelocityX = rigid2D.linearVelocityX + moveInput.x * speed;
                 if(movementXAxisSoundEvent != null && isInContact && !isMovementXAxisSoundOn)
                 {
+                    //print("MAYBE");
+                    isMovementXAxisSoundOn = true;
+                    movementXAxisSoundEvent.Post(gameObject);
+                }
+                else if(isAPlane && movementXAxisSoundEvent != null && !isMovementXAxisSoundOn)
+                {
+                    //print("HELLO");
                     isMovementXAxisSoundOn = true;
                     movementXAxisSoundEvent.Post(gameObject);
                 }
@@ -201,7 +209,7 @@ public abstract class MovementController : MonoBehaviour
 
         if (((lastPosX == rigid2D.position.x) && isInContact) || !isInContact) /*(Mathf.Abs(rigid2D.linearVelocityX) <= stopThresholdSound &&*/
         {
-            if (movementXAxisSoundEvent != null)
+            if (movementXAxisSoundEvent != null && !isAPlane)
             {
                 isMovementXAxisSoundOn = false;
                 movementXAxisSoundEvent.Stop(gameObject);
@@ -209,7 +217,13 @@ public abstract class MovementController : MonoBehaviour
 
         }
 
-        lastPosX = rigid2D.position.x;
+        if(isAPlane && (lastPosX == rigid2D.position.x))
+        {
+            isMovementXAxisSoundOn = false;
+            movementXAxisSoundEvent.Stop(gameObject);
+        }
+
+            lastPosX = rigid2D.position.x;
     }
 
     //To get the inputs
